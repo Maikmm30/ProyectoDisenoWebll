@@ -9,6 +9,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Tecnologia from "./Componentes/Tecnologia";
+import AgregarTecnologia from "./Componentes/AgregarTecnologia";
 function App() {
   return (
     <Router>
@@ -16,8 +18,13 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/clientesM" component={ClientesMesas} />
+
         <Route path="/seguridad" component={Seguridad} />
         <Route path="/usuarios" component={Usuarios} />
+
+        <Route path="/tecnologia" component={Tecnologia} />
+        <Route path="/agregarTecnologia" component={AgregarTecnologia} />
+
       </Switch>
     </Router>
   );

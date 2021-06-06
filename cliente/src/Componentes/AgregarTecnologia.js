@@ -1,69 +1,20 @@
 import { Container, Row, Col } from "react-bootstrap";
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
 
-import {
-    Link
-  } from "react-router-dom";
-
-const columns = [{
-dataField: 'codigo',
-text: 'Código'
-}, {
-dataField: 'nombre',
-text: 'Nombre'
-}, {
-dataField: 'cantidad',
-text: 'Cantidad'
-},
-{
-dataField: 'restaurante',
-text: 'Restaurante'
-}];
-
-const products = [{
-    codigo: 1,
-    nombre: 'A',
-    cantidad: '1',
-    restaurante: 'A'
-  }, {
-    codigo: 2,
-    nombre: 'B',
-    cantidad: '2',
-    restaurante: 'B'
-  },
-  {
-    codigo: 3,
-    nombre: 'C',
-    cantidad: '3',
-    restaurante: 'C'
-  },
-  {
-    codigo: 4,
-    nombre: 'D',
-    cantidad: '4',
-    restaurante: 'D'
-  }];
-
-  
-function Tecnologia() {
+function AgregarTecnologia() {
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row bg-warning" style={{ height: "600px" }}>
         <div class="col-3 m-auto text-center pb-5">
-          <h3>Lista de Artifactos Tecnológicos</h3>
+          <h3>Tecnología</h3>
           <i class="fas fa-laptop fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
-                <div class="row row-cols-4 m-4">
-                <Link to='/agregarTecnologia'> 
+                <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  </Link>  
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
                   <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i></div>
 
               </div>
             </div>
@@ -71,18 +22,19 @@ function Tecnologia() {
               Información de los artículos
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Código del Artefacto
+                  Código
                 </label>
                 <div class="col-sm-4">
                       <input
                         type="number"
                         class="form-control"
+                        readonly="readonly"
                       />
                     </div>
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Restaurante
+                  Restaurante
                 </label>
                 <div class="col-sm-3">
                 <select
@@ -98,13 +50,13 @@ function Tecnologia() {
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Artefacto
+                  Nombre
                 </label>
                 <div class="col-sm-4">
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nombre del Artefacto"
+                        placeholder="Nombre Artículo"
                       />
                     </div>
               </div>
@@ -112,23 +64,42 @@ function Tecnologia() {
                 <label for="staticEmail" class="col-sm-2 col-form-label">
                   Marca
                 </label>
-                <div class="col-sm-9">
-                <BootstrapTable
-                    keyField="id"
-                    data={ products }
-                    columns={ columns }
-                    cellEdit={ cellEditFactory({ mode: 'dbclick' }) }
-                />
+                <div class="col-sm-3">
+                <select
+                        class="form-control"
+                        id="exampleFormControlSelect2"
+                      >
+                        <option>Marca 1</option>
+                        <option>Marca 2</option>
+                        <option>Marca 3</option>
+                        <option>Marca 4</option>
+                        <option>Marca 5</option>
+                      </select>
                 </div>
-                
-              <div class="text-center col-12 bg-success h-25">
-                <div class="row row-cols-2 m-4">
-                
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
-
+                <div class="form-group row mt-2">
+                <label for="staticEmail" class="col-sm-2 col-form-label">
+                  Cantidad
+                </label>
+                <div class="col-sm-4">
+                      <input
+                        type="number"
+                        class="form-control"
+                        placeholder="Cantidad del artículo"
+                      />
+                    </div>
               </div>
-            </div>
+              <div class="form-group row mt-2">
+                <label for="staticEmail" class="col-sm-2 col-form-label">
+                  Descripcion
+                </label>
+                <div class="col-sm-9">
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Descripción del artículo"
+                      />
+                    </div>
+              </div>
               </div>
             </div>
           </div>
@@ -137,4 +108,4 @@ function Tecnologia() {
     </div>
   );
 }
-export default Tecnologia;
+export default AgregarTecnologia;

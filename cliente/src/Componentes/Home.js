@@ -14,7 +14,7 @@ export default () => {
         <CardGroup>
          
           <Card className="m-5 text-center" >
-          <Link to='/clientesM'> 
+          <Link to='/seguridad'> 
             <Card.Body>
             <i class="fas fa-lock fa-5x" style={{color: "#C42709"}}></i>
               <Card.Title >Seguridad</Card.Title>
@@ -31,10 +31,12 @@ export default () => {
           </Card>
 
           <Card className="m-5 text-center">
+            <Link to='clientesM'>
             <Card.Body>
             <i class="fas fa-user-alt fa-5x" style={{color: "#C42709"}}></i>
               <Card.Title>Clientes</Card.Title>
             </Card.Body>
+            </Link>
           </Card>
         </CardGroup>
 

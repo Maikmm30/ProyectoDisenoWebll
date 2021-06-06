@@ -24,10 +24,12 @@ export default () => {
          
 
           <Card className="m-5 text-center">
+          <Link to='/tecnologia'> 
             <Card.Body>
               <i class="fas fa-utensils fa-5x " style={{color: "#C42709"}}></i>
               <Card.Title>Restaurantes</Card.Title>
             </Card.Body>
+          </Link>
           </Card>
 
           <Card className="m-5 text-center">

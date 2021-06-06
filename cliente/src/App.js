@@ -7,6 +7,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import Tecnologia from "./Componentes/Tecnologia";
 function App() {
   return (
     <Router>
@@ -14,6 +15,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/clientesM" component={ClientesMesas} />
+        <Route path="/tecnologia" component={Tecnologia} />
       </Switch>
     </Router>
   );

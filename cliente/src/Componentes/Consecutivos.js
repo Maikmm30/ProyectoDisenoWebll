@@ -26,7 +26,7 @@ const columns = [
   }
 ];
 
-const usuarios = [
+const consecutivos = [
   {
     codigo: 1,
     tipo: "A",
@@ -57,7 +57,7 @@ const usuarios = [
   },
 ];
 
-function Usuarios() {
+function Consecutivos() {
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -123,7 +123,7 @@ function Usuarios() {
                 <div class="py-5 px-4">
                   <BootstrapTable
                     keyField="id"
-                    data={usuarios}
+                    data={consecutivos}
                     columns={columns}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
@@ -147,4 +147,4 @@ function Usuarios() {
     </div>
   );
 }
-export default Usuarios;
+export default Consecutivos;

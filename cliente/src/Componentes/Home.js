@@ -47,10 +47,12 @@ export default () => {
         <CardGroup >
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
+          <Link to='/proveedores'>
             <Card.Body>
             <i class="fas fa-truck fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title className="text-light">Proveedores</Card.Title>
             </Card.Body>
+            </Link>
           </Card>
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>

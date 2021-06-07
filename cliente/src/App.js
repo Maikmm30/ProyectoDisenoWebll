@@ -12,6 +12,8 @@ import {
 import Tecnologia from "./Componentes/Tecnologia";
 import AgregarTecnologia from "./Componentes/AgregarTecnologia";
 import Usuarios from "./Componentes/Usuarios";
+import Proveedores from "./Componentes/Proveedores";
+
 function App() {
   return (
     <Router>
@@ -27,6 +29,8 @@ function App() {
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />
+
+        <Route path="/proveedores" component={Proveedores} />
 
       </Switch>
     </Router>

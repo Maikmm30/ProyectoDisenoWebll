@@ -34,38 +34,45 @@ export default () => {
                   />
                   </Link>
                   <label class="form-check-label">Países</label>
+                  <Link to='/paises'>
                   <input
                     class="form-check-input"
                     type="checkbox"
                     value=""
                     id=""
                   />
+                  </Link>
                 </div>
               </div>
               <div class="col-sm">
                 <div className="form-check">
-              
                 <label class="form-check-label">Cajas</label>
+                <Link to='/'>
                 <input
                   class="form-check-input"
                   type="checkbox"
                   value=""
                   id=""
                 />
+                </Link>
                 <label class="form-check-label">Roles o Eventos</label>
+                <Link to='/'> 
                 <input
                   class="form-check-input"
                   type="checkbox"
                   value=""
                   id=""
                 />
+                </Link>
                 <label class="form-check-label">Unidades de Medida</label>
+                <Link to='/'>
                 <input
                   class="form-check-input"
                   type="checkbox"
                   value=""
                   id=""
                 />
+                </Link>
                 </div>
               </div>
             </div>

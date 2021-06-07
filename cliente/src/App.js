@@ -13,6 +13,7 @@ import Tecnologia from "./Componentes/Tecnologia";
 import AgregarTecnologia from "./Componentes/AgregarTecnologia";
 import Usuarios from "./Componentes/Usuarios";
 import Proveedores from "./Componentes/Proveedores";
+import Login from "./Componentes/Login"; 
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />
 
         <Route path="/proveedores" component={Proveedores} />
+
+        <Route path="/login" component={Login} />
 
       </Switch>
     </Router>

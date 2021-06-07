@@ -15,7 +15,6 @@ export default () => {
             <div class="row ">
               <div class="col-sm">
                 <div className="form-check">
-                
                   <label class="form-check-label">Usuarios</label>
                   <Link to='/usuarios'>
                   <input

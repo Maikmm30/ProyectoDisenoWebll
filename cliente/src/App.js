@@ -17,6 +17,13 @@ import Consecutivos from "./Componentes/Consecutivos";
 import AgregarConsecutivos from "./Componentes/AgregarConsecutivos";
 import Paises from "./Componentes/Paises";
 import AgregarPaises from "./Componentes/AgregarPaises";
+import Login from "./Componentes/Login"; 
+import AyudaSistema from "./Componentes/AyudaSistema"; 
+import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
+import AyudaRestaurante from "./Componentes/AyudaRestaurante"; 
+import AyudaLicores from "./Componentes/AyudaLicores"; 
+import AyudaVinos from "./Componentes/AyudaVinos"; 
+
 
 function App() {
   return (
@@ -39,6 +46,18 @@ function App() {
 
         <Route path="/proveedores" component={Proveedores} />
 
+        <Route path="/login" component={Login} />
+
+        <Route path="/ayuda-sistema" component={AyudaSistema} />
+
+        <Route path="/ayuda-seguridad" component={AyudaSeguridad} />
+
+        <Route path="/ayuda-restaurante" component={AyudaRestaurante} />
+        
+        <Route path="/ayuda-licores" component={AyudaLicores} />
+        
+        <Route path="/ayuda-vinos" component={AyudaVinos} />
+        
       </Switch>
     </Router>
   );

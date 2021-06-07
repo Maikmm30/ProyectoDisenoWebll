@@ -9,59 +9,51 @@ const columns = [
     text: "Código",
   },
   {
-    dataField: "nombre",
-    text: "Nombre",
+    dataField: "tipo",
+    text: "Tipo",
   },
   {
-    dataField: "primerapellido",
-    text: "Primer Apellido",
+    dataField: "descripcion",
+    text: "Descripción",
   },
   {
-    dataField: "segundoapellido",
-    text: "Segundo Apellido",
+    dataField: "valorConsecutivo",
+    text: "Valor del consecutivo",
   },
   {
-    dataField: "telefonofijo",
-    text: "Telefóno fijo",
-  },
-  {
-    dataField: "telefonocelular",
-    text: "Telefóno Celular",
+    dataField: "contienePrefijo",
+    text: "Contiene Prefijo",
   }
 ];
 
 const usuarios = [
   {
     codigo: 1,
-    nombre: "A",
-    primerapellido: "1",
-    segundoapellido: "A",
-    telefonofijo: "A",
-    telefonocelular: "2"
+    tipo: "A",
+    descripcion: "1",
+    valorConsecutivo: "A",
+    contienePrefijo: "A"
   },
   {
-    codigo: 2,
-    nombre: "B",
-    primerapellido: "2",
-    segundoapellido: "B",
-    telefonofijo: "B",
-    telefonocelular: "2"
+    codigo: 1,
+    tipo: "A",
+    descripcion: "1",
+    valorConsecutivo: "A",
+    contienePrefijo: "A"
   },
   {
-    codigo: 3,
-    nombre: "C",
-    primerapellido: "3",
-    segundoapellido: "C",
-    telefonofijo: "C",
-    telefonocelular: "3"
+    codigo: 1,
+    tipo: "A",
+    descripcion: "1",
+    valorConsecutivo: "A",
+    contienePrefijo: "A"
   },
   {
-    codigo: 2,
-    nombre: "D",
-    primerapellido: "4",
-    segundoapellido: "D",
-    telefonofijo: "4",
-    telefonocelular: "D"
+    codigo: 1,
+    tipo: "A",
+    descripcion: "1",
+    valorConsecutivo: "A",
+    contienePrefijo: "A"
   },
 ];
 
@@ -70,14 +62,14 @@ function Usuarios() {
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
         <div class="col-3 m-auto text-center pb-5">
-          <h3>Lista de Usuarios</h3>
-          <i class="fas fa-user-alt fa-10x"></i>
+          <h3>Lista de Consecutivos</h3>
+          <i class="fas fa-window-restore fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
               <div class="row row-cols-4 m-4">
-                <Link to="/agregarUsuarios">
+                <Link to="/agregarConsecutivos">
                   <div class="col">
                     <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                   </div>
@@ -94,13 +86,13 @@ function Usuarios() {
               </div>
             </div>
             <div class="col-12 bg-danger h-80">
-              Información de los artículos
+              Solo búsqueda
               <div class="container">
                 <div class="row">
                   <div class="col">
                     <div class="form-group row mt-2">
                       <label for="staticEmail" class="col-sm-4 col-form-label">
-                        Código del Usuario
+                        Código del Consecutivo
                       </label>
                       <div class="col-sm-8">
                         <input
@@ -111,39 +103,10 @@ function Usuarios() {
                       </div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">
-                      Nickname
-                      </label>
-                      <div class="col-sm-8">
-                        <input
-                          type="number"
-                          class="form-control"
-                          readonly="readonly"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="w-100"></div>
                   <div class="col">
                     <div class="form-group row mt-2">
                       <label for="staticEmail" class="col-sm-4 col-form-label">
-                        Nombre del Usuario
-                      </label>
-                      <div class="col-sm-8">
-                        <input
-                          type="number"
-                          class="form-control"
-                          readonly="readonly"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">
-                        Privilegios
+                      Descripción del Consecutivo
                       </label>
                       <div class="col-sm-8">
                         <input

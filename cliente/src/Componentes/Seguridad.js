@@ -25,12 +25,14 @@ export default () => {
                   />
                   </Link>
                   <label class="form-check-label">Consecutivos</label>
+                  <Link to='/consecutivos'>
                   <input
                     class="form-check-input"
                     type="checkbox"
                     value=""
                     id=""
                   />
+                  </Link>
                   <label class="form-check-label">Países</label>
                   <input
                     class="form-check-input"

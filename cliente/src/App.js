@@ -14,6 +14,12 @@ import AgregarTecnologia from "./Componentes/AgregarTecnologia";
 import Usuarios from "./Componentes/Usuarios";
 import Proveedores from "./Componentes/Proveedores";
 import Login from "./Componentes/Login"; 
+import AyudaSistema from "./Componentes/AyudaSistema"; 
+import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
+import AyudaRestaurante from "./Componentes/AyudaRestaurante"; 
+import AyudaLicores from "./Componentes/AyudaLicores"; 
+import AyudaVinos from "./Componentes/AyudaVinos"; 
+
 
 function App() {
   return (
@@ -35,6 +41,16 @@ function App() {
 
         <Route path="/login" component={Login} />
 
+        <Route path="/ayuda-sistema" component={AyudaSistema} />
+
+        <Route path="/ayuda-seguridad" component={AyudaSeguridad} />
+
+        <Route path="/ayuda-restaurante" component={AyudaRestaurante} />
+        
+        <Route path="/ayuda-licores" component={AyudaLicores} />
+        
+        <Route path="/ayuda-vinos" component={AyudaVinos} />
+        
       </Switch>
     </Router>
   );

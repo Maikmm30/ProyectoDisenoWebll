@@ -11,6 +11,10 @@ export default () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
          
+        <Nav.Link href="/"><i class="fas fa-home fa-2x"></i></Nav.Link>
+
+
+
           <NavDropdown title="Sistema" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Información</NavDropdown.Item>
               <NavDropdown.Divider />
@@ -20,16 +24,16 @@ export default () => {
             </NavDropdown>
             
             <NavDropdown title="Ayuda" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Sistema</NavDropdown.Item>
+              <NavDropdown.Item href="/ayuda-sistema">Sistema</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Seguridad</NavDropdown.Item>
+              <NavDropdown.Item href="/ayuda-seguridad">Seguridad</NavDropdown.Item>
               <NavDropdown.Divider />
             <NavDropdown title="Restaurante" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Restaurante</NavDropdown.Item>
+            <NavDropdown.Item href="/ayuda-restaurante">Restaurante</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Licores</NavDropdown.Item>
+              <NavDropdown.Item href="/ayuda-licores">Licores</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Vinos</NavDropdown.Item>
+              <NavDropdown.Item href="/ayuda-vinos">Vinos</NavDropdown.Item>
               <NavDropdown.Divider />
             </NavDropdown>
           </NavDropdown>

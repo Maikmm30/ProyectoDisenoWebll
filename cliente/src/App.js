@@ -3,7 +3,7 @@ import Navbar from "./Componentes/Navbar";
 import Home from "./Componentes/Home";
 import ClientesMesas from "./Componentes/ClientesMesas";
 import Seguridad from "./Componentes/Seguridad";
-import Usuarios from "./Componentes/Usuarios";
+import AgregarUsuarios from "./Componentes/AgregarUsuarios";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Tecnologia from "./Componentes/Tecnologia";
 import AgregarTecnologia from "./Componentes/AgregarTecnologia";
+import Usuarios from "./Componentes/Usuarios";
 function App() {
   return (
     <Router>
@@ -20,7 +21,9 @@ function App() {
         <Route path="/clientesM" component={ClientesMesas} />
 
         <Route path="/seguridad" component={Seguridad} />
+        <Route path="/agregarUsuarios" component={AgregarUsuarios} />
         <Route path="/usuarios" component={Usuarios} />
+
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />

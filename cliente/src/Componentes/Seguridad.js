@@ -47,7 +47,7 @@ export default () => {
               <div class="col-sm">
                 <div className="form-check">
                 <label class="form-check-label">Cajas</label>
-                <Link to='/'>
+                <Link to='/cajas'>
                 <input
                   class="form-check-input"
                   type="checkbox"

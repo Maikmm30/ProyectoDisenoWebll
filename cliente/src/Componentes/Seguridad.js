@@ -56,7 +56,7 @@ export default () => {
                 />
                 </Link>
                 <label class="form-check-label">Roles o Eventos</label>
-                <Link to='/'> 
+                <Link to='/roles'> 
                 <input
                   class="form-check-input"
                   type="checkbox"

@@ -18,6 +18,8 @@ import AgregarConsecutivos from "./Componentes/AgregarConsecutivos";
 import Paises from "./Componentes/Paises";
 import AgregarPaises from "./Componentes/AgregarPaises";
 import Cajas from "./Componentes/Cajas";
+import Roles from "./Componentes/Roles";
+import AgregarRoles from "./Componentes/AgregarRoles";
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
 import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
@@ -41,6 +43,10 @@ function App() {
         <Route path="/paises" component={Paises} />
         <Route path="/agregarPaises" component={AgregarPaises} />
         <Route path="/cajas" component={Cajas} />
+        <Route path="/roles" component={Roles} />
+        <Route path="/agregarRoles" component={AgregarRoles} />
+
+
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />

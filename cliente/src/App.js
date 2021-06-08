@@ -17,6 +17,7 @@ import Consecutivos from "./Componentes/Consecutivos";
 import AgregarConsecutivos from "./Componentes/AgregarConsecutivos";
 import Paises from "./Componentes/Paises";
 import AgregarPaises from "./Componentes/AgregarPaises";
+import Cajas from "./Componentes/Cajas";
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
 import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
@@ -32,7 +33,6 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/clientesM" component={ClientesMesas} />
-
         <Route path="/seguridad" component={Seguridad} />
         <Route path="/agregarUsuarios" component={AgregarUsuarios} />
         <Route path="/usuarios" component={Usuarios} />
@@ -40,22 +40,17 @@ function App() {
         <Route path="/agregarConsecutivos" component={AgregarConsecutivos} />
         <Route path="/paises" component={Paises} />
         <Route path="/agregarPaises" component={AgregarPaises} />
+        <Route path="/cajas" component={Cajas} />
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />
 
         <Route path="/proveedores" component={Proveedores} />
-
         <Route path="/login" component={Login} />
-
         <Route path="/ayuda-sistema" component={AyudaSistema} />
-
         <Route path="/ayuda-seguridad" component={AyudaSeguridad} />
-
         <Route path="/ayuda-restaurante" component={AyudaRestaurante} />
-        
         <Route path="/ayuda-licores" component={AyudaLicores} />
-        
         <Route path="/ayuda-vinos" component={AyudaVinos} />
         
       </Switch>

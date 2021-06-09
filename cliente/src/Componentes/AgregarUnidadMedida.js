@@ -1,64 +1,64 @@
 function AgregarUnidadMedida() {
   return (
-    <div class="container">
-      <div class="row bg-warning" style={{ height: "650px" }}>
-        <div class="col-3 m-auto text-center pb-5">
-          <h3 class="mb-4 text-center">Unidades de Medida</h3>
-          <i class="fas fa-balance-scale-right fa-10x"></i>
+    <div className="container">
+      <div className="row bg-warning" style={{ height: "650px" }}>
+        <div className="col-3 m-auto text-center pb-5">
+          <h3 className="mb-4 text-center">Unidades de Medida</h3>
+          <i className="fas fa-balance-scale-right fa-10x"></i>
         </div>
-        <div class="col-9">
-          <div class="row">
-            <div class="text-center mb-3 col-12 bg-success h-35">
-              <div class="row row-cols-3 m-4">
-                <div class="col">
-                  <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+        <div className="col-9">
+          <div className="row">
+            <div className="text-center mb-3 col-12 bg-success h-35">
+              <div className="row row-cols-3 m-4">
+                <div className="col">
+                  <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
-                <div class="col ">
-                  <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                <div className="col ">
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
                 </div>
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
               </div>
             </div>
             <h4>Información de Unidades de Medida</h4>
-            <div class=" row mt-4">
-              <div class="col">
+            <div className=" row mt-4">
+              <div className="col">
                 <div className="row">
-                  <label class="col-sm-3">Código</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+                  <label className="col-sm-3">Código</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control" />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="row ">
+              <div className="col">
+                <div className="row ">
                 
                 </div>
               </div>
             </div>
-            <div class=" row mt-4">
-              <div class="col">
+            <div className=" row mt-4">
+              <div className="col">
                 <div className="row">
-                  <label class="col-sm-3">Unidad</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+                  <label className="col-sm-3">Unidad</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control" />
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="row ">
+              <div className="col">
+                <div className="row ">
                 
                 </div>
               </div>
             </div>
-            <div class=" row mt-4 ">
-              <div class="col">
+            <div className=" row mt-4 ">
+              <div className="col">
                 <div className="row">
-                  <label class="col-sm-3">Escala</label>
-                  <div class="col-sm-8">
+                  <label className="col-sm-3">Escala</label>
+                  <div className="col-sm-8">
                   <select
-                        class="form-control"
+                        className="form-control"
                         id="exampleFormControlSelect1"
                       >
                         <option>Yotta</option>
@@ -85,23 +85,23 @@ function AgregarUnidadMedida() {
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="row ">
-                <label class="col-sm-3">Símbolo</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+              <div className="col">
+                <div className="row ">
+                <label className="col-sm-3">Símbolo</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control" />
                   </div>
                 </div>
               </div>
             </div>
             
-            <div class=" row mt-4 ">
-              <div class="col">
+            <div className=" row mt-4 ">
+              <div className="col">
                 <div className="row">
-                  <label class="col-sm-3">Detalle</label>
-                  <div class="col-sm-8">
+                  <label className="col-sm-3">Detalle</label>
+                  <div className="col-sm-8">
                   <select
-                        class="form-control"
+                        className="form-control"
                         id="exampleFormControlSelect1"
                       >
                         <option>Unidades de capacidad</option>
@@ -123,11 +123,11 @@ function AgregarUnidadMedida() {
                   </div>
                 </div>
               </div>
-              <div class="col">
-                <div class="row ">
-                <label class="col-sm-3">Simbología</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+              <div className="col">
+                <div className="row ">
+                <label className="col-sm-3">Simbología</label>
+                  <div className="col-sm-8">
+                    <input type="text" className="form-control" />
                   </div>
                 </div>
               </div>

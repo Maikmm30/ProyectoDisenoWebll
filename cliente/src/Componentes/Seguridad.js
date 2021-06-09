@@ -65,7 +65,7 @@ export default () => {
                 />
                 </Link>
                 <label class="form-check-label">Unidades de Medida</label>
-                <Link to='/'>
+                <Link to='/unidadMedida'>
                 <input
                   class="form-check-input"
                   type="checkbox"

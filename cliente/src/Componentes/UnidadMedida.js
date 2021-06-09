@@ -23,7 +23,7 @@ const columns = [
   {
     dataField: "simbologia",
     text: "Simbología",
-  }
+  },
 ];
 
 const consecutivos = [
@@ -32,28 +32,28 @@ const consecutivos = [
     unidadMedida: "A",
     escala: "1",
     detalle: "A",
-    simbologia: "A"
+    simbologia: "A",
   },
   {
     codigo: 1,
     unidadMedida: "A",
     escala: "1",
     detalle: "A",
-    simbologia: "A"
+    simbologia: "A",
   },
   {
     codigo: 1,
     unidadMedida: "A",
     escala: "1",
     detalle: "A",
-    simbologia: "A"
+    simbologia: "A",
   },
   {
     codigo: 1,
     unidadMedida: "A",
     escala: "1",
     detalle: "A",
-    simbologia: "A"
+    simbologia: "A",
   },
 ];
 
@@ -96,9 +96,8 @@ function UnidadMedida() {
                       </label>
                       <div class="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
@@ -106,13 +105,12 @@ function UnidadMedida() {
                   <div class="col">
                     <div class="form-group row mt-2">
                       <label for="staticEmail" class="col-sm-4 col-form-label">
-                      Detalle Unidad de Medida
+                        Detalle Unidad de Medida
                       </label>
                       <div class="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
@@ -128,16 +126,15 @@ function UnidadMedida() {
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>
-
-                <div class="bg-success">
-                  <div class="row h-100 ">
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
-                    </div>
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div class="bg-success text-center">
+              <div class="row h-100 ">
+                <div class="col">
+                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                </div>
+                <div class="col">
+                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
                 </div>
               </div>
             </div>

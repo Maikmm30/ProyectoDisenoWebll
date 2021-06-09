@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./Componentes/Navbar";
 import Home from "./Componentes/Home";
+import AgregarClientesMesas from "./Componentes/AgregarClientesMesas";
 import ClientesMesas from "./Componentes/ClientesMesas";
 import Seguridad from "./Componentes/Seguridad";
 import AgregarUsuarios from "./Componentes/AgregarUsuarios";
@@ -37,6 +38,7 @@ function App() {
        <Navbar/>
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/agregarClientesMesas" component={AgregarClientesMesas} />
         <Route path="/clientesMesas" component={ClientesMesas} />
         <Route path="/seguridad" component={Seguridad} />
         <Route path="/agregarUsuarios" component={AgregarUsuarios} />

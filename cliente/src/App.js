@@ -37,7 +37,7 @@ function App() {
        <Navbar/>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/clientesM" component={ClientesMesas} />
+        <Route path="/clientesMesas" component={ClientesMesas} />
         <Route path="/seguridad" component={Seguridad} />
         <Route path="/agregarUsuarios" component={AgregarUsuarios} />
         <Route path="/usuarios" component={Usuarios} />

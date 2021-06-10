@@ -28,7 +28,23 @@ import AyudaSeguridad from "./Componentes/AyudaSeguridad";
 import AyudaRestaurante from "./Componentes/AyudaRestaurante"; 
 import AyudaLicores from "./Componentes/AyudaLicores"; 
 import AyudaVinos from "./Componentes/AyudaVinos"; 
-
+import Administracion from "./Componentes/Administracion";
+import Especiales from "./Componentes/Especiales";
+import Buffet from "./Componentes/Buffet";
+import AgregarBuffet from "./Componentes/AgregarBuffet";
+import Bebidas from "./Componentes/Bebidas";
+import BebidasCalientes from "./Componentes/BebidasCalientes";
+import AgregarBebidaCaliente from "./Componentes/AgregarBebidaCaliente";
+import BebidasHeladas from "./Componentes/BebidasHeladas";
+import AgregarBebidaHelada from "./Componentes/AgregarBebidaHelada";
+import BebidasGaseosas from "./Componentes/BebidasGaseosas";
+import AgregarBebidaGaseosa from "./Componentes/AgregarBebidaGaseosa";
+import BebidasLicores from "./Componentes/BebidasLicores";
+import AgregarBebidaLicor from "./Componentes/AgregarBebidaLicor";
+import BebidasVinos from "./Componentes/BebidasVinos";
+import AgregarBebidaVino from "./Componentes/AgregarBebidaVino";
+import Especialidades from "./Componentes/Especialidades";
+import AgregarEspecialidad from "./Componentes/AgregarEspecialidad";
 
 function App() {
   return (
@@ -60,7 +76,31 @@ function App() {
         <Route path="/ayuda-restaurante" component={AyudaRestaurante} />
         <Route path="/ayuda-licores" component={AyudaLicores} />
         <Route path="/ayuda-vinos" component={AyudaVinos} />
+
+        <Route path='/administracion' exact component={Administracion}/>
+        <Route path='/administracion/especiales' exact component={Especiales}/>
+        <Route path='/administracion/especiales/buffet' exact component={Buffet}/>
+        <Route path='/administracion/especiales/buffet/agregar-buffet' exact component={AgregarBuffet}/>
+        <Route path='/administracion/especiales/bebidas' exact component={Bebidas}/>
+
+        <Route path='/administracion/especiales/bebidas/calientes' exact component={BebidasCalientes}/>
+        <Route path='/administracion/especiales/bebidas/calientes/agregar-bebida-caliente' exact component={AgregarBebidaCaliente}/>
+
+        <Route path='/administracion/especiales/bebidas/heladas' exact component={BebidasHeladas}/>
+        <Route path='/administracion/especiales/bebidas/helada/agregar-bebida-helada' exact component={AgregarBebidaHelada}/>
+
+        <Route path='/administracion/especiales/bebidas/gaseosas' exact component={BebidasGaseosas}/>
+        <Route path='/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa' exact component={AgregarBebidaGaseosa}/>
+
+        <Route path='/administracion/especiales/bebidas/licores' exact component={BebidasLicores}/>
+        <Route path='/administracion/especiales/bebidas/licores/agregar-bebida-licor' exact component={AgregarBebidaLicor}/>
         
+        <Route path='/administracion/especiales/bebidas/vinos' exact component={BebidasVinos}/>
+        <Route path='/administracion/especiales/bebidas/vinos/agregar-bebida-vino' exact component={AgregarBebidaVino}/>
+
+        <Route path='/administracion/especiales/especialidades' exact component={Especialidades}/>
+        <Route path='/administracion/especiales/especialidades/agregar-especialidad' exact component={AgregarEspecialidad}/>
+
       </Switch>
     </Router>
   );

@@ -27,7 +27,7 @@ const columns = [
   {
     dataField: "telefonocelular",
     text: "Telefóno Celular",
-  }
+  },
 ];
 
 const usuarios = [
@@ -37,7 +37,7 @@ const usuarios = [
     primerapellido: "1",
     segundoapellido: "A",
     telefonofijo: "A",
-    telefonocelular: "2"
+    telefonocelular: "2",
   },
   {
     codigo: 2,
@@ -45,7 +45,7 @@ const usuarios = [
     primerapellido: "2",
     segundoapellido: "B",
     telefonofijo: "B",
-    telefonocelular: "2"
+    telefonocelular: "2",
   },
   {
     codigo: 3,
@@ -53,7 +53,7 @@ const usuarios = [
     primerapellido: "3",
     segundoapellido: "C",
     telefonofijo: "C",
-    telefonocelular: "3"
+    telefonocelular: "3",
   },
   {
     codigo: 2,
@@ -61,7 +61,7 @@ const usuarios = [
     primerapellido: "4",
     segundoapellido: "D",
     telefonofijo: "4",
-    telefonocelular: "D"
+    telefonocelular: "D",
   },
 ];
 
@@ -99,28 +99,26 @@ function Usuarios() {
                 <div class="row">
                   <div class="col">
                     <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                      <label class="col-sm-4 col-form-label">
                         Código del Usuario
                       </label>
                       <div class="col-sm-8">
                         <input
                           type="number"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">
-                      Nickname
+                      <label class="col-sm-3 col-form-label">
+                        Nickname
                       </label>
                       <div class="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
@@ -128,28 +126,26 @@ function Usuarios() {
                   <div class="w-100"></div>
                   <div class="col">
                     <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-4 col-form-label">
+                      <label class="col-sm-4 col-form-label">
                         Nombre del Usuario
                       </label>
                       <div class="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
                   </div>
                   <div class="col">
                     <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-3 col-form-label">
+                      <label class="col-sm-3 col-form-label">
                         Privilegios
                       </label>
                       <div class="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           class="form-control"
-                          readonly="readonly"
                         />
                       </div>
                     </div>
@@ -165,16 +161,15 @@ function Usuarios() {
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>
-
-                <div class="bg-success">
-                  <div class="row h-100 ">
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
-                    </div>
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div class="bg-success text-center">
+              <div class="row ">
+                <div class="col">
+                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                </div>
+                <div class="col">
+                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
                 </div>
               </div>
             </div>

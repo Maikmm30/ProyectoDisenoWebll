@@ -23,7 +23,7 @@ const columns = [
   {
     dataField: "contienePrefijo",
     text: "Contiene Prefijo",
-  }
+  },
 ];
 
 const consecutivos = [
@@ -32,95 +32,87 @@ const consecutivos = [
     tipo: "A",
     descripcion: "1",
     valorConsecutivo: "A",
-    contienePrefijo: "A"
+    contienePrefijo: "A",
   },
   {
     codigo: 1,
     tipo: "A",
     descripcion: "1",
     valorConsecutivo: "A",
-    contienePrefijo: "A"
+    contienePrefijo: "A",
   },
   {
     codigo: 1,
     tipo: "A",
     descripcion: "1",
     valorConsecutivo: "A",
-    contienePrefijo: "A"
+    contienePrefijo: "A",
   },
   {
     codigo: 1,
     tipo: "A",
     descripcion: "1",
     valorConsecutivo: "A",
-    contienePrefijo: "A"
+    contienePrefijo: "A",
   },
 ];
 
 function Consecutivos() {
   return (
-    <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
-        <div class="col-3 m-auto text-center pb-5">
+    <div className="container">
+      <div className="row bg-warning" style={{ height: "800px" }}>
+        <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Consecutivos</h3>
-          <i class="fas fa-window-restore fa-10x"></i>
+          <i className="fas fa-window-restore fa-10x"></i>
         </div>
-        <div class="col-9">
-          <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
-              <div class="row row-cols-4 m-4">
+        <div className="col-9">
+          <div className="row h-75">
+            <div className="text-center col-12 bg-success h-25">
+              <div className="row row-cols-4 m-4">
                 <Link to="/agregarConsecutivos">
-                  <div class="col">
-                    <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                  <div className="col">
+                    <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                   </div>
                 </Link>
-                <div class="col ">
-                  <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                <div className="col ">
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
                 </div>
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
                 </div>
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div className="col-12 bg-danger h-80">
               Solo búsqueda
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-4 col-form-label">
+              <div className="container">
+                <div className="row">
+                  <div className="col">
+                    <div className="form-group row mt-2">
+                      <label className="col-sm-4 col-form-label">
                         Código del Consecutivo
                       </label>
-                      <div class="col-sm-8">
-                        <input
-                          type="number"
-                          class="form-control"
-                          readonly="readonly"
-                        />
+                      <div className="col-sm-8">
+                        <input type="number" className="form-control" />
                       </div>
                     </div>
                   </div>
-                  <div class="col">
-                    <div class="form-group row mt-2">
-                      <label for="staticEmail" class="col-sm-4 col-form-label">
-                      Descripción del Consecutivo
+                  <div className="col">
+                    <div className="form-group row mt-2">
+                      <label className="col-sm-4 col-form-label">
+                        Descripción del Consecutivo
                       </label>
-                      <div class="col-sm-8">
-                        <input
-                          type="number"
-                          class="form-control"
-                          readonly="readonly"
-                        />
+                      <div className="col-sm-8">
+                        <input type="text" className="form-control" />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="form-group text-center">
-                <div class="py-5 px-4">
+              <div className="form-group text-center">
+                <div className="py-5 px-4">
                   <BootstrapTable
                     keyField="id"
                     data={consecutivos}
@@ -128,16 +120,15 @@ function Consecutivos() {
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>
-
-                <div class="bg-success">
-                  <div class="row h-100 ">
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
-                    </div>
-                    <div class="col">
-                      <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className="bg-success text-center">
+              <div className="row h-100 ">
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                </div>
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
                 </div>
               </div>
             </div>

@@ -1,32 +1,32 @@
 function AgregarConsecutivos() {
   return (
-    <div class="container">
-      <div class="row bg-warning" style={{ height: "650px" }}>
-        <div class="col-3 m-auto text-center pb-5">
-          <h3 class="mb-4 text-center">Consecutivos</h3>
-          <i class="far fa-window-restore fa-10x"></i>
+    <div className="container">
+      <div className="row bg-warning" style={{ height: "650px" }}>
+        <div className="col-3 m-auto text-center pb-5">
+          <h3 className="mb-4 text-center">Consecutivos</h3>
+          <i className="far fa-window-restore fa-10x"></i>
         </div>
-        <div class="col-9">
-          <div class="row">
-            <div class="text-center mb-3 col-12 bg-success h-35">
-              <div class="row row-cols-3 m-4">
-                <div class="col">
-                  <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+        <div className="col-9">
+          <div className="row">
+            <div className="text-center mb-3 col-12 bg-success h-35">
+              <div className="row row-cols-3 m-4">
+                <div className="col">
+                  <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
-                <div class="col ">
-                  <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                <div className="col ">
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
                 </div>
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                <div className="col">
+                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
               </div>
             </div>
 
             <h4>Información de Consecutivo</h4>
-            <div class=" row mt-4 mb-3">
-              <label class="col-sm-3 ">Tipo de Consecutivo</label>
-              <div class="col-sm-5">
-                <select class="form-control" id="exampleFormControlSelect1">
+            <div className=" row mt-4 mb-3">
+              <label className="col-sm-3 ">Tipo de Consecutivo</label>
+              <div className="col-sm-5">
+                <select className="form-control" id="exampleFormControlSelect1">
                   <option>Clientes</option>
                   <option>Personal</option>
                   <option>Proveedores</option>
@@ -55,39 +55,39 @@ function AgregarConsecutivos() {
                 </select>
               </div>
             </div>
-            <div class="row mt-2 mb-3">
-              <label class="col-sm-3">Descripción</label>
-              <div class="col-sm-5">
-                <input type="text" class="form-control" />
+            <div className="row mt-2 mb-3">
+              <label className="col-sm-3">Descripción</label>
+              <div className="col-sm-5">
+                <input type="text" className="form-control" />
               </div>
             </div>
-            <div class=" row mt-2 mb-3">
-              <label for="staticEmail" class="col-sm-3">
+            <div className=" row mt-2 mb-3">
+              <label for="staticEmail" className="col-sm-3">
                 Valor Consecutivo
               </label>
-              <div class="col-sm-5">
-                <input type="text" class="form-control" />
+              <div className="col-sm-5">
+                <input type="text" className="form-control" />
               </div>
             </div>
-            <div class="row mt-2 mb-3">
-              <label for="staticEmail" class="col-sm-3">
+            <div className="row mt-2 mb-3">
+              <label for="staticEmail" className="col-sm-3">
                 Consecutivo posee Prefijo
               </label>
-              <div class="col-sm-2">
+              <div className="col-sm-2">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="checkbox"
                   value=""
                   id=""
                 />
               </div>
             </div>
-            <div class="row mt-1 mb-3">
-              <label for="staticEmail" class="col-sm-3">
+            <div className="row mt-1 mb-3">
+              <label for="staticEmail" className="col-sm-3">
                 Prefijo
               </label>
-              <div class="col-sm-5">
-                <input type="text" class="form-control" />
+              <div className="col-sm-5">
+                <input type="text" className="form-control" />
               </div>
             </div>
           </div>

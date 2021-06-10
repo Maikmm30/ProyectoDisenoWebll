@@ -1,6 +1,7 @@
 import "./App.css";
 import Navbar from "./Componentes/Navbar";
 import Home from "./Componentes/Home";
+import AgregarClientesMesas from "./Componentes/AgregarClientesMesas";
 import ClientesMesas from "./Componentes/ClientesMesas";
 import Seguridad from "./Componentes/Seguridad";
 import AgregarUsuarios from "./Componentes/AgregarUsuarios";
@@ -22,6 +23,7 @@ import Roles from "./Componentes/Roles";
 import AgregarRoles from "./Componentes/AgregarRoles";
 import UnidadMedida from "./Componentes/UnidadMedida";
 import AgregarUnidadMedida from "./Componentes/AgregarUnidadMedida";
+import AperturaCajas from "./Componentes/AperturaCajas";
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
 import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
@@ -52,7 +54,8 @@ function App() {
        <Navbar/>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route path="/clientesM" component={ClientesMesas} />
+        <Route path="/agregarClientesMesas" component={AgregarClientesMesas} />
+        <Route path="/clientesMesas" component={ClientesMesas} />
         <Route path="/seguridad" component={Seguridad} />
         <Route path="/agregarUsuarios" component={AgregarUsuarios} />
         <Route path="/usuarios" component={Usuarios} />
@@ -65,6 +68,8 @@ function App() {
         <Route path="/agregarRoles" component={AgregarRoles} />
         <Route path="/unidadMedida" component={UnidadMedida} />
         <Route path="/agregarUnidadMedida" component={AgregarUnidadMedida} />
+        <Route path="/aperturaCajas" component={AperturaCajas} />
+
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />

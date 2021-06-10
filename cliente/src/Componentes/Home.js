@@ -16,7 +16,7 @@ export default () => {
           <Card className="m-5 text-center" >
           <Link to='/seguridad'> 
             <Card.Body>
-            <i class="fas fa-lock fa-5x" style={{color: "#C42709"}}></i>
+            <i className="fas fa-lock fa-5x" style={{color: "#C42709"}}></i>
               <Card.Title >Seguridad</Card.Title>
             </Card.Body>
             </Link>
@@ -26,16 +26,16 @@ export default () => {
           <Card className="m-5 text-center">
           <Link to='/tecnologia'> 
             <Card.Body>
-              <i class="fas fa-utensils fa-5x " style={{color: "#C42709"}}></i>
+              <i className="fas fa-utensils fa-5x " style={{color: "#C42709"}}></i>
               <Card.Title>Restaurantes</Card.Title>
             </Card.Body>
           </Link>
           </Card>
 
           <Card className="m-5 text-center">
-            <Link to='clientesM'>
+            <Link to='clientesMesas'>
             <Card.Body>
-            <i class="fas fa-user-alt fa-5x" style={{color: "#C42709"}}></i>
+            <i className="fas fa-user-alt fa-5x" style={{color: "#C42709"}}></i>
               <Card.Title>Clientes</Card.Title>
             </Card.Body>
             </Link>
@@ -43,13 +43,13 @@ export default () => {
         </CardGroup>
 
       </div>
-      <div class="bg-light" style={{ padding: "30px 250px" }}>
+      <div className="bg-light" style={{ padding: "30px 250px" }}>
         <CardGroup >
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
           <Link to='/proveedores'>
             <Card.Body>
-            <i class="fas fa-truck fa-5x" style={{color: "#FFF"}}></i>
+            <i className="fas fa-truck fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title className="text-light">Proveedores</Card.Title>
             </Card.Body>
             </Link>
@@ -58,7 +58,7 @@ export default () => {
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
           <Link to='/administracion'>
             <Card.Body>
-            <i class="fas fa-folder-open fa-5x" style={{color: "#FFF"}}></i>
+            <i className="fas fa-folder-open fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title  className="text-light">Administración</Card.Title>
             </Card.Body>
             </Link>
@@ -66,7 +66,7 @@ export default () => {
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
             <Card.Body>
-            <i class="fas fa-file-signature fa-5x" style={{color: "#FFF"}}></i>
+            <i className="fas fa-file-signature fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title  className="text-light">Reportes</Card.Title>
             </Card.Body>
           </Card>

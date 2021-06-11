@@ -56,10 +56,12 @@ export default () => {
           </Card>
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
+          <Link to='/administracion'>
             <Card.Body>
             <i className="fas fa-folder-open fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title  className="text-light">Administración</Card.Title>
             </Card.Body>
+            </Link>
           </Card>
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>

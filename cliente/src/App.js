@@ -24,6 +24,9 @@ import AgregarRoles from "./Componentes/AgregarRoles";
 import UnidadMedida from "./Componentes/UnidadMedida";
 import AgregarUnidadMedida from "./Componentes/AgregarUnidadMedida";
 import AperturaCajas from "./Componentes/AperturaCajas";
+import ClientesBarra from "./Componentes/ClientesBarra";
+import AgregarClientesBarra from "./Componentes/AgregarClientesBarra";
+
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
 import AyudaSeguridad from "./Componentes/AyudaSeguridad"; 
@@ -53,7 +56,8 @@ function App() {
         <Route path="/unidadMedida" component={UnidadMedida} />
         <Route path="/agregarUnidadMedida" component={AgregarUnidadMedida} />
         <Route path="/aperturaCajas" component={AperturaCajas} />
-
+        <Route path="/clientesBarra" component={ClientesBarra} />
+        <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
 
         <Route path="/tecnologia" component={Tecnologia} />
         <Route path="/agregarTecnologia" component={AgregarTecnologia} />

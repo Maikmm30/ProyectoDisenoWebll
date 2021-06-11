@@ -1,4 +1,4 @@
-function ClientesBarra() {
+function AgregarClientesBarra() {
   return (
     <div className="container">
       <div className="estilocambia row bg-warning" style={{ height: "900px" }}>
@@ -164,4 +164,4 @@ function ClientesBarra() {
   );
 }
 
-export default ClientesBarra;
+export default AgregarClientesBarra;

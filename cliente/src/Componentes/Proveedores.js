@@ -13,52 +13,74 @@ text: 'Código'
 dataField: 'nombre',
 text: 'Nombre'
 }, {
-dataField: 'cantidad',
-text: 'Cantidad'
+dataField: 'primerApellido',
+text: 'Primer Apellido'
 },
 {
-dataField: 'restaurante',
-text: 'Restaurante'
+dataField: 'segundoApellido',
+text: 'Segundo Apellido'
+},
+{dataField: 'telefono',
+text: 'Teléfono'
+},
+{
+  dataField: 'fax',
+  text: 'Fax'
+  }, {
+  dataField: 'celular',
+  text: 'Celular'
 }];
 
 const products = [{
     codigo: 1,
     nombre: 'A',
-    cantidad: '1',
-    restaurante: 'A'
+    primerApellido: 'A',
+    segundoApellido: 'A',
+    telefono: '1',
+    fax: '1',
+    celular: '1'
   }, {
     codigo: 2,
     nombre: 'B',
-    cantidad: '2',
-    restaurante: 'B'
+    primerApellido: 'B',
+    segundoApellido: 'B',
+    telefono: '2',
+    fax: '2',
+    celular: '2'
   },
   {
     codigo: 3,
     nombre: 'C',
-    cantidad: '3',
-    restaurante: 'C'
+    primerApellido: 'C',
+    segundoApellido: 'C',
+    telefono: '3',
+    fax: '3',
+    celular: '3'
   },
   {
     codigo: 4,
     nombre: 'D',
-    cantidad: '4',
-    restaurante: 'D'
+    primerApellido: 'D',
+    segundoApellido: 'D',
+    telefono: '4',
+    fax: '4',
+    celular: '4'
   }];
 
   
-function Tecnologia() {
+function Proveedores() {
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
         <div class="col-3 m-auto text-center pb-5">
-          <h3>Lista de Artifactos Tecnológicos</h3>
-          <i class="fas fa-laptop fa-10x"></i>
+          <h3>Lista de Proveedores</h3>
+          <i class="fas fa-people-carry fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-4 m-4">
-                <Link to='/agregarTecnologia'> 
+                <Link to='/marcas'> 
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
                   </Link>  
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
@@ -68,10 +90,10 @@ function Tecnologia() {
               </div>
             </div>
             <div class="col-12 bg-danger h-80">
-              Búsqueda de Artículos Tecnológicos
+              Búsqueda de Proveedores
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Código del Arículo
+                  Código del Proveedor
                 </label>
                 <div class="col-sm-4">
                       <input
@@ -80,7 +102,7 @@ function Tecnologia() {
                       />
                     </div>
                     <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Restaurante
+                  Dirección
                 </label>
                 <div class="col-sm-4">
                       <input
@@ -91,7 +113,7 @@ function Tecnologia() {
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Artículo
+                  Nombre del Proveedor
                 </label>
                 <div class="col-sm-4">
                       <input
@@ -99,13 +121,21 @@ function Tecnologia() {
                         class="form-control"
                       />
                     </div>
-
-              </div>
-              <div class="form-group row mt-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Marca
+                    <label for="staticEmail" class="col-sm-2 col-form-label">
+                  Cédula de Identidad
                 </label>
-                <div class="col-sm-9">
+                <div class="col-sm-4">
+                      <input
+                        type="number"
+                        class="form-control"
+                      />
+                    </div>
+              </div>
+              
+              
+              <div class="form-group row mt-2">
+                
+                <div class="col-sm-12">
                 <BootstrapTable
                     keyField="id"
                     data={ products }
@@ -130,4 +160,4 @@ function Tecnologia() {
     </div>
   );
 }
-export default Tecnologia;
+export default Proveedores;

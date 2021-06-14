@@ -13,7 +13,6 @@ import {
 import Restaurantes from "./Componentes/Restaurantes";
 import AgregarRestaurante from "./Componentes/AgregarRestaurante";
 import Usuarios from "./Componentes/Usuarios";
-import Proveedores from "./Componentes/Proveedores";
 import Consecutivos from "./Componentes/Consecutivos";
 import AgregarConsecutivos from "./Componentes/AgregarConsecutivos";
 import Paises from "./Componentes/Paises";
@@ -80,7 +79,6 @@ function App() {
         <Route path="/restaurantes" exact component={Restaurantes} />
         <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />
 
-        <Route path="/proveedores" component={Proveedores} />
         <Route path="/login" component={Login} />
         <Route path="/ayuda-sistema" component={AyudaSistema} />
         <Route path="/ayuda-seguridad" component={AyudaSeguridad} />
@@ -88,7 +86,7 @@ function App() {
         <Route path="/ayuda-licores" component={AyudaLicores} />
         <Route path="/ayuda-vinos" component={AyudaVinos} />
 
-        <Route path='/administracion'  component={Administracion}/>
+        <Route path='/administracion' exact component={Administracion}/>
         <Route path='/administracion/especiales' exact component={Especiales}/>
         <Route path='/administracion/especiales/buffet' exact component={Buffet}/>
         <Route path='/administracion/especiales/buffet/agregar-buffet' exact component={AgregarBuffet}/>

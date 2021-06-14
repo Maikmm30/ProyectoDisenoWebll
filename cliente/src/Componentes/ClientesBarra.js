@@ -23,15 +23,7 @@ const columns = [
     dataField: "fecha",
     text: "Fecha",
   },
-  ,
-  {
-    dataField: "reservacion",
-    text: "Reservación",
-  },
-  {
-    dataField: "restaurante",
-    text: "Restaurante",
-  },
+ 
 ];
 
 const consecutivos = [
@@ -40,55 +32,47 @@ const consecutivos = [
     nombre: "A",
     montoPagado: "1",
     detalle: "A",
-    fecha: "1",
-    reservacion: "A",
-    restaurante: "A",
+    fecha: "1"
   },
   {
     codigo: 1,
     nombre: "A",
     montoPagado: "1",
     detalle: "A",
-    fecha: "1",
-    reservacion: "A",
-    restaurante: "A",
+    fecha: "1"
   },
   {
     codigo: 1,
     nombre: "A",
     montoPagado: "1",
     detalle: "A",
-    fecha: "1",
-    reservacion: "A",
-    restaurante: "A",
+    fecha: "1"
   },
   {
     codigo: 1,
     nombre: "A",
     montoPagado: "1",
     detalle: "A",
-    fecha: "1",
-    reservacion: "A",
-    restaurante: "A",
+    fecha: "1"
   },
 ];
 
-function ClientesMesas() {
+function ClientesBarra() {
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "700px" }}>
         <div className="col-3 m-auto text-center pb-5">
-          <h3>Lista de Clientes</h3>
-          <i className="fas fa-utensils fa-10x"></i>
+          <h3>Lista de Clientes Barra</h3>
+          <i className="fas fa-glass-martini-alt fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row h-75">
             <div className="text-center col-12 bg-success h-25">
               <div className="row row-cols-4 m-4">
-              <Link to="/agregarClientesMesas">
-                <div className="col">
-                  <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
-                </div>
+                <Link to="/agregarClientesMesas">
+                  <div className="col">
+                    <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                  </div>
                 </Link>
                 <div className="col ">
                   <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
@@ -119,42 +103,10 @@ function ClientesMesas() {
                     <div className="row">
                       <div className="form-group row ">
                         <label className="col-sm-4 col-form-label">
-                        Fecha de Reservación
+                          Nombre del Cliente
                         </label>
                         <div className="col-sm-8">
-                          <input type="date" className="form-control" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="form-group  mt-2">
-                    <div className="row ">
-                      <div className="col ">
-                        <div className="form-group row ">
-                          <label className="col-sm-4  col-form-label">
-                            Nombre del Cliente
-                          </label>
-                          <div className="col-sm-8">
-                            <input type="text" className="form-control ms-2" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col ms-5">
-                        <div className="row">
-                          <div className="form-group row">
-                            <div >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id=""
-                              />
-                              <label className="ms-2 ">
-                                Reservación
-                              </label>
-                            </div>
-                          </div>
+                          <input type="text" className="form-control" />
                         </div>
                       </div>
                     </div>
@@ -178,4 +130,4 @@ function ClientesMesas() {
     </div>
   );
 }
-export default ClientesMesas;
+export default ClientesBarra;

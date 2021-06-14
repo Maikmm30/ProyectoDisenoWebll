@@ -10,8 +10,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-import Tecnologia from "./Componentes/Tecnologia";
-import AgregarTecnologia from "./Componentes/AgregarTecnologia";
+import Restaurantes from "./Componentes/Restaurantes";
+import AgregarRestaurante from "./Componentes/AgregarRestaurante";
 import Usuarios from "./Componentes/Usuarios";
 import Proveedores from "./Componentes/Proveedores";
 import Consecutivos from "./Componentes/Consecutivos";
@@ -71,8 +71,8 @@ function App() {
         <Route path="/aperturaCajas" component={AperturaCajas} />
 
 
-        <Route path="/tecnologia" component={Tecnologia} />
-        <Route path="/agregarTecnologia" component={AgregarTecnologia} />
+        <Route path="/restaurantes" exact component={Restaurantes} />
+        <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />
 
         <Route path="/proveedores" component={Proveedores} />
         <Route path="/login" component={Login} />
@@ -82,7 +82,7 @@ function App() {
         <Route path="/ayuda-licores" component={AyudaLicores} />
         <Route path="/ayuda-vinos" component={AyudaVinos} />
 
-        <Route path='/administracion' exact component={Administracion}/>
+        <Route path='/administracion'  component={Administracion}/>
         <Route path='/administracion/especiales' exact component={Especiales}/>
         <Route path='/administracion/especiales/buffet' exact component={Buffet}/>
         <Route path='/administracion/especiales/buffet/agregar-buffet' exact component={AgregarBuffet}/>

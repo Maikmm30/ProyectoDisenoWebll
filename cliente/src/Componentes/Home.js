@@ -24,7 +24,7 @@ export default () => {
          
 
           <Card className="m-5 text-center">
-          <Link to='/tecnologia'> 
+          <Link to='/restaurantes'> 
             <Card.Body>
               <i className="fas fa-utensils fa-5x " style={{color: "#C42709"}}></i>
               <Card.Title>Restaurantes</Card.Title>

@@ -26,6 +26,9 @@ import AperturaCajas from "./Componentes/AperturaCajas";
 import ClientesBarra from "./Componentes/ClientesBarra";
 import AgregarClientesBarra from "./Componentes/AgregarClientesBarra";
 import CierreCajas from "./Componentes/CierraCaja";
+import RestauranteTurin from "./Componentes/RestauranteTurin";
+import RestaurantePicolla from "./Componentes/RestaurantePicolla";
+import RestauranteNotte from "./Componentes/RestauranteNotte";
 
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
@@ -92,6 +95,9 @@ function App() {
         <Route path="/clientesBarra" component={ClientesBarra} />
         <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
         <Route path="/cierreCajas" component={CierreCajas} />
+        <Route path="/restauranteTurin" component={RestauranteTurin} />
+        <Route path="/restaurantePicolla" component={RestaurantePicolla} />
+        <Route path="/restauranteNotte" component={RestauranteNotte} />
 
         <Route path="/restaurantes" exact component={Restaurantes} />
         <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />

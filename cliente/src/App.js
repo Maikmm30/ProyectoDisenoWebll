@@ -26,6 +26,9 @@ import AperturaCajas from "./Componentes/AperturaCajas";
 import ClientesBarra from "./Componentes/ClientesBarra";
 import AgregarClientesBarra from "./Componentes/AgregarClientesBarra";
 import CierreCajas from "./Componentes/CierraCaja";
+import RestauranteTurin from "./Componentes/RestauranteTurin";
+import RestaurantePicolla from "./Componentes/RestaurantePicolla";
+import RestauranteNotte from "./Componentes/RestauranteNotte";
 
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
@@ -50,6 +53,23 @@ import BebidasVinos from "./Componentes/BebidasVinos";
 import AgregarBebidaVino from "./Componentes/AgregarBebidaVino";
 import Especialidades from "./Componentes/Especialidades";
 import AgregarEspecialidad from "./Componentes/AgregarEspecialidad";
+import Tecnologia from "./Componentes/Tecnologia";
+import AgregarTecnologia from "./Componentes/AgregarTecnologia";
+import VentanaProveedores from "./Componentes/VentanaProveedores";
+import ListaMarcas from "./Componentes/ListaMarcas";
+import Marcas from "./Componentes/Marcas";
+import CatalogoProductos from "./Componentes/CatalogoProductos";
+import Comestibles from "./Componentes/Comestibles";
+import AgregarComestibles from "./Componentes/AgregarComestibles";
+import Empaques from "./Componentes/Empaques";
+import AgregarEmpaques from "./Componentes/AgregarEmpaque";
+import Limpieza from "./Componentes/Limpieza";
+import AgregarLimpieza from "./Componentes/AgregarLimpieza";
+import Utensilio from "./Componentes/Utensilio";
+import AgregarUtensilios from "./Componentes/AgregarUtensilios";
+import Proveedores from "./Componentes/Proveedores";
+import VentanaReportes from "./Componentes/VentanaReportes";
+import Bitacora from "./Componentes/Bitacora";
 
 function App() {
   return (
@@ -75,6 +95,9 @@ function App() {
         <Route path="/clientesBarra" component={ClientesBarra} />
         <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
         <Route path="/cierreCajas" component={CierreCajas} />
+        <Route path="/restauranteTurin" component={RestauranteTurin} />
+        <Route path="/restaurantePicolla" component={RestaurantePicolla} />
+        <Route path="/restauranteNotte" component={RestauranteNotte} />
 
         <Route path="/restaurantes" exact component={Restaurantes} />
         <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />
@@ -109,6 +132,25 @@ function App() {
 
         <Route path='/administracion/especiales/especialidades' exact component={Especialidades}/>
         <Route path='/administracion/especiales/especialidades/agregar-especialidad' exact component={AgregarEspecialidad}/>
+        <Route path="/tecnologia" component={Tecnologia} />
+        <Route path="/agregarTecnologia" component={AgregarTecnologia} />
+        <Route path="/ventanaProveedores" component={VentanaProveedores} />
+        <Route path="/listaMarcas" component={ListaMarcas} />
+        <Route path="/marcas" component={Marcas}/>
+        <Route path="/catalogoProductos" component={CatalogoProductos}/>
+        <Route path="/comestibles" component={Comestibles}/>
+        <Route path="/agregarComestibles" component={AgregarComestibles}/>
+        <Route path="/empaques" component={Empaques}/>
+        <Route path="/agregarEmpaques" component={AgregarEmpaques}/>
+        <Route path="/limpieza" component={Limpieza}/>
+        <Route path="/agregarLimpieza" component={AgregarLimpieza}/>
+        <Route path="/utensilio" component={Utensilio}/>
+        <Route path="/agregarUtensilio" component={AgregarUtensilios}/>
+        <Route path="/proveedores" component={Proveedores}/>
+        <Route path="/ventanaReportes" component={VentanaReportes}/>
+        <Route path="/bitacora" component={Bitacora}/>
+
+
 
       </Switch>
     </Router>

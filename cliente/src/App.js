@@ -29,6 +29,7 @@ import CierreCajas from "./Componentes/CierraCaja";
 import RestauranteTurin from "./Componentes/RestauranteTurin";
 import RestaurantePicolla from "./Componentes/RestaurantePicolla";
 import RestauranteNotte from "./Componentes/RestauranteNotte";
+import AgregarProveedores from "./Componentes/AgregarProveedores";
 
 import Login from "./Componentes/Login"; 
 import AyudaSistema from "./Componentes/AyudaSistema"; 
@@ -98,7 +99,8 @@ function App() {
         <Route path="/restauranteTurin" component={RestauranteTurin} />
         <Route path="/restaurantePicolla" component={RestaurantePicolla} />
         <Route path="/restauranteNotte" component={RestauranteNotte} />
-
+        <Route path="/agregarProveedores" component={AgregarProveedores} />
+        
         <Route path="/restaurantes" exact component={Restaurantes} />
         <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />
 

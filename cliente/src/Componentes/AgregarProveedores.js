@@ -21,7 +21,7 @@ function ClientesMesas() {
                 </div>
                 <div className="col">
                   <i className="py-3 px-4 bg-light rounded-circle fas fa-images fa-3x"></i>
-                  </div>
+                </div>
               </div>
             </div>
             <div className="col-8 bg-danger">
@@ -78,6 +78,7 @@ function ClientesMesas() {
                   </div>
 
                   <div className="row my-3">
+                    <h5>Teléfonos</h5>
                     <div className="col-sm-4">
                       <label>Oficina</label>
                       <input type="text" className="form-control" />

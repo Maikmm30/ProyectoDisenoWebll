@@ -1,4 +1,7 @@
 import React from "react";
+import {
+  Link
+} from "react-router-dom";
 
 function CatalogoProductos(){
         return (
@@ -15,45 +18,55 @@ function CatalogoProductos(){
                 <div className="form-check">
                 
                   <label class="form-check-label">Comestibles</label>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
+                  <Link to='/comestibles'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                   <label class="form-check-label">Desechos y Empaques</label>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
+                  <Link to='/empaques'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                   <label class="form-check-label">Limpieza e Higiene</label>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
+                  <Link to='/limpieza'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                 </div>
               </div>
               <div class="col-sm">
                 <div className="form-check">
               
                     <label class="form-check-label">Tecnología</label>
-                    <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                    />
+                    <Link to='/tecnologia'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                     <label class="form-check-label">Equipos y Utensilios</label>
-                    <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                    />
+                    <Link to='/utensilio'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                     </div>
               </div>
             </div>

@@ -17,36 +17,44 @@ function VentanaProveedores(){
                     <div class="col-sm">
                         Opciones
                       <div className="form-check">
-                      
+
                         <label class="form-check-label">Marcas</label>
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id=""
-                        />
+                        <Link to='/listaMarcas'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                         <label class="form-check-label"></label>
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id=""
-                        />
+                        <Link to='/listaMarcas'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                         <div class="row"></div>
                         <label class="form-check-label">Productos</label>
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id=""
-                        />
+                        <Link to='/catalogoProductos'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                         <label class="form-check-label">Proveedores</label>
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          value=""
-                          id=""
-                        />
+                        <Link to='/Proveedores'>
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id=""
+                          />
+                        </Link>
                       </div>
                     </div>
                     <div class="col-sm">

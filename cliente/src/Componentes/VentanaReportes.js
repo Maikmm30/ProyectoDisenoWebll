@@ -17,20 +17,26 @@ function VentanaReportes(){
                     <div class="col-sm">
                         Opciones
                         <div class="form-check">
+                        <Link to='/bitacora'>
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Bitácora
                             </label>
                         </div>
                         <div class="form-check">
+                        <Link to='/reporteClientes'>
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Clientes
                             </label>
                         </div>
 
                         <div class="form-check">
+                        <Link to='/reporteFacturacion'>
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
                             <label class="form-check-label" for="flexRadioDefault1">
                                 Facturación
                             </label>

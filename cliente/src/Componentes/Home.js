@@ -47,7 +47,7 @@ export default () => {
         <CardGroup >
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
-          <Link to='/proveedores'>
+          <Link to='/ventanaProveedores'>
             <Card.Body>
             <i className="fas fa-truck fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title className="text-light">Proveedores</Card.Title>
@@ -65,10 +65,12 @@ export default () => {
           </Card>
 
           <Card className="m-5 text-center" style={{backgroundColor: "#C42709"}}>
+          <Link to='/ventanaReportes'>
             <Card.Body>
             <i className="fas fa-file-signature fa-5x" style={{color: "#FFF"}}></i>
               <Card.Title  className="text-light">Reportes</Card.Title>
             </Card.Body>
+            </Link>
           </Card>
         </CardGroup>
       </div>

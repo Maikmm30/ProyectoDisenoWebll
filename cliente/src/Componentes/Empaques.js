@@ -59,7 +59,7 @@ function Empaques() {
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-4 m-4">
-                <Link to='/marcas'> 
+                <Link to='/agregarEmpaques'> 
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
                   </Link>  
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>

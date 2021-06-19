@@ -71,6 +71,9 @@ import AgregarUtensilios from "./Componentes/AgregarUtensilios";
 import Proveedores from "./Componentes/Proveedores";
 import VentanaReportes from "./Componentes/VentanaReportes";
 import Bitacora from "./Componentes/Bitacora";
+import Clientes from "./Componentes/Clientes";
+import ReporteFacturacion from "./Componentes/ReporteFacturacion";
+import ReporteClientes from "./Componentes/ReporteClientes";
 
 function App() {
   return (
@@ -151,6 +154,9 @@ function App() {
         <Route path="/proveedores" component={Proveedores}/>
         <Route path="/ventanaReportes" component={VentanaReportes}/>
         <Route path="/bitacora" component={Bitacora}/>
+        <Route path="/clientes" component={Clientes}/>
+        <Route path="/reporteFacturacion" component={ReporteFacturacion}/>
+        <Route path="/reporteClientes" component={ReporteClientes}/>
 
 
 

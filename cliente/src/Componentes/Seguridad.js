@@ -15,64 +15,70 @@ export default () => {
             <div class="row ">
               <div class="col-sm">
                 <div className="form-check">
-                  <label class="form-check-label">Usuarios</label>
-                  <Link to='/usuarios'>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
+                
+                <div class="form-check col-12">
+                <Link to='/usuarios'> 
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Usuarios
+                            </label>
+                        </div>
+                        
+                       
+                <div class="form-check col-12">
+                <Link to='/consecutivos'> 
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Consecutivos
+                            </label>
+                        </div>
+                       
+                         
+                <div class="form-check col-12">
+                <Link to='/paises'>
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                   </Link>
-                  <label class="form-check-label">Consecutivos</label>
-                  <Link to='/consecutivos'>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
-                  </Link>
-                  <label class="form-check-label">Países</label>
-                  <Link to='/paises'>
-                  <input
-                    class="form-check-input"
-                    type="checkbox"
-                    value=""
-                    id=""
-                  />
-                  </Link>
+                  <label class="form-check-label" for="flexRadioDefault1">
+                                Países
+                            </label>
+                        </div>
+                        
                 </div>
               </div>
               <div class="col-sm">
                 <div className="form-check">
-                <label class="form-check-label">Cajas</label>
-                <Link to='/cajas'>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id=""
-                />
-                </Link>
-                <label class="form-check-label">Roles o Eventos</label>
+                
+                <div class="form-check col-12">
+                <Link to='/cajas'> 
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                            </Link>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                Cajas
+                            </label>
+                        </div>
+                        
+                        
+                <div class="form-check col-12">
                 <Link to='/roles'> 
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id=""
-                />
+                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
                 </Link>
-                <label class="form-check-label">Unidades de Medida</label>
+                <label class="form-check-label" for="flexRadioDefault1">
+                                Roles
+                            </label>
+                        </div>
+                        
+                         
+                <div class="form-check col-12">
                 <Link to='/unidadMedida'>
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id=""
-                />
-                </Link>
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+                  </Link>
+                   <label class="form-check-label" for="flexRadioDefault1">
+                                Unidades de Medida
+                            </label>
+                        </div>
+                        
                 </div>
               </div>
             </div>

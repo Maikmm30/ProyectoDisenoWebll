@@ -26,7 +26,7 @@ function Administracion() {
 
 
                     <Card className="m-5 text-center">
-                        <Link to='/#'>
+                        <Link to='/empleados'>
                             <Card.Body>
                                 <i class="fas fa-user-alt fa-5x" style={{ color: "#C42709" }}></i>
                                 <Card.Title>Empleados</Card.Title>
@@ -41,7 +41,7 @@ function Administracion() {
                 <CardGroup >
 
                 <Card className="m-5 text-center">
-                        <Link to='#'>
+                        <Link to='/mesas'>
                             <Card.Body>
                                 <i class="fas fa-table fa-5x" style={{ color: "#C42709" }}></i>
                                 <Card.Title>Mesas</Card.Title>
@@ -50,7 +50,7 @@ function Administracion() {
                     </Card>
 
                     <Card className="m-5 text-center">
-                        <Link to='#'>
+                        <Link to='/puestos'>
                             <Card.Body>
                                 <i class="fas fa-user-alt fa-5x" style={{ color: "#C42709" }}></i>
                                 <Card.Title>Puesto</Card.Title>

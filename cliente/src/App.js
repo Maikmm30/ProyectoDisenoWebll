@@ -74,6 +74,12 @@ import Bitacora from "./Componentes/Bitacora";
 import Clientes from "./Componentes/Clientes";
 import ReporteFacturacion from "./Componentes/ReporteFacturacion";
 import ReporteClientes from "./Componentes/ReporteClientes";
+import Mesas from "./Componentes/Mesas";
+import Empleados from "./Componentes/Empleados";
+import Puestos from "./Componentes/Puestos";
+import AgregarEmpleados from "./Componentes/AgregarEmpleados";
+import AgregarPuesto from "./Componentes/AgregarPuesto";
+import AgregarMesas from "./Componentes/AgregarMesas";
 
 function App() {
   return (
@@ -157,6 +163,14 @@ function App() {
         <Route path="/clientes" component={Clientes}/>
         <Route path="/reporteFacturacion" component={ReporteFacturacion}/>
         <Route path="/reporteClientes" component={ReporteClientes}/>
+        <Route path="/mesas" component={Mesas}/>
+        <Route path="/empleados" component={Empleados}/>
+        <Route path="/puestos" component={Puestos}/>
+        <Route path="/agregarEmpleados" component={AgregarEmpleados}/>
+        <Route path="/agregarPuestos" component={AgregarPuesto}/>
+        <Route path="/agregarMesas" component={AgregarMesas}/>
+
+        
 
 
 

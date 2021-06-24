@@ -4,7 +4,7 @@ const app = express()
 
 app.use(express.json())
 
-mongoose.connect('mongodb+srv://tefest07:tefest07@cluster0.jwptf.mongodb.net/proyectoDB?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
     useNewUrlParser: true
 })
 

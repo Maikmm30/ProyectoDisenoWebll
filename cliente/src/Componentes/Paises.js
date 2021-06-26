@@ -1,7 +1,9 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
 import { Link } from "react-router-dom";
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+
 
 const columns = [
   {
@@ -14,7 +16,7 @@ const columns = [
   },
 ];
 
-const paises = [
+const paisesTabla = [
   {
     codigo: 1,
     pais: "A",
@@ -24,8 +26,23 @@ const paises = [
     pais: "A",
   },
 ];
-
 function Paises() {
+  
+const [paises, setPais] = useState([]);
+
+  useEffect(() =>
+{
+  axios.get('http://localhost:3000/pais/')
+  .then(res => {
+    this.setState({
+      setPais: res.data
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+});
+
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -83,7 +100,7 @@ function Paises() {
                 <div className="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
-                    data={paises}
+                    data={paisesTabla}
                     columns={columns}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />

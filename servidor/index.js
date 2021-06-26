@@ -3,6 +3,8 @@ const mongoose = require ('mongoose')
 const app = express()
 
 app.use(express.json())
+const paisRutas = require('./rutas/paisRuta')
+app.use('/pais', paisRutas);
 
 mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
     useNewUrlParser: true

@@ -1,12 +1,17 @@
-let mongoose = require('mongoose'),
-  express = require('express'),
-  router = express.Router();
+const router = require('express').Router();
+let Pais = require('../modelos/Pais');
 
+router.route('/').get((req, res) => {
 
-let paisSchema = require('../modelos/Pais');
+Pais.find() 
+    .then(paises => res.json(paises))
+    .catch(err => res.status(400).json('Error: ' + err));
+    
+})
 
+/*
 router.route('/agregarPais').post((req, res, next) => {
-  paisSchema.create(req.body, (error, data) => {
+  Pais.create(req.body, (error, data) => {
     if (error) {
       return next(error)
     } else {
@@ -17,18 +22,9 @@ router.route('/agregarPais').post((req, res, next) => {
 });
 
 
-router.route('/paises').get((req, res) => {
-  studentSchema.find((error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      res.json(data)
-    }
-  })
-})
 
 
-/* Update Student
+ Update Student
 router.route('/update-student/:id').put((req, res, next) => {
   studentSchema.findByIdAndUpdate(req.params.id, {
     $set: req.body

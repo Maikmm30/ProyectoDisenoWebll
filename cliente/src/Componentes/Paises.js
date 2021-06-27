@@ -1,8 +1,25 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
-import axios from 'axios';
-import React, { useState,useEffect } from 'react';
+import Axios from 'axios';
+import React, { useState, useEffect } from 'react';
+
+
+function Paises() {
+  
+const [paises, setPais] = useState([]);
+
+  useEffect(() =>
+{
+  Axios.get('http://localhost:3001/paises/')
+  .then(res => {
+  //  const todosPaises = res.data.paises.todosPaises;
+    //setPais(todosPaises)
+    console.log(res);
+  })
+  .catch((error) => {
+  })
+});
 
 
 const columns = [
@@ -26,28 +43,11 @@ const paisesTabla = [
     pais: "A",
   },
 ];
-function Paises() {
-  
-const [paises, setPais] = useState([]);
-
-  useEffect(() =>
-{
-  axios.get('http://localhost:3000/pais/')
-  .then(res => {
-    this.setState({
-      setPais: res.data
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  })
-});
-
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
         <div className="col-3 m-auto text-center pb-5">
-          <h3>Lista de Países</h3>
+          <h3>Lista de Países {paises}</h3>
           <i className="fas fa-globe-americas fa-10x"></i>
         </div>
         <div className="col-9">
@@ -76,7 +76,7 @@ const [paises, setPais] = useState([]);
                 <div className="row">
                   <div className="col">
                     <div className="form-group row mt-2">
-                      <label for="staticEmail" className="col-sm-3 col-form-label">
+                      <label  className="col-sm-3 col-form-label">
                         Código del País
                       </label>
                       <div className="col-sm-8">
@@ -86,7 +86,7 @@ const [paises, setPais] = useState([]);
                   </div>
                   <div className="col">
                     <div className="form-group row mt-2">
-                      <label for="staticEmail" className="col-sm-4 col-form-label">
+                      <label  className="col-sm-4 col-form-label">
                         Nombre del País
                       </label>
                       <div className="col-sm-8">

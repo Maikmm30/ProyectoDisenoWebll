@@ -7,9 +7,8 @@ let paisSchema = new Schema({
   },
   nombre: {
     type: String
-  },
-  rollno: {
-    type: Number
   }
 })
-module.exports = mongoose.model('Pais', paisSchema)
+
+const Pais =  mongoose.model('pais', paisSchema);
+module.exports = Pais;

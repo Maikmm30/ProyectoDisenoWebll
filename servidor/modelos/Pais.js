@@ -10,5 +10,6 @@ let paisSchema = new Schema({
   }
 })
 
-const Pais =  mongoose.model('pais', paisSchema);
+const Pais =  mongoose.model('pais',paisSchema);
+
 module.exports = Pais;

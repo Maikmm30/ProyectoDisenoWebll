@@ -9,8 +9,7 @@ function Paises() {
   
 const [paises, setPais] = useState([]);
 
-  useEffect(() =>
-{
+useEffect(() =>{
   Axios.get('http://localhost:3001/paises/')
   .then(res => {
   //  const todosPaises = res.data.paises.todosPaises;
@@ -18,8 +17,9 @@ const [paises, setPais] = useState([]);
     console.log(res);
   })
   .catch((error) => {
+    console.log('error'+error)
   })
-});
+},[]);
 
 
 const columns = [

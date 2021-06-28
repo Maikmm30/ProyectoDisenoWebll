@@ -10,7 +10,7 @@ app.use('/paises', paisRutas);
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority',{
     useNewUrlParser: true
 })
 const connection = mongoose.connection;

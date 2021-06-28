@@ -8,16 +8,11 @@ import React, { useState, useEffect } from 'react';
 function Paises() {
   
 const [paises, setPais] = useState([]);
-
 useEffect(() =>{
   Axios.get('http://localhost:3001/paises/')
-  .then(res => {
-  //  const todosPaises = res.data.paises.todosPaises;
-    //setPais(todosPaises)
-    console.log(res);
-  })
-  .catch((error) => {
-    console.log('error'+error)
+  .then((res) => {
+    setPais(res.data)
+    console.log(paises)
   })
 },[]);
 
@@ -28,26 +23,16 @@ const columns = [
     text: "Código",
   },
   {
-    dataField: "pais",
-    text: "País",
-  },
-];
-
-const paisesTabla = [
-  {
-    codigo: 1,
-    pais: "A",
-  },
-  {
-    codigo: 2,
-    pais: "A",
+    dataField: "nombre",
+    text: "Nombre",
   },
 ];
   return (
     <div className="container">
+      
       <div className="row bg-warning" style={{ height: "800px" }}>
         <div className="col-3 m-auto text-center pb-5">
-          <h3>Lista de Países {paises}</h3>
+          <h3>Lista de Países </h3>
           <i className="fas fa-globe-americas fa-10x"></i>
         </div>
         <div className="col-9">
@@ -100,7 +85,7 @@ const paisesTabla = [
                 <div className="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
-                    data={paisesTabla}
+                    data={paises}
                     columns={columns}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />

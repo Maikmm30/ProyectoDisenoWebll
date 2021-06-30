@@ -8,6 +8,7 @@ import React, { useState, useEffect } from 'react';
 function Paises() {
   
 const [paises, setPais] = useState([]);
+
 useEffect(() =>{
   Axios.get('http://localhost:3001/paises/')
   .then((res) => {
@@ -15,7 +16,6 @@ useEffect(() =>{
     console.log(paises)
   })
 },[]);
-
 
 const columns = [
   {

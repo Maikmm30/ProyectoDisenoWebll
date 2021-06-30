@@ -9,8 +9,8 @@ Pais.find()
     
 })
 
-/*
-router.route('/agregarPais').post((req, res, next) => {
+
+router.route('/agregar').post((req, res, next) => {
   Pais.create(req.body, (error, data) => {
     if (error) {
       return next(error)
@@ -22,7 +22,7 @@ router.route('/agregarPais').post((req, res, next) => {
 });
 
 
-
+/*
 
  Update Student
 router.route('/update-student/:id').put((req, res, next) => {

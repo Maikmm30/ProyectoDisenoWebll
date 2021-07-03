@@ -22,6 +22,8 @@ let proveedorSchema = new Schema({
     },
     celular: {
         type: String
+    },estado: {
+        type: String
     }
 })
 

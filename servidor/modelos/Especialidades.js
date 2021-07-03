@@ -19,6 +19,8 @@ let especialidadesSchema = new Schema({
     },
     restaurante: {
         type: String
+    },estado: {
+        type: String
     }
 })
 

@@ -37,6 +37,8 @@ let bebidasVinosSchema = new Schema({
     },
     acompana: {
         type: String
+    },estado: {
+        type: String
     }
 })
 

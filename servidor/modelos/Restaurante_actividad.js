@@ -13,6 +13,8 @@ let restauranteActividadSchema = new Schema({
     },
     descripcion: {
         type: String
+    },estado: {
+        type: String
     }
 })
 

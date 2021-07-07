@@ -4,6 +4,7 @@ import {
   Nav,
   NavDropdown
 } from "react-bootstrap";
+import PopUp from "./PopUp";
 export default () => {
   return (
     <Navbar bg="light" expand="lg" >
@@ -14,7 +15,7 @@ export default () => {
           <NavDropdown title="Sistema" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Información</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Reiniciar sesión </NavDropdown.Item>
+              <NavDropdown.Item><PopUp/></NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="#action/3.3">Salir</NavDropdown.Item>
             </NavDropdown>

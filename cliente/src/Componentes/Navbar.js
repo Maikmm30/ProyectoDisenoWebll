@@ -17,7 +17,7 @@ export default () => {
               <NavDropdown.Divider />
               <NavDropdown.Item><PopUp/></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3">Salir</NavDropdown.Item>
+              <NavDropdown.Item href="/">Salir</NavDropdown.Item>
             </NavDropdown>
             
             <NavDropdown title="Ayuda" id="basic-nav-dropdown">
@@ -34,8 +34,6 @@ export default () => {
               <NavDropdown.Divider />
             </NavDropdown>
           </NavDropdown>
-
-          <Nav.Link href="/">Login</Nav.Link>
 
         </Nav>
       </Navbar.Collapse>

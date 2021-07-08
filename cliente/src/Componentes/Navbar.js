@@ -11,7 +11,7 @@ export default () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-        <Nav.Link href="/"><i className="fas fa-home fa-2x"></i></Nav.Link>
+        <Nav.Link href="/home"><i className="fas fa-home fa-2x"></i></Nav.Link>
           <NavDropdown title="Sistema" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Información</NavDropdown.Item>
               <NavDropdown.Divider />
@@ -35,7 +35,7 @@ export default () => {
             </NavDropdown>
           </NavDropdown>
 
-          <Nav.Link href="/Login">Login</Nav.Link>
+          <Nav.Link href="/">Login</Nav.Link>
 
         </Nav>
       </Navbar.Collapse>

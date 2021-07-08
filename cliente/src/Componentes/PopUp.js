@@ -13,7 +13,7 @@ class popUp extends React.Component {
       buttons: [
         {
           label: 'Sí',
-          onClick: (event) => {  window.location.href='/Login'}
+          onClick: (event) => {  window.location.href='/'}
         },
         {
           label: 'No'

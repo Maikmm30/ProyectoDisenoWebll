@@ -65,19 +65,19 @@ const products = [{
 
 function AyudaVinos() {
   return (
-    <div class="container">
-      <div class="row bg-warning">
-        <div class="col-3 m-auto text-center pb-5">
+    <div class="container text-center">
+      <div class="row"  style={{  backgroundColor: "#FF723F"}}>
+        <div class="col-3 m-auto pb-5">
           <h3>Reporte Ayuda de Vinos.</h3>
           <i class="fas fa-wine-glass-alt fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
 
-            <div class="col-12 bg-danger h-80">
-            <h4>Ayuda para los Tipos de Vinos.</h4>
+            <div class="col-12 h-80">
+            <h4 className="pt-5" style={{  backgroundColor: "#FF723F"}}>Ayuda para los Tipos de Vinos.</h4>
               <div class="form-group row mt-2">
-                <div class="col-sm-9">
+                <div class="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
                     data={products}
@@ -91,7 +91,7 @@ function AyudaVinos() {
           </div>
         </div>
 
-        <div class="text-center col-12 bg-success h-25">
+        <div class="text-center col-12 bg-success h-25" style={{  backgroundColor: "#C42709"}}>
           <div class="row row-cols-5 m-4">
 
             <div class="col"><i class="fas fa-arrow-circle-left fa-4x"></i></div>

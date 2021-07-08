@@ -2,23 +2,23 @@
 function AgregarBebidaCaliente() {
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "600px" }}>
+      <div class="row " style={{ height: "600px" , backgroundColor: "#FF723F"}}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Agregar Bebida Caliente</h3>
-          <i class="fas fa-mug-hot fa-10x"></i>
+          <i class="fas fa-mug-hot fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center text-light col-12 h-25" style={{  backgroundColor: "#C42709"}}>
               <div class="row row-cols-4 m-4">
-                <div class="col"><i class="p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
-                <div class="col"><i class="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
+                <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
+                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class="py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
                 <div class="col"><i class="fas fa-search fa-4x"></i></div>
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               Información de la Bebida Caliente
                 <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">

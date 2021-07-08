@@ -66,25 +66,25 @@ const products = [{
 function BebidasVinos() {
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row " style={{ height: "830px" , backgroundColor: "#FF723F"}}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Bebidas Vinos</h3>
-          <i class="fas fa-wine-glass-alt fa-10x"></i>
+          <i class="fas fa-wine-glass-alt fa-10x  text-light"></i>
         </div>
         <div class="col-9">
-          <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
-              <div class="row row-cols-4 m-4">
-                <Link to='/administracion/especiales/bebidas/vinos/agregar-bebida-vino'>
-                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                </Link>
-                <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
-                <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
-                <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i></div>
+          <div class="row h-60">
+            <div class="text-center col-12 h-25"  style={{  backgroundColor: "#C42709"}}>
+              <div class="row row-cols-4 m-4 text-light">
+               
+                  <div class="col"><i class=" p-3  rounded-circle fas fa-broom fa-3x "></i></div>
+                
+                <div class="col "><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
+                <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"></i></div>
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12  h-80">
 
               <div class="row mt-2 mb-3">
 
@@ -129,7 +129,7 @@ function BebidasVinos() {
               </div>
 
               <div class="form-group row mt-2">
-                <div class="col-sm-9">
+                <div class="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
                     data={products}
@@ -138,11 +138,12 @@ function BebidasVinos() {
                   />
                 </div>
 
-                <div class="text-center col-12 bg-success h-25">
+                <div class="text-center col-12 h-25"  style={{  backgroundColor: "#C42709"}}>
                   <div class="row row-cols-2 m-4">
-
-                    <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
-                    <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
+                  <Link to='/administracion/especiales/bebidas/vinos/agregar-bebida-vino'>
+                    <div class="col"><i class=" py-3 px-4  text-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
+                  </Link>
+                    <div class="col"><i class=" py-3 px-4  text-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
 
                   </div>
                 </div>

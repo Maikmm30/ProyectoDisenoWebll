@@ -65,19 +65,19 @@ const products = [{
 
 function AyudaSistema() {
   return (
-    <div class="container">
-      <div class="row bg-warning">
-        <div class="col-3 m-auto text-center pb-5">
-          <h3>Reporte Ayuda de Sistema.</h3>
-          <i class="fas fa-question-circle fa-10x"></i>
+    <div className="container text-center">
+      <div className="row "  style={{  backgroundColor: "#FF723F"}}>
+        <div className="col-3 m-auto text-center pb-5">
+          <h3>Reporte Ayuda de Sistema</h3>
+          <i className="fas fa-question-circle fa-10x text-light" ></i>
         </div>
-        <div class="col-9">
-          <div class="row h-75">
+        <div className="col-9">
+          <div className="row h-75">
 
-            <div class="col-12 bg-danger h-80">
-            <h4>Ayuda para el Módulo de Administración del Sistema.</h4>
-              <div class="form-group row mt-2">
-                <div class="col-sm-9">
+            <div className="col-12 h-80">
+            <h4 className="pt-5" style={{  backgroundColor: "#FF723F"}}>Ayuda para el Módulo de Administración del Sistema</h4>
+             <div className="form-group">
+                <div className="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
                     data={products}
@@ -92,14 +92,14 @@ function AyudaSistema() {
           </div>
         </div>
 
-        <div class="text-center col-12 bg-success h-25">
-          <div class="row row-cols-5 m-4">
+        <div className="text-center col-12 h-25"  style={{  backgroundColor: "#C42709"}}>
+          <div className="row row-cols-5 m-4 text-light">
 
-            <div class="col"><i class="fas fa-arrow-circle-left fa-4x"></i></div>
-            <div class="col"><i class="fas fa-arrow-circle-right fa-4x"></i></div>
-            <div class="col"><i class="fas fa-times-circle fa-4x"></i></div>
-            <div class="col"><i class="fas fa-search fa-4x"></i></div>
-            <div class="col"><i class="fas fa-print fa-4x"></i></div>
+            <div className="col"><i className="fas fa-arrow-circle-left fa-4x "></i></div>
+            <div className="col"><i className="fas fa-arrow-circle-right fa-4x"></i></div>
+            <div className="col"><i className="fas fa-times-circle fa-4x"></i></div>
+            <div className="col"><i className="fas fa-search fa-4x"></i></div>
+            <div className="col"><i className="fas fa-print fa-4x"></i></div>
 
           </div>
         </div>

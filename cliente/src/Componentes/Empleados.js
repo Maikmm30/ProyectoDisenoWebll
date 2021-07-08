@@ -56,25 +56,25 @@ const products = [{
 function Empleados() {
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "700px" , backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Empleados</h3>
-          <i class="fas fa-user-friends fa-10x"></i>
+          <i class="fas fa-user-friends fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
-                <div class="row row-cols-4 m-4">
-                <Link to='/agregarEmpleados'> 
-                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  </Link>  
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i></div>
+            <div class="text-center col-12  h-25"  style={{  backgroundColor: "#C42709"}}>
+                <div class="row row-cols-4 m-4 text-light">
+                
+                  <div class="col"><i class=" p-3  rounded-circle fas fa-broom fa-3x "></i></div>
+               
+                  <div class="col "><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
+                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"></i></div>
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               Búsqueda de Empleados
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
@@ -100,7 +100,7 @@ function Empleados() {
               
               <div class="form-group row mt-2">
                 
-                <div class="col-sm-12">
+                <div class="py-5 px-5">
                 <BootstrapTable
                     keyField="id"
                     data={ products }
@@ -109,11 +109,12 @@ function Empleados() {
                 />
                 </div>
                 
-              <div class="text-center col-12 bg-success h-25">
+              <div class="text-center col-12  h-25" style={{  backgroundColor: "#C42709"}}>
                 <div class="row row-cols-2 m-4">
-                
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
+                <Link to='/agregarEmpleados'> 
+                  <div class="col"><i class=" py-3 px-4 text-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
+                </Link>
+                  <div class="col"><i class=" py-3 px-4 text-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
 
               </div>
             </div>

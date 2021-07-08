@@ -4,19 +4,20 @@ import {
   Nav,
   NavDropdown
 } from "react-bootstrap";
+import PopUp from "./PopUp";
 export default () => {
   return (
     <Navbar bg="light" expand="lg" >
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
-        <Nav.Link href="/"><i className="fas fa-home fa-2x"></i></Nav.Link>
+        <Nav.Link href="/home"><i className="fas fa-home fa-2x"></i></Nav.Link>
           <NavDropdown title="Sistema" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Información</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.2">Reiniciar sesión </NavDropdown.Item>
+              <NavDropdown.Item><PopUp/></NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3">Salir</NavDropdown.Item>
+              <NavDropdown.Item href="/">Salir</NavDropdown.Item>
             </NavDropdown>
             
             <NavDropdown title="Ayuda" id="basic-nav-dropdown">
@@ -33,8 +34,6 @@ export default () => {
               <NavDropdown.Divider />
             </NavDropdown>
           </NavDropdown>
-
-          <Nav.Link href="/Login">Login</Nav.Link>
 
         </Nav>
       </Navbar.Collapse>

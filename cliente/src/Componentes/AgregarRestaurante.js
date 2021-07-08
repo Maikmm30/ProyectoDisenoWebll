@@ -3,23 +3,23 @@ import { Container, Row, Col } from "react-bootstrap";
 function AgregarRestaurante() {
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "600px" }}>
-        <div class="col-3 m-auto text-center pb-5">
+      <div class="row " style={{ height: "600px", backgroundColor: "#FF723F"  }}>
+        <div class="col-3 m-auto text-center pb-5" >
           <h3>Agregar Restaurante</h3>
-          <i class="fas fa-utensils fa-10x"></i>
+          <i class="fas fa-utensils fa-10x text-light"></i>
         </div>
-        <div class="col-9" style={{ backgroundColor: "#dc3545" }}>
+        <div class="col-9" >
           <div class="row">
-            <div class="text-center mb-3 col-12 bg-success h-35">
+            <div class="text-center text-light mb-3 col-12 h-35" style={{  backgroundColor: "#C42709"}}>
               <div class="row row-cols-4 m-4">
-                <div class="col"><i class="p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
-                <div class="col"><i class="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
-                <div class="col"><i class="fas fa-search fa-4x"></i></div>
+                <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
+                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class="py-3 px-4 rounded-circle fas fa-times fa-3x"></i></div>
+                <div class="col"><i class="py-2 px-3 fas  rounded-circle fa-search fa-4x"></i></div>
               </div>
             </div>
 
-            <div class="row">
+            <div class="row ">
               <div class="col">
                 <h4>Información del Restaurante</h4>
                 <div class="row mt-4 mb-3">

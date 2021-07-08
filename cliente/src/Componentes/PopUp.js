@@ -2,9 +2,6 @@ import React from "react";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
-import {
-   Link
-  } from "react-router-dom";
 class popUp extends React.Component {
   submit = () => {
     confirmAlert({
@@ -13,7 +10,7 @@ class popUp extends React.Component {
       buttons: [
         {
           label: 'Sí',
-          onClick: (event) => {  window.location.href='/'}
+          onClick: () => {  window.location.href='/'}
         },
         {
           label: 'No'

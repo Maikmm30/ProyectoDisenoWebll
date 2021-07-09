@@ -1,25 +1,23 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
-import Axios from 'axios';
-import React, { useState, useEffect } from 'react';
-
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 
 function Paises() {
-  
-const [paises, setPais] = useState([]);
-const [codigoPais, setCodigoPais] = useState("");
-const [nombrePais, setNombrePais] = useState("");
+  const [paises, setPais] = useState([]);
+  const [codigoPais, setCodigoPais] = useState("");
+  const [nombrePais, setNombrePais] = useState("");
 
-useEffect(() =>{
-  Axios.get('http://localhost:3001/paises/')
-  .then((res) => {
-    setPais(res.data)
-    console.log(paises)
-  })
-},[]);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/paises/").then((res) => {
+      setPais(res.data);
+      console.log(paises);
+      console.log(codigoPais);
+    });
+  }, []);
 
-/*const buscarPais = () => {
+  /*const buscarPais = () => {
   Axios.get('http://localhost:3001/paises/buscar',{
     //codigoPais:codigoPais,
     nombrePais:nombrePais
@@ -29,19 +27,26 @@ useEffect(() =>{
   })
 };*/
 
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-  },
-  {
-    dataField: "nombre",
-    text: "Nombre",
-  },
-];
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+    },
+  ];
+  const myFunction = (event) => {
+    console.log(event.target.textContent);
+      var tableValue = event.target.textContent;
+      console.log(event.target);
+      console.log(event.target.value);
+      if (event.target.tagName == "TD") {
+    }
+  };
   return (
     <div className="container">
-      
       <div className="row bg-warning" style={{ height: "800px" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Países </h3>
@@ -57,13 +62,13 @@ const columns = [
                   </div>
                 </Link>
                 <div className="col ">
-                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" ></button>
+                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></button>
                 </div>
                 <div className="col">
                   <i className="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
                 <div className="col">
-                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" ></button>
+                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></button>
                 </div>
               </div>
             </div>
@@ -73,32 +78,40 @@ const columns = [
                 <div className="row">
                   <div className="col">
                     <div className="form-group row mt-2">
-                      <label  className="col-sm-3 col-form-label">
+                      <label className="col-sm-3 col-form-label">
                         Código del País
                       </label>
                       <div className="col-sm-8">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                        setCodigoPais(event.target.value);
-                      }}/>
+                        <input
+                          type="text"
+                          className="form-control"
+                          onChange={(event) => {
+                            setCodigoPais(event.target.value);
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
                   <div className="col">
                     <div className="form-group row mt-2">
-                      <label  className="col-sm-4 col-form-label">
+                      <label className="col-sm-4 col-form-label">
                         Nombre del País
                       </label>
                       <div className="col-sm-8">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                        setNombrePais(event.target.value);
-                      }}/>
+                        <input
+                          type="text"
+                          className="form-control"
+                          onChange={(event) => {
+                            setNombrePais(event.target.value);
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5">
+                <div className="py-5 px-5" onKeyPress={myFunction}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}

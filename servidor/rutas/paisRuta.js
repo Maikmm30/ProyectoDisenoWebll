@@ -1,15 +1,13 @@
-const router = require('express').Router();
-let Pais = require('../modelos/Pais');
+const router = require("express").Router();
+let Pais = require("../modelos/Pais");
 const express = require("express");
 const app = express();
 
-router.route('/').get((req, res) => {
-
-Pais.find() 
-    .then(paises => res.json(paises))
-    .catch(err => res.status(400).json('Error: ' + err));
-    
-})
+router.route("/").get((req, res) => {
+  Pais.find()
+    .then((paises) => res.json(paises))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 
 /*router.route('/buscar').get((req,res) => {
   console.log(req.body.nombrePais);
@@ -17,7 +15,6 @@ Pais.find()
     .then(pais=>res.json(pais))
     .catch(err => res.status(400).json('Error: ' + err));
 })*/
-
 
 /*router.route('/agregar').post((req, res, next) => {
   Pais.create(req.body, (error, data) => {
@@ -35,33 +32,26 @@ router.post("/agregar", async (req, res) => {
   const codigoPais = req.body.codigoPais;
   const estadoPais = req.body.estadoPais;
 
-  try{
-    const pais = new Pais({codigo: codigoPais, nombre: nombrePais, estado: estadoPais});
+  try {
+    const pais = new Pais({
+      codigo: codigoPais,
+      nombre: nombrePais,
+      estado: estadoPais,
+    });
     await pais.save();
     res.send("inserted data");
-  } catch (err){
+  } catch (err) {
     console.log(err);
   }
 });
 
-
+router.route("actualiza").put((req, res) => {
+  const actualizaPais = req.body.actualizaPais;
+  Pais.find()
+    .then((paises) => res.json(paises))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 /*
-
- Update Student
-router.route('/update-student/:id').put((req, res, next) => {
-  studentSchema.findByIdAndUpdate(req.params.id, {
-    $set: req.body
-  }, (error, data) => {
-    if (error) {
-      return next(error);
-      console.log(error)
-    } else {
-      res.json(data)
-      console.log('Student updated successfully !')
-    }
-  })
-})
-
 // Delete Student
 router.route('/delete-student/:id').delete((req, res, next) => {
   studentSchema.findByIdAndRemove(req.params.id, (error, data) => {

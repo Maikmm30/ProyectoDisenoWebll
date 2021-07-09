@@ -8,6 +8,8 @@ import React, { useState, useEffect } from 'react';
 function Paises() {
   
 const [paises, setPais] = useState([]);
+const [codigoPais, setCodigoPais] = useState("");
+const [nombrePais, setNombrePais] = useState("");
 
 useEffect(() =>{
   Axios.get('http://localhost:3001/paises/')
@@ -16,6 +18,16 @@ useEffect(() =>{
     console.log(paises)
   })
 },[]);
+
+/*const buscarPais = () => {
+  Axios.get('http://localhost:3001/paises/buscar',{
+    //codigoPais:codigoPais,
+    nombrePais:nombrePais
+  })
+  .then((res) => {
+    setPais(res.data)
+  })
+};*/
 
 const columns = [
   {
@@ -45,13 +57,13 @@ const columns = [
                   </div>
                 </Link>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" ></button>
                 </div>
                 <div className="col">
                   <i className="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
                 <div className="col">
-                  <i className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
+                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" ></button>
                 </div>
               </div>
             </div>
@@ -65,7 +77,9 @@ const columns = [
                         Código del País
                       </label>
                       <div className="col-sm-8">
-                        <input type="number" className="form-control" />
+                      <input type="text" className="form-control" onChange={(event)=>{
+                        setCodigoPais(event.target.value);
+                      }}/>
                       </div>
                     </div>
                   </div>
@@ -75,7 +89,9 @@ const columns = [
                         Nombre del País
                       </label>
                       <div className="col-sm-8">
-                        <input type="text" className="form-control" />
+                      <input type="text" className="form-control" onChange={(event)=>{
+                        setNombrePais(event.target.value);
+                      }}/>
                       </div>
                     </div>
                   </div>

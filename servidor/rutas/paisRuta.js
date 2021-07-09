@@ -1,5 +1,7 @@
 const router = require('express').Router();
 let Pais = require('../modelos/Pais');
+const express = require("express");
+const app = express();
 
 router.route('/').get((req, res) => {
 
@@ -9,8 +11,15 @@ Pais.find()
     
 })
 
+/*router.route('/buscar').get((req,res) => {
+  console.log(req.body.nombrePais);
+  Pais.find({nombre:req.body.nombrePais})
+    .then(pais=>res.json(pais))
+    .catch(err => res.status(400).json('Error: ' + err));
+})*/
 
-router.route('/agregar').post((req, res, next) => {
+
+/*router.route('/agregar').post((req, res, next) => {
   Pais.create(req.body, (error, data) => {
     if (error) {
       return next(error)
@@ -19,6 +28,20 @@ router.route('/agregar').post((req, res, next) => {
       res.json(data)
     }
   })
+});*/
+
+router.post("/agregar", async (req, res) => {
+  const nombrePais = req.body.nombrePais;
+  const codigoPais = req.body.codigoPais;
+  const estadoPais = req.body.estadoPais;
+
+  try{
+    const pais = new Pais({codigo: codigoPais, nombre: nombrePais, estado: estadoPais});
+    await pais.save();
+    res.send("inserted data");
+  } catch (err){
+    console.log(err);
+  }
 });
 
 

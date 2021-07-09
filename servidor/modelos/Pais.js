@@ -7,6 +7,9 @@ let paisSchema = new Schema({
   },
   nombre: {
     type: String
+  }, 
+  estado: {
+    type: Boolean
   }
 })
 

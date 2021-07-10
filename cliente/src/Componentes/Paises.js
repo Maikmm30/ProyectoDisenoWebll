@@ -9,11 +9,13 @@ function Paises() {
   const [codigoPais, setCodigoPais] = useState("");
   const [nombrePais, setNombrePais] = useState("");
 
+  var paisActualiza;
+  var paisNuevo;
+  var columnaSeleccionada;
+
   useEffect(() => {
     Axios.get("http://localhost:3001/paises/").then((res) => {
       setPais(res.data);
-      console.log(paises);
-      console.log(codigoPais);
     });
   }, []);
 
@@ -27,24 +29,54 @@ function Paises() {
   })
 };*/
 
+const actualizaPais = () =>{
+
+ /* Axios.put("http://localhost:3001/paises/actualiza",{
+    paisActualiza: paisActualiza,
+    paisNuevo : paisNuevo,
+    columnaSeleccionada : columnaSeleccionada
+  });
+  */
+ alert('Alerta'+paisNuevo)
+}
+
   const columns = [
     {
       dataField: "codigo",
       text: "Código",
+      events:{
+        onClick:( column, columnIndex, )=>{
+         columnaSeleccionada= columnIndex.dataField;
+        }
+      }
     },
     {
       dataField: "nombre",
       text: "Nombre",
+      events:{
+        onClick:( column, columnIndex)=>{
+          columnaSeleccionada= columnIndex.dataField;
+        }
+      }
     },
   ];
-  const myFunction = (event) => {
-    console.log(event.target.textContent);
-      var tableValue = event.target.textContent;
-      console.log(event.target);
-      console.log(event.target.value);
-      if (event.target.tagName == "TD") {
-    }
+  const capturaInput = (event) => { 
+   if (!event.target.value == '') {
+     paisNuevo =event.target.value;
+     
+     actualizaPais();
+   }
   };
+
+  const capturaValorAntiguo = (event)=>{
+    if (event.target.tagName === "TD") {
+      paisActualiza =event.target.textContent
+      
+     console.log(columnaSeleccionada)
+    }
+  
+
+  }
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -68,7 +100,7 @@ function Paises() {
                   <i className="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
                 <div className="col">
-                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></button>
+                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={actualizaPais}></button>
                 </div>
               </div>
             </div>
@@ -111,7 +143,7 @@ function Paises() {
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5" onKeyPress={myFunction}>
+                <div className="py-5 px-5" onKeyUpCapture ={capturaInput} onDoubleClick={capturaValorAntiguo}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}

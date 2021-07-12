@@ -45,16 +45,20 @@ router.post("/agregar", async (req, res) => {
   }
 });
 
-router.route("/actualiza").put((req, res) => {
-  /*const paisActualiza = req.body.paisActualiza;
+router.put("/update", async (req, res) => {
+  const paisActualiza = req.body.paisActualiza;
   const paisNuevo = req.body.paisNuevo;
-  const columnaSeleccionada = req.body.columnaSeleccionada;*/
-  console.log(paisNuevo)
-   Pais.findOneAndUpdate({pais : 'Costa Rica'}, {$set : {pais : 'Nicaragua'}} , { new: true },(err,doc))
-    .then(() => res.json('actualizado'))
-    .catch((err) => res.status(400).json("Error: " + err));
-    console.log(doc)
-});
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try{
+  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
+    res.json(pais);
+
+  });
+  }
+  catch(err){
+    res.send('error');
+  }
+})
 /*
 // Delete Student
 router.route('/delete-student/:id').delete((req, res, next) => {

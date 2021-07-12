@@ -9,9 +9,11 @@ function Paises() {
   const [codigoPais, setCodigoPais] = useState("");
   const [nombrePais, setNombrePais] = useState("");
 
-  var paisActualiza;
-  var paisNuevo;
-  var columnaSeleccionada;
+
+  
+  var [paisActualiza, setActualizaPais] = useState("");
+  var [paisNuevo, setNuevoPais] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/paises/").then((res) => {
@@ -29,15 +31,17 @@ function Paises() {
   })
 };*/
 
-const actualizaPais = () =>{
+const actualizaPais = () => {
 
- /* Axios.put("http://localhost:3001/paises/actualiza",{
+  Axios.put("http://localhost:3001/paises/update",
+  {
     paisActualiza: paisActualiza,
     paisNuevo : paisNuevo,
-    columnaSeleccionada : columnaSeleccionada
-  });
-  */
- alert('Alerta'+paisNuevo)
+    columnaSeleccionada : columnaSeleccionada 
+  }
+  );
+  window.location.reload()
+  
 }
 
   const columns = [
@@ -46,7 +50,7 @@ const actualizaPais = () =>{
       text: "Código",
       events:{
         onClick:( column, columnIndex, )=>{
-         columnaSeleccionada= columnIndex.dataField;
+          setColumna(columnIndex.dataField)
         }
       }
     },
@@ -55,26 +59,23 @@ const actualizaPais = () =>{
       text: "Nombre",
       events:{
         onClick:( column, columnIndex)=>{
-          columnaSeleccionada= columnIndex.dataField;
+          setColumna(columnIndex.dataField)
         }
       }
     },
   ];
   const capturaInput = (event) => { 
    if (!event.target.value == '') {
-     paisNuevo =event.target.value;
-     
-     actualizaPais();
+    setNuevoPais(event.target.value)
+    console.log(columnaSeleccionada)
    }
   };
 
   const capturaValorAntiguo = (event)=>{
     if (event.target.tagName === "TD") {
-      paisActualiza =event.target.textContent
-      
-     console.log(columnaSeleccionada)
+      setActualizaPais(event.target.textContent)
     }
-  
+    
 
   }
   return (
@@ -143,7 +144,7 @@ const actualizaPais = () =>{
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5" onKeyUpCapture ={capturaInput} onDoubleClick={capturaValorAntiguo}>
+                <div className="py-5 px-5" onKeyUp ={capturaInput} onBlur={actualizaPais} onDoubleClick={capturaValorAntiguo}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}

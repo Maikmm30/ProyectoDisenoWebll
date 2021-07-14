@@ -110,7 +110,8 @@ const eliminaPais = () => {
     window.location.reload();
  }
  const limpiaCajas =()=>{
-  setCodigo("")
+    setCodigo("")
+    setNombre("")
  }
 
   return (
@@ -151,6 +152,7 @@ const eliminaPais = () => {
                         <input
                           type="text"
                           className="form-control"
+                          value={codigoBusca}
                           onChange={(event) => {
                             setCodigo(event.target.value);
                           }}
@@ -167,6 +169,7 @@ const eliminaPais = () => {
                         <input
                           type="text"
                           className="form-control"
+                          value={nombreBusca}
                           onChange={(event) => {
                             setNombre(event.target.value);
                           }}

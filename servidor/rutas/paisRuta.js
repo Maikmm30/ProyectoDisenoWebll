@@ -4,28 +4,11 @@ const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-  Pais.find()
+  Pais.find({estado: {$ne: 'false'}})
     .then((paises) => res.json(paises))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-/*router.route('/buscar').get((req,res) => {
-  console.log(req.body.nombrePais);
-  Pais.find({nombre:req.body.nombrePais})
-    .then(pais=>res.json(pais))
-    .catch(err => res.status(400).json('Error: ' + err));
-})*/
-
-/*router.route('/agregar').post((req, res, next) => {
-  Pais.create(req.body, (error, data) => {
-    if (error) {
-      return next(error)
-    } else {
-      console.log(data)
-      res.json(data)
-    }
-  })
-});*/
 
 router.post("/agregar", async (req, res) => {
   const nombrePais = req.body.nombrePais;
@@ -56,21 +39,33 @@ router.put("/update", async (req, res) => {
   });
   }
   catch(err){
-    res.send('error');
+    res.send('error'+ err);
   }
 })
-/*
-// Delete Student
-router.route('/delete-student/:id').delete((req, res, next) => {
-  studentSchema.findByIdAndRemove(req.params.id, (error, data) => {
-    if (error) {
-      return next(error);
-    } else {
-      res.status(200).json({
-        msg: data
-      })
-    }
-  })
+
+
+router.route("/buscar").post((req,res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+  Pais.find({codigo: codigoBusca, nombre: nombreBusca})
+    .then(pais=>res.json(pais))
+    .catch(err => res.status(400).json('Error: ' + err));
 })
-*/
+
+
+
+router.put("/eliminar" , async(req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  console.log(codigoBusca)
+ 
+  try{
+    await Pais.findOneAndUpdate({ codigo : codigoBusca}, {estado : false} , (err, pais)=>{
+      res.json(pais);
+    });
+    }
+    catch(err){
+      res.send('error'+ err);
+    }
+})
+
 module.exports = router;

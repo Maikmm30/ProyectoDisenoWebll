@@ -5,6 +5,7 @@ const app = express()
 
 app.use(cors());
 app.use(express.json())
+
 const paisRutas = require('./rutas/paisRuta')
 app.use('/paises', paisRutas);
 

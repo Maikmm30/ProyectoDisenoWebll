@@ -6,10 +6,8 @@ import React, { useState, useEffect } from "react";
 
 function Paises() {
   const [paises, setPais] = useState([]);
-  const [codigoPais, setCodigoPais] = useState("");
-  const [nombrePais, setNombrePais] = useState("");
-
-
+  var [codigoBusca, setCodigo] = useState("");
+  var [nombreBusca, setNombre] = useState("");
   
   var [paisActualiza, setActualizaPais] = useState("");
   var [paisNuevo, setNuevoPais] = useState("");
@@ -21,15 +19,7 @@ function Paises() {
     });
   }, []);
 
-  /*const buscarPais = () => {
-  Axios.get('http://localhost:3001/paises/buscar',{
-    //codigoPais:codigoPais,
-    nombrePais:nombrePais
-  })
-  .then((res) => {
-    setPais(res.data)
-  })
-};*/
+
 
 const actualizaPais = () => {
 
@@ -38,16 +28,39 @@ const actualizaPais = () => {
     paisActualiza: paisActualiza,
     paisNuevo : paisNuevo,
     columnaSeleccionada : columnaSeleccionada 
-  }
-  );
+  });
   window.location.reload()
   
 }
 
+const buscarPais = () => {
+  
+  Axios.post("http://localhost:3001/paises/buscar", 
+  {
+    codigoBusca : codigoBusca,
+    nombreBusca : nombreBusca
+  })
+  .then((res) => {
+    setPais(res.data);
+    
+  });
+  
+};
+const eliminaPais = () => {
+  Axios.put("http://localhost:3001/paises/eliminar", 
+  {
+    codigoBusca : codigoBusca
+  })
+  .then((res) => {
+    window.location.reload()
+  });
+  
+};
   const columns = [
     {
       dataField: "codigo",
       text: "Código",
+      editable: false,
       events:{
         onClick:( column, columnIndex, )=>{
           setColumna(columnIndex.dataField)
@@ -67,7 +80,6 @@ const actualizaPais = () => {
   const capturaInput = (event) => { 
    if (!event.target.value == '') {
     setNuevoPais(event.target.value)
-    console.log(columnaSeleccionada)
    }
   };
 
@@ -76,8 +88,31 @@ const actualizaPais = () => {
       setActualizaPais(event.target.textContent)
     }
     
-
   }
+
+  const capturaBuscaPais = ()=>{
+     if(codigoBusca && nombreBusca!== ''){
+       buscarPais()
+     }
+     else{
+      alert('Por favor ingrese los datos')
+     }
+  }
+  const capturaEliminaPais = ()=>{
+    if(codigoBusca && nombreBusca!== ''){
+      eliminaPais()
+    }
+    else{
+      alert('Por favor ingrese los datos')
+    }
+ }
+ const recarga = ()=>{
+    window.location.reload();
+ }
+ const limpiaCajas =()=>{
+  setCodigo("")
+ }
+
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -89,19 +124,17 @@ const actualizaPais = () => {
           <div className="row h-75">
             <div className="text-center col-12 bg-success h-30">
               <div className="row row-cols-4 m-4">
-                <Link to="/agregarPaises">
                   <div className="col">
-                    <i className="p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                    <button className="p-3 bg-light rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button>
                   </div>
-                </Link>
                 <div className="col ">
-                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></button>
+                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBuscaPais}></button>
                 </div>
                 <div className="col">
                   <i className="py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
                 </div>
                 <div className="col">
-                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={actualizaPais}></button>
+                  <button className="py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -119,7 +152,7 @@ const actualizaPais = () => {
                           type="text"
                           className="form-control"
                           onChange={(event) => {
-                            setCodigoPais(event.target.value);
+                            setCodigo(event.target.value);
                           }}
                         />
                       </div>
@@ -135,7 +168,7 @@ const actualizaPais = () => {
                           type="text"
                           className="form-control"
                           onChange={(event) => {
-                            setNombrePais(event.target.value);
+                            setNombre(event.target.value);
                           }}
                         />
                       </div>
@@ -157,11 +190,15 @@ const actualizaPais = () => {
 
             <div className="bg-success text-center">
               <div className="row">
+             
                 <div className="col">
+                <Link to="/agregarPaises">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                  </Link>
                 </div>
+               
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminaPais}></button>
                 </div>
               </div>
             </div>

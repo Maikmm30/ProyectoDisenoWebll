@@ -17,8 +17,8 @@ let bebidasCalientesSchema = new Schema({
     ingredientes: {
         type: String
     },
-    descripcion: {
-        type: String
+    estado: {
+        type: Boolean
     }
 })
 

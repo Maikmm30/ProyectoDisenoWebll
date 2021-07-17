@@ -9,7 +9,7 @@ function Paises() {
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
   
-  var [paisActualiza, setActualizaPais] = useState("");
+  var [codigoActualiza, setCodigoActualiza] = useState("")
   var [paisNuevo, setNuevoPais] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
@@ -22,10 +22,9 @@ function Paises() {
 
 
 const actualizaPais = () => {
-
-  Axios.put("http://localhost:3001/paises/update",
+Axios.put("http://localhost:3001/paises/update",
   {
-    paisActualiza: paisActualiza,
+    codigoActualiza: codigoActualiza,
     paisNuevo : paisNuevo,
     columnaSeleccionada : columnaSeleccionada 
   });
@@ -34,7 +33,6 @@ const actualizaPais = () => {
 }
 
 const buscarPais = () => {
-  
   Axios.post("http://localhost:3001/paises/buscar", 
   {
     codigoBusca : codigoBusca,
@@ -62,7 +60,7 @@ const eliminaPais = () => {
       text: "Código",
       editable: false,
       events:{
-        onClick:( column, columnIndex, )=>{
+        onClick:( column, columnIndex)=>{
           setColumna(columnIndex.dataField)
         }
       }
@@ -73,22 +71,23 @@ const eliminaPais = () => {
       events:{
         onClick:( column, columnIndex)=>{
           setColumna(columnIndex.dataField)
+          console.log(columnaSeleccionada)
         }
       }
     },
   ];
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(JSON.parse(row.codigo))
+    }
+  };
   const capturaInput = (event) => { 
    if (!event.target.value == '') {
     setNuevoPais(event.target.value)
+    console.log(event.target)
    }
   };
 
-  const capturaValorAntiguo = (event)=>{
-    if (event.target.tagName === "TD") {
-      setActualizaPais(event.target.textContent)
-    }
-    
-  }
 
   const capturaBuscaPais = ()=>{
      if(codigoBusca && nombreBusca!== ''){
@@ -180,11 +179,12 @@ const eliminaPais = () => {
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5" onKeyUp ={capturaInput} onBlur={actualizaPais} onDoubleClick={capturaValorAntiguo}>
+                <div className="py-5 px-5" onKeyUp ={capturaInput} onBlur={actualizaPais}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}
                     columns={columns}
+                    rowEvents={rowEvents}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>

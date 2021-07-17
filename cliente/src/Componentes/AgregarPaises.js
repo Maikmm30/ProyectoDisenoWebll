@@ -14,6 +14,10 @@ function AgregarPaises() {
     });
     window.location.href = 'http://localhost:3000/paises'
   };
+  const limpiaCajas =()=>{
+    setCodigoPais("")
+    setNombrePais("")
+ }
 
   return (
     <div className="container">
@@ -27,7 +31,7 @@ function AgregarPaises() {
             <div className="text-center mb-3 col-12 bg-success h-35">
               <div className="row row-cols-4 m-4">
                 <div className="col">
-                  <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></button>
+                  <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x" onClick={limpiaCajas}></button>
                 </div>
                 <div className="col ">
                 <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"  onClick={enviarDatos}></button>
@@ -48,7 +52,7 @@ function AgregarPaises() {
               <div className="col-sm-5">
                 <input type="number" className="form-control" onChange={(event)=>{
                   setCodigoPais(event.target.value);
-                }}/>
+                }}value={codigoPais} />
               </div>
             </div>
             <div className=" row mt-2 mb-3">
@@ -58,7 +62,7 @@ function AgregarPaises() {
               <div className="col-sm-5">
               <input type="text" className="form-control" onChange={(event)=>{
                   setNombrePais(event.target.value);
-                }}/>
+                }}value={nombrePais}/>
               </div>
             </div>
             <div className=" row mt-2 mb-3">

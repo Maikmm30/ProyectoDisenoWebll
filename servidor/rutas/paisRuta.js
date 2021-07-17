@@ -29,11 +29,11 @@ router.post("/agregar", async (req, res) => {
 });
 
 router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
+  const codigoActualiza = req.body.codigoActualiza;
   const paisNuevo = req.body.paisNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
+  await Pais.findOneAndUpdate({codigo : codigoActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
     res.json(pais);
 
   });
@@ -56,7 +56,6 @@ router.route("/buscar").post((req,res) => {
 
 router.put("/eliminar" , async(req, res) => {
   const codigoBusca = req.body.codigoBusca
-  console.log(codigoBusca)
  
   try{
     await Pais.findOneAndUpdate({ codigo : codigoBusca}, {estado : false} , (err, pais)=>{
@@ -67,5 +66,12 @@ router.put("/eliminar" , async(req, res) => {
       res.send('error'+ err);
     }
 })
+
+router.route("/obtenerCodigos").get((req,res) => {
+  Pais.find({}, {codigo :1, estado: 0})
+    .then(pais=>res.json(pais))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
 
 module.exports = router;

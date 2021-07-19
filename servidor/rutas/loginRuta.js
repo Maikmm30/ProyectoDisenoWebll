@@ -3,26 +3,22 @@ let Usuario = require("../modelos/Usuario");
 const express = require("express");
 const app = express();
 
-router.route("/").post((req, res) => {
-
-    const usuarioBusca = req.body.usuarioBusca
-    const passBusca = req.body.passBusca
-    Usuario.find({
-        usuario: usuarioBusca,
-        password: passBusca
-    }, function(err, result){
-        console.log('*--*-*-*'+result.length)
-        if(err){
-            console.log(err)
+router.post("/", async(req, res) => {
+  const usuarioBusca = req.body.usuarioBusca;
+  const passBusca = req.body.passBusca;
+ await Usuario.findOne(
+    {
+      usuario: usuarioBusca,
+      password: passBusca,
+    }, function (err, user){
+        if(!user){
+           return res.send(false)
         }
-        if(result.length===1){
-            window.location.href = 'http://localhost:3000/paises'
-            // res.send('No existe')
+        if(user){
+            return res.json(user)
         }
+        
     })
-})
-
-
-
+});
 
 module.exports = router;

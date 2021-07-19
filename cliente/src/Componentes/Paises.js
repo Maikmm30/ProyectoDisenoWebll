@@ -49,7 +49,7 @@ const eliminaPais = () => {
   {
     codigoBusca : codigoBusca
   })
-  .then((res) => {
+  .then(() => {
     window.location.reload()
   });
   

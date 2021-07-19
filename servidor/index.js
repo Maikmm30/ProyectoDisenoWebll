@@ -8,8 +8,12 @@ app.use(express.json())
 
 const paisRutas = require('./rutas/paisRuta')
 const bebidaCalienteRutas = require('./rutas/bebidaCalienteRuta')
+const login = require('./rutas/loginRuta')
+
+
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
+app.use('/login', login);
 
 
 mongoose.Promise = global.Promise;

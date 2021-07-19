@@ -1,6 +1,19 @@
-import React from "react";
+
+import Axios from "axios";
+import React, { useState } from "react";
 
 function Login() {
+  const [usuarioBusca, setUsuario] = useState("")
+  const [passBusca, setPass] = useState("")
+
+  const validaUsuario = () => {
+    Axios.post("http://localhost:3001/login/", {
+      usuarioBusca: usuarioBusca,
+      passBusca: passBusca
+    }).then((res) => {
+     alert(res.data)
+    });
+  };
     return (
         <div className="container">
         <div className="row">
@@ -11,17 +24,20 @@ function Login() {
                 <form className="form-signin">
                   <div className="form-label-group m-5">
                   <label for="">Usuario</label>
-                    <input type="usuario" id="" className="form-control" placeholder="Ingresar usuario" required autofocus/>
+                    <input type="usuario" id="" className="form-control" placeholder="Ingresar usuario" required autofocus
+                    onChange={(event)=>{setUsuario(event.target.value);}}value={usuarioBusca}/>
                    
                   </div>
     
                   <div className="form-label-group m-5">
                   <label for="">Contraseña</label>
-                    <input type="password" id="" className="form-control" placeholder="Ingresar contraseña" required/>
+                    <input type="password" id="" className="form-control" placeholder="Ingresar contraseña" required
+                    onChange={(event)=>{setPass(event.target.value);}}value={passBusca}/>
+                    
                   </div>
                   <div className="m-5 text-center">
                   <button className="m-2 rounded border-0 bg-warning"><i className="fas fa-broom fa-2x "></i></button>
-                    <button className="m-2 rounded border-0 bg-warning"><i className="fas fa-check-circle fa-2x"></i></button>
+                    <button className="m-2 rounded border-0 bg-warning" onClick={validaUsuario}><i className="fas fa-check-circle fa-2x"></i></button>
                     <button className="m-2 rounded border-0 bg-warning"><i className="fas fa-times-circle fa-2x"></i></button>
                     </div>
                 </form>
@@ -30,7 +46,7 @@ function Login() {
           </div>
         </div>
       </div>
-        );
+    );
 }
 
 export default Login;

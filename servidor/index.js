@@ -7,7 +7,9 @@ app.use(cors());
 app.use(express.json())
 
 const paisRutas = require('./rutas/paisRuta')
+const bebidaCalienteRutas = require('./rutas/bebidaCalienteRuta')
 app.use('/paises', paisRutas);
+app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
 
 
 mongoose.Promise = global.Promise;

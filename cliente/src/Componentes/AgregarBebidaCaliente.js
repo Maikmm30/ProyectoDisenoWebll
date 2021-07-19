@@ -1,5 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+
 
 function AgregarBebidaCaliente() {
+
+  const [codigoBebidaCaliente, setCodigoBebidaCaliente] = useState("");
+  const [nombreBebidaCaliente, setNombreBebidaCaliente] = useState("");
+  const [ingredientesBebidaCaliente, setIngredientesBebidaCaliente] = useState("");
+  const [precioBebidaCaliente, setPrecioBebidaCaliente] = useState("");
+  const [restauranteBebidaCaliente, setRestauranteBebidaCaliente] = useState("");
+
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/calientes/agregar",{
+      codigoBebidaCaliente: codigoBebidaCaliente,
+      nombreBebidaCaliente: nombreBebidaCaliente,
+      ingredientesBebidaCaliente: ingredientesBebidaCaliente,
+      precioBebidaCaliente: precioBebidaCaliente,
+      restauranteBebidaCaliente: restauranteBebidaCaliente,
+      estadoBebidaCaliente: true,
+    });
+    window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/calientes/'
+  };
+
   return (
     <div class="container">
       <div class="row " style={{ height: "600px" , backgroundColor: "#FF723F"}}>
@@ -12,7 +35,7 @@ function AgregarBebidaCaliente() {
             <div class="text-center text-light col-12 h-25" style={{  backgroundColor: "#C42709"}}>
               <div class="row row-cols-4 m-4">
                 <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><button class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></button></div>
                 <div class="col"><i class="py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
                 <div class="col"><i class="fas fa-search fa-4x"></i></div>
 
@@ -25,11 +48,9 @@ function AgregarBebidaCaliente() {
                   Código
                   </label>
                 <div class="col-sm-4">
-                  <input
-                    type="number"
-                    class="form-control"
-                    readonly="readonly"
-                  />
+                <input type="number" className="form-control" onChange={(event)=>{
+                  setCodigoBebidaCaliente(event.target.value);
+                }}/>
                 </div>
               </div>
               <div class="form-group row mt-2">
@@ -37,10 +58,9 @@ function AgregarBebidaCaliente() {
                   Nombre
                   </label>
                 <div class="col-sm-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                  />
+                <input type="text" className="form-control" onChange={(event)=>{
+                  setNombreBebidaCaliente(event.target.value);
+                }}/>
                 </div>
               </div>
 
@@ -52,6 +72,9 @@ function AgregarBebidaCaliente() {
                   <textarea
                     class="form-control"
                     rows="4"
+                    onChange={(event)=>{
+                      setIngredientesBebidaCaliente(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -61,10 +84,9 @@ function AgregarBebidaCaliente() {
                   Precio
                   </label>
                 <div class="col-sm-4">
-                  <input
-                    type="number"
-                    class="form-control"
-                  />
+                <input type="number" className="form-control" onChange={(event)=>{
+                  setPrecioBebidaCaliente(event.target.value);
+                }}/>
                 </div>
               </div>
               <div class="form-group row mt-2">
@@ -75,6 +97,9 @@ function AgregarBebidaCaliente() {
                   <select
                     class="form-control"
                     id="exampleFormControlSelect1"
+                    onChange={(event)=>{
+                      setRestauranteBebidaCaliente(event.target.value);
+                    }}
                   >
                     <option>Restaurante 1</option>
                     <option>Restaurante 2</option>

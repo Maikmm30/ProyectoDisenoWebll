@@ -8,9 +8,11 @@ app.use(express.json())
 
 const paisRutas = require('./rutas/paisRuta')
 const bebidaCalienteRutas = require('./rutas/bebidaCalienteRuta')
+const restauranteRutas = require('./rutas/restauranteRuta')
+
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
-
+app.use('/restaurante',restauranteRutas)
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority',{

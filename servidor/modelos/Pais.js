@@ -7,12 +7,12 @@ let paisSchema = new Schema({
   },
   nombre: {
     type: String
-  }, 
+  },
   estado: {
     type: Boolean
   }
 })
 
-const Pais =  mongoose.model('pais',paisSchema);
+const Pais = mongoose.model('pais', paisSchema);
 
 module.exports = Pais;

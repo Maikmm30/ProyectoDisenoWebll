@@ -8,7 +8,7 @@ function Paises() {
   const [paises, setPais] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [paisNuevo, setNuevoPais] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
@@ -19,48 +19,46 @@ function Paises() {
     });
   }, []);
 
-
-
-const actualizaPais = () => {
-Axios.put("http://localhost:3001/paises/update",
-  {
-    codigoActualiza: codigoActualiza,
-    paisNuevo : paisNuevo,
-    columnaSeleccionada : columnaSeleccionada 
-  });
-  window.location.reload()
-  
-}
-
-const buscarPais = () => {
-  Axios.post("http://localhost:3001/paises/buscar", 
-  {
-    codigoBusca : codigoBusca,
-    nombreBusca : nombreBusca
-  })
-  .then((res) => {
-    setPais(res.data);
-    
-  });
-  
-};
-const eliminaPais = () => {
-  Axios.put("http://localhost:3001/paises/eliminar", 
-  {
-    codigoBusca : codigoBusca
-  })
-  .then(() => {
+  const actualizaPais = () => {
+    Axios.put("http://localhost:3001/paises/update",
+      {
+        codigoActualiza: codigoActualiza,
+        paisNuevo: paisNuevo,
+        columnaSeleccionada: columnaSeleccionada
+      });
     window.location.reload()
-  });
-  
-};
+
+  }
+
+  const buscarPais = () => {
+    Axios.post("http://localhost:3001/paises/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setPais(res.data);
+
+      });
+
+  };
+  const eliminaPais = () => {
+    Axios.put("http://localhost:3001/paises/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
   const columns = [
     {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -68,50 +66,51 @@ const eliminaPais = () => {
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
           console.log(columnaSeleccionada)
         }
       }
     },
   ];
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(JSON.parse(row.codigo))
     }
   };
-  const capturaInput = (event) => { 
-   if (!event.target.value == '') {
-    setNuevoPais(event.target.value)
-    console.log(event.target)
-   }
+  const capturaInput = (event) => {
+    if (!event.target.value == '') {
+      setNuevoPais(event.target.value)
+      console.log(event.target)
+    }
   };
 
 
-  const capturaBuscaPais = ()=>{
-     if(codigoBusca && nombreBusca!== ''){
-       buscarPais()
-     }
-     else{
+  const capturaBuscaPais = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscarPais()
+    }
+    else {
       alert('Por favor ingrese los datos')
-     }
+    }
   }
-  const capturaEliminaPais = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+  const capturaEliminaPais = () => {
+    if (codigoBusca && nombreBusca !== '') {
       eliminaPais()
     }
-    else{
+    else {
       alert('Por favor ingrese los datos')
     }
- }
- const recarga = ()=>{
+  }
+  const recarga = () => {
     window.location.reload();
- }
- const limpiaCajas =()=>{
+  }
+  const limpiaCajas = () => {
     setCodigo("")
     setNombre("")
- }
+  }
 
   return (
     <div className="container">
@@ -124,9 +123,9 @@ const eliminaPais = () => {
           <div className="row h-75">
             <div className="text-center col-12 bg-success h-30">
               <div className="row row-cols-4 m-4">
-                  <div className="col">
-                    <button className="p-3 bg-light rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button>
-                  </div>
+                <div className="col">
+                  <button className="p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
+                </div>
                 <div className="col ">
                   <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBuscaPais}></button>
                 </div>
@@ -179,7 +178,7 @@ const eliminaPais = () => {
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5" onKeyUp ={capturaInput} onBlur={actualizaPais}>
+                <div className="py-5 px-5" onKeyUp={capturaInput} onBlur={actualizaPais}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}
@@ -193,13 +192,13 @@ const eliminaPais = () => {
 
             <div className="bg-success text-center">
               <div className="row">
-             
+
                 <div className="col">
-                <Link to="/agregarPaises">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                  <Link to="/agregarPaises">
+                    <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
                   </Link>
                 </div>
-               
+
                 <div className="col">
                   <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminaPais}></button>
                 </div>

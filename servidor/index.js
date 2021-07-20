@@ -1,5 +1,5 @@
-const express = require ('express')
-const mongoose = require ('mongoose')
+const express = require('express')
+const mongoose = require('mongoose')
 const cors = require('cors');
 const app = express()
 
@@ -25,43 +25,44 @@ const rolesRutas = require('./rutas/rolesRuta');
 const utensilioRutas = require('./rutas/utensiliosRuta');
 const unidadMedidaRutas = require('./rutas/unidadMedidaRuta');
 const mesasRutas = require('./rutas/unidadMedidaRuta');
+const ayudaSistemaRutas = require('./rutas/ayudaSistemaRuta');
 
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
 app.use('/login', login);
 app.use('/administracion/especiales/bebidas/gaseosas/', bebidaGaseosaRutas);
-app.use('/administracion/especiales/bebidas/helada/',bebidaHeladaRutas);
-app.use('/administracion/especiales/bebidas/licores/',bebidaLicorRutas);
-app.use('/administracion/especiales/bebidas/vinos/',bebidaVinoRutas);
-app.use('/comestibles/',comestibleRutas);
-app.use('/consecutivos/',consecutivosRutas);
-app.use('/empaques/',empaquesRutas);
-app.use('/administracion/especiales/especialidades/',especialidadesRuta);
-app.use('/limpieza',limpiezaRuta);
-app.use('/Proveedores',proveedoresRuta);
-app.use('/puestos',puestosRutas);
-app.use('/restaurantes',restauranteRutas);
-app.use('/roles',rolesRutas);
-app.use('/utensilio',utensilioRutas);
-app.use('/unidadMedida',unidadMedidaRutas);
-app.use('/mesas',mesasRutas);
-
+app.use('/administracion/especiales/bebidas/helada/', bebidaHeladaRutas);
+app.use('/administracion/especiales/bebidas/licores/', bebidaLicorRutas);
+app.use('/administracion/especiales/bebidas/vinos/', bebidaVinoRutas);
+app.use('/comestibles/', comestibleRutas);
+app.use('/consecutivos/', consecutivosRutas);
+app.use('/empaques/', empaquesRutas);
+app.use('/administracion/especiales/especialidades/', especialidadesRuta);
+app.use('/limpieza', limpiezaRuta);
+app.use('/Proveedores', proveedoresRuta);
+app.use('/puestos', puestosRutas);
+app.use('/restaurantes', restauranteRutas);
+app.use('/roles', rolesRutas);
+app.use('/utensilio', utensilioRutas);
+app.use('/unidadMedida', unidadMedidaRutas);
+app.use('/mesas', mesasRutas);
+app.use('/ayuda-sistema', ayudaSistemaRutas);
 
 
 
 
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority',{
-    useNewUrlParser: true
+mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority', {
+  useNewUrlParser: true
 })
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("****Conectado a la base de datos****");
 })
 
-app.listen(3001, ()=>{
+app.listen(3001, () => {
 
-    console.log('Server running on port 3001...')
+  console.log('Server running on port 3001...')
 })

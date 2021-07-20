@@ -4,11 +4,10 @@ const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-  Pais.find({estado: {$ne: 'false'}})
+  Pais.find({ estado: { $ne: 'false' } })
     .then((paises) => res.json(paises))
     .catch((err) => res.status(400).json("Error: " + err));
 });
-
 
 router.post("/agregar", async (req, res) => {
   const nombrePais = req.body.nombrePais;
@@ -32,42 +31,42 @@ router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
   const paisNuevo = req.body.paisNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({codigo : codigoActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+  try {
+    await Pais.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: paisNuevo }, (err, pais) => {
+      res.json(pais);
 
-  });
+    });
   }
-  catch(err){
-    res.send('error'+ err);
+  catch (err) {
+    res.send('error' + err);
   }
 })
 
 
-router.route("/buscar").post((req,res) => {
+router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
   const nombreBusca = req.body.nombreBusca
-  Pais.find({codigo: codigoBusca, nombre: nombreBusca})
-    .then(pais=>res.json(pais))
+  Pais.find({ codigo: codigoBusca, nombre: nombreBusca })
+    .then(pais => res.json(pais))
     .catch(err => res.status(400).json('Error: ' + err));
 })
 
-router.put("/eliminar" , async(req, res) => {
+router.put("/eliminar", async (req, res) => {
   const codigoBusca = req.body.codigoBusca
- 
-  try{
-    await Pais.findOneAndUpdate({ codigo : codigoBusca}, {estado : false} , (err, pais)=>{
+
+  try {
+    await Pais.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, pais) => {
       res.json(pais);
     });
-    }
-    catch(err){
-      res.send('error'+ err);
-    }
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
 })
 
-router.route("/obtenerCodigos").get((req,res) => {
-  Pais.find({}, {codigo :1, estado: 0})
-    .then(pais=>res.json(pais))
+router.route("/obtenerCodigos").get((req, res) => {
+  Pais.find({}, { codigo: 1, estado: 0 })
+    .then(pais => res.json(pais))
     .catch(err => res.status(400).json('Error: ' + err));
 })
 

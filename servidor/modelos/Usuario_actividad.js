@@ -9,13 +9,13 @@ let usuarioActividadSchema = new Schema({
         type: String
     },
     fecha: {
-        type: date
+        type: Date
     },
     descripcion: {
         type: String
     }
 })
 
-const UsuarioActividad = mongoose.model('usuarioActividad', usuarioActividadSchema);
+const UsuarioActividad = mongoose.model('usuarioActividad', usuarioActividadSchema, 'usuarioActividad');
 
 module.exports = UsuarioActividad;

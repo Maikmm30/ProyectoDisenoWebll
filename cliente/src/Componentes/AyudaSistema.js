@@ -27,7 +27,6 @@ function AyudaSistema() {
   useEffect(() => {
     Axios.get("http://localhost:3001/ayuda-sistema/").then((res) => {
       setDatosUsuario(res.data);
-      console.log("DATA: " + res.data);
     });
   }, []);
 

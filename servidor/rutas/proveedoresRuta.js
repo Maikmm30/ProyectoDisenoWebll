@@ -3,6 +3,12 @@ let Proveedor = require("../modelos/Proveedor");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  Proveedor.find({})
+    .then((proveedor) => res.json(proveedor))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoProveedor = req.body.codigoProveedor;
   const cedulaProveedor = req.body.cedulaProveedor;

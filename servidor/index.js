@@ -40,7 +40,7 @@ app.use('/consecutivos/', consecutivosRutas);
 app.use('/empaques/', empaquesRutas);
 app.use('/administracion/especiales/especialidades/', especialidadesRuta);
 app.use('/limpieza', limpiezaRuta);
-app.use('/Proveedores', proveedoresRuta);
+app.use('/proveedores', proveedoresRuta);
 app.use('/puestos', puestosRutas);
 app.use('/restaurantes', restauranteRutas);
 app.use('/roles', rolesRutas);

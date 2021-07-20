@@ -12,13 +12,16 @@ let unidadMedidaSchema = new Schema({
     type: String
   },
   detalle:{
-      type: bool
+      type: Boolean
   },
   simbologia:{
     type: String
   },
+  simbolo:{
+    type: String
+  },
   estado:{
-    type: bool
+    type: Boolean
 }})
 
 const UnidadMedida =  mongoose.model('unidadMedida',unidadMedidaSchema);

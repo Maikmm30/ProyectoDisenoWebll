@@ -17,13 +17,13 @@ let consecutivoSchema = new Schema({
     type: String
   },
   contienePrefijo: {
-    type: bool
+    type: Boolean
   },
   prefijo: {
     type: String
   },
   estado:{
-      type: bool
+      type: Boolean
   }
 })
 

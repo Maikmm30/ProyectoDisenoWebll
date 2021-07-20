@@ -1,7 +1,38 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarComestibles() {
+
+  const [codigoComestible, setCodigoComestible] = useState("");
+  const [nombreComestible, setNombreComestible] = useState("");
+  const [cantidadComestible, setCantidadComestible] = useState("");
+  const [restauranteComestible, setRestauranteComestible] = useState("");
+  const [marcaComestible, setMarcaComestible] = useState("");
+  const [tipoDeComestible, setTipoDeComestible] = useState("");
+  const [claseDeComestible, setClaseDeComestible] = useState("");
+  const [lineaDeComestible, setLineaDeComestible] = useState("");
+  const [unidadDeMedidaComestible, setUnidadDeMedidaComestible] = useState("");
+
+
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarComestibles",{
+      codigoComestible: codigoComestible,
+      nombreComestible: nombreComestible,
+      cantidadComestible: cantidadComestible,
+      restauranteComestible: restauranteComestible,
+      marcaComestible: marcaComestible,
+      tipoDeComestible: tipoDeComestible,
+      claseDeComestible: claseDeComestible,
+      lineaDeComestible: lineaDeComestible,
+      unidadDeMedidaComestible: unidadDeMedidaComestible,
+      estadoComestible: true,
+    });
+    window.location.href = 'http://localhost:3000/comestibles/'
+  };
+
   return (
 <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -14,7 +45,7 @@ function AgregarComestibles() {
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                   <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
@@ -29,7 +60,9 @@ function AgregarComestibles() {
                       <input
                         type="number"
                         class="form-control"
-                        readonly="readonly"
+                        onChange={(event)=>{
+                          setCodigoComestible(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -42,6 +75,9 @@ function AgregarComestibles() {
                         type="text"
                         class="form-control"
                         placeholder="Nombre Comestible"
+                        onChange={(event)=>{
+                          setNombreComestible(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -54,6 +90,9 @@ function AgregarComestibles() {
                         type="text"
                         class="form-control"
                         placeholder="Cantidad Comestible"
+                        onChange={(event)=>{
+                          setCantidadComestible(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -65,6 +104,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setTipoDeComestible(event.target.value);
+                        }}
                       >
                         <option>Comestible 1</option>
                         <option>Comestible 2</option>
@@ -84,6 +126,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteComestible(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>
@@ -108,6 +153,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setMarcaComestible(event.target.value);
+                        }}
                       >
                         <option>Marca 1</option>
                         <option>Marca 2</option>
@@ -127,6 +175,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setClaseDeComestible(event.target.value);
+                        }}
                       >
                         <option>Clase de Comestible 1</option>
                         <option>Clase de Comestible 2</option>
@@ -143,6 +194,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setLineaDeComestible(event.target.value);
+                        }}
                       >
                         <option>Línea de Comestible 1</option>
                         <option>Línea de Comestible 2</option>
@@ -160,6 +214,9 @@ function AgregarComestibles() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setUnidadDeMedidaComestible(event.target.value);
+                        }}
                       >
                         <option>Unidad de Medida 1</option>
                         <option>Unidad de Medida 2</option>

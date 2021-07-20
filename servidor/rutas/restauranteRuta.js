@@ -17,5 +17,72 @@ router.put("/update", async (req, res) => {
     }
   })
   
+const app = express();
+
+router.post("/agregar", async (req, res) => {
+  const codigoRestaurante = req.body.codigoRestaurante;
+  const nombreRestaurante = req.body.nombreRestaurante;
+  const especialidadRestaurante = req.body.especialidadRestaurante;
+  const direccionRestaurante = req.body.direccionRestaurante;
+  const telefonoRestaurante = req.body.telefonoRestaurante;
+  const estadoRestaurante = req.body.estadoRestaurante;
+
+  try {
+    const restaurante = new Restaurante({
+      codigo: codigoRestaurante,
+      nombre: nombreRestaurante,
+      especialidad: especialidadRestaurante,
+      direccion: direccionRestaurante,
+      telefono: telefonoRestaurante,
+      estado: estadoRestaurante,
+    });
+    await restaurante.save();
+    res.send("inserted data");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+
+/*router.put("/update", async (req, res) => {
+  const paisActualiza = req.body.paisActualiza;
+  const paisNuevo = req.body.paisNuevo;
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try{
+  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
+    res.json(pais);
+
+  });
+  }
+  catch(err){
+    res.send('error'+ err);
+  }
+})*/
+
+
+router.route("/buscar").post((req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+
+  Restaurante.find({ codigo: codigoBusca, nombre: nombreBusca })
+    .then(restaurante => res.json(restaurante))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
+
+
+router.put("/eliminar", async (req, res) => {
+
+  const codigoBusca = req.body.codigoBusca
+
+  try {
+    await Restaurante.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, restaurante) => {
+      res.json(restaurante);
+    });
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
+})
 
 module.exports = router;

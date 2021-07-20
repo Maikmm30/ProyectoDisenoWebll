@@ -12,7 +12,7 @@ let rolSchema = new Schema({
     type: String
   },
   estado:{
-      type: bool
+      type: Boolean
   }
 
 })

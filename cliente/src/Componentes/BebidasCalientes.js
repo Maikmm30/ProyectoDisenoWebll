@@ -60,13 +60,14 @@ function BebidasCalientes() {
      alert('Por favor ingrese los datos')
     }
   }
-    const recarga = ()=>{
+  const recarga = () => {
     window.location.reload();
-    }
-    const limpiaCajas =()=>{
-    setCodigo("")
-    setNombre("")
-    }
+  };
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
+  
 const columns = [
   {
     dataField: "codigo",

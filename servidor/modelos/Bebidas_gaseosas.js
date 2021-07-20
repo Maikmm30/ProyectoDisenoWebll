@@ -31,6 +31,6 @@ let bebidasGaseosasSchema = new Schema({
     }
 })
 
-const BebidasGaseosas = mongoose.model('bebidasGaseosas', bebidasGaseosasSchema);
+const BebidasGaseosas = mongoose.model('bebidasGaseosas', bebidasGaseosasSchema,'bebidasGaseosas');
 
 module.exports = BebidasGaseosas;

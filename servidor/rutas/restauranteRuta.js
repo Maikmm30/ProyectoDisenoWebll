@@ -2,6 +2,15 @@ const router = require("express").Router();
 let Restaurante = require("../modelos/Restaurante");
 const express = require("express");
 
+
+router.route("/").get((req, res) => {
+  Restaurante.find({estado: {$ne: 'false'}})
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
   const restauNuevo = req.body.restauNuevo;
@@ -44,21 +53,6 @@ router.post("/agregar", async (req, res) => {
 });
 
 
-router.put("/update", async (req, res) => {
-  const codigoActualiza = req.body.codigoActualiza;
-  const restauranteNuevo = req.body.restauranteNuevo;
-  const columnaSeleccionada = req.body.columnaSeleccionada;
-  try {
-    await Restaurante.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: restauranteNuevo }, (err, restaurante) => {
-      res.json(restaurante);
-
-    });
-  }
-  catch (err) {
-    res.status(400).send(error)
-  }
-})
-
 
 router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
@@ -73,16 +67,7 @@ router.route("/buscar").post((req, res) => {
 
 router.put("/eliminar", async (req, res) => {
 
-  const codigoBusca = req.body.codigoBusca
-
-  try {
-    await Restaurante.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, restaurante) => {
-      res.json(restaurante);
-    });
-  }
-  catch (err) {
-    res.send('error' + err);
-  }
+ 
 })
 
 module.exports = router;

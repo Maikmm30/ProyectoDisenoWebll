@@ -1,7 +1,30 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarEmpaques() {
+
+  const [codigoEmpaque, setCodigoEmpaque] = useState("");
+  const [nombreEmpaque, setNombreEmpaque] = useState("");
+  const [cantidadEmpaque, setCantidadEmpaque] = useState("");
+  const [restauranteEmpaque, setRestauranteEmpaque] = useState("");
+  const [marcaEmpaque, setMarcaEmpaque] = useState("");
+  const [descripcionEmpaque, setDescripcionEmpaque] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarEmpaques",{
+      codigoEmpaque: codigoEmpaque,
+      nombreEmpaque: nombreEmpaque,
+      cantidadEmpaque: cantidadEmpaque,
+      restauranteEmpaque: restauranteEmpaque,
+      marcaEmpaque: marcaEmpaque,
+      descripcionEmpaque: descripcionEmpaque,
+      estadoEmpaque: true,
+    });
+    window.location.href = 'http://localhost:3000/empaques/'
+  };
+
   return (
 <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -14,7 +37,7 @@ function AgregarEmpaques() {
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                   <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
@@ -29,7 +52,9 @@ function AgregarEmpaques() {
                       <input
                         type="number"
                         class="form-control"
-                        readonly="readonly"
+                        onChange={(event)=>{
+                          setCodigoEmpaque(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -41,6 +66,9 @@ function AgregarEmpaques() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteEmpaque(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>
@@ -58,6 +86,9 @@ function AgregarEmpaques() {
                         type="text"
                         class="form-control"
                         placeholder="Nombre Empaque"
+                        onChange={(event)=>{
+                          setNombreEmpaque(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -69,6 +100,9 @@ function AgregarEmpaques() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setMarcaEmpaque(event.target.value);
+                        }}
                       >
                         <option>Marca 1</option>
                         <option>Marca 2</option>
@@ -89,6 +123,9 @@ function AgregarEmpaques() {
                         type="text"
                         class="form-control"
                         placeholder="Cantidad Comestible"
+                        onChange={(event)=>{
+                          setCantidadEmpaque(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -103,6 +140,9 @@ function AgregarEmpaques() {
                         class="form-control"
                         placeholder="Descripcion"
                         rows="3"
+                        onChange={(event)=>{
+                          setDescripcionEmpaque(event.target.value);
+                        }}
                       />
                 </div>
                 </div>

@@ -2,9 +2,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 
-import {
-  Link
-} from "react-router-dom";
 
 const columns = [{
   dataField: 'codigo',

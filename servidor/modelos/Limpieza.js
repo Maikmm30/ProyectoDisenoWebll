@@ -1,36 +1,39 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let bebidasGaseosasSchema = new Schema({
+let limpiezaSchema = new Schema({
     codigo: {
         type: String
     },
     nombre: {
         type: String
     },
-    marca: {
-        type: String
-    },
-    nacionalidad: {
-        type: String
-    },
-    precio: {
+    cantidad: {
         type: Number
     },
     restaurante: {
         type: String
     },
-    cantidad: {
-        type: Number
-    },
-    descripcion: {
+    marca: {
         type: String
     },
-    estado: {
+    tipoDeArticulo: {
+        type: String
+    },
+    cantidadDeMedida: {
+        type: Number
+    },
+    unidadDeMedida : {
+        type: String
+    },
+    descripcion : {
+        type: String
+    },
+    estado : {
         type: Boolean
     }
 })
 
-const BebidasGaseosas = mongoose.model('bebidasGaseosas', bebidasGaseosasSchema);
+const Limpieza = mongoose.model('limpieza', limpiezaSchema);
 
-module.exports = BebidasGaseosas;
+module.exports = Bitacora;

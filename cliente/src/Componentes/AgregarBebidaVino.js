@@ -1,5 +1,36 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarBebidaVino() {
+
+  const [codigoBebidaVino, setCodigoBebidaVino] = useState("");
+  const [nombreBebidaVino, setNombreBebidaVino] = useState("");
+  const [marcaBebidaVino, setMarcaBebidaVino] = useState("");
+  const [nacionalidadBebidaVino, setNacionalidadBebidaVino] = useState("");
+  const [anioCosechaBebidaVino, setAnioBebidaVino] = useState("");
+  const [precioUnitarioBebidaVino, setPrecioUnitarioBebidaVino] = useState("");
+  const [precioBotellaBebidaVino, setPrecioBotellaBebidaVino] = useState("");
+  const [restauranteBebidaVino, setRestauranteBebidaVino] = useState("");
+  const [cantidadBebidaVino, setCantidadBebidaVino] = useState("");
+  const [descripcionBebidaVino, setDescripcionBebidaVino] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/agregar-bebida-vino",{
+      codigoBebidaVino: codigoBebidaVino,
+      nombreBebidaVino: nombreBebidaVino,
+      marcaBebidaVino: marcaBebidaVino,
+      nacionalidadBebidaVino: nacionalidadBebidaVino,
+      anioCosechaBebidaVino: anioCosechaBebidaVino,
+      precioUnitarioBebidaVino: precioUnitarioBebidaVino,
+      precioBotellaBebidaVino: precioBotellaBebidaVino,
+      restauranteBebidaVino: restauranteBebidaVino,
+      cantidadBebidaVino: cantidadBebidaVino,
+      descripcionBebidaVino: descripcionBebidaVino,
+      estadoBebidaVino: true,
+    });
+    window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/vinos/'
+  };
+
   return (
     <div class="container">
       <div class="row " style={{ height: "700px" , backgroundColor: "#FF723F"}}>
@@ -12,7 +43,7 @@ function AgregarBebidaVino() {
             <div class="text-center mb-3 col-12 text-light h-35" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4">
                 <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                 <div class="col"><i class="py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
                 <div class="col"><i class="fas fa-search fa-4x"></i></div>
               </div>
@@ -24,13 +55,17 @@ function AgregarBebidaVino() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                        setCodigoBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
                   <label class="col-sm-3">Nombre</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" onChange={(event)=>{
+                        setNombreBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
                 <div class=" row mt-2 mb-2">
@@ -39,6 +74,9 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="exampleFormControlSelect1"
+                      onChange={(event)=>{
+                        setMarcaBebidaVino(event.target.value);
+                      }}
                     >
                       <option>Marca 1</option>
                       <option>Marca 2</option>
@@ -53,6 +91,9 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="exampleFormControlSelect1"
+                      onChange={(event)=>{
+                        setNacionalidadBebidaVino(event.target.value);
+                      }}
                     >
                       <option>Nacionalidad 1</option>
                       <option>Nacionalidad 2</option>
@@ -66,7 +107,9 @@ function AgregarBebidaVino() {
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="col-sm-2">Precio Unitario</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                        setPrecioUnitarioBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
 
@@ -74,14 +117,18 @@ function AgregarBebidaVino() {
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="col-sm-2">Precio Botella</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                        setPrecioBotellaBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
 
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Año de la Cosecha</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                        setAnioBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
 
@@ -94,6 +141,9 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="exampleFormControlSelect1"
+                      onChange={(event)=>{
+                        setRestauranteBebidaVino(event.target.value);
+                      }}
                     >
                       <option>Restaurante 1</option>
                       <option>Restaurante 2</option>
@@ -105,7 +155,9 @@ function AgregarBebidaVino() {
                 <div class="row mt-3 mb-2">
                   <label class="col-sm-3 ">Cantidad</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                        setCantidadBebidaVino(event.target.value);
+                      }}/>
                   </div>
                 </div>
                 <div class="row mt-3 ">
@@ -114,6 +166,9 @@ function AgregarBebidaVino() {
                     <textarea
                       class="form-control"
                       rows="4"
+                      onChange={(event)=>{
+                        setDescripcionBebidaVino(event.target.value);
+                      }}
                     />
                   </div>
                 </div>

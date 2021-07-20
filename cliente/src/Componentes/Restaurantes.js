@@ -1,52 +1,105 @@
 import { Container, Row, Col } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
 
-const columns = [{
-  dataField: 'codigo',
-  text: 'Código'
-}, {
-  dataField: 'nombre',
-  text: 'Nombre'
-}, {
-  dataField: 'cantidad',
-  text: 'Cantidad'
-},
-{
-  dataField: 'restaurante',
-  text: 'Restaurante'
-}];
+function Restaurantes() {
 
+  var [codigoActualiza, setCodigoActualiza] = useState("")
+  var [restauNuevo, setNuevoRestau] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
+
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+          console.log(columnaSeleccionada)
+        }
+      }
+    },
+    {
+      dataField: "cantidad",
+      text: "Cantidad",
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+          console.log(columnaSeleccionada)
+        }
+      }
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante",
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+          console.log(columnaSeleccionada)
+        }
+      }
+    },
+  ];
+  
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(JSON.parse(row.codigo))
+    }
+  };
+  
 const products = [{
   codigo: 1,
   nombre: 'A',
-  cantidad: '1',
-  restaurante: 'A'
+  primerApellido: 'A',
+  segundoApellido: '0',
+  telefono: '1',
 }, {
   codigo: 2,
   nombre: 'B',
-  cantidad: '2',
-  restaurante: 'B'
+  primerApellido: 'B',
+  segundoApellido: '0',
+  telefono: '1',
 },
 {
   codigo: 3,
   nombre: 'C',
-  cantidad: '3',
-  restaurante: 'C'
+  primerApellido: 'C',
+  segundoApellido: '1',
+  telefono: '0',
 },
 {
   codigo: 4,
   nombre: 'D',
-  cantidad: '4',
-  restaurante: 'D'
+  primerApellido: 'D',
+  segundoApellido: '1',
+  telefono: '0',
 }];
 
+  const actualizaRestaurante = () => {
+    Axios.put("http://localhost:3001/paises/update", {
+      codigoActualiza: codigoActualiza,
+      restauNuevo: restauNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
 
-function Restaurantes() {
   return (
     <div className="container">
       <div className="row" style={{ height: "700px", backgroundColor: "#FF723F"  }}>

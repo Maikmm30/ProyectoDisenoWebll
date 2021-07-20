@@ -1,5 +1,28 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarEspecialidad() {
+
+  const [codigoEspecialidad, setCodigoEspecialidad] = useState("");
+  const [nombreEspecialidad, setNombreEspecialidad] = useState("");
+  const [ingredientesEspecialidad, setIngredientesEspecialidad] = useState("");
+  const [precioEspecialidad, setPrecioEspecialidad] = useState("");
+  const [detalleEspecialidad, setDetalleEspecialidad] = useState("");
+  const [restauranteEspecialidad, setRestauranteEspecialidad] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/agregar-especialidad",{
+      codigoEspecialidad: codigoEspecialidad,
+      nombreEspecialidad: nombreEspecialidad,
+      ingredientesEspecialidad: ingredientesEspecialidad,
+      precioEspecialidad: precioEspecialidad,
+      detalleEspecialidad: detalleEspecialidad,
+      restauranteEspecialidad: restauranteEspecialidad,
+      estadoEspecialidad: true,
+    });
+    window.location.href = 'http://localhost:3000/administracion/especiales/especialidades/'
+  };
+
   return (
     <div class="container">
       <div class="row" style={{ height: "600px", backgroundColor: "#FF723F" }}>
@@ -12,7 +35,7 @@ function AgregarEspecialidad() {
             <div class="text-center text-light mb-3 col-12 h-35" style={{  backgroundColor: "#C42709"}}>
               <div class="row row-cols-4 m-4">
                 <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                 <div class="col"><i class="py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
                 <div class="col"><i class="fas fa-search fa-4x"></i></div>
               </div>
@@ -24,19 +47,26 @@ function AgregarEspecialidad() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                          setCodigoEspecialidad(event.target.value);
+                        }}
+                        />
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
                   <label class="col-sm-3">Nombre del Platillo</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" onChange={(event)=>{
+                          setNombreEspecialidad(event.target.value);
+                        }}/>
                   </div>
                 </div>
                 <div class="form-group row mt-2">
                   <label class="col-sm-3">Ingredientes</label>
                   <div class="col-sm-8" >
-                    <textarea class="form-control" rows="4" />
+                    <textarea class="form-control" rows="4" onChange={(event)=>{
+                          setIngredientesEspecialidad(event.target.value);
+                        }}/>
                   </div>
                 </div>
 
@@ -46,14 +76,18 @@ function AgregarEspecialidad() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Precio</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" />
+                    <input type="number" class="form-control" onChange={(event)=>{
+                          setPrecioEspecialidad(event.target.value);
+                        }}/>
                   </div>
                 </div>
 
                 <div class="row mt-3 ">
                   <label class="col-sm-3">Detalle</label>
                   <div class="col-sm-8" >
-                    <textarea class="form-control" rows="4"/>
+                    <textarea class="form-control" rows="4"onChange={(event)=>{
+                          setDetalleEspecialidad(event.target.value);
+                        }}/>
                   </div>
                 </div>
 

@@ -31,6 +31,9 @@ let bebidasLicoresSchema = new Schema({
     },
     descripcion: {
         type: String
+    },
+    estado: {
+        type: Boolean
     }
 })
 

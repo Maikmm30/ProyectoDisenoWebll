@@ -1,5 +1,27 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarBebidaHelada() {
+
+  const [codigoBebidaHelada, setCodigoBebidaHelada] = useState("");
+  const [nombreBebidaHelada, setNombreBebidaHelada] = useState("");
+  const [ingredientesBebidaHelada, setIngredientesBebidaHelada] = useState("");
+  const [precioBebidaHelada, setPrecioBebidaHelada] = useState("");
+  const [restauranteBebidaHelada, setRestauranteBebidaHelada] = useState("");
+
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/helada/agregar-bebida-helada",{
+      codigoBebidaHelada: codigoBebidaHelada,
+      nombreBebidaHelada: nombreBebidaHelada,
+      ingredientesBebidaHelada: ingredientesBebidaHelada,
+      precioBebidaHelada: precioBebidaHelada,
+      restauranteBebidaHelada: restauranteBebidaHelada,
+      estadoBebidaHelada: true,
+    });
+    window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/helada/'
+  };
+
   return (
     <div class="container">
       <div class="row " style={{ height: "600px" , backgroundColor: "#FF723F" }}>
@@ -12,7 +34,7 @@ function AgregarBebidaHelada() {
             <div class="text-center col-12  text-light h-25" style={{  backgroundColor: "#C42709"}}>
               <div class="row row-cols-4 m-4">
                 <div class="col"><i class="p-3  rounded-circle fas fa-broom fa-3x "></i></div>
-                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div class="col"><i class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                 <div class="col"><i class="py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
                 <div class="col"><i class="fas fa-search fa-4x"></i></div>
 
@@ -28,7 +50,9 @@ function AgregarBebidaHelada() {
                   <input
                     type="number"
                     class="form-control"
-                    readonly="readonly"
+                    onChange={(event)=>{
+                      setCodigoBebidaHelada(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -37,10 +61,9 @@ function AgregarBebidaHelada() {
                   Nombre
                   </label>
                 <div class="col-sm-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                  />
+                <input type="text" className="form-control" onChange={(event)=>{
+                  setNombreBebidaHelada(event.target.value);
+                }}/>
                 </div>
               </div>
 
@@ -52,6 +75,9 @@ function AgregarBebidaHelada() {
                   <textarea
                     class="form-control" 
                     rows="4"
+                    onChange={(event)=>{
+                      setIngredientesBebidaHelada(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -64,6 +90,9 @@ function AgregarBebidaHelada() {
                   <input
                     type="number"
                     class="form-control"
+                    onChange={(event)=>{
+                      setPrecioBebidaHelada(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -75,6 +104,9 @@ function AgregarBebidaHelada() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteBebidaHelada(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>

@@ -5,6 +5,12 @@ let proveedorSchema = new Schema({
     codigo: {
         type: String
     },
+    cedula: {
+        type: String
+    },
+    fecha: {
+        type: Date
+    },
     nombre: {
         type: String
     },
@@ -12,6 +18,9 @@ let proveedorSchema = new Schema({
         type: String
     },
     segundoApellido: {
+        type: String
+    },
+    direccion: {
         type: String
     },
     telefonoOficina: {

@@ -1,7 +1,37 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarLimpieza() {
+
+  const [codigoLimpieza, setCodigoLimpieza] = useState("");
+  const [nombreLimpieza, setNombreLimpieza] = useState("");
+  const [cantidadLimpieza, setCantidadLimpieza] = useState("");
+  const [restauranteLimpieza, setRestauranteLimpieza] = useState("");
+  const [marcaLimpieza, setMarcaLimpieza] = useState("");
+  const [tipoDeArticuloLimpieza, setTipoDeArticuloLimpieza] = useState("");
+  const [unidadDeMedidaLimpieza, setUnidadDeMedidaLimpieza] = useState("");
+  const [descripcionLimpieza, setDescripcionLimpieza] = useState("");
+  const [cantidadDeMedidaLimpieza, setCantidadDeMedidaLimpieza] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarLimpieza",{
+      codigoLimpieza: codigoLimpieza,
+      nombreLimpieza: nombreLimpieza,
+      cantidadLimpieza: cantidadLimpieza,
+      restauranteLimpieza: restauranteLimpieza,
+      marcaLimpieza: marcaLimpieza,
+      tipoDeArticuloLimpieza: tipoDeArticuloLimpieza,
+      unidadDeMedidaLimpieza: unidadDeMedidaLimpieza,
+      descripcionLimpieza: descripcionLimpieza,
+      cantidadDeMedidaLimpieza: cantidadDeMedidaLimpieza,
+      estadoLimpieza: true,
+    });
+    window.location.href = 'http://localhost:3000/limpieza/'
+  };
+
+
   return (
 <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -14,7 +44,7 @@ function AgregarLimpieza() {
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                   <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
@@ -29,7 +59,9 @@ function AgregarLimpieza() {
                       <input
                         type="number"
                         class="form-control"
-                        readonly="readonly"
+                        onChange={(event)=>{
+                          setCodigoLimpieza(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -41,6 +73,9 @@ function AgregarLimpieza() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteLimpieza(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>
@@ -58,6 +93,9 @@ function AgregarLimpieza() {
                         type="text"
                         class="form-control"
                         placeholder="Nombre Comestible"
+                        onChange={(event)=>{
+                          setNombreLimpieza(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -69,6 +107,9 @@ function AgregarLimpieza() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setMarcaLimpieza(event.target.value);
+                        }}
                       >
                         <option>Marca 1</option>
                         <option>Marca 2</option>
@@ -89,6 +130,9 @@ function AgregarLimpieza() {
                         type="text"
                         class="form-control"
                         placeholder="Cantidad Comestible"
+                        onChange={(event)=>{
+                          setCantidadLimpieza(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -102,6 +146,9 @@ function AgregarLimpieza() {
                         class="form-control"
                         placeholder="Descripcion"
                         rows="3"
+                        onChange={(event)=>{
+                          setDescripcionLimpieza(event.target.value);
+                        }}
                       />
                 </div>
                 </div>
@@ -123,6 +170,9 @@ function AgregarLimpieza() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setTipoDeArticuloLimpieza(event.target.value);
+                        }}
                       >
                         <option>Tipo de Artículo 1</option>
                         <option>Tipo de Artículo 2</option>
@@ -144,6 +194,9 @@ function AgregarLimpieza() {
                         type="text"
                         class="form-control"
                         placeholder="Cantidad de Medida"
+                        onChange={(event)=>{
+                          setCantidadDeMedidaLimpieza(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -155,6 +208,9 @@ function AgregarLimpieza() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setUnidadDeMedidaLimpieza(event.target.value);
+                        }}
                       >
                         <option>Unidad de Medida 1</option>
                         <option>Unidad de Medida 2</option>

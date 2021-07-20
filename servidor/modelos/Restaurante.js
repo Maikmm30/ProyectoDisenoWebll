@@ -25,6 +25,6 @@ let restauranteSchema = new Schema({
     }
 })
 
-const Restaurante = mongoose.model('restaurante', restauranteSchema);
+const Restaurante = mongoose.model('restaurante', restauranteSchema, 'restaurante');
 
 module.exports = Restaurante;

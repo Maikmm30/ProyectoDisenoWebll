@@ -2,10 +2,20 @@ const router = require("express").Router();
 let Restaurante = require("../modelos/Restaurante");
 const express = require("express");
 
+
+router.route("/").get((req, res) => {
+  Restaurante.find({estado: {$ne: 'false'}})
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+
 router.put("/update", async (req, res) => {
     const codigoActualiza = req.body.codigoActualiza;
     const restauNuevo = req.body.restauNuevo;
     const columnaSeleccionada = req.body.columnaSeleccionada;
+    console.log(columnaSeleccionada)
     try{
     await Restaurante.findOneAndUpdate({codigo : codigoActualiza}, {[columnaSeleccionada] : restauNuevo} , (err, restaurante)=>{
       res.json(restaurante);
@@ -44,21 +54,6 @@ router.post("/agregar", async (req, res) => {
 });
 
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
-  const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
-
-  });
-  }
-  catch(err){
-    res.send('error'+ err);
-  }
-})*/
-
 
 router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
@@ -73,16 +68,7 @@ router.route("/buscar").post((req, res) => {
 
 router.put("/eliminar", async (req, res) => {
 
-  const codigoBusca = req.body.codigoBusca
-
-  try {
-    await Restaurante.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, restaurante) => {
-      res.json(restaurante);
-    });
-  }
-  catch (err) {
-    res.send('error' + err);
-  }
+ 
 })
 
 module.exports = router;

@@ -3,20 +3,20 @@ let Restaurante = require("../modelos/Restaurante");
 const express = require("express");
 
 router.put("/update", async (req, res) => {
-    const codigoActualiza = req.body.codigoActualiza;
-    const restauNuevo = req.body.restauNuevo;
-    const columnaSeleccionada = req.body.columnaSeleccionada;
-    try{
-    await Restaurante.findOneAndUpdate({codigo : codigoActualiza}, {[columnaSeleccionada] : restauNuevo} , (err, restaurante)=>{
+  const codigoActualiza = req.body.codigoActualiza;
+  const restauNuevo = req.body.restauNuevo;
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try {
+    await Restaurante.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: restauNuevo }, (err, restaurante) => {
       res.json(restaurante);
-  
+
     });
-    }
-    catch(err){
-      res.send('error'+ err);
-    }
-  })
-  
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
+})
+
 const app = express();
 
 router.post("/agregar", async (req, res) => {
@@ -44,20 +44,20 @@ router.post("/agregar", async (req, res) => {
 });
 
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const restauranteNuevo = req.body.restauranteNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+  try {
+    await Restaurante.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: restauranteNuevo }, (err, restaurante) => {
+      res.json(restaurante);
 
-  });
+    });
   }
-  catch(err){
-    res.send('error'+ err);
+  catch (err) {
+    res.status(400).send(error)
   }
-})*/
+})
 
 
 router.route("/buscar").post((req, res) => {

@@ -33,23 +33,24 @@ router.post("/agregar", async (req, res) => {
         res.send("inserted data");
     } catch (err) {
         console.log(err);
+        res.status(400).send(error)
     }
 });
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
-  const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+router.put("/update", async (req, res) => {
+    const codigoActualiza = req.body.codigoActualiza;
+    const buffetNuevo = req.body.buffetNuevo;
+    const columnaSeleccionada = req.body.columnaSeleccionada;
+    try {
+        await Buffet.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: buffetNuevo }, (err, buffet) => {
+            res.json(buffet);
 
-  });
-  }
-  catch(err){
-    res.send('error'+ err);
-  }
-})*/
+        });
+    }
+    catch (err) {
+        res.send('error' + err);
+    }
+})
 
 
 router.route("/buscar").post((req, res) => {
@@ -73,7 +74,7 @@ router.put("/eliminar", async (req, res) => {
         });
     }
     catch (err) {
-        res.send('error' + err);
+        res.status(400).send(error)
     }
 })
 

@@ -32,7 +32,48 @@ router.post("/agregar", async (req, res) => {
     res.send("inserted data");
   } catch (err) {
     console.log(err);
+    res.status(400).send(error)
   }
 });
+
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const comestibleNuevo = req.body.comestibleNuevo;
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try {
+    await Comestible.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: comestibleNuevo }, (err, comestible) => {
+      res.json(comestible);
+
+    });
+  }
+  catch (err) {
+    res.status(400).send(error)
+  }
+})
+
+
+router.route("/buscar").post((req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+
+  Comestible.find({ codigo: codigoBusca, nombre: nombreBusca })
+    .then(comestible => res.json(comestible))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.put("/eliminar", async (req, res) => {
+
+  const codigoBusca = req.body.codigoBusca
+
+  try {
+    await Comestible.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, comestible) => {
+      res.json(comestible);
+    });
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
+})
+
 
 module.exports = router;

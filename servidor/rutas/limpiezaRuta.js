@@ -35,4 +35,43 @@ router.post("/agregar", async (req, res) => {
   }
 });
 
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const limpiezaNuevo = req.body.limpiezaNuevo;
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try {
+    await Limpieza.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: limpiezaNuevo }, (err, limpieza) => {
+      res.json(limpieza);
+
+    });
+  }
+  catch (err) {
+    res.status(400).send(error)
+  }
+})
+
+
+router.route("/buscar").post((req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+
+  Limpieza.find({ codigo: codigoBusca, nombre: nombreBusca })
+      .then(limpieza => res.json(limpieza))
+      .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.put("/eliminar", async (req, res) => {
+
+  const codigoBusca = req.body.codigoBusca
+
+  try {
+      await Limpieza.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, limpieza) => {
+          res.json(limpieza);
+      });
+  }
+  catch (err) {
+      res.send('error' + err);
+  }
+})
+
 module.exports = router;

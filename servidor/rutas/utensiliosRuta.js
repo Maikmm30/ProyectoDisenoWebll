@@ -29,4 +29,43 @@ router.post("/agregar", async (req, res) => {
   }
 });
 
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const equipoNuevo = req.body.equipoNuevo;
+  const columnaSeleccionada = req.body.columnaSeleccionada;
+  try {
+    await Equipo.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: equipoNuevo }, (err, equipo) => {
+      res.json(equipo);
+
+    });
+  }
+  catch (err) {
+    res.status(400).send(error)
+  }
+})
+
+
+router.route("/buscar").post((req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+
+  Equipo.find({ codigo: codigoBusca, nombre: nombreBusca })
+    .then(equipo => res.json(equipo))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.put("/eliminar", async (req, res) => {
+
+  const codigoBusca = req.body.codigoBusca
+
+  try {
+    await Equipo.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, equipo) => {
+      res.json(equipo);
+    });
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
+})
+
 module.exports = router;

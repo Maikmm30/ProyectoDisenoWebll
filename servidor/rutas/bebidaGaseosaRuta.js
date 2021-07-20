@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let BebidasGaseosas = require("../modelos/Bebidas_gaseosas");
+let BebidaGaseosa = require("../modelos/Bebidas_gaseosas");
 const express = require("express");
 const app = express();
 
@@ -13,10 +13,10 @@ router.post("/agregar", async (req, res) => {
   const cantidadBebidaGaseosa = req.body.cantidadBebidaGaseosa;
   const descripcionBebidaGaseosa = req.body.descripcionBebidaGaseosa;
   //const imagenBebidaGaseosa = ;
-  const estadoBebidaGaseosa = req.body.estadoBebidaCaliente;
+  const estadoBebidaGaseosa = req.body.estadoBebidaGaseosa;
 
   try {
-    const bebidaGaseosa = new BebidasGaseosas({
+    const bebidaGaseosa = new BebidaGaseosa({
       codigo: codigoBebidaGaseosa,
       nombre: nombreBebidaGaseosa,
       marca: marcaBebidaGaseosa,
@@ -35,20 +35,20 @@ router.post("/agregar", async (req, res) => {
 });
 
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const bebidaGaseosaNuevo = req.body.bebidaGaseosaNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+  try {
+    await BebidaGaseosa.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaGaseosaNuevo }, (err, bebidaGaseosa) => {
+      res.json(bebidaGaseosa);
 
-  });
+    });
   }
-  catch(err){
-    res.send('error'+ err);
+  catch (err) {
+    res.status(400).send(error)
   }
-})*/
+})
 
 
 router.route("/buscar").post((req, res) => {

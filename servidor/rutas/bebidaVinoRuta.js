@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let BebidasVinos = require("../modelos/Bebidas_vinos");
+let BebidaVino = require("../modelos/Bebidas_vinos");
 const express = require("express");
 const app = express();
 
@@ -18,7 +18,7 @@ router.post("/agregar", async (req, res) => {
   const estadoBebidaVino = req.body.estadoBebidaVino;
 
   try {
-    const bebidaVino = new BebidasVinos({
+    const bebidaVino = new BebidaVino({
       codigo: codigoBebidaVino,
       nombre: nombreBebidaVino,
       marca: marcaBebidaVino,
@@ -35,24 +35,25 @@ router.post("/agregar", async (req, res) => {
     res.send("inserted data");
   } catch (err) {
     console.log(err);
+    res.status(400).send(error)
   }
 });
 
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const bebidaVinoNuevo = req.body.bebidaVinoNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+  try {
+    await BebidaVino.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaVinoNuevo }, (err, bebidaVino) => {
+      res.json(bebidaVino);
 
-  });
+    });
   }
-  catch(err){
-    res.send('error'+ err);
+  catch (err) {
+    res.status(400).send(error)
   }
-})*/
+})
 
 
 router.route("/buscar").post((req, res) => {
@@ -60,8 +61,8 @@ router.route("/buscar").post((req, res) => {
   const nombreBusca = req.body.nombreBusca
 
   BebidaVino.find({ codigo: codigoBusca, nombre: nombreBusca })
-      .then(bebidaVino => res.json(bebidaVino))
-      .catch(err => res.status(400).json('Error: ' + err));
+    .then(bebidaVino => res.json(bebidaVino))
+    .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.put("/eliminar", async (req, res) => {
@@ -69,12 +70,12 @@ router.put("/eliminar", async (req, res) => {
   const codigoBusca = req.body.codigoBusca
 
   try {
-      await BebidaVino.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, bebidaVino) => {
-          res.json(bebidaVino);
-      });
+    await BebidaVino.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, bebidaVino) => {
+      res.json(bebidaVino);
+    });
   }
   catch (err) {
-      res.send('error' + err);
+    res.send('error' + err);
   }
 })
 

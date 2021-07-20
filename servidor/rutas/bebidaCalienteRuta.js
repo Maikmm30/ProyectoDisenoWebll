@@ -1,5 +1,5 @@
 const router = require("express").Router();
-let BebidasCaliente = require("../modelos/Bebidas_calientes");
+let BebidaCaliente = require("../modelos/Bebidas_calientes");
 const express = require("express");
 const app = express();
 
@@ -12,7 +12,7 @@ router.post("/agregar", async (req, res) => {
   const estadoBebidaCaliente = req.body.estadoBebidaCaliente;
 
   try {
-    const bebidaCaliente = new BebidasCaliente({
+    const bebidaCaliente = new BebidaCaliente({
       codigo: codigoBebidaCaliente,
       nombre: nombreBebidaCaliente,
       ingredientes: ingredientesBebidaCaliente,
@@ -29,20 +29,20 @@ router.post("/agregar", async (req, res) => {
 });
 
 
-/*router.put("/update", async (req, res) => {
-  const paisActualiza = req.body.paisActualiza;
-  const paisNuevo = req.body.paisNuevo;
+router.put("/update", async (req, res) => {
+  const codigoActualiza = req.body.codigoActualiza;
+  const bebidaCalienteNuevo = req.body.bebidaCalienteNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
-  try{
-  await Pais.findOneAndUpdate({[columnaSeleccionada] : paisActualiza}, {[columnaSeleccionada] : paisNuevo} , (err, pais)=>{
-    res.json(pais);
+  try {
+    await BebidaCaliente.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaCalienteNuevo }, (err, bebidaCaliente) => {
+      res.json(bebidaCaliente);
 
-  });
+    });
   }
-  catch(err){
-    res.send('error'+ err);
+  catch (err) {
+    res.send('error' + err);
   }
-})*/
+})
 
 
 router.route("/buscar").post((req, res) => {

@@ -26,7 +26,7 @@ const utensilioRutas = require('./rutas/utensiliosRuta');
 const unidadMedidaRutas = require('./rutas/unidadMedidaRuta');
 const mesasRutas = require('./rutas/unidadMedidaRuta');
 const ayudaSistemaRutas = require('./rutas/ayudaSistemaRuta');
-
+const buffetRutas = require('./rutas/buffetRuta');
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
@@ -48,6 +48,7 @@ app.use('/utensilio', utensilioRutas);
 app.use('/unidadMedida', unidadMedidaRutas);
 app.use('/mesas', mesasRutas);
 app.use('/ayuda-sistema', ayudaSistemaRutas);
+app.use('/buffets', buffetRutas);
 
 
 

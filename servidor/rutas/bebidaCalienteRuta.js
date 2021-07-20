@@ -3,6 +3,14 @@ let BebidaCaliente = require("../modelos/Bebidas_calientes");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  BebidaCaliente.find({ estado: { $ne: 'false' } })
+      .then((bebidaCaliente) => res.json(bebidaCaliente))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+
 router.post("/agregar", async (req, res) => {
   const codigoBebidaCaliente = req.body.codigoBebidaCaliente;
   const nombreBebidaCaliente = req.body.nombreBebidaCaliente;
@@ -31,10 +39,10 @@ router.post("/agregar", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
-  const bebidaCalienteNuevo = req.body.bebidaCalienteNuevo;
+  const bebidaNuevo = req.body.bebidaNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await BebidaCaliente.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaCalienteNuevo }, (err, bebidaCaliente) => {
+    await BebidaCaliente.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaNuevo }, (err, bebidaCaliente) => {
       res.json(bebidaCaliente);
 
     });

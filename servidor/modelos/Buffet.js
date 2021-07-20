@@ -25,6 +25,6 @@ let buffetSchema = new Schema({
     }
 })
 
-const Buffet = mongoose.model('buffet', buffetSchema);
+const Buffet = mongoose.model('buffet', buffetSchema, 'buffet');
 
 module.exports = Buffet;

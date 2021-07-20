@@ -22,6 +22,6 @@ let bebidasCalientesSchema = new Schema({
     }
 })
 
-const BebidasCalientes = mongoose.model('bebidasCalientes', bebidasCalientesSchema);
+const BebidasCalientes = mongoose.model('bebidascalientes', bebidasCalientesSchema,'bebidascalientes');
 
 module.exports = BebidasCalientes;

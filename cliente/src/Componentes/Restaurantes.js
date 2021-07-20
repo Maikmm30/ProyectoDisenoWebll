@@ -32,7 +32,7 @@ function Restaurantes() {
     window.location.reload();
   };
 
-  const buscarPais = () => {
+  const buscar = () => {
     Axios.post("http://localhost:3001/restaurantes/buscar", 
     {
       codigoBusca : codigoBusca,
@@ -52,9 +52,9 @@ function Restaurantes() {
     }
   };
 
-  const capturaBuscaPais = ()=>{
+  const capturaBuscaRestau = ()=>{
     if(codigoBusca && nombreBusca!== ''){
-      buscarPais()
+      buscar()
     }
     else{
      alert('Por favor ingrese los datos')
@@ -153,7 +153,7 @@ const limpiaCajas =()=>{
                 <div className="col">
                   <button
                     className=" p-3 rounded-circle  fas fa-check-circle fa-3x"
-                    onClick={capturaBuscaPais}
+                    onClick={capturaBuscaRestau}
                   ></button>
                 </div>
                 <div className="col">

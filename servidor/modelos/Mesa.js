@@ -1,30 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let bebidasHeladasSchema = new Schema({
+let mesaSchema = new Schema({
     codigo: {
         type: String
     },
     nombre: {
         type: String
     },
-    ingredientes: {
+    numero: {
         type: String
     },
-    precio: {
+    cantidadSillas: {
         type: Number
     },
     restaurante: {
         type: String
     },
-    descripcion: {
-        type: String
-    }, 
     estado: {
-        type: Boolean
+        type: String
     }
 })
 
-const BebidasHeladas = mongoose.model('bebidasHeladas', bebidasHeladasSchema);
+const Mesa = mongoose.model('restaurante', mesaSchema);
 
-module.exports = BebidasHeladas;
+module.exports = Restaurante;

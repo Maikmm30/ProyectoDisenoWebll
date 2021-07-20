@@ -1,7 +1,27 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarMesas() {
+
+  const [codigoMesa, setCodigoMesa] = useState("");
+  const [nombreMesa, setNombreMesa] = useState("");
+  const [cantidadSillasMesa, setCantidadSillasMesa] = useState("");
+  const [restauranteMesa, setRestauranteMesa] = useState("");
+  const [numeroMesa, setNumeroMesa] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarMesas",{
+      codigoMesa: codigoMesa,
+      nombreMesa: nombreMesa,
+      cantidadSillasMesa: cantidadSillasMesa,
+      restauranteMesa: restauranteMesa,
+      numeroMesa: numeroMesa,
+      estadoMesa: true,
+    });
+    window.location.href = 'http://localhost:3000/mesas/'
+  };
   return (
 <div class="container">
       <div class="row" style={{ height: "600px" , backgroundColor: "#FF723F"  }}>
@@ -17,7 +37,7 @@ function AgregarMesas() {
             <div class="text-center col-12 text-light h-25" style={{  backgroundColor: "#C42709"}}>
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3  rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col "><i class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                   <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
@@ -32,7 +52,9 @@ function AgregarMesas() {
                       <input
                         type="number"
                         class="form-control"
-                        readonly="readonly"
+                        onChange={(event)=>{
+                          setCodigoMesa(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -45,6 +67,9 @@ function AgregarMesas() {
                         type="text"
                         class="form-control"
                         placeholder="Nombre"
+                        onChange={(event)=>{
+                          setNombreMesa(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -57,6 +82,9 @@ function AgregarMesas() {
                         type="text"
                         class="form-control"
                         placeholder="Numero"
+                        onChange={(event)=>{
+                          setNumeroMesa(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -69,6 +97,9 @@ function AgregarMesas() {
                         type="text"
                         class="form-control"
                         placeholder="Cantidad de Sillas"
+                        onChange={(event)=>{
+                          setCantidadSillasMesa(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -80,6 +111,9 @@ function AgregarMesas() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteMesa(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>

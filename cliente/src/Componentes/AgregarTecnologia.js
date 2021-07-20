@@ -1,6 +1,29 @@
 import { Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarTecnologia() {
+
+  const [codigoTecnologia, setCodigoTecnologia] = useState("");
+  const [nombreTecnologia, setNombreTecnologia] = useState("");
+  const [cantidadTecnologia, setCantidadTecnologia] = useState("");
+  const [restauranteTecnologia, setRestauranteTecnologia] = useState("");
+  const [marcaTecnologia, setMarcaTecnologia] = useState("");
+  const [descripcionTecnologia, setDescripcionTecnologia] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarTecnologia",{
+      codigoTecnologia: codigoTecnologia,
+      nombreTecnologia: nombreTecnologia,
+      cantidadTecnologia: cantidadTecnologia,
+      restauranteTecnologia: restauranteTecnologia,
+      marcaTecnologia: marcaTecnologia,
+      descripcionTecnologia: descripcionTecnologia,
+      estadoTecnologia: true,
+    });
+    window.location.href = 'http://localhost:3000/tecnologia/'
+  };
+
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "600px" }}>
@@ -12,8 +35,8 @@ function AgregarTecnologia() {
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-3 m-4">
-                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " ></i></div>
+                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                   <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
@@ -28,7 +51,9 @@ function AgregarTecnologia() {
                       <input
                         type="number"
                         class="form-control"
-                        readonly="readonly"
+                        onChange={(event)=>{
+                          setCodigoTecnologia(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -40,6 +65,9 @@ function AgregarTecnologia() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setRestauranteTecnologia(event.target.value);
+                        }}
                       >
                         <option>Restaurante 1</option>
                         <option>Restaurante 2</option>
@@ -57,6 +85,9 @@ function AgregarTecnologia() {
                         type="text"
                         class="form-control"
                         placeholder="Nombre Artículo"
+                        onChange={(event)=>{
+                          setNombreTecnologia(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -68,6 +99,9 @@ function AgregarTecnologia() {
                 <select
                         class="form-control"
                         id="exampleFormControlSelect2"
+                        onChange={(event)=>{
+                          setMarcaTecnologia(event.target.value);
+                        }}
                       >
                         <option>Marca 1</option>
                         <option>Marca 2</option>
@@ -85,6 +119,9 @@ function AgregarTecnologia() {
                         type="number"
                         class="form-control"
                         placeholder="Cantidad del artículo"
+                        onChange={(event)=>{
+                          setCantidadTecnologia(event.target.value);
+                        }}
                       />
                     </div>
               </div>
@@ -97,6 +134,9 @@ function AgregarTecnologia() {
                         type="text"
                         class="form-control"
                         placeholder="Descripción del artículo"
+                        onChange={(event)=>{
+                          setDescripcionTecnologia(event.target.value);
+                        }}
                       />
                     </div>
               </div>

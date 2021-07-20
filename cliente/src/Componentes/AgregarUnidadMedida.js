@@ -1,4 +1,29 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+
 function AgregarUnidadMedida() {
+
+  const [codigoUnidadMedida, setCodigoUnidadMedida] = useState("");
+  const [unidadUnidadMedida, setUnidadUnidadMedida] = useState("");
+  const [escalaUnidadMedida, setEscalaUnidadMedida] = useState("");
+  const [detalleUnidadMedida, setDetalleUnidadMedida] = useState("");
+  const [simbologiaUnidadMedida, setSimbologiaUnidadMedida] = useState("");
+  const [simboloUnidadMedida, setSimboloUnidadMedida] = useState("");
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/agregarUnidadMedidad",{
+      codigoUnidadMedida: codigoUnidadMedida,
+      unidadUnidadMedida: unidadUnidadMedida,
+      escalaUnidadMedida: escalaUnidadMedida,
+      detalleUnidadMedida: detalleUnidadMedida,
+      simbologiaUnidadMedida: simbologiaUnidadMedida,
+      simboloUnidadMedida: simboloUnidadMedida,
+      estadoUnidadMedida: true,
+    });
+    window.location.href = 'http://localhost:3000/unidadMedida/'
+  };
+
+
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "650px" }}>
@@ -14,7 +39,7 @@ function AgregarUnidadMedida() {
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"  onClick={enviarDatos}></i>
                 </div>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
@@ -27,7 +52,9 @@ function AgregarUnidadMedida() {
                 <div className="row">
                   <label className="col-sm-3">Código</label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                          setCodigoUnidadMedida(event.target.value);
+                        }}/>
                   </div>
                 </div>
               </div>
@@ -42,7 +69,9 @@ function AgregarUnidadMedida() {
                 <div className="row">
                   <label className="col-sm-3">Unidad</label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                          setUnidadUnidadMedida(event.target.value);
+                        }}/>
                   </div>
                 </div>
               </div>
@@ -60,6 +89,9 @@ function AgregarUnidadMedida() {
                   <select
                         className="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setEscalaUnidadMedida(event.target.value);
+                        }}
                       >
                         <option>Yotta</option>
                         <option>Zetta</option>
@@ -89,7 +121,10 @@ function AgregarUnidadMedida() {
                 <div className="row ">
                 <label className="col-sm-3">Símbolo</label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                          setSimboloUnidadMedida(event.target.value);
+                        }}
+                        />
                   </div>
                 </div>
               </div>
@@ -103,6 +138,9 @@ function AgregarUnidadMedida() {
                   <select
                         className="form-control"
                         id="exampleFormControlSelect1"
+                        onChange={(event)=>{
+                          setDetalleUnidadMedida(event.target.value);
+                        }}
                       >
                         <option>Unidades de capacidad</option>
                         <option>Unidades de densidad</option>
@@ -127,7 +165,9 @@ function AgregarUnidadMedida() {
                 <div className="row ">
                 <label className="col-sm-3">Simbología</label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                          setSimbologiaUnidadMedida(event.target.value);
+                        }}/>
                   </div>
                 </div>
               </div>

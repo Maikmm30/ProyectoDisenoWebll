@@ -17,6 +17,9 @@ let unidadMedidaSchema = new Schema({
   simbologia:{
     type: String
   },
+  simbolo:{
+    type: String
+  },
   estado:{
     type: bool
 }})

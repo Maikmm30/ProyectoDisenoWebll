@@ -105,15 +105,6 @@ const columns = [
         setColumna(columnIndex.dataField)
       }
     }
-  },
-  {
-    dataField: "ingredientes",
-    text: "Ingredientes",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
-    }
   }
 ];
 const rowEvents = {

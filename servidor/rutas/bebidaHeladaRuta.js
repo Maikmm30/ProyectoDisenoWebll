@@ -3,6 +3,13 @@ let BebidasHelada = require("../modelos/Bebidas_heladas");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  BebidasHelada.find({ estado: { $ne: 'false' } })
+      .then((bebidaHelada) => res.json(bebidaHelada))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 router.post("/agregar", async (req, res) => {
   const codigoBebidaHelada = req.body.codigoBebidaHelada;
   const nombreBebidaHelada = req.body.nombreBebidaHelada;
@@ -30,10 +37,10 @@ router.post("/agregar", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
-  const bebidaHeladaNuevo = req.body.bebidaHeladaNuevo;
+  const bebidaNuevo = req.body.bebidaNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await BebidaHelada.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaHeladaNuevo }, (err, bebidaHelada) => {
+    await BebidasHelada.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaNuevo }, (err, bebidaHelada) => {
       res.json(bebidaHelada);
 
     });
@@ -48,7 +55,7 @@ router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
   const nombreBusca = req.body.nombreBusca
 
-  BebidaHelada.find({ codigo: codigoBusca, nombre: nombreBusca })
+  BebidasHelada.find({ codigo: codigoBusca, nombre: nombreBusca })
     .then(bebidaHelada => res.json(bebidaHelada))
     .catch(err => res.status(400).json('Error: ' + err));
 })

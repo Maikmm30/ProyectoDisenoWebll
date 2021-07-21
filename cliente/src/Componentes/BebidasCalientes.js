@@ -63,6 +63,7 @@ function BebidasCalientes() {
   const recarga = () => {
     window.location.reload();
   };
+  
   const limpiaCajas = () => {
     setCodigo("");
     setNombre("");

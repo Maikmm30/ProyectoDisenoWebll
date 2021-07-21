@@ -37,6 +37,6 @@ let bebidasLicoresSchema = new Schema({
     }
 })
 
-const BebidasLicores = mongoose.model('bebidasLicores', bebidasLicoresSchema);
+const BebidasLicores = mongoose.model('bebidasLicores', bebidasLicoresSchema,'bebidasLicores');
 
 module.exports = BebidasLicores;

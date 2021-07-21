@@ -14,8 +14,6 @@ function BebidasHeladas() {
   var [codigoActualiza, setCodigoActualiza] = useState("");
   var [bebidaNuevo, setNuevoBebida] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
-
-
     
 useEffect(() => {
   Axios.get("http://localhost:3001/administracion/especiales/bebidas/heladas/").then((res) => {

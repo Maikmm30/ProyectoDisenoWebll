@@ -63,6 +63,7 @@ function BebidasCalientes() {
   const recarga = () => {
     window.location.reload();
   };
+  
   const limpiaCajas = () => {
     setCodigo("");
     setNombre("");
@@ -100,15 +101,6 @@ const columns = [
   {
     dataField: "restaurante",
     text: "Restaurante",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
-    }
-  },
-  {
-    dataField: "ingredientes",
-    text: "Ingredientes",
     events:{
       onClick:( column, columnIndex)=>{
         setColumna(columnIndex.dataField)

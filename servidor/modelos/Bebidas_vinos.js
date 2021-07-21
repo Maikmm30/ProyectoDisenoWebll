@@ -32,16 +32,14 @@ let bebidasVinosSchema = new Schema({
     descripcion: {
         type: String
     },
-    tipo: {
+    tipoVenta: {
         type: String
     },
-    acompana: {
-        type: String
-    },estado: {
+   estado: {
         type: String
     }
 })
 
-const BebidasVinos = mongoose.model('bebidasVinos', bebidasVinosSchema);
+const BebidasVinos = mongoose.model('bebidasVinos', bebidasVinosSchema,'bebidasVinos');
 
 module.exports = BebidasVinos;

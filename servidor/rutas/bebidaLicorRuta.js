@@ -3,6 +3,13 @@ let BebidaLicor = require("../modelos/Bebidas_licores");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  BebidaLicor.find({ estado: { $ne: 'false' } })
+      .then((bebidaLicor) => res.json(bebidaLicor))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 router.post("/agregar", async (req, res) => {
   const codigoBebidaLicor = req.body.codigoBebidaLicor;
   const nombreBebidaLicor = req.body.nombreBebidaLicor;
@@ -42,10 +49,10 @@ router.post("/agregar", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
-  const bebidaLicorNuevo = req.body.bebidaLicorNuevo;
+  const bebidaNuevo = req.body.bebidaNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await BebidaLicor.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaLicorNuevo }, (err, bebidaLicor) => {
+    await BebidaLicor.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaNuevo }, (err, bebidaLicor) => {
       res.json(bebidaLicor);
 
     });

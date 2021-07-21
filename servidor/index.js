@@ -32,7 +32,7 @@ app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
 app.use('/login', login);
 app.use('/administracion/especiales/bebidas/gaseosas/', bebidaGaseosaRutas);
-app.use('/administracion/especiales/bebidas/helada/', bebidaHeladaRutas);
+app.use('/administracion/especiales/bebidas/heladas/', bebidaHeladaRutas);
 app.use('/administracion/especiales/bebidas/licores/', bebidaLicorRutas);
 app.use('/administracion/especiales/bebidas/vinos/', bebidaVinoRutas);
 app.use('/comestibles/', comestibleRutas);

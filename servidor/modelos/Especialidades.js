@@ -20,10 +20,10 @@ let especialidadesSchema = new Schema({
     restaurante: {
         type: String
     },estado: {
-        type: String
+        type: Boolean
     }
 })
 
-const Especialidades = mongoose.model('especialidades', especialidadesSchema);
+const Especialidades = mongoose.model('especialidades', especialidadesSchema,'especialidades');
 
 module.exports = Especialidades;

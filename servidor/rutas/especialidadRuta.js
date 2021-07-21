@@ -3,6 +3,13 @@ let Especialidad = require("../modelos/Especialidades");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  Especialidad.find({ estado: { $ne: 'false' } })
+      .then((especialidad) => res.json(especialidad))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 router.post("/agregar", async (req, res) => {
   const codigoEspecialidad = req.body.codigoEspecialidad;
   const nombreEspecialidad = req.body.nombreEspecialidad;
@@ -29,14 +36,13 @@ router.post("/agregar", async (req, res) => {
   }
 });
 
-
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
-  const especialidadNuevo = req.body.especialidadNuevo;
+  const especialNuevo = req.body.especialNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await Especialidad.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: especialidadNuevo }, (err, especialidad) => {
-      res.json(especialidad);
+    await Especialidad.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: especialNuevo }, (err, especial) => {
+      res.json(especial);
 
     });
   }

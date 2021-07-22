@@ -5,15 +5,28 @@ import Axios from 'axios';
 function AgregarBebidaCaliente() {
 
   const [codigoBebidaCaliente, setCodigoBebidaCaliente] = useState("");
+  const [numeroBebidaCaliente, setNumeroBebidaCaliente] = useState("");
   const [nombreBebidaCaliente, setNombreBebidaCaliente] = useState("");
   const [ingredientesBebidaCaliente, setIngredientesBebidaCaliente] = useState("");
   const [precioBebidaCaliente, setPrecioBebidaCaliente] = useState("");
   const [restauranteBebidaCaliente, setRestauranteBebidaCaliente] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/calientes/id").then((res) => {
+      console.log(res.data)
+      console.log(res.data[0].numero);
+      const num = parseInt(res.data[0].numero)+1;
+      setNumeroBebidaCaliente(num);
+      const str = "BCA";
+      setCodigoBebidaCaliente(str+num);
+      console.log('Codigo'+codigoBebidaCaliente);
+    });
+  }, []);
 
   const enviarDatos = () => {
     Axios.post("http://localhost:3001/administracion/especiales/bebidas/calientes/agregar",{
       codigoBebidaCaliente: codigoBebidaCaliente,
+      numeroBebidaCaliente: numeroBebidaCaliente,
       nombreBebidaCaliente: nombreBebidaCaliente,
       ingredientesBebidaCaliente: ingredientesBebidaCaliente,
       precioBebidaCaliente: precioBebidaCaliente,
@@ -48,9 +61,7 @@ function AgregarBebidaCaliente() {
                   Código
                   </label>
                 <div class="col-sm-4">
-                <input type="number" className="form-control" onChange={(event)=>{
-                  setCodigoBebidaCaliente(event.target.value);
-                }}/>
+                <input type="text" className="form-control" value={codigoBebidaCaliente} disabled/>
                 </div>
               </div>
               <div class="form-group row mt-2">
@@ -98,6 +109,9 @@ function AgregarBebidaCaliente() {
                     class="form-control"
                     id="exampleFormControlSelect1"
                     onChange={(event)=>{
+                      setRestauranteBebidaCaliente(event.target.value);
+                    }}
+                    onClick={(event)=>{
                       setRestauranteBebidaCaliente(event.target.value);
                     }}
                   >

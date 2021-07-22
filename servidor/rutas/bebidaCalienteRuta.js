@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let BebidaCaliente = require("../modelos/Bebidas_calientes");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -9,10 +10,17 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/id").get((req, res) => {
+/*router.route("/id").get((req, res) => {
   //BebidaCaliente.find({}).select('codigo').sort({score : -1}).limit(1)
   BebidaCaliente.find().select('numero').sort({numero:-1}).limit(1)
       .then((bebidaCaliente) => res.json(bebidaCaliente))
+      .catch((err) => res.status(400).json("Error: " + err));
+});*/
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'bebidaCaliente'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
 });
 

@@ -11,12 +11,12 @@ function Restaurantes() {
   const [restaurantes, setRestau] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [restauNuevo, setNuevoRestau] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-  
+
   useEffect(() => {
     Axios.get("http://localhost:3001/restaurantes/").then((res) => {
       setRestau(res.data);
@@ -33,17 +33,19 @@ function Restaurantes() {
   };
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/restaurantes/buscar", 
-    {
-      codigoBusca : codigoBusca,
-      nombreBusca : nombreBusca
-    })
-    .then((res) => {
-      setRestau(res.data);
-      
-    });
-    
+    Axios.post("http://localhost:3001/restaurantes/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setRestau(res.data);
+
+      });
+
   };
+
+
 
   const capturaInput = (event) => {
     if (!event.target.value == "") {
@@ -52,28 +54,28 @@ function Restaurantes() {
     }
   };
 
-  const capturaBuscaRestau = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+  const capturaBuscaRestau = () => {
+    if (codigoBusca && nombreBusca !== '') {
       buscar()
     }
-    else{
-     alert('Por favor ingrese los datos')
+    else {
+      alert('Por favor ingrese los datos')
     }
- }
- const recarga = ()=>{
-  window.location.reload();
-}
-const limpiaCajas =()=>{
-  setCodigo("")
-  setNombre("")
-}
+  }
+  const recarga = () => {
+    window.location.reload();
+  }
+  const limpiaCajas = () => {
+    setCodigo("")
+    setNombre("")
+  }
   const columns = [
     {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -81,8 +83,8 @@ const limpiaCajas =()=>{
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
           console.log(columnaSeleccionada)
         }
@@ -91,8 +93,8 @@ const limpiaCajas =()=>{
     {
       dataField: "direccion",
       text: "Dirección",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
           console.log(columnaSeleccionada)
         }
@@ -101,8 +103,8 @@ const limpiaCajas =()=>{
     {
       dataField: "cantidadClientes",
       text: "Cantidad clientes",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
           console.log(columnaSeleccionada)
         }
@@ -111,21 +113,41 @@ const limpiaCajas =()=>{
     {
       dataField: "telefono",
       text: "Teléfono",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
           console.log(columnaSeleccionada)
         }
       }
     }
   ];
-  
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(JSON.parse(row.codigo))
     }
   };
-  
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminaRestaurante()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminaRestaurante = () => {
+    Axios.put("http://localhost:3001/paises/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
+
 
   return (
     <div className="container">
@@ -215,11 +237,11 @@ const limpiaCajas =()=>{
                   <div className="row row-cols-2 m-4 ">
                     <Link to="/restaurantes/agregar-restaurantes">
                       <div className="col">
-                      <button className="py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
+                        <button className="py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                       </div>
                     </Link>
                     <div className="col">
-                      <button className="py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

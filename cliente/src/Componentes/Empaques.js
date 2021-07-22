@@ -105,7 +105,7 @@ function Empaques() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
   };
 

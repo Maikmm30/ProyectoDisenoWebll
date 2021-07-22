@@ -1,59 +1,128 @@
 import { Container, Row, Col } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-
 import {
     Link
   } from "react-router-dom";
-
-const columns = [{
-dataField: 'codigo',
-text: 'Código'
-}, {
-dataField: 'nombre',
-text: 'Nombre'
-}, {
-dataField: 'primerApellido',
-text: 'Rol'
-},
-{
-dataField: 'segundoApellido',
-text: 'Interno al Restaurante'
-},
-{dataField: 'telefono',
-text: 'Externo al Restaurante'
-}];
-
-const products = [{
-    codigo: 1,
-    nombre: 'A',
-    primerApellido: 'A',
-    segundoApellido: '0',
-    telefono: '1',
-  }, {
-    codigo: 2,
-    nombre: 'B',
-    primerApellido: 'B',
-    segundoApellido: '0',
-    telefono: '1',
-  },
-  {
-    codigo: 3,
-    nombre: 'C',
-    primerApellido: 'C',
-    segundoApellido: '1',
-    telefono: '0',
-  },
-  {
-    codigo: 4,
-    nombre: 'D',
-    primerApellido: 'D',
-    segundoApellido: '1',
-    telefono: '0',
-  }];
-
+  import Axios from "axios";
+  import React, { useState, useEffect } from "react";
   
 function Puestos() {
+
+  const [puestos, setPuesto] = useState([]);
+  var [codigoBusca, setCodigo] = useState("");
+  var [nombreBusca, setNombre] = useState("");
+
+  var [codigoActualiza, setCodigoActualiza] = useState("")
+  var [puestoNuevo, setNuevoPuesto] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
+
+    
+  useEffect(() => {
+    Axios.get("http://localhost:3001/puestos/").then((res) => {
+      setPuesto(res.data);
+    });
+  }, []);
+
+  const actualizaPais = () => {
+    Axios.put("http://localhost:3001/puestos/update",
+      {
+        codigoActualiza: codigoActualiza,
+        puestoNuevo: puestoNuevo,
+        columnaSeleccionada: columnaSeleccionada
+      });
+    window.location.reload()
+  }
+
+  const buscar = () => {
+    Axios.post("http://localhost:3001/puestos/buscar", 
+    {
+      codigoBusca : codigoBusca,
+      nombreBusca : nombreBusca
+    })
+    .then((res) => {
+      setPuesto(res.data);
+    });
+  };
+  
+    
+const capturaInput = (event) => {
+  if (!event.target.value == '') {
+    setNuevoPuesto(event.target.value)
+    console.log(event.target)
+  }
+};
+
+
+const capturaBusca = ()=>{
+  if(codigoBusca && nombreBusca!== ''){
+    buscar()
+  }
+  else{
+   alert('Por favor ingrese los datos')
+  }
+}
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        },
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+          console.log(columnaSeleccionada);
+        },
+      }
+    },
+    {
+      dataField: "rol",
+      text: "Rol",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+          console.log(columnaSeleccionada);
+        },
+      },
+    },
+    {
+      dataField: "relacion",
+      text: "Relación",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+          console.log(columnaSeleccionada);
+        },
+      }
+    }
+  ];
+
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(JSON.parse(row.codigo))
+    }
+  };
+
+  const recarga = () => {
+    window.location.reload();
+  };
+  
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
+    
+
+
   return (
     <div class="container">
       <div class="row " style={{ height: "800px" , backgroundColor: "#FF723F"  }}>
@@ -66,67 +135,64 @@ function Puestos() {
             <div class="text-center col-12  h-25" style={{  backgroundColor: "#C42709"}}>
                 <div class="row row-cols-4 m-4">
                
-                  <div class="col"><i class=" p-3  rounded-circle fas fa-broom fa-3x "></i></div>
+                  <div class="col"><button class=" p-3  rounded-circle fas fa-broom fa-3x "  onClick={limpiaCajas}></button></div>
                 
-                  <div class="col "><i class="p-3  rounded-circle  fas fa-check-circle fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></i></div>
-                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"></i></div>
+                  <div class="col "><button class="p-3  rounded-circle  fas fa-check-circle fa-3x"  onClick={capturaBusca}></button></div>
+                  <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button></div>
+                  <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"   onClick={recarga}></button></div>
 
               </div>
             </div>
             <div class="col-12 h-80">
               Búsqueda de Puestos
               <div class="form-group row mt-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Código del Restaurante
+                <label class="col-sm-2 col-form-label">
+                  Código del puesto
                 </label>
                 <div class="col-sm-4">
                       <input
                         type="number"
                         class="form-control"
+                        value={codigoBusca}
+                        onChange={(event) => {
+                          setCodigo(event.target.value);
+                        }}
                       />
                     </div>
-                    <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Restaurante 
+                    <label  class="col-sm-2 col-form-label">
+                  Nombre del puesto
                 </label>
                 <div class="col-sm-4">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
+                        value={nombreBusca}
+                        onChange={(event) => {
+                          setNombre(event.target.value);
+                        }}
                       />
                     </div>
               </div>
-              <div class="form-check col-12">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Interno al Restaurante
-                            </label>
-                        </div>
-                        <div class="form-check col-12">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                Externo al Restaurante
-                            </label>
-                        </div>
-              
               
               <div class="form-group row mt-2">
                 
-                <div class="py-5 px-5">
+                <div class="py-5 px-5"
+                   onKeyUp={capturaInput} onBlur={actualizaPais}>
                 <BootstrapTable
                     keyField="id"
-                    data={ products }
+                    data={ puestos }
                     columns={ columns }
+                    rowEvents={rowEvents}
                     cellEdit={ cellEditFactory({ mode: 'dbclick' }) }
                 />
                 </div>
                 
-              <div class="text-center col-12 h-25">
+              <div class="text-center col-12 h-25" style={{  backgroundColor: "#C42709"}}>
                 <div class="row row-cols-2 m-4">
                 <Link to='/agregarPuestos'> 
-                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-plus-circle fa-3x"></i></div>
+                  <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
                 </Link>
-                  <div class="col"><i class=" py-3 px-4  rounded-circle fas fa-minus-circle fa-3x"></i></div>
+                  <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button></div>
 
               </div>
             </div>

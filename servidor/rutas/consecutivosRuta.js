@@ -53,5 +53,13 @@ router.put("/update", async (req, res) => {
   }
 })
 
+router.route("/buscar").post((req, res) => {
+  const codigoBusca = req.body.codigoBusca
+  const nombreBusca = req.body.nombreBusca
+
+  Consecutivo.find({ codigo: codigoBusca, nombre: nombreBusca })
+    .then(consecutivo => res.json(consecutivo))
+    .catch(err => res.status(400).json('Error: ' + err));
+})
 
 module.exports = router;

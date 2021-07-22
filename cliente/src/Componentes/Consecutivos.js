@@ -33,6 +33,20 @@ function Consecutivos() {
     window.location.reload();
   };
 
+  
+  const buscar = () => {
+    Axios.post("http://localhost:3001/consecutivos/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setConsecutivo(res.data);
+
+      });
+
+  };
+
   const capturaInput = (event) => {
     if (!event.target.value == "") {
       setNuevoConsecutivo(event.target.value);
@@ -40,6 +54,24 @@ function Consecutivos() {
     }
   };
   
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscar()
+    }
+    else {
+      alert('Por favor ingrese los datos')
+    }
+  }
+
+  
+  const recarga = () => {
+    window.location.reload();
+  };
+
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
 
 const columns = [
   {
@@ -107,19 +139,19 @@ const rowEvents = {
           <div className="row h-75">
             <div className="text-center col-12 bg-success h-25">
               <div className="row row-cols-4 m-4">
-                <Link to="/agregarConsecutivos">
+              
                   <div className="col">
-                    <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                    <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button>
                   </div>
-                </Link>
+               
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -133,7 +165,11 @@ const rowEvents = {
                         Código del Consecutivo
                       </label>
                       <div className="col-sm-8">
-                        <input type="number" className="form-control" />
+                        <input type="number" className="form-control" 
+                         value={codigoBusca}
+                         onChange={(event) => {
+                           setCodigo(event.target.value);
+                         }}/>
                       </div>
                     </div>
                   </div>
@@ -143,7 +179,11 @@ const rowEvents = {
                         Descripción del Consecutivo
                       </label>
                       <div className="col-sm-8">
-                        <input type="text" className="form-control" />
+                        <input type="text" className="form-control"
+                          value={nombreBusca}
+                          onChange={(event) => {
+                            setNombre(event.target.value);
+                          }} />
                       </div>
                     </div>
                   </div>
@@ -165,9 +205,11 @@ const rowEvents = {
             </div>
             <div className="bg-success text-center">
               <div className="row h-100 ">
+              <Link to="/agregarConsecutivos">
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
                 </div>
+                </Link>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
                 </div>

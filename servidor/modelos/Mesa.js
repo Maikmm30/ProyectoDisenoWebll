@@ -9,7 +9,7 @@ let mesaSchema = new Schema({
         type: String
     },
     numero: {
-        type: String
+        type: Number
     },
     cantidadSillas: {
         type: Number
@@ -18,10 +18,10 @@ let mesaSchema = new Schema({
         type: String
     },
     estado: {
-        type: String
+        type: Boolean
     }
 })
 
-const Mesa = mongoose.model('restaurante', mesaSchema);
+const Mesa = mongoose.model('mesa', mesaSchema,'mesa');
 
-module.exports = Restaurante;
+module.exports = Mesa;

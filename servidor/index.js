@@ -24,7 +24,7 @@ const restauranteRutas = require('./rutas/restauranteRuta');
 const rolesRutas = require('./rutas/rolesRuta');
 const utensilioRutas = require('./rutas/utensiliosRuta');
 const unidadMedidaRutas = require('./rutas/unidadMedidaRuta');
-const mesasRutas = require('./rutas/unidadMedidaRuta');
+const mesasRutas = require('./rutas/mesasRuta');
 const ayudaSistemaRutas = require('./rutas/ayudaSistemaRuta');
 const buffetRutas = require('./rutas/buffetRuta');
 

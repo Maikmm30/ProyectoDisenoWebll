@@ -3,6 +3,12 @@ let Mesa = require("../modelos/Mesa");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  Mesa.find({ estado: { $ne: 'false' } })
+      .then((mesa) => res.json(mesa))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoMesa = req.body.codigoMesa;
   const nombreMesa = req.body.nombreMesa;

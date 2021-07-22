@@ -14,100 +14,120 @@ function BebidasHeladas() {
   var [codigoActualiza, setCodigoActualiza] = useState("");
   var [bebidaNuevo, setNuevoBebida] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
-    
-useEffect(() => {
-  Axios.get("http://localhost:3001/administracion/especiales/bebidas/heladas/").then((res) => {
-    setBebida(res.data);
-  });
-}, []);
 
-const actualiza = () => {
-  Axios.put("http://localhost:3001/administracion/especiales/bebidas/heladas/update", {
-    codigoActualiza: codigoActualiza,
-    bebidaNuevo: bebidaNuevo,
-    columnaSeleccionada: columnaSeleccionada,
-  });
-  window.location.reload();
-};
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/heladas/").then((res) => {
+      setBebida(res.data);
+    });
+  }, []);
 
-const buscar = () => {
-  Axios.post("http://localhost:3001/administracion/especiales/bebidas/heladas/buscar", 
-  {
-    codigoBusca : codigoBusca,
-    nombreBusca : nombreBusca
-  })
-  .then((res) => {
-    setBebida(res.data);
-  });
-};
-const capturaInput = (event) => {
-  if (!event.target.value == "") {
-    setNuevoBebida(event.target.value);
-    console.log(event.target);
-  }
-};
-const capturaBusca = ()=>{
-  if(codigoBusca && nombreBusca!== ''){
-    buscar()
-  }
-  else{
-   alert('Por favor ingrese los datos')
-  }
-}
-  
-const recarga = () => {
-  window.location.reload();
-};
+  const actualiza = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/heladas/update", {
+      codigoActualiza: codigoActualiza,
+      bebidaNuevo: bebidaNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
 
-const limpiaCajas = () => {
-  setCodigo("");
-  setNombre("");
-};
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-    editable: false,
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  const buscar = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/heladas/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setBebida(res.data);
+      });
+  };
+  const capturaInput = (event) => {
+    if (!event.target.value == "") {
+      setNuevoBebida(event.target.value);
+      console.log(event.target);
     }
-  },
-  {
-    dataField: "nombre",
-    text: "Nombre",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  };
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscar()
     }
-  },
-  {
-    dataField: "precio",
-    text: "Precio",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
-    }
-  },
-  {
-    dataField: "restaurante",
-    text: "Restaurante",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+    else {
+      alert('Por favor ingrese los datos')
     }
   }
-];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    setCodigoActualiza(JSON.parse(row.codigo))
+  const recarga = () => {
+    window.location.reload();
+  };
+
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "precio",
+      text: "Precio",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    }
+  ];
+
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
+    }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
   }
-};
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/heladas/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
 
   return (
     <div class="container">
@@ -128,7 +148,7 @@ const rowEvents = {
                 </div>
 
                 <div class="col ">
-                  <button class="p-3  rounded-circle  fas fa-check-circle fa-3x"  onClick={capturaBusca}></button>
+                  <button class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
                 <div class="col">
                   <button class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button>
@@ -160,17 +180,17 @@ const rowEvents = {
 
                 <div class="col-sm-4">
                   <input type="text" class="form-control"
-                   value={nombreBusca}
-                   onChange={(event) => {
-                     setNombre(event.target.value);
-                   }} />
+                    value={nombreBusca}
+                    onChange={(event) => {
+                      setNombre(event.target.value);
+                    }} />
                 </div>
               </div>
 
               <div class="form-group row mt-2 text-center">
                 <div class="py-5 px-5"
-                 onKeyUp={capturaInput}
-                 onBlur={actualiza}>
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={bebidasHeladas}
@@ -190,8 +210,8 @@ const rowEvents = {
                         <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                       </div>
                     </Link>
-                    <div class="col">
-                      <button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

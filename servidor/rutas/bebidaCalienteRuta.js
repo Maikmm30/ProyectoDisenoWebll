@@ -9,10 +9,16 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
-
+router.route("/id").get((req, res) => {
+  //BebidaCaliente.find({}).select('codigo').sort({score : -1}).limit(1)
+  BebidaCaliente.find().select('numero').sort({numero:-1}).limit(1)
+      .then((bebidaCaliente) => res.json(bebidaCaliente))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.post("/agregar", async (req, res) => {
   const codigoBebidaCaliente = req.body.codigoBebidaCaliente;
+  const numeroBebidaCaliente = req.body.numeroBebidaCaliente;
   const nombreBebidaCaliente = req.body.nombreBebidaCaliente;
   const ingredientesBebidaCaliente = req.body.ingredientesBebidaCaliente;
   const precioBebidaCaliente = req.body.precioBebidaCaliente;
@@ -22,6 +28,7 @@ router.post("/agregar", async (req, res) => {
   try {
     const bebidaCaliente = new BebidaCaliente({
       codigo: codigoBebidaCaliente,
+      numero: numeroBebidaCaliente,
       nombre: nombreBebidaCaliente,
       ingredientes: ingredientesBebidaCaliente,
       precio: precioBebidaCaliente,

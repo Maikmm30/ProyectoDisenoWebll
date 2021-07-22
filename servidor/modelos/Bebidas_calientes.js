@@ -5,6 +5,9 @@ let bebidasCalientesSchema = new Schema({
     codigo: {
         type: String
     },
+    numero: {
+        type: String
+    },
     nombre: {
         type: String
     },

@@ -27,6 +27,6 @@ let consecutivoSchema = new Schema({
   }
 })
 
-const Consecutivo =  mongoose.model('consecutivos',consecutivoSchema);
+const Consecutivo =  mongoose.model('consecutivos',consecutivoSchema, 'consecutivos');
 
 module.exports = Consecutivo;

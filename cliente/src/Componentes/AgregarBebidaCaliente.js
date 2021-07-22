@@ -13,9 +13,9 @@ function AgregarBebidaCaliente() {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/administracion/especiales/bebidas/calientes/id").then((res) => {
-      console.log(res.data)
-      console.log(res.data[0].numero);
-      const num = parseInt(res.data[0].numero)+1;
+      console.log('data'+res.data)
+      console.log(res.data[0].valorConsecutivo);
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
       setNumeroBebidaCaliente(num);
       const str = "BCA";
       setCodigoBebidaCaliente(str+num);
@@ -33,6 +33,7 @@ function AgregarBebidaCaliente() {
       restauranteBebidaCaliente: restauranteBebidaCaliente,
       estadoBebidaCaliente: true,
     });
+    //consulta de editar consecutivo +1
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/calientes/'
   };
 

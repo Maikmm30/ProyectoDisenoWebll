@@ -1,12 +1,12 @@
 const router = require("express").Router();
-let BebidasHelada = require("../modelos/Bebidas_heladas");
+let BebidaHelada = require("../modelos/Bebidas_heladas");
 const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-  BebidasHelada.find({ estado: { $ne: 'false' } })
-      .then((bebidaHelada) => res.json(bebidaHelada))
-      .catch((err) => res.status(400).json("Error: " + err));
+  BebidaHelada.find({ estado: { $ne: 'false' } })
+    .then((bebidaHelada) => res.json(bebidaHelada))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 
@@ -19,7 +19,7 @@ router.post("/agregar", async (req, res) => {
   const estadoBebidaHelada = req.body.estadoBebidaHelada;
 
   try {
-    const bebidaHelada = new BebidasHelada({
+    const bebidaHelada = new BebidaHelada({
       codigo: codigoBebidaHelada,
       nombre: nombreBebidaHelada,
       ingredientes: ingredientesBebidaHelada,
@@ -40,7 +40,7 @@ router.put("/update", async (req, res) => {
   const bebidaNuevo = req.body.bebidaNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await BebidasHelada.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaNuevo }, (err, bebidaHelada) => {
+    await BebidaHelada.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: bebidaNuevo }, (err, bebidaHelada) => {
       res.json(bebidaHelada);
 
     });
@@ -55,11 +55,10 @@ router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
   const nombreBusca = req.body.nombreBusca
 
-  BebidasHelada.find({ codigo: codigoBusca, nombre: nombreBusca })
+  BebidaHelada.find({ codigo: codigoBusca, nombre: nombreBusca })
     .then(bebidaHelada => res.json(bebidaHelada))
     .catch(err => res.status(400).json('Error: ' + err));
 })
-
 
 
 router.put("/eliminar", async (req, res) => {

@@ -12,12 +12,12 @@ function BebidasCalientes() {
   const [bebidasCalientes, setBebida] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [bebidaNuevo, setNuevoBebida] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-    
+
   useEffect(() => {
     Axios.get("http://localhost:3001/administracion/especiales/bebidas/calientes/").then((res) => {
       setBebida(res.data);
@@ -34,16 +34,16 @@ function BebidasCalientes() {
   };
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/calientes/buscar", 
-    {
-      codigoBusca : codigoBusca,
-      nombreBusca : nombreBusca
-    })
-    .then((res) => {
-      setBebida(res.data);
-      
-    });
-    
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/calientes/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setBebida(res.data);
+
+      });
+
   };
   const capturaInput = (event) => {
     if (!event.target.value == "") {
@@ -51,68 +51,88 @@ function BebidasCalientes() {
       console.log(event.target);
     }
   };
-  
-  const capturaBusca = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
       buscar()
     }
-    else{
-     alert('Por favor ingrese los datos')
+    else {
+      alert('Por favor ingrese los datos')
     }
   }
   const recarga = () => {
     window.location.reload();
   };
-  
+
   const limpiaCajas = () => {
     setCodigo("");
     setNombre("");
   };
-  
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-    editable: false,
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "precio",
+      text: "Precio",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
     }
-  },
-  {
-    dataField: "nombre",
-    text: "Nombre",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  ];
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
     }
-  },
-  {
-    dataField: "precio",
-    text: "Precio",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
     }
-  },
-  {
-    dataField: "restaurante",
-    text: "Restaurante",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+    else {
+      alert('Por favor ingrese el codigo')
     }
   }
-];
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    setCodigoActualiza(JSON.parse(row.codigo))
-  }
-};
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/calientes/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
 
   return (
     <div class="container">
@@ -158,7 +178,7 @@ const rowEvents = {
                 </label>
                 <div class="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
                     value={codigoBusca}
                     onChange={(event) => {
@@ -207,8 +227,8 @@ const rowEvents = {
                         <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                       </div>
                     </Link>
-                    <div class="col">
-                      <button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

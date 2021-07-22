@@ -1,63 +1,101 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+
+function Consecutivos() {
+
+  
+  const [consecutivos, setConsecutivo] = useState([]);
+  var [codigoBusca, setCodigo] = useState("");
+  var [nombreBusca, setNombre] = useState("");
+  
+  var [codigoActualiza, setCodigoActualiza] = useState("")
+  var [consecutivoNuevo, setNuevoConsecutivo] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
+
+    
+  useEffect(() => {
+    Axios.get("http://localhost:3001/consecutivos/").then((res) => {
+      setConsecutivo(res.data);
+    });
+  }, []);
+
+  
+  const actualiza = () => {
+    Axios.put("http://localhost:3001/consecutivos/update", {
+      codigoActualiza: codigoActualiza,
+      consecutivoNuevo: consecutivoNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
+
+  const capturaInput = (event) => {
+    if (!event.target.value == "") {
+      setNuevoConsecutivo(event.target.value);
+      console.log(event.target);
+    }
+  };
+  
 
 const columns = [
   {
     dataField: "codigo",
     text: "Código",
+    editable: false,
+    events:{
+      onClick:( column, columnIndex)=>{
+        setColumna(columnIndex.dataField)
+      }
+    }
   },
   {
     dataField: "tipo",
     text: "Tipo",
+    events:{
+      onClick:( column, columnIndex)=>{
+        setColumna(columnIndex.dataField)
+      }
+    }
   },
   {
     dataField: "descripcion",
     text: "Descripción",
+    events:{
+      onClick:( column, columnIndex)=>{
+        setColumna(columnIndex.dataField)
+      }
+    }
   },
   {
     dataField: "valorConsecutivo",
     text: "Valor del consecutivo",
+    events:{
+      onClick:( column, columnIndex)=>{
+        setColumna(columnIndex.dataField)
+      }
+    }
   },
   {
     dataField: "contienePrefijo",
     text: "Contiene Prefijo",
+    events:{
+      onClick:( column, columnIndex)=>{
+        setColumna(columnIndex.dataField)
+      }
+    }
   },
 ];
 
-const consecutivos = [
-  {
-    codigo: 1,
-    tipo: "A",
-    descripcion: "1",
-    valorConsecutivo: "A",
-    contienePrefijo: "A",
-  },
-  {
-    codigo: 1,
-    tipo: "A",
-    descripcion: "1",
-    valorConsecutivo: "A",
-    contienePrefijo: "A",
-  },
-  {
-    codigo: 1,
-    tipo: "A",
-    descripcion: "1",
-    valorConsecutivo: "A",
-    contienePrefijo: "A",
-  },
-  {
-    codigo: 1,
-    tipo: "A",
-    descripcion: "1",
-    valorConsecutivo: "A",
-    contienePrefijo: "A",
-  },
-];
+const rowEvents = {
+  onClick: (e, row, rowIndex) => {
+    setCodigoActualiza(JSON.parse(row.codigo))
+  }
+};
 
-function Consecutivos() {
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -112,11 +150,14 @@ function Consecutivos() {
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-4">
+                <div className="py-5 px-4"
+                 onKeyUp={capturaInput}
+                 onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={consecutivos}
                     columns={columns}
+                    rowEvents={rowEvents}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>

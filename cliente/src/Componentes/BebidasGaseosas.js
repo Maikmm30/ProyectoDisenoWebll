@@ -13,7 +13,7 @@ function BebidasGaseosas() {
   const [bebidasGaseosas, setBebida] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [bebidaNuevo, setNuevoBebida] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
@@ -24,7 +24,7 @@ function BebidasGaseosas() {
     });
   }, []);
 
-  
+
   const actualiza = () => {
     Axios.put("http://localhost:3001/administracion/especiales/bebidas/gaseosas/update", {
       codigoActualiza: codigoActualiza,
@@ -35,16 +35,16 @@ function BebidasGaseosas() {
   };
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/gaseosas/buscar", 
-    {
-      codigoBusca : codigoBusca,
-      nombreBusca : nombreBusca
-    })
-    .then((res) => {
-      setBebida(res.data);
-      
-    });
-    
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/gaseosas/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setBebida(res.data);
+
+      });
+
   };
 
   const capturaInput = (event) => {
@@ -54,12 +54,12 @@ function BebidasGaseosas() {
     }
   };
 
-  const capturaBusca = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
       buscar()
     }
-    else{
-     alert('Por favor ingrese los datos')
+    else {
+      alert('Por favor ingrese los datos')
     }
   }
 
@@ -77,8 +77,8 @@ function BebidasGaseosas() {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -86,8 +86,8 @@ function BebidasGaseosas() {
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -95,8 +95,8 @@ function BebidasGaseosas() {
     {
       dataField: "precio",
       text: "Precio",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -105,26 +105,46 @@ function BebidasGaseosas() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
   };
-  
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/gaseosas/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
+
   return (
     <div class="container">
-      <div class="row " style={{ height: "760px" , backgroundColor: "#FF723F"}}>
+      <div class="row " style={{ height: "760px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Bebidas Gaseosas</h3>
           <i class="fas fa-glass-whiskey fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12  h-25" style={{  backgroundColor: "#C42709"}}>
+            <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4 text-light">
-             
+
                 <div class="col"><button class=" p-3  rounded-circle fas fa-broom fa-3x "
                   onClick={limpiaCajas}></button></div>
                 <div class="col "><button class="p-3  rounded-circle  fas fa-check-circle fa-3x"
-                onClick={capturaBusca}></button></div>
+                  onClick={capturaBusca}></button></div>
                 <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button></div>
                 <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"
                   onClick={recarga}></button></div>
@@ -168,8 +188,8 @@ function BebidasGaseosas() {
 
               <div class="form-group row mt-2">
                 <div class="py-5 px-5"
-                onKeyUp={capturaInput}
-                 onBlur={actualiza}>
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={bebidasGaseosas}
@@ -179,12 +199,14 @@ function BebidasGaseosas() {
                   />
                 </div>
 
-                <div class="text-center col-12  h-25"  style={{  backgroundColor: "#C42709"}}>
+                <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
                   <div class="row row-cols-2 m-4">
-                  <Link to='/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa'>
-                    <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
-                   </Link>
-                    <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button></div>
+                    <Link to='/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa'>
+                      <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
+                    </Link>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
+                    </div>
 
                   </div>
                 </div>

@@ -5,6 +5,9 @@ let bebidasCalientesSchema = new Schema({
     codigo: {
         type: String
     },
+    numero: {
+        type: String
+    },
     nombre: {
         type: String
     },
@@ -22,6 +25,6 @@ let bebidasCalientesSchema = new Schema({
     }
 })
 
-const BebidasCalientes = mongoose.model('bebidascalientes', bebidasCalientesSchema,'bebidascalientes');
+const BebidasCalientes = mongoose.model('bebidasCalientes', bebidasCalientesSchema,'bebidasCalientes');
 
 module.exports = BebidasCalientes;

@@ -19,64 +19,64 @@ function BebidasVinos() {
   var [vinoNuevo, setNuevoVino] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-useEffect(() => {
-  Axios.get("http://localhost:3001/administracion/especiales/bebidas/vinos/").then((res) => {
-    setVinos(res.data);
-  });
-}, []);
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/vinos/").then((res) => {
+      setVinos(res.data);
+    });
+  }, []);
 
-const actualiza = () => {
-  Axios.put("http://localhost:3001/administracion/especiales/bebidas/vinos/update", {
-    codigoActualiza: codigoActualiza,
-    vinoNuevo: vinoNuevo,
-    columnaSeleccionada: columnaSeleccionada,
-  });
-  window.location.reload();
-};
+  const actualiza = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/vinos/update", {
+      codigoActualiza: codigoActualiza,
+      vinoNuevo: vinoNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
 
-const buscar = () => {
-  Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/buscar", 
-  {
-    codigoBusca : codigoBusca,
-    nombreBusca : nombreBusca
-  })
-  .then((res) => {
-    setVinos(res.data);
-  });
-};
+  const buscar = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setVinos(res.data);
+      });
+  };
 
-const capturaInput = (event) => {
-  if (!event.target.value == "") {
-    setNuevoVino(event.target.value);
-    console.log(event.target);
+  const capturaInput = (event) => {
+    if (!event.target.value == "") {
+      setNuevoVino(event.target.value);
+      console.log(event.target);
+    }
+  };
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscar()
+    }
+    else {
+      alert('Por favor ingrese los datos')
+    }
   }
-};
 
-const capturaBusca = ()=>{
-  if(codigoBusca && nombreBusca!== ''){
-    buscar()
-  }
-  else{
-   alert('Por favor ingrese los datos')
-  }
-}
+  const recarga = () => {
+    window.location.reload();
+  };
 
-const recarga = () => {
-  window.location.reload();
-};
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
 
-const limpiaCajas = () => {
-  setCodigo("");
-  setNombre("");
-};
-  
   const columns = [
     {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -84,8 +84,8 @@ const limpiaCajas = () => {
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -93,8 +93,8 @@ const limpiaCajas = () => {
     {
       dataField: "precioUnitario",
       text: "Precio Unitario",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -102,8 +102,8 @@ const limpiaCajas = () => {
     {
       dataField: "precioBotella",
       text: "Precio Botella",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -111,8 +111,8 @@ const limpiaCajas = () => {
     {
       dataField: "nacionalidad",
       text: "Nacionalidad",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -120,19 +120,40 @@ const limpiaCajas = () => {
     {
       dataField: "anioCosecha",
       text: "Año",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
     },
   ];
-  
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    setCodigoActualiza(JSON.parse(row.codigo))
+
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
+    }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
   }
-};
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/bebidas/vinos/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+
+  };
 
   return (
     <div class="container">
@@ -149,7 +170,7 @@ const rowEvents = {
             >
               <div class="row row-cols-4 m-4 text-light">
                 <div class="col">
-                  <button class=" p-3  rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button>
+                  <button class=" p-3  rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
                 </div>
 
                 <div class="col ">
@@ -167,7 +188,7 @@ const rowEvents = {
               </div>
             </div>
             <div class="col-12  h-80">
-            <div class="form-group row mt-2">
+              <div class="form-group row mt-2">
                 <label class="col-sm-2 col-form-label">
                   Código de Vino
                 </label>
@@ -188,10 +209,10 @@ const rowEvents = {
 
                 <div class="col-sm-4">
                   <input type="text" class="form-control"
-                   value={nombreBusca}
-                   onChange={(event) => {
-                     setNombre(event.target.value);
-                   }} />
+                    value={nombreBusca}
+                    onChange={(event) => {
+                      setNombre(event.target.value);
+                    }} />
                 </div>
               </div>
               <div class="form-group row mt-2">
@@ -219,8 +240,8 @@ const rowEvents = {
                         <button class=" py-3 px-4  bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                       </div>
                     </Link>
-                    <div class="col">
-                      <button  class=" py-3 px-4  bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

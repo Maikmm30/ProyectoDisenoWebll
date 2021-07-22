@@ -3,6 +3,13 @@ let Tecnologia = require("../modelos/Tecnologia");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  Tecnologia.find({ estado: { $ne: 'false' } })
+      .then((tecnologia) => res.json(tecnologia))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+  
+
 router.post("/agregar", async (req, res) => {
   const codigoTecnologia = req.body.codigoTecnologia;
   const nombreTecnologia = req.body.nombreTecnologia;

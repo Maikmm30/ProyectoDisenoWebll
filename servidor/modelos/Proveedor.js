@@ -27,12 +27,13 @@ let proveedorSchema = new Schema({
         type: Number
     },
     fax: {
-        type: String
+        type: Number
     },
     celular: {
-        type: String
-    },estado: {
-        type: String
+        type: Number    
+    },
+    estado: {
+        type: Boolean
     }
 })
 

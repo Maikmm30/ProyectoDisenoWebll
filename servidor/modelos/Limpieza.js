@@ -34,6 +34,6 @@ let limpiezaSchema = new Schema({
     }
 })
 
-const Limpieza = mongoose.model('limpieza', limpiezaSchema);
+const Limpieza = mongoose.model('limpieza', limpiezaSchema, 'limpieza');
 
-module.exports = Bitacora;
+module.exports = Limpieza;

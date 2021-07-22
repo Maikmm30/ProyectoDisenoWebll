@@ -1,116 +1,76 @@
 import { Container, Row, Col } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-
 import {
     Link
   } from "react-router-dom";
 
-
-
-  const columns = [{
-    dataField: 'codigo',
-    text: 'Código'
-    }, {
-    dataField: 'nombre',
-    text: 'Nombre'
-    },
-    {
-    dataField: 'montoPagado',
-    text: 'Monto Pagado'
-    },
-    {
-      dataField: 'detalle',
-      text: 'Detalle'
-    },
-    {
-        dataField: 'fecha',
-        text: 'Fecha'
-        }, {
-        dataField: 'reservacion',
-        text: 'Reservación'
-        },
-        {
-        dataField: 'barra',
-        text: 'Barra'
-        },
-        {
-          dataField: 'restaurante',
-          text: 'Restaurante'
-        }];
-    
-    const products = [{
-        codigo: 1,
-        nombre: 'A',
-        montoPagado: 1,
-        detalle: 'A',
-        fecha: '09/05/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'A',
-    
-      }, {
-        codigo: 2,
-        nombre: 'B',
-        montoPagado: 2,
-        detalle: 'B',
-        fecha: '09/09/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'A',
-      },
-      {
-        codigo: 3,
-        nombre: 'C',
-        montoPagado: 1,
-        detalle: 'C',
-        fecha: '08/05/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'B',
-      },
-      {
-        codigo: 4,
-        nombre: 'D',
-        montoPagado: 1,
-        detalle: 'D',
-        fecha: '09/18/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'C',
-      }, {
-        codigo: 2,
-        nombre: 'B',
-        montoPagado: 2,
-        detalle: 'B',
-        fecha: '09/09/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'A',
-      },
-      {
-        codigo: 3,
-        nombre: 'C',
-        montoPagado: 1,
-        detalle: 'C',
-        fecha: '08/05/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'B',
-      },
-      {
-        codigo: 4,
-        nombre: 'D',
-        montoPagado: 1,
-        detalle: 'D',
-        fecha: '09/18/21',
-        reservacion: 'Sí',
-        barra: 'No',
-        restaurante: 'C',
-      }];
-
+  import Axios from "axios";
+  import React, { useState, useEffect } from "react";
+  
   
 function ReporteClientes() {
+  var d = new Date();
+  var datestring = d.getDate()  + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
+  var horastring = d.getHours() + ":" + d.getMinutes();
+
+  const [reporte, setReporte] = useState([]);
+  var [cantidadClientes, setCantidad] = useState("");
+  var [fechaActual, setFecha] = useState(datestring);
+  var [horaActual, setHora] = useState(horastring);
+  var [codigoBusca, setCodigo] = useState("");
+  var [nombreBusca, setNombre] = useState("");
+
+  var [codigoActualiza, setCodigoActualiza] = useState("")
+  var [reporteNuevo, reporteProveedor] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+    },
+    {
+      dataField: "nombreCompleto",
+      text: "Nombre Completo",
+    },
+    {
+      dataField: "montoPagado",
+      text: "Monto Pagado",
+    },
+    {
+      dataField: "detalle",
+      text: "Detalle",
+    },
+    {
+      dataField: "fecha",
+      text: "Fecha",
+    },
+    {
+      dataField: "reservacion",
+      text: "Reservación",
+    },
+    {
+      dataField: "barra",
+      text: "Barra",
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante",
+    },
+  ];
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/clienteReporte/").then((res) => {
+      setReporte(res.data);
+    });
+
+    Axios.get("http://localhost:3001/clienteReporte/cuentaClientes").then((res) => {
+      setCantidad(res.data);
+    });
+
+
+  }, []);
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "700px" }}>
@@ -119,7 +79,7 @@ function ReporteClientes() {
           <i class="fas fa-users fa-10x"></i>
         </div>
         <div class="col-9">
-          <div class="row h-75">
+          <div class="row h-50">
             <div class="text-center col-12 bg-success h-25">
                 <div class="row row-cols-4 m-4">
                     
@@ -128,28 +88,28 @@ function ReporteClientes() {
             <div class="col-12 bg-danger h-80">
               Lista de Clientes
               <div class="form-group row mt-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Fecha
+                <label for="staticEmail" class="col-sm col-form-label">
+                  Fecha:
                 </label>
                 <div class="col-sm-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  16/06/21
+                <label for="staticEmail" class="col-sm col-form-label">
+                {fechaActual}
                 </label>
                     </div>
-                    <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Hora
+                    <label for="staticEmail" class="col-sm col-form-label">
+                  Hora:
                 </label>
-                <div class="col-sm-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  4:53pm
+                <div class="col-sm">
+                <label for="staticEmail" class="col-sm col-form-label">
+                  {horastring}
                 </label>
                     </div>
-                    <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Cantidad de Clientes
+                    <label for="staticEmail" class="col-sm-4 col-form-label">
+                  Cantidad de Clientes a la Fecha
                 </label>
                 <div class="col-sm-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  350
+                <label for="staticEmail" class="col-sm col-form-label">
+                 {cantidadClientes}
                 </label>
                     </div>
               </div>
@@ -161,7 +121,7 @@ function ReporteClientes() {
                 <div class="col-sm-12">
                 <BootstrapTable
                     keyField="id"
-                    data={ products }
+                    data={ reporte }
                     columns={ columns }
                     cellEdit={ cellEditFactory({ mode: 'dbclick' }) }
                 />

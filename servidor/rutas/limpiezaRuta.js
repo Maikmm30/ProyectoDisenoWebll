@@ -1,7 +1,14 @@
 const router = require("express").Router();
-let Limpieza = require("../modelos/Empaque");
+let Limpieza = require("../modelos/Limpieza");
 const express = require("express");
 const app = express();
+
+
+router.route("/").get((req, res) => {
+  Limpieza.find({ estado: { $ne: 'false' } })
+      .then((limpieza) => res.json(limpieza))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.post("/agregar", async (req, res) => {
   const codigoLimpieza = req.body.codigoLimpieza;

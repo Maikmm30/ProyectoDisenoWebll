@@ -34,6 +34,6 @@ let comestibleSchema = new Schema({
     }
 })
 
-const Comestible = mongoose.model('comestible', comestibleSchema);
+const Comestible = mongoose.model('comestible', comestibleSchema, 'comestible');
 
 module.exports = Comestible;

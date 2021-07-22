@@ -3,6 +3,12 @@ let Puesto = require("../modelos/Puesto");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  Puesto.find({ estado: { $ne: 'false' } })
+      .then((puesto) => res.json(puesto))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoPuesto = req.body.codigoPuesto;
   const nombrePuesto = req.body.nombrePuesto;

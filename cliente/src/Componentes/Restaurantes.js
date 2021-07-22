@@ -138,7 +138,7 @@ function Restaurantes() {
   }
 
   const eliminaRestaurante = () => {
-    Axios.put("http://localhost:3001/paises/eliminar",
+    Axios.put("http://localhost:3001/restaurantes/eliminar",
       {
         codigoBusca: codigoBusca
       })

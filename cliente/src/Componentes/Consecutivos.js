@@ -204,7 +204,7 @@ const rowEvents = {
               </div>
             </div>
             <div className="bg-success text-center">
-              <div className="row h-100 ">
+              <div className="row row-cols-2 m-4 ">
               <Link to="/agregarConsecutivos">
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>

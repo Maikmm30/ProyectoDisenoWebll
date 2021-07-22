@@ -113,8 +113,29 @@ function Comestibles() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/comestibles/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+
   };
   
   return (
@@ -198,8 +219,8 @@ function Comestibles() {
                       <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button> 
                     </div>
                     </Link>
-                    <div class="col">
-                      <button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

@@ -10,7 +10,7 @@ import {
 
 
 function Especialidades() {
-  
+
   const [especialidades, setEspecial] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
@@ -19,114 +19,135 @@ function Especialidades() {
   var [especialNuevo, setNuevoEspecial] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-  
-useEffect(() => {
-  Axios.get("http://localhost:3001/administracion/especiales/especialidades/").then((res) => {
-    setEspecial(res.data);
-  });
-}, []);
 
-const actualiza = () => {
-  Axios.put("http://localhost:3001/administracion/especiales/especialidades/update", {
-    codigoActualiza: codigoActualiza,
-    especialNuevo: especialNuevo,
-    columnaSeleccionada: columnaSeleccionada,
-  });
-  window.location.reload();
-};
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/especialidades/").then((res) => {
+      setEspecial(res.data);
+    });
+  }, []);
 
-const buscar = () => {
-  Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscar", 
-  {
-    codigoBusca : codigoBusca,
-    nombreBusca : nombreBusca
-  })
-  .then((res) => {
-    setEspecial(res.data);
-  });
-};
+  const actualiza = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/especialidades/update", {
+      codigoActualiza: codigoActualiza,
+      especialNuevo: especialNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
 
-const capturaInput = (event) => {
-  if (!event.target.value == "") {
-    setNuevoEspecial(event.target.value);
-    console.log(event.target);
-  }
-};
+  const buscar = () => {
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setEspecial(res.data);
+      });
+  };
 
-const capturaBusca = ()=>{
-  if(codigoBusca && nombreBusca!== ''){
-    buscar()
-  }
-  else{
-   alert('Por favor ingrese los datos')
-  }
-}
-
-
-const recarga = () => {
-  window.location.reload();
-};
-
-const limpiaCajas = () => {
-  setCodigo("");
-  setNombre("");
-};
-  
-
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-    editable: false,
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  const capturaInput = (event) => {
+    if (!event.target.value == "") {
+      setNuevoEspecial(event.target.value);
+      console.log(event.target);
     }
-  },
-  {
-    dataField: "nombre",
-    text: "Nombre",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+  };
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscar()
     }
-  },
-  {
-    dataField: "ingredientes",
-    text: "Ingredientes",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
-    }
-  },
-  {
-    dataField: "precio",
-    text: "Precio",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
-    }
-  },
-  {
-    dataField: "detalle",
-    text: "Detalle",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
-      }
+    else {
+      alert('Por favor ingrese los datos')
     }
   }
-];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    setCodigoActualiza(JSON.parse(row.codigo))
+
+  const recarga = () => {
+    window.location.reload();
+  };
+
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
+
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "ingredientes",
+      text: "Ingredientes",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "precio",
+      text: "Precio",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "detalle",
+      text: "Detalle",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
+      }
+    }
+  ];
+
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
+    }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
   }
-};
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/administracion/especiales/especialidades/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+
+  };
 
   return (
     <div className="container">
@@ -146,19 +167,19 @@ const rowEvents = {
             >
               <div className="row row-cols-4 m-4  text-light">
                 <div className="col">
-                  <button className=" p-3  rounded-circle fas fa-broom fa-3x " 
-                  onClick={limpiaCajas}></button>
+                  <button className=" p-3  rounded-circle fas fa-broom fa-3x "
+                    onClick={limpiaCajas}></button>
                 </div>
                 <div className="col ">
                   <button className="p-3  rounded-circle  fas fa-check-circle fa-3x"
-                     onClick={capturaBusca}></button>
+                    onClick={capturaBusca}></button>
                 </div>
                 <div className="col">
                   <button className=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div className="col">
                   <button className=" py-3 px-4  rounded-circle fas fa-sync fa-3x"
-                  onClick={recarga}></button>
+                    onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -215,7 +236,7 @@ const rowEvents = {
                       </div>
                     </Link>
                     <div className="col">
-                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

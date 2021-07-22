@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-  Proveedor.find({})
+  Proveedor.find({ estado: { $ne: 'false' }})
     .then((proveedor) => res.json(proveedor))
     .catch((err) => res.status(400).json("Error: " + err));
 });

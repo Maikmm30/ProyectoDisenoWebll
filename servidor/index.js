@@ -30,6 +30,7 @@ const buffetRutas = require('./rutas/buffetRuta');
 const marcaRutas = require('./rutas/marcaRutas');
 const tecnologiaRutas = require('./rutas/tecnologiaRuta');
 const clienteRutas = require('./rutas/clientesReporteRuta');
+const usuarioRutas = require('./rutas/usuariosRuta');
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
@@ -55,9 +56,7 @@ app.use('/buffet', buffetRutas);
 app.use('/marcas', marcaRutas);
 app.use('/tecnologia', tecnologiaRutas);
 app.use('/clienteReporte', clienteRutas);
-
-
-
+app.use('/usuario', usuarioRutas);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority', {

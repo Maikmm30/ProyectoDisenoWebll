@@ -29,6 +29,7 @@ const ayudaSistemaRutas = require('./rutas/ayudaSistemaRuta');
 const buffetRutas = require('./rutas/buffetRuta');
 const marcaRutas = require('./rutas/marcaRutas');
 const tecnologiaRutas = require('./rutas/tecnologiaRuta');
+const clienteRutas = require('./rutas/clientesReporteRuta');
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
@@ -53,6 +54,7 @@ app.use('/ayuda-sistema', ayudaSistemaRutas);
 app.use('/buffets', buffetRutas);
 app.use('/marcas', marcaRutas);
 app.use('/tecnologia', tecnologiaRutas);
+app.use('/clienteReporte', clienteRutas);
 
 
 

@@ -4,7 +4,7 @@ const express = require("express");
 
 
 router.route("/").get((req, res) => {
-  Restaurante.find({estado: {$ne: 'false'}})
+  Restaurante.find({ estado: { $ne: 'false' } })
     .then((restaurante) => res.json(restaurante))
     .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -66,8 +66,17 @@ router.route("/buscar").post((req, res) => {
 
 
 router.put("/eliminar", async (req, res) => {
+  const codigoBusca = req.body.codigoBusca
 
- 
+  try {
+    await Restaurante.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, restaurante) => {
+      res.json(restaurante);
+    });
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
+
 })
 
 module.exports = router;

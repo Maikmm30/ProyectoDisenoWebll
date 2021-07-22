@@ -11,10 +11,8 @@ function AgregarConsecutivos() {
   const [contienePrefijoConsecutivo, setContienePrefijoConsecutivo] = useState("");
   const [prefijoConsecutivo, setPrefijoConsecutivo] = useState("");
 
-
-
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarConsecutivos",{
+    Axios.post("http://localhost:3001/consecutivos/agregar",{
       codigoConsecutivo: codigoConsecutivo,
       tipoConsecutivo: tipoConsecutivo,
       descripcionConsecutivo: descripcionConsecutivo,
@@ -100,6 +98,8 @@ function AgregarConsecutivos() {
               <div className="col-sm-5">
                 <input type="text" className="form-control" onChange={(event)=>{
                   setValorConsecutivo(event.target.value);
+                  setCodigoConsecutivo(1);
+                  setNombreConsecutivo(1);
                 }}/>
               </div>
             </div>
@@ -114,7 +114,7 @@ function AgregarConsecutivos() {
                   value=""
                   id=""
                   onChange={(event)=>{
-                    setContienePrefijoConsecutivo(event.target.value);
+                    setContienePrefijoConsecutivo(true);
                   }}
                 />
               </div>

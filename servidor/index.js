@@ -48,7 +48,7 @@ app.use('/utensilio', utensilioRutas);
 app.use('/unidadMedida', unidadMedidaRutas);
 app.use('/mesas', mesasRutas);
 app.use('/ayuda-sistema', ayudaSistemaRutas);
-app.use('/buffets', buffetRutas);
+app.use('/buffet', buffetRutas);
 
 
 

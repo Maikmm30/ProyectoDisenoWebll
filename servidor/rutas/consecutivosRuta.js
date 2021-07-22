@@ -20,7 +20,6 @@ router.post("/agregar", async (req, res) => {
   const prefijoConsecutivo = req.body.prefijoConsecutivo;
   const estadoConsecutivo = req.body.estadoConsecutivo;
 
-
   try {
     const consecutivo = new Consecutivo({
       codigo: codigoConsecutivo,

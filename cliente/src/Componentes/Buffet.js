@@ -19,13 +19,13 @@ function Buffet() {
 
     
   useEffect(() => {
-    Axios.get("http://localhost:3001/buffets/").then((res) => {
+    Axios.get("http://localhost:3001/buffet/").then((res) => {
       setBuffet(res.data);
     });
   }, []);
 
   const actualiza = () => {
-    Axios.put("http://localhost:3001/buffets/update", {
+    Axios.put("http://localhost:3001/buffet/update", {
       codigoActualiza: codigoActualiza,
       buffetNuevo: buffetNuevo,
       columnaSeleccionada: columnaSeleccionada,
@@ -34,7 +34,7 @@ function Buffet() {
   };
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/buffets/buscar", 
+    Axios.post("http://localhost:3001/buffet/buscar", 
     {
       codigoBusca : codigoBusca,
       nombreBusca : nombreBusca
@@ -124,8 +124,26 @@ function Buffet() {
       setCodigoActualiza(JSON.parse(row.codigo))
     }
   };
-  
 
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/buffet/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+        window.location.reload()
+      });
+
+  };
 
   return (
     <div className="container">
@@ -220,7 +238,7 @@ function Buffet() {
                     </div>
 
                     <div className="col">
-                      <button className="py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>
                   </div>
                 </div>

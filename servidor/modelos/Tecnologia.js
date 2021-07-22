@@ -25,6 +25,6 @@ let tecnologiaSchema = new Schema({
     }
 })
 
-const Tecnologia = mongoose.model('tecnologia', tecnologiaSchema);
+const Tecnologia = mongoose.model('tecnologia', tecnologiaSchema,'tecnologia');
 
 module.exports = Tecnologia;

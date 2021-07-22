@@ -3,6 +3,13 @@ let Comestible = require("../modelos/Comestible");
 const express = require("express");
 const app = express();
 
+
+router.route("/").get((req, res) => {
+  Comestible.find({ estado: { $ne: 'false' } })
+      .then((comestible) => res.json(comestible))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoComestible = req.body.codigoComestible;
   const nombreComestible = req.body.nombreComestible;
@@ -55,10 +62,10 @@ router.put("/update", async (req, res) => {
 router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
   const nombreBusca = req.body.nombreBusca
-
-  Comestible.find({ codigo: codigoBusca, nombre: nombreBusca })
-    .then(comestible => res.json(comestible))
-    .catch(err => res.status(400).json('Error: ' + err));
+  
+  Comestible.find({ codigo: codigoBusca , nombre: nombreBusca})
+      .then(comestible => res.json(comestible))
+      .catch(err => res.status(400).json('Error: ' + err));
 })
 
 router.put("/eliminar", async (req, res) => {

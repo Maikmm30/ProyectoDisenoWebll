@@ -25,6 +25,6 @@ let empaqueSchema = new Schema({
     }
 })
 
-const Empaque = mongoose.model('empaque', empaqueSchema);
+const Empaque = mongoose.model('empaque', empaqueSchema,'empaque');
 
 module.exports = Empaque;

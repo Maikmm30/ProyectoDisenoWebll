@@ -25,6 +25,6 @@ let marcaSchema = new Schema({
     },
 })
 
-const Marca = mongoose.model('marca', marcaSchema);
+const Marca = mongoose.model('marca', marcaSchema, 'marca');
 
 module.exports = Marca;

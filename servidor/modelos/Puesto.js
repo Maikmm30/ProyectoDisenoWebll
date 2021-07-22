@@ -15,10 +15,10 @@ let puestoSchema = new Schema({
         type: String
     },
     estado: {
-        type: String
+        type: Boolean
     }
 })
 
-const Puesto = mongoose.model('puesto', puestoSchema);
+const Puesto = mongoose.model('puesto', puestoSchema,'puesto');
 
 module.exports = Puesto;

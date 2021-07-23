@@ -32,14 +32,14 @@ function Proveedores() {
   }
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/proveedores/buscar", 
-    {
-      codigoBusca : codigoBusca,
-      nombreBusca : nombreBusca
-    })
-    .then((res) => {
-      setDatosProveedores(res.data);
-    });
+    Axios.post("http://localhost:3001/proveedores/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setDatosProveedores(res.data);
+      });
   };
 
   const capturaInput = (event) => {
@@ -48,20 +48,20 @@ function Proveedores() {
     }
   };
 
-  
-  const capturaBusca = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
       buscar()
     }
-    else{
-     alert('Por favor ingrese los datos')
+    else {
+      alert('Por favor ingrese los datos')
     }
   }
 
   const recarga = () => {
     window.location.reload();
   };
-  
+
   const limpiaCajas = () => {
     setCodigo("");
     setNombre("");
@@ -136,10 +136,31 @@ function Proveedores() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
   };
-  
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/proveedores/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+  };
+
+
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -151,12 +172,12 @@ function Proveedores() {
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
               <div class="row row-cols-4 m-4">
-              
-                  <div class="col"><button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button></div>
-              
+
+                <div class="col"><button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button></div>
+
                 <div class="col "><button class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button></div>
                 <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></button></div>
-                <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"  onClick={recarga}></button></div>
+                <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></button></div>
 
               </div>
             </div>
@@ -168,7 +189,7 @@ function Proveedores() {
                 </label>
                 <div class="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
                     value={codigoBusca}
                     onChange={(event) => {
@@ -190,11 +211,11 @@ function Proveedores() {
                   />
                 </div>
               </div>
-          
+
               <div class="form-group row mt-2">
 
                 <div class="col-sm-12"
-                   onKeyUp={capturaInput} onBlur={actualiza}>
+                  onKeyUp={capturaInput} onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={DatosProveedores}
@@ -206,10 +227,12 @@ function Proveedores() {
 
                 <div class="text-center col-12 bg-success h-25">
                   <div class="row row-cols-2 m-4">
-                  <Link to='/agregarProveedores'>
-                    <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
-                   </Link>
-                    <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button></div>
+                    <Link to='/agregarProveedores'>
+                      <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
+                    </Link>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
+                    </div>
 
                   </div>
                 </div>

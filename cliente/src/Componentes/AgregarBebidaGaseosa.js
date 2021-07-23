@@ -32,6 +32,19 @@ function AgregarBebidaGaseosa() {
  
              }
             });  
+      Axios.get("http://localhost:3001/paises/names").then((res) => {
+        console.log('data'+res.data)
+        console.log(res.data[1]);
+        var array = [];
+        for(var k in res.data) {
+          console.log(array.push(res.data[k].nombre));
+        }
+        for(var i in array)
+        { 
+            document.getElementById("nacionalidad").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+
+        }
+      });  
     });
   }, []);
 
@@ -117,7 +130,7 @@ function AgregarBebidaGaseosa() {
                   <div class="col-sm-8">
                     <select
                       class="form-control"
-                      id="exampleFormControlSelect1"
+                      id="nacionalidad"
                       onChange={(event)=>{
                         setNacionalidadBebidaGaseosa(event.target.value);
                       }}
@@ -125,9 +138,7 @@ function AgregarBebidaGaseosa() {
                         setNacionalidadBebidaGaseosa(event.target.value);
                       }}
                     >
-                      <option>Nacionalidad 1</option>
-                      <option>Nacionalidad 2</option>
-                      <option>Nacionalidad 3</option>
+                      
                     </select>
                   </div>
 

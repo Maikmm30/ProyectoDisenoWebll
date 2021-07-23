@@ -8,6 +8,12 @@ router.route("/").get((req, res) => {
       .then((marca) => res.json(marca))
       .catch((err) => res.status(400).json("Error: " + err));
 });
+
+router.route("/names").get((req, res) => {
+  Marca.find({ estado: { $ne: 'false' } }).select('nombre')
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
   
   router.put("/update", async (req, res) => {
     const codigoActualiza = req.body.codigoActualiza;

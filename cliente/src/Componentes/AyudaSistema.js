@@ -1,22 +1,13 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
-import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 
 
 const columns = [{
-  dataField: 'codigo',
-  text: 'Código'
-}, {
-  dataField: 'codigo_usuario',
-  text: 'Codigo de Usuario'
-}, {
-  dataField: 'fecha',
-  text: 'Fecha'
-}, {
   dataField: 'descripcion',
-  text: 'Descripcion'
+  text: 'Descripción de actividades',
+  editable: false
 }];
 
 

@@ -4,7 +4,7 @@ const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-    UsuarioActividad.find({codigo: '1'})
+    UsuarioActividad.find({codigo: '2'})
       .then((usuarioactividad) => res.json(usuarioactividad))
       .catch((err) => res.status(400).json("Error: " + err));
   });

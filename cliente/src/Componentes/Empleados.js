@@ -4,21 +4,21 @@ import cellEditFactory from 'react-bootstrap-table2-editor';
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import {
-    Link
-  } from "react-router-dom";
+  Link
+} from "react-router-dom";
 
 
-  
+
 function Empleados() {
 
   const [empleados, setEmpleado] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [empleadoNuevo, setNuevoEmpleado] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
-  
+
   useEffect(() => {
     Axios.get("http://localhost:3001/empleados/").then((res) => {
       setEmpleado(res.data);
@@ -34,7 +34,7 @@ function Empleados() {
     window.location.reload();
   };
 
-    
+
   const buscar = () => {
     Axios.post("http://localhost:3001/empleados/buscar",
       {
@@ -77,8 +77,8 @@ function Empleados() {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -86,8 +86,8 @@ function Empleados() {
     {
       dataField: "cedula",
       text: "Cédula",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -95,8 +95,8 @@ function Empleados() {
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -104,8 +104,8 @@ function Empleados() {
     {
       dataField: "primerApellido",
       text: "Primer Apellido",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -113,8 +113,8 @@ function Empleados() {
     {
       dataField: "segundoApellido",
       text: "Segundo Apellido",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -122,8 +122,8 @@ function Empleados() {
     {
       dataField: "telefono1",
       text: "Telefono 1",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -131,8 +131,8 @@ function Empleados() {
     {
       dataField: "telefono2",
       text: "Telefono 2",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -140,8 +140,8 @@ function Empleados() {
     {
       dataField: "puesto",
       text: "Puesto",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -149,38 +149,58 @@ function Empleados() {
     {
       dataField: "restaurante",
       text: "Restaurante",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
     },
   ];
-  
-   
+
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/empleados/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
   };
 
   return (
     <div class="container">
-      <div class="row" style={{ height: "700px" , backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "700px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Empleados</h3>
           <i class="fas fa-user-friends fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12  h-25"  style={{  backgroundColor: "#C42709"}}>
-                <div class="row row-cols-4 m-4 text-light">
-                
-                  <div class="col"><button class=" p-3  rounded-circle fas fa-broom fa-3x "  onClick={limpiaCajas}></button></div>
-               
-                  <div class="col "><button class="p-3  rounded-circle  fas fa-check-circle fa-3x"  onClick={capturaBusca}></button></div>
-                  <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button></div>
-                  <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-sync fa-3x"  onClick={recarga}></button></div>
+            <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
+              <div class="row row-cols-4 m-4 text-light">
+
+                <div class="col"><button class=" p-3  rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button></div>
+
+                <div class="col "><button class="p-3  rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button></div>
+                <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button></div>
+                <div class="col"><button class=" py-3 px-4  rounded-circle fas fa-sync fa-3x" onClick={recarga}></button></div>
 
               </div>
             </div>
@@ -191,54 +211,56 @@ function Empleados() {
                   Código del Empleado
                 </label>
                 <div class="col-sm-4">
-                      <input
-                        type="number"
-                        class="form-control"
-                        value={codigoBusca}
-                        onChange={(event) => {
-                          setCodigo(event.target.value);
-                        }}
-                      />
-                    </div>
-                    <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Empleado 
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={codigoBusca}
+                    onChange={(event) => {
+                      setCodigo(event.target.value);
+                    }}
+                  />
+                </div>
+                <label for="staticEmail" class="col-sm-2 col-form-label">
+                  Nombre del Empleado
                 </label>
                 <div class="col-sm-4">
-                      <input
-                        type="text"
-                        class="form-control"
-                        value={nombreBusca}
-                        onChange={(event) => {
-                          setNombre(event.target.value);
-                        }}
-                      />
-                    </div>
-              </div>
-              
-              
-              <div class="form-group row mt-2">
-                
-                <div class="py-5 px-5 text-center"
-                 onKeyUp={capturaInput}
-                 onBlur={actualiza}>
-                <BootstrapTable
-                    keyField="id"
-                    data={ empleados }
-                    columns={ columns }
-                    rowEvents={rowEvents}
-                    cellEdit={ cellEditFactory({ mode: 'dbclick' }) }
-                />
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={nombreBusca}
+                    onChange={(event) => {
+                      setNombre(event.target.value);
+                    }}
+                  />
                 </div>
-                
-              <div class="text-center col-12  h-25" style={{  backgroundColor: "#C42709"}}>
-                <div class="row row-cols-2 m-4">
-                <Link to='/agregarEmpleados'> 
-                  <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
-                </Link>
-                  <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button></div>
-
               </div>
-            </div>
+
+
+              <div class="form-group row mt-2">
+
+                <div class="py-5 px-5 text-center"
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
+                  <BootstrapTable
+                    keyField="id"
+                    data={empleados}
+                    columns={columns}
+                    rowEvents={rowEvents}
+                    cellEdit={cellEditFactory({ mode: 'dbclick' })}
+                  />
+                </div>
+
+                <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
+                  <div class="row row-cols-2 m-4">
+                    <Link to='/agregarEmpleados'>
+                      <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
+                    </Link>
+                    <div className="col">
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
+                    </div>
+
+                  </div>
+                </div>
               </div>
             </div>
           </div>

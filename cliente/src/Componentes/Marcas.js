@@ -27,7 +27,7 @@ function Marcas() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
                         readonly="readonly"
                       />

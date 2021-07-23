@@ -22,6 +22,32 @@ function AgregarComestibles() {
       setNumeroComestible(num);
       const str = "COM";
       setCodigoComestible(str+num);
+      Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              for(var k in res.data) {
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            });  
+        Axios.get("http://localhost:3001/unidadMedida/names").then((res) => {
+        console.log('data'+res.data)
+        console.log(res.data[1]);
+        var array = [];
+        for(var k in res.data) {
+          console.log(array.push(res.data[k].unidadMedida));
+        }
+        for(var i in array)
+        { 
+            document.getElementById("unidadMedida").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+
+        }
+      });  
     });
   }, []);
 
@@ -123,12 +149,14 @@ function AgregarComestibles() {
                           setTipoDeComestible(event.target.value);
                         }}
                       >
-                        <option>Comestible 1</option>
-                        <option>Comestible 2</option>
-                        <option>Comestible 3</option>
-                        <option>Comestible 4</option>
-                        <option>Comestible 5</option>
-                        <option>Comestible 6</option>
+                        <option>Frutas</option>
+                        <option>Cacao</option>
+                        <option>Carnes</option>
+                        <option>Aceites</option>
+                        <option>Cereales</option>
+                        <option>Vegetales</option>
+                        <option>Legumbres</option>
+                        <option>Frutos Secos</option>
                       </select>
                 </div>
                 
@@ -140,7 +168,7 @@ function AgregarComestibles() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="restaurante"
                         onChange={(event)=>{
                           setRestauranteComestible(event.target.value);
                         }}
@@ -148,9 +176,7 @@ function AgregarComestibles() {
                           setRestauranteComestible(event.target.value);
                         }}
                       >
-                        <option>Restaurante 1</option>
-                        <option>Restaurante 2</option>
-                        <option>Restaurante 3</option>
+                        
                       </select>
                 </div>
                 
@@ -203,9 +229,12 @@ function AgregarComestibles() {
                           setClaseDeComestible(event.target.value);
                         }}
                       >
-                        <option>Clase de Comestible 1</option>
-                        <option>Clase de Comestible 2</option>
-                        <option>Clase de Comestible 3</option>
+                        <option>Fibra</option>
+                        <option>Grasas</option>
+                        <option>Proteinas</option>
+                        <option>Vitaminas</option>
+                        <option>Minerales</option>
+                        <option>Carbohidratos</option>
                       </select>
                 </div>
                 
@@ -225,10 +254,9 @@ function AgregarComestibles() {
                           setLineaDeComestible(event.target.value);
                         }}
                       >
-                        <option>Línea de Comestible 1</option>
-                        <option>Línea de Comestible 2</option>
-                        <option>Línea de Comestible 3</option>
-                        <option>Línea de Comestible 4</option>
+                        <option>Secos</option>
+                        <option>Congelados</option>
+                        <option>Refrigerados</option>
                       </select>
                 </div>
                 
@@ -240,7 +268,7 @@ function AgregarComestibles() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="unidadMedida"
                         onChange={(event)=>{
                           setUnidadDeMedidaComestible(event.target.value);
                         }}
@@ -248,9 +276,7 @@ function AgregarComestibles() {
                           setUnidadDeMedidaComestible(event.target.value);
                         }}
                       >
-                        <option>Unidad de Medida 1</option>
-                        <option>Unidad de Medida 2</option>
-                        <option>Unidad de Medida 3</option>
+                        
                       </select>
                 </div>
                 

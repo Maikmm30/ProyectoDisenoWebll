@@ -22,6 +22,32 @@ function AgregarLimpieza() {
       setNumeroLimpieza(num);
       const str = "LH";
       setCodigoLimpieza(str+num);
+      Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              for(var k in res.data) {
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            });  
+        Axios.get("http://localhost:3001/unidadMedida/names").then((res) => {
+        console.log('data'+res.data)
+        console.log(res.data[1]);
+        var array = [];
+        for(var k in res.data) {
+          console.log(array.push(res.data[k].unidadMedida));
+        }
+        for(var i in array)
+        { 
+            document.getElementById("unidadMedida").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+
+        }
+      });  
     });
   }, []);
 
@@ -86,14 +112,12 @@ function AgregarLimpieza() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="restaurante"
                         onChange={(event)=>{
                           setRestauranteLimpieza(event.target.value);
                         }}
                       >
-                        <option>Restaurante 1</option>
-                        <option>Restaurante 2</option>
-                        <option>Restaurante 3</option>
+                      
                       </select>
                 </div>
                 
@@ -221,14 +245,12 @@ function AgregarLimpieza() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="unidadMedida"
                         onChange={(event)=>{
                           setUnidadDeMedidaLimpieza(event.target.value);
                         }}
                       >
-                        <option>Unidad de Medida 1</option>
-                        <option>Unidad de Medida 2</option>
-                        <option>Unidad de Medida 3</option>
+                        
                       </select>
                 </div>
                 

@@ -7,23 +7,23 @@ import { Link } from "react-router-dom";
 
 function Consecutivos() {
 
-  
+
   const [consecutivos, setConsecutivo] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [consecutivoNuevo, setNuevoConsecutivo] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-    
+
   useEffect(() => {
     Axios.get("http://localhost:3001/consecutivos/").then((res) => {
       setConsecutivo(res.data);
     });
   }, []);
 
-  
+
   const actualiza = () => {
     Axios.put("http://localhost:3001/consecutivos/update", {
       codigoActualiza: codigoActualiza,
@@ -33,7 +33,7 @@ function Consecutivos() {
     window.location.reload();
   };
 
-  
+
   const buscar = () => {
     Axios.post("http://localhost:3001/consecutivos/buscar",
       {
@@ -53,7 +53,7 @@ function Consecutivos() {
       console.log(event.target);
     }
   };
-  
+
   const capturaBusca = () => {
     if (codigoBusca && nombreBusca !== '') {
       buscar()
@@ -63,7 +63,7 @@ function Consecutivos() {
     }
   }
 
-  
+
   const recarga = () => {
     window.location.reload();
   };
@@ -73,60 +73,80 @@ function Consecutivos() {
     setNombre("");
   };
 
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-    editable: false,
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
-    }
-  },
-  {
-    dataField: "tipo",
-    text: "Tipo",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+    },
+    {
+      dataField: "tipo",
+      text: "Tipo",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
-    }
-  },
-  {
-    dataField: "descripcion",
-    text: "Descripción",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+    },
+    {
+      dataField: "descripcion",
+      text: "Descripción",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
-    }
-  },
-  {
-    dataField: "valorConsecutivo",
-    text: "Valor del consecutivo",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+    },
+    {
+      dataField: "valorConsecutivo",
+      text: "Valor del consecutivo",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
-    }
-  },
-  {
-    dataField: "contienePrefijo",
-    text: "Contiene Prefijo",
-    events:{
-      onClick:( column, columnIndex)=>{
-        setColumna(columnIndex.dataField)
+    },
+    {
+      dataField: "contienePrefijo",
+      text: "Contiene Prefijo",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField)
+        }
       }
-    }
-  },
-];
+    },
+  ];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    setCodigoActualiza(JSON.parse(row.codigo))
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
+    }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
   }
-};
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/consecutivos/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+  };
 
   return (
     <div className="container">
@@ -139,11 +159,11 @@ const rowEvents = {
           <div className="row h-75">
             <div className="text-center col-12 bg-success h-25">
               <div className="row row-cols-4 m-4">
-              
-                  <div className="col">
-                    <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "onClick={limpiaCajas}></button>
-                  </div>
-               
+
+                <div className="col">
+                  <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
+                </div>
+
                 <div className="col ">
                   <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
@@ -165,11 +185,11 @@ const rowEvents = {
                         Código del Consecutivo
                       </label>
                       <div className="col-sm-8">
-                        <input type="number" className="form-control" 
-                         value={codigoBusca}
-                         onChange={(event) => {
-                           setCodigo(event.target.value);
-                         }}/>
+                        <input type="text" className="form-control"
+                          value={codigoBusca}
+                          onChange={(event) => {
+                            setCodigo(event.target.value);
+                          }} />
                       </div>
                     </div>
                   </div>
@@ -191,8 +211,8 @@ const rowEvents = {
               </div>
               <div className="form-group text-center">
                 <div className="py-5 px-4"
-                 onKeyUp={capturaInput}
-                 onBlur={actualiza}>
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={consecutivos}
@@ -205,13 +225,13 @@ const rowEvents = {
             </div>
             <div className="bg-success text-center">
               <div className="row row-cols-2 m-4 ">
-              <Link to="/agregarConsecutivos">
-                <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
-                </div>
+                <Link to="/agregarConsecutivos">
+                  <div className="col">
+                    <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                  </div>
                 </Link>
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                 </div>
               </div>
             </div>

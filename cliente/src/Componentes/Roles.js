@@ -6,22 +6,22 @@ import { Link } from "react-router-dom";
 
 
 function Roles() {
-  
+
   const [roles, setRol] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [rolNuevo, setNuevoRol] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
-  
+
   useEffect(() => {
     Axios.get("http://localhost:3001/roles/").then((res) => {
       setRol(res.data);
     });
   }, []);
 
-    
+
   const actualiza = () => {
     Axios.put("http://localhost:3001/roles/update", {
       codigoActualiza: codigoActualiza,
@@ -31,7 +31,7 @@ function Roles() {
     window.location.reload();
   };
 
-    
+
   const buscar = () => {
     Axios.post("http://localhost:3001/roles/buscar",
       {
@@ -45,14 +45,14 @@ function Roles() {
 
   };
 
-    
+
   const capturaInput = (event) => {
     if (!event.target.value == "") {
       setNuevoRol(event.target.value);
       console.log(event.target);
     }
   };
-  
+
 
   const capturaBusca = () => {
     if (codigoBusca && nombreBusca !== '') {
@@ -77,8 +77,8 @@ function Roles() {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -86,18 +86,38 @@ function Roles() {
     {
       dataField: "nombre",
       text: "Nombre del rol",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
     }
   ];
-  
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/roles/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
   };
 
   return (
@@ -111,10 +131,10 @@ function Roles() {
           <div className="row h-80">
             <div className="text-center col-12 bg-success h-25">
               <div className="row row-cols-4 m-4">
-               
-                  <div className="col">
-                    <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
-                  </div>
+
+                <div className="col">
+                  <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
+                </div>
                 <div className="col ">
                   <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
@@ -137,7 +157,7 @@ function Roles() {
                       </label>
                       <div className="col-sm-8">
                         <input
-                          type="number"
+                          type="text"
                           className="form-control"
                           value={codigoBusca}
                           onChange={(event) => {
@@ -150,7 +170,7 @@ function Roles() {
                   <div className="col">
                     <div className="form-group row mt-2">
                       <label for="staticEmail" className="col-sm-4 col-form-label">
-                      Nombre del Rol
+                        Nombre del Rol
                       </label>
                       <div className="col-sm-8">
                         <input
@@ -181,17 +201,17 @@ function Roles() {
               </div>
             </div>
             <div className="bg-success text-center">
-                  <div className="row row-cols-2 m-4  ">
-                  <Link to="/agregarRoles">
-                    <div className="col">
-                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
-                    </div>
-                    </Link>
-                    <div className="col">
-                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
-                    </div>
+              <div className="row row-cols-2 m-4  ">
+                <Link to="/agregarRoles">
+                  <div className="col">
+                    <button className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                   </div>
+                </Link>
+                <div className="col">
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                 </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

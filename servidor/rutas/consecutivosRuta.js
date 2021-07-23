@@ -6,8 +6,8 @@ const app = express();
 
 router.route("/").get((req, res) => {
   Consecutivo.find({ estado: { $ne: 'false' } })
-      .then((consecutivo) => res.json(consecutivo))
-      .catch((err) => res.status(400).json("Error: " + err));
+    .then((consecutivo) => res.json(consecutivo))
+    .catch((err) => res.status(400).json("Error: " + err));
 });
 
 /*router.route("/id").get((req, res) => {
@@ -67,6 +67,20 @@ router.route("/buscar").post((req, res) => {
   Consecutivo.find({ codigo: codigoBusca, nombre: nombreBusca })
     .then(consecutivo => res.json(consecutivo))
     .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.put("/eliminar", async (req, res) => {
+
+  const codigoBusca = req.body.codigoBusca
+
+  try {
+    await Consecutivo.findOneAndUpdate({ codigo: codigoBusca }, { estado: false }, (err, consecutivo) => {
+      res.json(consecutivo);
+    });
+  }
+  catch (err) {
+    res.send('error' + err);
+  }
 })
 
 module.exports = router;

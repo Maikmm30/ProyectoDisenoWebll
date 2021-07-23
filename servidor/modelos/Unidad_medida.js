@@ -12,7 +12,7 @@ let unidadMedidaSchema = new Schema({
     type: String
   },
   detalle:{
-      type: Boolean
+      type: String
   },
   simbologia:{
     type: String
@@ -24,6 +24,6 @@ let unidadMedidaSchema = new Schema({
     type: Boolean
 }})
 
-const UnidadMedida =  mongoose.model('unidadMedida',unidadMedidaSchema);
+const UnidadMedida =  mongoose.model('unidadMedida',unidadMedidaSchema,'unidadMedida');
 
 module.exports = UnidadMedida;

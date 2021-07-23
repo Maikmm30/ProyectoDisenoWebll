@@ -182,7 +182,6 @@ function Empleados() {
 
         window.location.reload()
       });
-
   };
 
   return (

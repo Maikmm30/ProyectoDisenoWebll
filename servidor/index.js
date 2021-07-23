@@ -35,6 +35,8 @@ const cajaRutas = require('./rutas/cajasRuta');
 const empleadosRuta = require('./rutas/empleadosRuta');
 const ayudaSeguridadRuta = require('./rutas/ayudaSeguridadRuta');
 const ayudaRestauranteRuta = require('./rutas/ayudaRestauranteRuta');
+const ayudaLicoresRuta = require('./rutas/ayudaLicoresRuta');
+const ayudaVinosRuta = require('./rutas/ayudaVinosRuta');
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
@@ -65,6 +67,8 @@ app.use('/cajas', cajaRutas);
 app.use('/empleados', empleadosRuta);
 app.use('/ayuda-seguridad', ayudaSeguridadRuta);
 app.use('/ayuda-restaurante', ayudaRestauranteRuta);
+app.use('/ayuda-licores', ayudaLicoresRuta);
+app.use('/ayuda-vinos', ayudaVinosRuta);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority', {

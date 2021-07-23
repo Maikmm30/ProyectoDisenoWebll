@@ -51,12 +51,6 @@ function AyudaSeguridad() {
         <div class="text-center col-12 h-25" style={{  backgroundColor: "#C42709"}}>
           <div class="row row-cols-5 m-4 text-light">
 
-            <div class="col"><i class="fas fa-arrow-circle-left fa-4x"></i></div>
-            <div class="col"><i class="fas fa-arrow-circle-right fa-4x"></i></div>
-            <div class="col"><i class="fas fa-times-circle fa-4x"></i></div>
-            <div class="col"><i class="fas fa-search fa-4x"></i></div>
-            <div class="col"><i class="fas fa-print fa-4x"></i></div>
-
           </div>
         </div>
 

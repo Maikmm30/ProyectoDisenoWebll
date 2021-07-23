@@ -50,13 +50,6 @@ function AyudaSistema() {
 
         <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
           <div className="row row-cols-5 m-4 text-light">
-
-            <div className="col"><i className="fas fa-arrow-circle-left fa-4x "></i></div>
-            <div className="col"><i className="fas fa-arrow-circle-right fa-4x"></i></div>
-            <div className="col"><i className="fas fa-times-circle fa-4x"></i></div>
-            <div className="col"><i className="fas fa-search fa-4x"></i></div>
-            <div className="col"><i className="fas fa-print fa-4x"></i></div>
-
           </div>
         </div>
 

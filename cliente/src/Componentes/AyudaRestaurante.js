@@ -1,69 +1,25 @@
-import { Container, Row, Col } from "react-bootstrap";
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
-
-import {
-  Link
-} from "react-router-dom";
+import BootstrapTable from "react-bootstrap-table-next";
+import cellEditFactory from "react-bootstrap-table2-editor";
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 
 const columns = [{
-  dataField: 'codigo',
-  text: 'Código'
-}, {
-  dataField: 'nombre',
-  text: 'Nombre'
-}, {
-  dataField: 'primerApellido',
-  text: 'Primer Apellido'
-}, {
-  dataField: 'segundoApellido',
-  text: 'Segundo Apellido'
-}, {
-  dataField: 'telefono',
-  text: 'Telefono Oficina'
-}, {
-  dataField: 'celular',
-  text: 'Celular'
-}];
-
-const products = [{
-  codigo: 1,
-  nombre: 'A',
-  cantidad: '1',
-  restaurante: 'A'
-}, {
-  codigo: 2,
-  nombre: 'B',
-  cantidad: '2',
-  restaurante: 'B'
-},
-{
-  codigo: 3,
-  nombre: 'C',
-  cantidad: '3',
-  restaurante: 'C'
-},
-{
-  codigo: 4,
-  nombre: 'D',
-  cantidad: '4',
-  restaurante: 'D'
-},
-{
-  codigo: 5,
-  nombre: 'E',
-  cantidad: '5',
-  restaurante: 'E'
-},
-{
-  codigo: 6,
-  nombre: 'F',
-  cantidad: '6',
-  restaurante: 'F'
+  dataField: 'descripcion',
+  text: 'Descripción',
+  editable: false
 }];
 
 
 function AyudaRestaurante() {
+
+  const [DatosUsuario, setDatosUsuario] = useState([]);
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/ayuda-restaurante/").then((res) => {
+      setDatosUsuario(res.data);
+    });
+  }, []);
+
   return (
     <div className="container text-center">
       <div className="row " style={{  backgroundColor: "#FF723F"}}>
@@ -80,7 +36,7 @@ function AyudaRestaurante() {
                 <div className="py-5 px-5">
                   <BootstrapTable
                     keyField="id"
-                    data={products}
+                    data={DatosUsuario}
                     columns={columns}
                     cellEdit={cellEditFactory({ mode: 'dbclick' })}
                   />
@@ -94,11 +50,6 @@ function AyudaRestaurante() {
         <div className="text-center col-12 h-25" style={{  backgroundColor: "#C42709"}}>
           <div className="row row-cols-5 m-4 text-light">
 
-            <div className="col"><i className="fas fa-arrow-circle-left fa-4x"></i></div>
-            <div className="col"><i className="fas fa-arrow-circle-right fa-4x"></i></div>
-            <div className="col"><i className="fas fa-times-circle fa-4x"></i></div>
-            <div className="col"><i className="fas fa-search fa-4x"></i></div>
-            <div className="col"><i className="fas fa-print fa-4x"></i></div>
 
           </div>
         </div>

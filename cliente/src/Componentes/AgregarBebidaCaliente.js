@@ -13,14 +13,25 @@ function AgregarBebidaCaliente() {
 
   useEffect(() => {
     Axios.get("http://localhost:3001/administracion/especiales/bebidas/calientes/id").then((res) => {
-      console.log('data'+res.data)
-      console.log(res.data[0].valorConsecutivo);
       const num = parseInt(res.data[0].valorConsecutivo)+1;
       setNumeroBebidaCaliente(num);
       const str = "BC";
       setCodigoBebidaCaliente(str+num);
-      console.log('Codigo'+codigoBebidaCaliente);
+      Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              for(var k in res.data) {
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            });  
     });
+    
   }, []);
 
   const enviarDatos = () => {
@@ -112,7 +123,7 @@ function AgregarBebidaCaliente() {
                 <div class="col-sm-3">
                   <select
                     class="form-control"
-                    id="exampleFormControlSelect1"
+                    id="restaurante"
                     onChange={(event)=>{
                       setRestauranteBebidaCaliente(event.target.value);
                     }}
@@ -120,10 +131,8 @@ function AgregarBebidaCaliente() {
                       setRestauranteBebidaCaliente(event.target.value);
                     }}
                   >
-                    <option>Restaurante 1</option>
-                    <option>Restaurante 2</option>
-                    <option>Restaurante 3</option>
                   </select>
+
                 </div>
 
               </div>

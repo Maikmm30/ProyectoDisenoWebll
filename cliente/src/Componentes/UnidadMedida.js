@@ -11,11 +11,11 @@ function UnidadMedida() {
   const [unidadMedida, setUnidad] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [detalleBusca, setDetalle] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [unidadNuevo, setNuevoUnidad] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
-  
+
   useEffect(() => {
     Axios.get("http://localhost:3001/unidadMedida/").then((res) => {
       setUnidad(res.data);
@@ -44,7 +44,7 @@ function UnidadMedida() {
 
   };
 
-    
+
   const capturaInput = (event) => {
     if (!event.target.value == "") {
       setNuevoUnidad(event.target.value);
@@ -66,8 +66,8 @@ function UnidadMedida() {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -75,8 +75,8 @@ function UnidadMedida() {
     {
       dataField: "unidadMedida",
       text: "Unidad de Medida",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -84,8 +84,8 @@ function UnidadMedida() {
     {
       dataField: "escala",
       text: "Escala",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -93,8 +93,8 @@ function UnidadMedida() {
     {
       dataField: "detalle",
       text: "Detalle",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -102,8 +102,8 @@ function UnidadMedida() {
     {
       dataField: "simbologia",
       text: "Simbología",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -112,8 +112,28 @@ function UnidadMedida() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
+  };
+
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/unidadMedida/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
   };
 
   return (
@@ -184,9 +204,9 @@ function UnidadMedida() {
                 </div>
               </div>
               <div class="form-group text-center">
-                <div class="py-5 px-4" 
-                 onKeyUp={capturaInput}
-                    onBlur={actualiza}>
+                <div class="py-5 px-4"
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={unidadMedida}
@@ -202,8 +222,8 @@ function UnidadMedida() {
                 <div class="col">
                   <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
                 </div>
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
+                <div className="col">
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                 </div>
               </div>
             </div>

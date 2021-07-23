@@ -4,12 +4,24 @@ import Axios from 'axios';
 function AgregarConsecutivos() {
 
   const [codigoConsecutivo, setCodigoConsecutivo] = useState("");
+  const [numeroConsecutivo, setNumeroConsecutivo] = useState("");
   const [tipoConsecutivo, setTipoConsecutivo] = useState("");
   const [descripcionConsecutivo, setDescripcionConsecutivo] = useState("");
   const [nombreConsecutivo, setNombreConsecutivo] = useState("");
   const [valorConsecutivo, setValorConsecutivo] = useState("");
   const [contienePrefijoConsecutivo, setContienePrefijoConsecutivo] = useState("");
   const [prefijoConsecutivo, setPrefijoConsecutivo] = useState("");
+
+  /*useEffect(() => {
+    Axios.get("http://localhost:3001/consecutivos/id").then((res) => {
+      console.log(res.data);
+      const num = parseInt(res.data[0])+1;
+      console.log(num);
+      setNumeroConsecutivo(num);
+      //const str = "P";
+      //setCodigoPais(str+num);
+    });
+  }, []);*/
 
   const enviarDatos = () => {
     Axios.post("http://localhost:3001/consecutivos/agregar",{
@@ -50,7 +62,24 @@ function AgregarConsecutivos() {
 
             <h4>Información de Consecutivo</h4>
             <div className=" row mt-4 mb-3">
+            <div className="row mt-2 mb-3">
+              <label className="col-sm-3">Codigo</label>
+              <div className="col-sm-5">
+                <input type="text" className="form-control" onChange={(event)=>{
+                  setCodigoConsecutivo(event.target.value);
+                }}/>
+              </div>
+            </div>
+            <div className="row mt-2 mb-3">
+              <label className="col-sm-3">Nombre</label>
+              <div className="col-sm-5">
+                <input type="text" className="form-control" onChange={(event)=>{
+                  setNombreConsecutivo(event.target.value);
+                }}/>
+              </div>
+            </div>
               <label className="col-sm-3 ">Tipo de Consecutivo</label>
+              
               <div className="col-sm-5">
                 <select className="form-control" id="exampleFormControlSelect1" onChange={(event)=>{
                   setTipoConsecutivo(event.target.value);
@@ -98,8 +127,6 @@ function AgregarConsecutivos() {
               <div className="col-sm-5">
                 <input type="text" className="form-control" onChange={(event)=>{
                   setValorConsecutivo(event.target.value);
-                  setCodigoConsecutivo(1);
-                  setNombreConsecutivo(1);
                 }}/>
               </div>
             </div>
@@ -113,7 +140,7 @@ function AgregarConsecutivos() {
                   type="checkbox"
                   value=""
                   id=""
-                  onChange={(event)=>{
+                  on={(event)=>{
                     setContienePrefijoConsecutivo(true);
                   }}
                 />

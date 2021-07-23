@@ -4,14 +4,24 @@ import Axios from 'axios';
 function AgregarUnidadMedida() {
 
   const [codigoUnidadMedida, setCodigoUnidadMedida] = useState("");
+  const [numeroUnidadMedida, setNumeroUnidadMedida] = useState("");
   const [unidadUnidadMedida, setUnidadUnidadMedida] = useState("");
   const [escalaUnidadMedida, setEscalaUnidadMedida] = useState("");
   const [detalleUnidadMedida, setDetalleUnidadMedida] = useState("");
   const [simbologiaUnidadMedida, setSimbologiaUnidadMedida] = useState("");
   const [simboloUnidadMedida, setSimboloUnidadMedida] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/unidadMedida/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroUnidadMedida(num);
+      const str = "UM";
+      setCodigoUnidadMedida(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarUnidadMedidad",{
+    Axios.post("http://localhost:3001/unidadMedida/agregar",{
       codigoUnidadMedida: codigoUnidadMedida,
       unidadUnidadMedida: unidadUnidadMedida,
       escalaUnidadMedida: escalaUnidadMedida,
@@ -20,6 +30,12 @@ function AgregarUnidadMedida() {
       simboloUnidadMedida: simboloUnidadMedida,
       estadoUnidadMedida: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '17',
+        consecutivoNuevo: numeroUnidadMedida,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/unidadMedida/'
   };
 
@@ -52,9 +68,7 @@ function AgregarUnidadMedida() {
                 <div className="row">
                   <label className="col-sm-3">Código</label>
                   <div className="col-sm-8">
-                    <input type="text" className="form-control" onChange={(event)=>{
-                          setCodigoUnidadMedida(event.target.value);
-                        }}/>
+                    <input type="text" className="form-control" value={codigoUnidadMedida} disabled/>
                   </div>
                 </div>
               </div>

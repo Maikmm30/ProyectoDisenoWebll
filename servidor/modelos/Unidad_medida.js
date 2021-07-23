@@ -5,7 +5,7 @@ let unidadMedidaSchema = new Schema({
   codigo: {
     type: String
   },
-  unidadmedida: {
+  unidadMedida: {
     type: String
   },
   escala: {

@@ -4,7 +4,17 @@ import Axios from 'axios';
 function AgregarPaises() {
 
   const [codigoPais, setCodigoPais] = useState("");
+  const [numeroPais, setNumeroPais] = useState("");
   const [nombrePais, setNombrePais] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/paises/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroPais(num);
+      const str = "P";
+      setCodigoPais(str+num);
+    });
+  }, []);
 
   const enviarDatos = () => {
     Axios.post("http://localhost:3001/paises/agregar",{
@@ -12,6 +22,12 @@ function AgregarPaises() {
       nombrePais: nombrePais,
       estadoPais: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '16',
+        consecutivoNuevo: numeroPais,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/paises'
   };
   const limpiaCajas =()=>{
@@ -50,9 +66,7 @@ function AgregarPaises() {
             <div className="row mt-2 mb-3">
               <label className="col-sm-3">Código del País</label>
               <div className="col-sm-5">
-                <input type="number" className="form-control" onChange={(event)=>{
-                  setCodigoPais(event.target.value);
-                }}value={codigoPais} />
+                <input type="text" className="form-control" value={codigoPais} disabled/>
               </div>
             </div>
             <div className=" row mt-2 mb-3">

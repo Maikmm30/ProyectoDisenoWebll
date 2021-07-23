@@ -1,11 +1,19 @@
 const router = require("express").Router();
 let Puesto = require("../modelos/Puesto");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
   Puesto.find({ estado: { $ne: 'false' } })
       .then((puesto) => res.json(puesto))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'puesto'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
 });
 

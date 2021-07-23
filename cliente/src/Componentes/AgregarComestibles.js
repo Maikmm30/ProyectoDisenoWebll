@@ -6,6 +6,7 @@ import Axios from 'axios';
 function AgregarComestibles() {
 
   const [codigoComestible, setCodigoComestible] = useState("");
+  const [numeroComestible, setNumeroComestible] = useState("");
   const [nombreComestible, setNombreComestible] = useState("");
   const [cantidadComestible, setCantidadComestible] = useState("");
   const [restauranteComestible, setRestauranteComestible] = useState("");
@@ -15,10 +16,17 @@ function AgregarComestibles() {
   const [lineaDeComestible, setLineaDeComestible] = useState("");
   const [unidadDeMedidaComestible, setUnidadDeMedidaComestible] = useState("");
 
-
+  useEffect(() => {
+    Axios.get("http://localhost:3001/comestibles/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroComestible(num);
+      const str = "COM";
+      setCodigoComestible(str+num);
+    });
+  }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarComestibles",{
+    Axios.post("http://localhost:3001/comestibles/agregar",{
       codigoComestible: codigoComestible,
       nombreComestible: nombreComestible,
       cantidadComestible: cantidadComestible,
@@ -30,6 +38,12 @@ function AgregarComestibles() {
       unidadDeMedidaComestible: unidadDeMedidaComestible,
       estadoComestible: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '9',
+        consecutivoNuevo: numeroComestible,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/comestibles/'
   };
 
@@ -58,11 +72,9 @@ function AgregarComestibles() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoComestible(event.target.value);
-                        }}
+                        value={codigoComestible} disabled
                       />
                     </div>
               </div>
@@ -107,6 +119,9 @@ function AgregarComestibles() {
                         onChange={(event)=>{
                           setTipoDeComestible(event.target.value);
                         }}
+                        onClick={(event)=>{
+                          setTipoDeComestible(event.target.value);
+                        }}
                       >
                         <option>Comestible 1</option>
                         <option>Comestible 2</option>
@@ -127,6 +142,9 @@ function AgregarComestibles() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setRestauranteComestible(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setRestauranteComestible(event.target.value);
                         }}
                       >
@@ -156,6 +174,9 @@ function AgregarComestibles() {
                         onChange={(event)=>{
                           setMarcaComestible(event.target.value);
                         }}
+                        onClick={(event)=>{
+                          setMarcaComestible(event.target.value);
+                        }}
                       >
                         <option>Marca 1</option>
                         <option>Marca 2</option>
@@ -178,6 +199,9 @@ function AgregarComestibles() {
                         onChange={(event)=>{
                           setClaseDeComestible(event.target.value);
                         }}
+                        onClick={(event)=>{
+                          setClaseDeComestible(event.target.value);
+                        }}
                       >
                         <option>Clase de Comestible 1</option>
                         <option>Clase de Comestible 2</option>
@@ -195,6 +219,9 @@ function AgregarComestibles() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setLineaDeComestible(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setLineaDeComestible(event.target.value);
                         }}
                       >
@@ -215,6 +242,9 @@ function AgregarComestibles() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setUnidadDeMedidaComestible(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setUnidadDeMedidaComestible(event.target.value);
                         }}
                       >

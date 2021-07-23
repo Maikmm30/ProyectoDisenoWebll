@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Comestible = require("../modelos/Comestible");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -9,6 +10,14 @@ router.route("/").get((req, res) => {
       .then((comestible) => res.json(comestible))
       .catch((err) => res.status(400).json("Error: " + err));
 });
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'comestible'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 
 router.post("/agregar", async (req, res) => {
   const codigoComestible = req.body.codigoComestible;
@@ -26,7 +35,7 @@ router.post("/agregar", async (req, res) => {
     const comestible = new Comestible({
       codigo: codigoComestible,
       nombre: nombreComestible,
-      cantiad: cantidadComestible,
+      cantidad: cantidadComestible,
       restaurante: restauranteComestible,
       marca: marcaComestible,
       tipoDeComestible: tipoDeComestible,

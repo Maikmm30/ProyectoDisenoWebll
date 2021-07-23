@@ -4,6 +4,7 @@ import Axios from 'axios';
 function AgregarBebidaVino() {
 
   const [codigoBebidaVino, setCodigoBebidaVino] = useState("");
+  const [numeroBebidaVino, setNumeroBebidaVino] = useState("");
   const [nombreBebidaVino, setNombreBebidaVino] = useState("");
   const [marcaBebidaVino, setMarcaBebidaVino] = useState("");
   const [nacionalidadBebidaVino, setNacionalidadBebidaVino] = useState("");
@@ -14,8 +15,17 @@ function AgregarBebidaVino() {
   const [cantidadBebidaVino, setCantidadBebidaVino] = useState("");
   const [descripcionBebidaVino, setDescripcionBebidaVino] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/vinos/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroBebidaVino(num);
+      const str = "BV";
+      setCodigoBebidaVino(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/agregar-bebida-vino",{
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/agregar",{
       codigoBebidaVino: codigoBebidaVino,
       nombreBebidaVino: nombreBebidaVino,
       marcaBebidaVino: marcaBebidaVino,
@@ -28,6 +38,12 @@ function AgregarBebidaVino() {
       descripcionBebidaVino: descripcionBebidaVino,
       estadoBebidaVino: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '5',
+        consecutivoNuevo: numeroBebidaVino,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/vinos/'
   };
 
@@ -55,9 +71,7 @@ function AgregarBebidaVino() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                        setCodigoBebidaVino(event.target.value);
-                      }}/>
+                    <input type="text" class="form-control" value={codigoBebidaVino} disabled/>
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
@@ -77,6 +91,9 @@ function AgregarBebidaVino() {
                       onChange={(event)=>{
                         setMarcaBebidaVino(event.target.value);
                       }}
+                      onClick={(event)=>{
+                        setMarcaBebidaVino(event.target.value);
+                      }}
                     >
                       <option>Marca 1</option>
                       <option>Marca 2</option>
@@ -92,6 +109,9 @@ function AgregarBebidaVino() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setNacionalidadBebidaVino(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setNacionalidadBebidaVino(event.target.value);
                       }}
                     >
@@ -142,6 +162,9 @@ function AgregarBebidaVino() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setRestauranteBebidaVino(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setRestauranteBebidaVino(event.target.value);
                       }}
                     >

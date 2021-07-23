@@ -5,14 +5,24 @@ import Axios from 'axios';
 function AgregarTecnologia() {
 
   const [codigoTecnologia, setCodigoTecnologia] = useState("");
+  const [numeroTecnologia, setNumeroTecnologia] = useState("");
   const [nombreTecnologia, setNombreTecnologia] = useState("");
   const [cantidadTecnologia, setCantidadTecnologia] = useState("");
   const [restauranteTecnologia, setRestauranteTecnologia] = useState("");
   const [marcaTecnologia, setMarcaTecnologia] = useState("");
   const [descripcionTecnologia, setDescripcionTecnologia] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/tecnologia/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroTecnologia(num);
+      const str = "TEC";
+      setCodigoTecnologia(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarTecnologia",{
+    Axios.post("http://localhost:3001/tecnologia/agregar",{
       codigoTecnologia: codigoTecnologia,
       nombreTecnologia: nombreTecnologia,
       cantidadTecnologia: cantidadTecnologia,
@@ -21,6 +31,12 @@ function AgregarTecnologia() {
       descripcionTecnologia: descripcionTecnologia,
       estadoTecnologia: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '12',
+        consecutivoNuevo: numeroTecnologia,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/tecnologia/'
   };
 
@@ -49,11 +65,9 @@ function AgregarTecnologia() {
                 </label>
                 <div class="col-sm-4">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoTecnologia(event.target.value);
-                        }}
+                        value={codigoTecnologia} disabled
                       />
                     </div>
               </div>
@@ -66,6 +80,9 @@ function AgregarTecnologia() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setRestauranteTecnologia(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setRestauranteTecnologia(event.target.value);
                         }}
                       >
@@ -100,6 +117,9 @@ function AgregarTecnologia() {
                         class="form-control"
                         id="exampleFormControlSelect2"
                         onChange={(event)=>{
+                          setMarcaTecnologia(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setMarcaTecnologia(event.target.value);
                         }}
                       >

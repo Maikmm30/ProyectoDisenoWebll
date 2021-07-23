@@ -6,14 +6,25 @@ import Axios from 'axios';
 function AgregarUtensilios() {
   
   const [codigoEquipo, setCodigoEquipo] = useState("");
+  const [numeroEquipo, setNumeroEquipo] = useState("");
   const [nombreEquipo, setNombreEquipo] = useState("");
   const [cantidadEquipo, setCantidadEquipo] = useState("");
   const [restauranteEquipo, setRestauranteEquipo] = useState("");
   const [marcaEquipo, setMarcaEquipo] = useState("");
   const [descripcionEquipo, setDescripcionEquipo] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/utensilio/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroEquipo(num);
+      const str = "EU";
+      setCodigoEquipo(str+num);
+    });
+  }, []);
+
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarUtensilio",{
+    Axios.post("http://localhost:3001/utensilio/agregar",{
       codigoEquipo: codigoEquipo,
       nombreEquipo: nombreEquipo,
       cantidadEquipo: cantidadEquipo,
@@ -22,6 +33,12 @@ function AgregarUtensilios() {
       descripcionEquipo: descripcionEquipo,
       estadoEquipo: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '13',
+        consecutivoNuevo: numeroEquipo,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/utensilio/'
   };
 
@@ -50,11 +67,9 @@ function AgregarUtensilios() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoEquipo(event.target.value);
-                        }}
+                        value={codigoEquipo} disabled
                       />
                     </div>
               </div>

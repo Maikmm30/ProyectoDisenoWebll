@@ -17,7 +17,7 @@ function AgregarBebidaCaliente() {
       console.log(res.data[0].valorConsecutivo);
       const num = parseInt(res.data[0].valorConsecutivo)+1;
       setNumeroBebidaCaliente(num);
-      const str = "BCA";
+      const str = "BC";
       setCodigoBebidaCaliente(str+num);
       console.log('Codigo'+codigoBebidaCaliente);
     });

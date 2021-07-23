@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let BebidaVino = require("../modelos/Bebidas_vinos");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -10,6 +11,12 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'bebidaVino'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.post("/agregar", async (req, res) => {
   const codigoBebidaVino = req.body.codigoBebidaVino;

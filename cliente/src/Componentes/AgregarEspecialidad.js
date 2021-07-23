@@ -4,14 +4,24 @@ import Axios from 'axios';
 function AgregarEspecialidad() {
 
   const [codigoEspecialidad, setCodigoEspecialidad] = useState("");
+  const [numeroEspecialidad, setNumeroEspecialidad] = useState("");
   const [nombreEspecialidad, setNombreEspecialidad] = useState("");
   const [ingredientesEspecialidad, setIngredientesEspecialidad] = useState("");
   const [precioEspecialidad, setPrecioEspecialidad] = useState("");
   const [detalleEspecialidad, setDetalleEspecialidad] = useState("");
   const [restauranteEspecialidad, setRestauranteEspecialidad] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/especialidades/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroEspecialidad(num);
+      const str = "ESP";
+      setCodigoEspecialidad(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/especialidades/agregar-especialidad",{
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/agregar",{
       codigoEspecialidad: codigoEspecialidad,
       nombreEspecialidad: nombreEspecialidad,
       ingredientesEspecialidad: ingredientesEspecialidad,
@@ -20,6 +30,12 @@ function AgregarEspecialidad() {
       restauranteEspecialidad: restauranteEspecialidad,
       estadoEspecialidad: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '6',
+        consecutivoNuevo: numeroEspecialidad,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/administracion/especiales/especialidades/'
   };
 
@@ -47,9 +63,7 @@ function AgregarEspecialidad() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                          setCodigoEspecialidad(event.target.value);
-                        }}
+                    <input type="text" class="form-control" value={codigoEspecialidad} disabled
                         />
                   </div>
                 </div>

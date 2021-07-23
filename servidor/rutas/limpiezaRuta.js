@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Limpieza = require("../modelos/Limpieza");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -7,6 +8,13 @@ const app = express();
 router.route("/").get((req, res) => {
   Limpieza.find({ estado: { $ne: 'false' } })
       .then((limpieza) => res.json(limpieza))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'limpieza'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
 });
 

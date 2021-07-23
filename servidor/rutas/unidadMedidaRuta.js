@@ -10,6 +10,12 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/names").get((req, res) => {
+  UnidadMedida.find({ estado: { $ne: 'false' } }).select('unidadMedida')
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.route("/id").get((req, res) => {
   
   Consecutivo.find({nombre: 'unidadMedida'}).select('valorConsecutivo')

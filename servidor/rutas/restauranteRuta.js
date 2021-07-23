@@ -9,7 +9,11 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-
+router.route("/names").get((req, res) => {
+  Restaurante.find({ estado: { $ne: 'false' } }).select('nombre')
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;

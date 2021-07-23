@@ -21,6 +21,19 @@ function AgregarBebidaVino() {
       setNumeroBebidaVino(num);
       const str = "BV";
       setCodigoBebidaVino(str+num);
+      Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              for(var k in res.data) {
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            });  
     });
   }, []);
 
@@ -160,7 +173,7 @@ function AgregarBebidaVino() {
                   <div class="col-sm-8">
                     <select
                       class="form-control"
-                      id="exampleFormControlSelect1"
+                      id="restaurante"
                       onChange={(event)=>{
                         setRestauranteBebidaVino(event.target.value);
                       }}
@@ -168,9 +181,7 @@ function AgregarBebidaVino() {
                         setRestauranteBebidaVino(event.target.value);
                       }}
                     >
-                      <option>Restaurante 1</option>
-                      <option>Restaurante 2</option>
-                      <option>Restaurante 3</option>
+                    
                     </select>
                   </div>
 

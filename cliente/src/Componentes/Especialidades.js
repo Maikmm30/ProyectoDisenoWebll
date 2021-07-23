@@ -188,7 +188,7 @@ function Especialidades() {
                 <label className="col-sm-2">Código de la Especialidad</label>
                 <div className="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     value={codigoBusca}
                     onChange={(event) => {

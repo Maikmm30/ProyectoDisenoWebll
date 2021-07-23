@@ -12,12 +12,12 @@ function Buffet() {
   const [buffets, setBuffet] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
-  
+
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [buffetNuevo, setNuevoBuffet] = useState("");
   var [columnaSeleccionada, setColumna] = useState("");
 
-    
+
   useEffect(() => {
     Axios.get("http://localhost:3001/buffet/").then((res) => {
       setBuffet(res.data);
@@ -34,16 +34,16 @@ function Buffet() {
   };
 
   const buscar = () => {
-    Axios.post("http://localhost:3001/buffet/buscar", 
-    {
-      codigoBusca : codigoBusca,
-      nombreBusca : nombreBusca
-    })
-    .then((res) => {
-      setBuffet(res.data);
-      
-    });
-    
+    Axios.post("http://localhost:3001/buffet/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setBuffet(res.data);
+
+      });
+
   };
 
   const capturaInput = (event) => {
@@ -53,20 +53,20 @@ function Buffet() {
     }
   };
 
-  
-  const capturaBusca = ()=>{
-    if(codigoBusca && nombreBusca!== ''){
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
       buscar()
     }
-    else{
-     alert('Por favor ingrese los datos')
+    else {
+      alert('Por favor ingrese los datos')
     }
- }
-  const recarga = ()=>{
+  }
+  const recarga = () => {
     window.location.reload();
   }
-  
-  const limpiaCajas =()=>{
+
+  const limpiaCajas = () => {
     setCodigo("")
     setNombre("")
   }
@@ -75,8 +75,8 @@ function Buffet() {
       dataField: "codigo",
       text: "Código",
       editable: false,
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -84,8 +84,8 @@ function Buffet() {
     {
       dataField: "nombre",
       text: "Nombre",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -93,8 +93,8 @@ function Buffet() {
     {
       dataField: "precio",
       text: "Precio",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -102,8 +102,8 @@ function Buffet() {
     {
       dataField: "tipoComida",
       text: "Tipo de Comida",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
@@ -111,17 +111,17 @@ function Buffet() {
     {
       dataField: "unidadMedida",
       text: "Unidad de Medida",
-      events:{
-        onClick:( column, columnIndex)=>{
+      events: {
+        onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField)
         }
       }
     }
   ];
-  
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
   };
 
@@ -164,19 +164,19 @@ function Buffet() {
               <div className="row row-cols-4 m-4 text-light">
                 <div className="col">
                   <button className=" p-3  rounded-circle fas fa-broom fa-3x "
-                  onClick={limpiaCajas}></button>
+                    onClick={limpiaCajas}></button>
                 </div>
 
                 <div className="col ">
                   <button className="p-3  rounded-circle  fas fa-check-circle fa-3x"
-                  onClick={capturaBusca}></button>
+                    onClick={capturaBusca}></button>
                 </div>
                 <div className="col">
                   <button className=" py-3 px-4  rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div className="col">
                   <button className=" py-3 px-4  rounded-circle fas fa-sync fa-3x"
-                  onClick={recarga}></button>
+                    onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -187,7 +187,7 @@ function Buffet() {
                 </label>
                 <div className="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     value={codigoBusca}
                     onChange={(event) => {
@@ -214,9 +214,9 @@ function Buffet() {
 
               <div className="form-group row mt-2 text-center">
                 <div className="py-5 px-5"
-                
-                onKeyUp={capturaInput}
-                onBlur={actualiza}>
+
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={buffets}

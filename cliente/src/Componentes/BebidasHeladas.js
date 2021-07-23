@@ -165,7 +165,7 @@ function BebidasHeladas() {
                 </label>
                 <div class="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
                     value={codigoBusca}
                     onChange={(event) => {

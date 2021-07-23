@@ -51,7 +51,7 @@ function Usuarios() {
     }
   };
 
-  
+
   const capturaBusca = () => {
     if (codigoBusca && nombreBusca !== '') {
       buscar()
@@ -127,14 +127,34 @@ function Usuarios() {
       }
     },
   ];
-  
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
     }
   };
 
-  
+  const capturaEliminar = () => {
+    if (codigoBusca !== '') {
+      eliminarDato()
+    }
+    else {
+      alert('Por favor ingrese el codigo')
+    }
+  }
+
+  const eliminarDato = () => {
+    Axios.put("http://localhost:3001/usuario/eliminar",
+      {
+        codigoBusca: codigoBusca
+      })
+      .then(() => {
+
+        window.location.reload()
+      });
+  };
+
+
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -146,10 +166,10 @@ function Usuarios() {
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
               <div class="row row-cols-4 m-4">
-              
-                  <div class="col">
-                    <button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "  onClick={limpiaCajas}></button>
-                  </div>
+
+                <div class="col">
+                  <button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
+                </div>
                 <div class="col ">
                   <button class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
@@ -157,7 +177,7 @@ function Usuarios() {
                   <button class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div class="col">
-                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"  onClick={recarga}></button>
+                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -171,14 +191,14 @@ function Usuarios() {
                         Código del Usuario
                       </label>
                       <div class="col-sm-8">
-                          <input
-                            type="text"
-                            class="form-control"
-                            value={codigoBusca}
-                            onChange={(event) => {
-                              setCodigo(event.target.value);
-                            }}
-                      />
+                        <input
+                          type="text"
+                          class="form-control"
+                          value={codigoBusca}
+                          onChange={(event) => {
+                            setCodigo(event.target.value);
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -188,24 +208,24 @@ function Usuarios() {
                         Nombre del Usuario
                       </label>
                       <div class="col-sm-8">
-                          <input
+                        <input
                           type="text"
                           class="form-control"
                           value={nombreBusca}
                           onChange={(event) => {
                             setNombre(event.target.value);
                           }}
-                      />
+                        />
                       </div>
                     </div>
                   </div>
-              
+
                 </div>
               </div>
               <div class="form-group text-center">
-                <div class="py-5 px-4"    
-                onKeyUp={capturaInput}
-                    onBlur={actualiza}>
+                <div class="py-5 px-4"
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
                     data={usuarios}
@@ -218,13 +238,13 @@ function Usuarios() {
             </div>
             <div class="bg-success text-center ">
               <div class="row row-cols-2 m-4">
-              <Link to="/agregarUsuarios">
-                <div class="col">
-                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
-                </div>
+                <Link to="/agregarUsuarios">
+                  <div class="col">
+                    <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
+                  </div>
                 </Link>
-                <div class="col">
-                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
+                <div className="col">
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                 </div>
               </div>
             </div>

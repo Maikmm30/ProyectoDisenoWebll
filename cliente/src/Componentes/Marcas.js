@@ -103,7 +103,6 @@ function Marcas() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nombre Marca"
                         onChange={(event)=>{
                           setNombreMarca(event.target.value);
                         }}
@@ -138,7 +137,6 @@ function Marcas() {
                       <textarea
                         type="text"
                         class="form-control"
-                        placeholder="Descripcion"
                         onChange={(event)=>{
                           setDescripcionMarca(event.target.value);
                         }}
@@ -184,7 +182,6 @@ function Marcas() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nombre Artículo"
                         onChange={(event)=>{
                           setEmpresaMarca(event.target.value);
                         }}
@@ -199,7 +196,6 @@ function Marcas() {
                       <textarea
                         type="text"
                         class="form-control"
-                        placeholder="Descripcion"
                         rows="3"
                         onChange={(event)=>{
                           setDetalleEmpresaMarca(event.target.value);
@@ -217,7 +213,6 @@ function Marcas() {
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Nombre Artículo"
                         onChange={(event)=>{
                           setTelefonoEmpresaMarca(event.target.value);
                         }}

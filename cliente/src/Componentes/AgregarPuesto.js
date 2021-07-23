@@ -23,6 +23,19 @@ function AgregarPuesto() {
       setNumeroPuesto(num);
       const str = "PU";
       setCodigoPuesto(str+num);
+      Axios.get("http://localhost:3001/roles/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              for(var k in res.data) {
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("rol").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            }); 
     });
   }, []);
 
@@ -99,15 +112,13 @@ function AgregarPuesto() {
                   Rol en el Restaurante
                 </label>
                 <div class="col-sm-8">
-                  <select class="form-control" id="exampleFormControlSelect1" onChange={(event)=>{
+                  <select class="form-control" id="rol" onChange={(event)=>{
                   setRolPuesto(event.target.value);
                 }}
                 onClick={(event)=>{
                   setRolPuesto(event.target.value);
                 }}>
-                    <option>Rol 1</option>
-                    <option>Rol 2</option>
-                    <option>Rol 3</option>
+                    
                   </select>
                 </div>
               </div>

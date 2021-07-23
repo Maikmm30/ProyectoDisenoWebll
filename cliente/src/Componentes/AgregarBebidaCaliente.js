@@ -26,14 +26,18 @@ function AgregarBebidaCaliente() {
   const enviarDatos = () => {
     Axios.post("http://localhost:3001/administracion/especiales/bebidas/calientes/agregar",{
       codigoBebidaCaliente: codigoBebidaCaliente,
-      numeroBebidaCaliente: numeroBebidaCaliente,
       nombreBebidaCaliente: nombreBebidaCaliente,
       ingredientesBebidaCaliente: ingredientesBebidaCaliente,
       precioBebidaCaliente: precioBebidaCaliente,
       restauranteBebidaCaliente: restauranteBebidaCaliente,
       estadoBebidaCaliente: true,
     });
-    //consulta de editar consecutivo +1
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '3',
+        consecutivoNuevo: numeroBebidaCaliente,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/calientes/'
   };
 

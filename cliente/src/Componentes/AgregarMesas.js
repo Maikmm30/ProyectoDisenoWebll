@@ -6,13 +6,23 @@ import Axios from 'axios';
 function AgregarMesas() {
 
   const [codigoMesa, setCodigoMesa] = useState("");
+  const [numMesa, setNumMesa] = useState("");
   const [nombreMesa, setNombreMesa] = useState("");
   const [cantidadSillasMesa, setCantidadSillasMesa] = useState("");
   const [restauranteMesa, setRestauranteMesa] = useState("");
   const [numeroMesa, setNumeroMesa] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/mesas/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumMesa(num);
+      const str = "ME";
+      setCodigoMesa(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarMesas",{
+    Axios.post("http://localhost:3001/mesas/agregar",{
       codigoMesa: codigoMesa,
       nombreMesa: nombreMesa,
       cantidadSillasMesa: cantidadSillasMesa,
@@ -20,6 +30,12 @@ function AgregarMesas() {
       numeroMesa: numeroMesa,
       estadoMesa: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '7',
+        consecutivoNuevo: numMesa,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/mesas/'
   };
   return (
@@ -50,11 +66,9 @@ function AgregarMesas() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoMesa(event.target.value);
-                        }}
+                        value={codigoMesa} disabled
                       />
                     </div>
               </div>
@@ -112,6 +126,9 @@ function AgregarMesas() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setRestauranteMesa(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setRestauranteMesa(event.target.value);
                         }}
                       >

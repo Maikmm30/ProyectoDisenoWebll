@@ -12,18 +12,34 @@ import Axios from 'axios';
 function AgregarPuesto() {
 
   const [codigoPuesto, setCodigoPuesto] = useState("");
+  const [numeroPuesto, setNumeroPuesto] = useState("");
   const [nombrePuesto, setNombrePuesto] = useState("");
   const [rolPuesto, setRolPuesto] = useState("");
   const [relacionPuesto, setRelacionPuesto] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/puestos/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroPuesto(num);
+      const str = "PU";
+      setCodigoPuesto(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarPuestos",{
+    Axios.post("http://localhost:3001/puestos/agregar",{
       codigoPuesto: codigoPuesto,
       nombrePuesto: nombrePuesto,
       rolPuesto: rolPuesto,
       relacionPuesto: relacionPuesto,
       estadoPuesto: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '8',
+        consecutivoNuevo: numeroPuesto,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/puestos'
   };
 
@@ -57,11 +73,9 @@ function AgregarPuesto() {
                 </label>
                 <div class="col-sm-8">
                   <input
-                    type="number"
+                    type="text"
                     class="form-control"
-                    onChange={(event)=>{
-                      setCodigoPuesto(event.target.value);
-                    }}
+                    value={codigoPuesto} disabled
                   />
                 </div>
               </div>
@@ -73,7 +87,7 @@ function AgregarPuesto() {
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Nombre Empaque"
+                    placeholder="Nombre Puesto"
                     onChange={(event)=>{
                       setNombrePuesto(event.target.value);
                     }}
@@ -86,6 +100,9 @@ function AgregarPuesto() {
                 </label>
                 <div class="col-sm-8">
                   <select class="form-control" id="exampleFormControlSelect1" onChange={(event)=>{
+                  setRolPuesto(event.target.value);
+                }}
+                onClick={(event)=>{
                   setRolPuesto(event.target.value);
                 }}>
                     <option>Rol 1</option>
@@ -100,8 +117,8 @@ function AgregarPuesto() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
-                  onChange={(event)=>{
-                    setRelacionPuesto(event.target.value);
+                  onClick={(event)=>{
+                    setRelacionPuesto('Interno al Restaurante');
                   }}
                 />
                 <label class="form-check-label" for="flexRadioDefault1">
@@ -114,8 +131,8 @@ function AgregarPuesto() {
                   type="radio"
                   name="flexRadioDefault"
                   id="flexRadioDefault1"
-                  onChange={(event)=>{
-                    setRelacionPuesto(event.target.value);
+                  onClick={(event)=>{
+                    setRelacionPuesto('Externo al Restaurante');
                   }}
                 />
                 <label class="form-check-label" for="flexRadioDefault1">

@@ -4,6 +4,7 @@ import Axios from 'axios';
 function AgregarBebidaGaseosa() {
 
   const [codigoBebidaGaseosa, setCodigoBebidaGaseosa] = useState("");
+  const [numeroBebidaGaseosa, setNumeroBebidaGaseosa] = useState("");
   const [nombreBebidaGaseosa, setNombreBebidaGaseosa] = useState("");
   const [marcaBebidaGaseosa, setMarcaBebidaGaseosa] = useState("");
   const [nacionalidadBebidaGaseosa, setNacionalidadBebidaGaseosa] = useState("");
@@ -12,10 +13,17 @@ function AgregarBebidaGaseosa() {
   const [descripcionBebidaGaseosa, setDescripcionBebidaGaseosa] = useState("");
   const [cantidadBebidaGaseosa, setCantidadBebidaGaseosa] = useState("");
 
-
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/gaseosas/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroBebidaGaseosa(num);
+      const str = "BG";
+      setCodigoBebidaGaseosa(str+num);
+    });
+  }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa",{
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/gaseosas/agregar",{
       codigoBebidaGaseosa: codigoBebidaGaseosa,
       nombreBebidaGaseosa: nombreBebidaGaseosa,
       marcaBebidaGaseosa: marcaBebidaGaseosa,
@@ -26,6 +34,12 @@ function AgregarBebidaGaseosa() {
       cantidadBebidaGaseosa: cantidadBebidaGaseosa,
       estadoBebidaGaseosa: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '1',
+        consecutivoNuevo: numeroBebidaGaseosa,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/gaseosas/'
   };
 
@@ -54,9 +68,7 @@ function AgregarBebidaGaseosa() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                  <input type="text" className="form-control" onChange={(event)=>{
-                  setCodigoBebidaGaseosa(event.target.value);
-                }}/>
+                  <input type="text" className="form-control" value={codigoBebidaGaseosa} disabled/>
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
@@ -76,6 +88,9 @@ function AgregarBebidaGaseosa() {
                       onChange={(event)=>{
                         setMarcaBebidaGaseosa(event.target.value);
                       }}
+                      onClick={(event)=>{
+                        setMarcaBebidaGaseosa(event.target.value);
+                      }}
                     >
                       <option>Marca 1</option>
                       <option>Marca 2</option>
@@ -91,6 +106,9 @@ function AgregarBebidaGaseosa() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setNacionalidadBebidaGaseosa(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setNacionalidadBebidaGaseosa(event.target.value);
                       }}
                     >
@@ -121,6 +139,9 @@ function AgregarBebidaGaseosa() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setRestauranteBebidaGaseosa(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setRestauranteBebidaGaseosa(event.target.value);
                       }}
                     >

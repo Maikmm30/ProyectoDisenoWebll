@@ -10,6 +10,13 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
+/*router.route("/id").get((req, res) => {
+  //BebidaCaliente.find({}).select('codigo').sort({score : -1}).limit(1)
+  Consecutivo.find().select('nombre').sort({codigo:-1}).limit(1)
+      .then((bebidaCaliente) => res.json(bebidaCaliente))
+      .catch((err) => res.status(400).json("Error: " + err));
+});*/
+
 router.post("/agregar", async (req, res) => {
   const codigoConsecutivo = req.body.codigoConsecutivo;
   const tipoConsecutivo = req.body.tipoConsecutivo;

@@ -6,14 +6,24 @@ import Axios from 'axios';
 function AgregarEmpaques() {
 
   const [codigoEmpaque, setCodigoEmpaque] = useState("");
+  const [numeroEmpaque, setNumeroEmpaque] = useState("");
   const [nombreEmpaque, setNombreEmpaque] = useState("");
   const [cantidadEmpaque, setCantidadEmpaque] = useState("");
   const [restauranteEmpaque, setRestauranteEmpaque] = useState("");
   const [marcaEmpaque, setMarcaEmpaque] = useState("");
   const [descripcionEmpaque, setDescripcionEmpaque] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/empaques/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroEmpaque(num);
+      const str = "DE";
+      setCodigoEmpaque(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarEmpaques",{
+    Axios.post("http://localhost:3001/empaques/agregar",{
       codigoEmpaque: codigoEmpaque,
       nombreEmpaque: nombreEmpaque,
       cantidadEmpaque: cantidadEmpaque,
@@ -22,6 +32,12 @@ function AgregarEmpaques() {
       descripcionEmpaque: descripcionEmpaque,
       estadoEmpaque: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '10',
+        consecutivoNuevo: numeroEmpaque,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/empaques/'
   };
 
@@ -50,11 +66,9 @@ function AgregarEmpaques() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoEmpaque(event.target.value);
-                        }}
+                        value={codigoEmpaque} disabled
                       />
                     </div>
               </div>
@@ -67,6 +81,9 @@ function AgregarEmpaques() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setRestauranteEmpaque(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setRestauranteEmpaque(event.target.value);
                         }}
                       >
@@ -101,6 +118,9 @@ function AgregarEmpaques() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setMarcaEmpaque(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setMarcaEmpaque(event.target.value);
                         }}
                       >

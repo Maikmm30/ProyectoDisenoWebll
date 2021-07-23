@@ -4,14 +4,25 @@ import Axios from 'axios';
 function AgregarBebidaHelada() {
 
   const [codigoBebidaHelada, setCodigoBebidaHelada] = useState("");
+  const [numeroBebidaHelada, setNumeroBebidaHelada] = useState("");
   const [nombreBebidaHelada, setNombreBebidaHelada] = useState("");
   const [ingredientesBebidaHelada, setIngredientesBebidaHelada] = useState("");
   const [precioBebidaHelada, setPrecioBebidaHelada] = useState("");
   const [restauranteBebidaHelada, setRestauranteBebidaHelada] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/heladas/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      console.log(num);
+      setNumeroBebidaHelada(num);
+      const str = "BH";
+      setCodigoBebidaHelada(str+num);
+      console.log(codigoBebidaHelada)
+    });
+  }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/helada/agregar-bebida-helada",{
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/heladas/agregar",{
       codigoBebidaHelada: codigoBebidaHelada,
       nombreBebidaHelada: nombreBebidaHelada,
       ingredientesBebidaHelada: ingredientesBebidaHelada,
@@ -19,7 +30,13 @@ function AgregarBebidaHelada() {
       restauranteBebidaHelada: restauranteBebidaHelada,
       estadoBebidaHelada: true,
     });
-    window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/helada/'
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '2',
+        consecutivoNuevo: numeroBebidaHelada,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
+    window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/heladas/'
   };
 
   return (
@@ -48,12 +65,7 @@ function AgregarBebidaHelada() {
                   </label>
                 <div class="col-sm-4">
                   <input
-                    type="number"
-                    class="form-control"
-                    onChange={(event)=>{
-                      setCodigoBebidaHelada(event.target.value);
-                    }}
-                  />
+                    type="text" class="form-control" value={codigoBebidaHelada} disabled/>
                 </div>
               </div>
               <div class="form-group row mt-2">
@@ -105,6 +117,9 @@ function AgregarBebidaHelada() {
                         class="form-control"
                         id="exampleFormControlSelect1"
                         onChange={(event)=>{
+                          setRestauranteBebidaHelada(event.target.value);
+                        }}
+                        onClick={(event)=>{
                           setRestauranteBebidaHelada(event.target.value);
                         }}
                       >

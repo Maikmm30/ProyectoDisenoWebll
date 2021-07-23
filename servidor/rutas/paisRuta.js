@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Pais = require("../modelos/Pais");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -7,6 +8,13 @@ router.route("/").get((req, res) => {
   Pais.find({ estado: { $ne: 'false' } })
     .then((paises) => res.json(paises))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'pais'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
+      .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.post("/agregar", async (req, res) => {

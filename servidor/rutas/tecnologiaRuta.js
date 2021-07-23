@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Tecnologia = require("../modelos/Tecnologia");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -9,6 +10,12 @@ router.route("/").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
   
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'tecnologia'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
 
 router.post("/agregar", async (req, res) => {
   const codigoTecnologia = req.body.codigoTecnologia;
@@ -23,7 +30,7 @@ router.post("/agregar", async (req, res) => {
     const tecnologia = new Tecnologia({
       codigo: codigoTecnologia,
       nombre: nombreTecnologia,
-      cantiad: cantidadTecnologia,
+      cantidad: cantidadTecnologia,
       restaurante: restauranteTecnologia,
       marca: marcaTecnologia,
       decripcion: descripcionTecnologia,

@@ -1,4 +1,5 @@
 const router = require("express").Router();
+let Consecutivo = require("../modelos/Consecutivos");
 let Equipo = require("../modelos/Equipo");
 const express = require("express");
 const app = express();
@@ -7,6 +8,13 @@ const app = express();
 router.route("/").get((req, res) => {
   Equipo.find({ estado: { $ne: 'false' } })
       .then((equipo) => res.json(equipo))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'equipo'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -23,7 +31,7 @@ router.post("/agregar", async (req, res) => {
     const equipo = new Equipo({
       codigo: codigoEquipo,
       nombre: nombreEquipo,
-      cantiad: cantidadEquipo,
+      cantidad: cantidadEquipo,
       restaurante: restauranteEquipo,
       marca: marcaEquipo,
       decripcion: descripcionEquipo,

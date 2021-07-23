@@ -1,11 +1,19 @@
 const router = require("express").Router();
 let UnidadMedida = require("../modelos/Unidad_medida");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
   UnidadMedida.find({ estado: { $ne: 'false' } })
       .then((unidadMedida) => res.json(unidadMedida))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'unidadMedida'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -21,7 +29,7 @@ router.post("/agregar", async (req, res) => {
   try {
     const unidadMedida = new UnidadMedida({
       codigo: codigoUnidadMedida,
-      unidadmedida: unidadUnidadMedida,
+      unidadMedida: unidadUnidadMedida,
       escala: escalaUnidadMedida,
       detalle: detalleUnidadMedida,
       simbologia: simbologiaUnidadMedida,

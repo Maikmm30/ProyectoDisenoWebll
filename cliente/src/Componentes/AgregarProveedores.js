@@ -4,6 +4,7 @@ import Axios from 'axios';
 function AgregarProveedores() {
 
   const [codigoProveedor, setCodigoProveedor] = useState("");
+  const [numeroProveedor, setNumeroProveedor] = useState("");
   const [cedulaProveedor, setCedulaProveedor] = useState("");
   const [fechaProveedor, setFechaProveedor] = useState("");
   const [nombreProveedor, setNombreProveedor] = useState("");
@@ -14,8 +15,17 @@ function AgregarProveedores() {
   const [faxProveedor, setFaxProveedor] = useState("");
   const [celularProveedor, setCelularProveedor] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/Proveedores/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroProveedor(num);
+      const str = "PRO";
+      setCodigoProveedor(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarProveedores",{
+    Axios.post("http://localhost:3001/Proveedores/agregar",{
       codigoProveedor: codigoProveedor,
       cedulaProveedor: cedulaProveedor,
       fechaProveedor: fechaProveedor,
@@ -28,6 +38,12 @@ function AgregarProveedores() {
       celularProveedor: celularProveedor,
       estadoLimpieza: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '14',
+        consecutivoNuevo: numeroProveedor,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/Proveedores/'
   };
 
@@ -63,21 +79,19 @@ function AgregarProveedores() {
                     <h4 className="my-4">Información del Proveedor</h4>
                     <label className="col-sm-3">Código </label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setCodigoProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" value={codigoProveedor} disabled/>
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Cédula de identidad</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" />
+                      <input type="text" className="form-control" onChange={(event)=>{
+                  setCedulaProveedor(event.target.value);
+                }}/>
                     </div>
                   </div>
-                  onChange={(event)=>{
-                  setCedulaProveedor(event.target.value);
-                }}
+                  
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Fecha de Ingreso</label>
                     <div className="col-sm-9">

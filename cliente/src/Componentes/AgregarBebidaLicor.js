@@ -4,6 +4,7 @@ import Axios from 'axios';
 function AgregarBebidaLicor() {
 
   const [codigoBebidaLicor, setCodigoBebidaLicor] = useState("");
+  const [numeroBebidaLicor, setNumeroBebidaLicor] = useState("");
   const [nombreBebidaLicor, setNombreBebidaLicor] = useState("");
   const [marcaBebidaLicor, setMarcaBebidaLicor] = useState("");
   const [nacionalidadBebidaLicor, setNacionalidadBebidaLicor] = useState("");
@@ -14,8 +15,17 @@ function AgregarBebidaLicor() {
   const [descripcionBebidaLicor, setDescripcionBebidaLicor] = useState("");
   const [cantidadBebidaLicor, setCantidadBebidaLicor] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/administracion/especiales/bebidas/licores/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroBebidaLicor(num);
+      const str = "BL";
+      setCodigoBebidaLicor(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/licores/agregar-bebida-licor",{
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/licores/agregar",{
       codigoBebidaLicor: codigoBebidaLicor,
       nombreBebidaLicor: nombreBebidaLicor,
       marcaBebidaLicor: marcaBebidaLicor,
@@ -28,6 +38,12 @@ function AgregarBebidaLicor() {
       cantidadBebidaLicor: cantidadBebidaLicor,
       estadoBebidaLicor: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '4',
+        consecutivoNuevo: numeroBebidaLicor,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/licores/'
   };
 
@@ -57,9 +73,7 @@ function AgregarBebidaLicor() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                  <input type="text" className="form-control" onChange={(event)=>{
-                  setCodigoBebidaLicor(event.target.value);
-                }}/>
+                  <input type="text" className="form-control" value={codigoBebidaLicor} disabled/>
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
@@ -79,6 +93,9 @@ function AgregarBebidaLicor() {
                       onChange={(event)=>{
                         setMarcaBebidaLicor(event.target.value);
                       }}
+                      onClick={(event)=>{
+                        setMarcaBebidaLicor(event.target.value);
+                      }}
                     >
                       <option>Marca 1</option>
                       <option>Marca 2</option>
@@ -94,6 +111,9 @@ function AgregarBebidaLicor() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setNacionalidadBebidaLicor(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setNacionalidadBebidaLicor(event.target.value);
                       }}
                     >
@@ -135,6 +155,9 @@ function AgregarBebidaLicor() {
                       class="form-control"
                       id="exampleFormControlSelect1"
                       onChange={(event)=>{
+                        setRestauranteBebidaLicor(event.target.value);
+                      }}
+                      onClick={(event)=>{
                         setRestauranteBebidaLicor(event.target.value);
                       }}
                     >

@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Empaque = require("../modelos/Empaque");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -9,6 +10,14 @@ router.route("/").get((req, res) => {
       .then((empaque) => res.json(empaque))
       .catch((err) => res.status(400).json("Error: " + err));
 });
+
+router.route("/id").get((req, res) => {
+  
+  Consecutivo.find({nombre: 'empaque'}).select('valorConsecutivo')
+      .then((consecutivo) => res.json(consecutivo))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 
 router.post("/agregar", async (req, res) => {
   const codigoEmpaque = req.body.codigoEmpaque;
@@ -23,7 +32,7 @@ router.post("/agregar", async (req, res) => {
     const empaque = new Empaque({
       codigo: codigoEmpaque,
       nombre: nombreEmpaque,
-      cantiad: cantidadEmpaque,
+      cantidad: cantidadEmpaque,
       restaurante: restauranteEmpaque,
       marca: marcaEmpaque,
       decripcion: descripcionEmpaque,

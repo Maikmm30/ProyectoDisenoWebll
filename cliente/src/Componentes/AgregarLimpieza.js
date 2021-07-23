@@ -6,6 +6,7 @@ import Axios from 'axios';
 function AgregarLimpieza() {
 
   const [codigoLimpieza, setCodigoLimpieza] = useState("");
+  const [numeroLimpieza, setNumeroLimpieza] = useState("");
   const [nombreLimpieza, setNombreLimpieza] = useState("");
   const [cantidadLimpieza, setCantidadLimpieza] = useState("");
   const [restauranteLimpieza, setRestauranteLimpieza] = useState("");
@@ -15,8 +16,17 @@ function AgregarLimpieza() {
   const [descripcionLimpieza, setDescripcionLimpieza] = useState("");
   const [cantidadDeMedidaLimpieza, setCantidadDeMedidaLimpieza] = useState("");
 
+  useEffect(() => {
+    Axios.get("http://localhost:3001/limpieza/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroLimpieza(num);
+      const str = "LH";
+      setCodigoLimpieza(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/agregarLimpieza",{
+    Axios.post("http://localhost:3001/limpieza/agregar",{
       codigoLimpieza: codigoLimpieza,
       nombreLimpieza: nombreLimpieza,
       cantidadLimpieza: cantidadLimpieza,
@@ -28,6 +38,12 @@ function AgregarLimpieza() {
       cantidadDeMedidaLimpieza: cantidadDeMedidaLimpieza,
       estadoLimpieza: true,
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '11',
+        consecutivoNuevo: numeroLimpieza,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/limpieza/'
   };
 
@@ -57,11 +73,9 @@ function AgregarLimpieza() {
                 </label>
                 <div class="col-sm-8">
                       <input
-                        type="number"
+                        type="text"
                         class="form-control"
-                        onChange={(event)=>{
-                          setCodigoLimpieza(event.target.value);
-                        }}
+                        value={codigoLimpieza} disabled
                       />
                     </div>
               </div>

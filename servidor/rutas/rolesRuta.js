@@ -3,6 +3,13 @@ let Rol = require("../modelos/Roles");
 const express = require("express");
 const app = express();
 
+
+router.route("/").get((req, res) => {
+  Rol.find({ estado: { $ne: 'false' } })
+      .then((rol) => res.json(rol))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoRol = req.body.codigoRol;
   const nombreRol = req.body.nombreRol;
@@ -37,6 +44,7 @@ router.put("/update", async (req, res) => {
     res.status(400).send(error)
   }
 })
+
 
 
 router.route("/buscar").post((req, res) => {

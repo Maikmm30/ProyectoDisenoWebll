@@ -3,6 +3,12 @@ let UnidadMedida = require("../modelos/Unidad_medida");
 const express = require("express");
 const app = express();
 
+router.route("/").get((req, res) => {
+  UnidadMedida.find({ estado: { $ne: 'false' } })
+      .then((unidadMedida) => res.json(unidadMedida))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 router.post("/agregar", async (req, res) => {
   const codigoUnidadMedida = req.body.codigoUnidadMedida;
   const unidadUnidadMedida = req.body.unidadUnidadMedida;
@@ -31,10 +37,10 @@ router.post("/agregar", async (req, res) => {
 
 router.put("/update", async (req, res) => {
   const codigoActualiza = req.body.codigoActualiza;
-  const unidadMedidaNuevo = req.body.unidadMedidaNuevo;
+  const unidadNuevo = req.body.unidadNuevo;
   const columnaSeleccionada = req.body.columnaSeleccionada;
   try {
-    await UnidadMedida.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: unidadMedidaNuevo }, (err, unidadMedida) => {
+    await UnidadMedida.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: unidadNuevo }, (err, unidadMedida) => {
       res.json(unidadMedida);
 
     });
@@ -47,12 +53,13 @@ router.put("/update", async (req, res) => {
 
 router.route("/buscar").post((req, res) => {
   const codigoBusca = req.body.codigoBusca
-  const nombreBusca = req.body.nombreBusca
+  const detalleBusca = req.body.detalleBusca
 
-  UnidadMedida.find({ codigo: codigoBusca, nombre: nombreBusca })
-    .then(unidadMedida => res.json(unidadMedida))
+  UnidadMedida.find({ codigo: codigoBusca, detalle: detalleBusca })
+    .then(unidad => res.json(unidad))
     .catch(err => res.status(400).json('Error: ' + err));
 })
+
 
 router.put("/eliminar", async (req, res) => {
 

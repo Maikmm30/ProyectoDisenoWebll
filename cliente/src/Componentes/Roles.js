@@ -1,31 +1,105 @@
 import BootstrapTable from "react-bootstrap-table-next";
 import cellEditFactory from "react-bootstrap-table2-editor";
-
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-  },
-  {
-    dataField: "rol",
-    text: "Nombre del rol",
-  }
-];
-
-const paises = [
-  {
-    codigo: 1,
-    rol: "A"
-  },
-  {
-    codigo: 2,
-    rol: "A"
-  }
-];
 
 function Roles() {
+  
+  const [roles, setRol] = useState([]);
+  var [codigoBusca, setCodigo] = useState("");
+  var [nombreBusca, setNombre] = useState("");
+  
+  var [codigoActualiza, setCodigoActualiza] = useState("")
+  var [rolNuevo, setNuevoRol] = useState("");
+  var [columnaSeleccionada, setColumna] = useState("");
+  
+  useEffect(() => {
+    Axios.get("http://localhost:3001/roles/").then((res) => {
+      setRol(res.data);
+    });
+  }, []);
+
+    
+  const actualiza = () => {
+    Axios.put("http://localhost:3001/roles/update", {
+      codigoActualiza: codigoActualiza,
+      rolNuevo: rolNuevo,
+      columnaSeleccionada: columnaSeleccionada,
+    });
+    window.location.reload();
+  };
+
+    
+  const buscar = () => {
+    Axios.post("http://localhost:3001/roles/buscar",
+      {
+        codigoBusca: codigoBusca,
+        nombreBusca: nombreBusca
+      })
+      .then((res) => {
+        setRol(res.data);
+
+      });
+
+  };
+
+    
+  const capturaInput = (event) => {
+    if (!event.target.value == "") {
+      setNuevoRol(event.target.value);
+      console.log(event.target);
+    }
+  };
+  
+
+  const capturaBusca = () => {
+    if (codigoBusca && nombreBusca !== '') {
+      buscar()
+    }
+    else {
+      alert('Por favor ingrese los datos')
+    }
+  }
+
+  const recarga = () => {
+    window.location.reload();
+  };
+
+  const limpiaCajas = () => {
+    setCodigo("");
+    setNombre("");
+  };
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+        }
+      }
+    },
+    {
+      dataField: "nombre",
+      text: "Nombre del rol",
+      events:{
+        onClick:( column, columnIndex)=>{
+          setColumna(columnIndex.dataField)
+        }
+      }
+    }
+  ];
+  
+  const rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(JSON.parse(row.codigo))
+    }
+  };
+
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -37,19 +111,18 @@ function Roles() {
           <div className="row h-80">
             <div className="text-center col-12 bg-success h-25">
               <div className="row row-cols-4 m-4">
-                <Link to="/agregarRoles">
+               
                   <div className="col">
-                    <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                    <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
                   </div>
-                </Link>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <button className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div className="col">
-                  <i className=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
+                  <button className=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></button>
                 </div>
               </div>
             </div>
@@ -66,6 +139,10 @@ function Roles() {
                         <input
                           type="number"
                           className="form-control"
+                          value={codigoBusca}
+                          onChange={(event) => {
+                            setCodigo(event.target.value);
+                          }}
                         />
                       </div>
                     </div>
@@ -79,6 +156,10 @@ function Roles() {
                         <input
                           type="text"
                           className="form-control"
+                          value={nombreBusca}
+                          onChange={(event) => {
+                            setNombre(event.target.value);
+                          }}
                         />
                       </div>
                     </div>
@@ -86,23 +167,28 @@ function Roles() {
                 </div>
               </div>
               <div className="form-group text-center">
-                <div className="py-5 px-5">
+                <div className="py-5 px-5"
+                  onKeyUp={capturaInput}
+                  onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
-                    data={paises}
+                    data={roles}
                     columns={columns}
+                    rowEvents={rowEvents}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>
               </div>
             </div>
             <div className="bg-success text-center">
-                  <div className="row h-100 ">
+                  <div className="row row-cols-2 m-4  ">
+                  <Link to="/agregarRoles">
                     <div className="col">
-                      <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                     </div>
+                    </Link>
                     <div className="col">
-                      <i className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i>
+                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></button>
                     </div>
                   </div>
                 </div>

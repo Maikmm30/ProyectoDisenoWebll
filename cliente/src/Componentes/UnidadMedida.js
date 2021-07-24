@@ -152,22 +152,22 @@ function UnidadMedida() {
         <div class="col-9">
           <div class="row h-75">
             <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
-              <div class="row row-cols-4 m-4 text-lighttext-light">
+              <div class="row row-cols-4 m-4 ">
                 <div class="col">
                   <button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas} ></button>
                 </div>
                 <div class="col ">
-                  <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></i>
+                  <button class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></button>
                 </div>
                 <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
+                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></button>
                 </div>
                 <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i>
+                  <button class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></button>
                 </div>
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               <div class="container">
                 <div class="row">
                   <div class="col">

@@ -97,7 +97,7 @@ function Cajas() {
         </div>
         <div className="col-9">
           <div className="row h-75">
-            <div className="text-center col-12 h-25">
+            <div className="text-center col-12 h-25"  style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
                 <div className="col">
                   <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
@@ -134,7 +134,7 @@ function Cajas() {
 
                 </div>
               </div>
-              <div class="form-group row mt-2  text-center" class="table-scroll">
+              <div class="form-group row mt-2  text-center table-scroll" >
                 <div className="py-5 px-4 ">
                   <BootstrapTable
                     keyField="id"

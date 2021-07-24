@@ -220,11 +220,11 @@ function UnidadMedida() {
                 </div>
               </div>
             </div>
-            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
-              <div class="row row-cols-2 m-4">
+            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div className="row row-cols-2 m-4">
                 <Link to="/agregarUnidadMedida">
-                  <div class="col">
-                    <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                  <div className="col">
+                    <button className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                   </div>
                 </Link>
                 <div className="col">

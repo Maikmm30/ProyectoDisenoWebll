@@ -122,14 +122,14 @@ function Roles() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Roles</h3>
           <i className="fas fa-address-card fa-10x"></i>
         </div>
         <div className="col-9">
-          <div className="row h-80">
-            <div className="text-center col-12 bg-success h-25">
+          <div className="row h-75">
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
 
                 <div className="col">
@@ -146,8 +146,7 @@ function Roles() {
                 </div>
               </div>
             </div>
-            <div className="col-12 bg-danger h-80">
-              Solo búsqueda
+            <div class="col-12  h-80">
               <div className="container">
                 <div className="row">
                   <div className="col">
@@ -186,7 +185,7 @@ function Roles() {
                   </div>
                 </div>
               </div>
-              <div className="form-group text-center">
+              <div class="form-group row mt-2  text-center" class="table-scroll">
                 <div className="py-5 px-5"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
@@ -200,7 +199,7 @@ function Roles() {
                 </div>
               </div>
             </div>
-            <div className="bg-success text-center">
+            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-2 m-4  ">
                 <Link to="/agregarRoles">
                   <div className="col">

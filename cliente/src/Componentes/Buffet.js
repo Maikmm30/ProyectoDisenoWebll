@@ -149,7 +149,7 @@ function Buffet() {
     <div className="container">
       <div
         className="row "
-        style={{ height: "780px", backgroundColor: "#FF723F" }}
+        style={{ height: "730px", backgroundColor: "#FF723F" }}
       >
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Comida Estilo Buffet</h3>
@@ -213,7 +213,7 @@ function Buffet() {
               </div>
 
               <div className="form-group row mt-2 text-center">
-                <div className="py-5 px-5"
+                <div className="py-5 px-5 table-scroll"
 
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
@@ -227,7 +227,7 @@ function Buffet() {
                 </div>
 
                 <div
-                  className="text-center col-12 h-25"
+                  className="text-center col-12 "
                   style={{ backgroundColor: "#C42709" }}
                 >
                   <div className="row row-cols-2 m-4">

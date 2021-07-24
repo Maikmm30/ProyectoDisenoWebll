@@ -153,7 +153,7 @@ function Restaurantes() {
     <div className="container">
       <div
         className="row"
-        style={{ height: "700px", backgroundColor: "#FF723F" }}
+        style={{ height: "800px", backgroundColor: "#FF723F" }}
       >
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Restaurantes</h3>
@@ -162,7 +162,7 @@ function Restaurantes() {
         <div className="col-9 ">
           <div className="row h-75">
             <div
-              className="text-center col-12 h-15"
+              className="text-center col-12 h-25"
               style={{ backgroundColor: "#C42709" }}
             >
               <div className="row row-cols-4 m-4 text-light">
@@ -217,7 +217,7 @@ function Restaurantes() {
 
               <div className="form-group row mt-2 text-center">
                 <div
-                  className="py-5 px-5"
+                  className="py-5 px-5  table-scroll"
                   onKeyUp={capturaInput}
                   onBlur={actualizaRestaurante}
                 >
@@ -231,15 +231,13 @@ function Restaurantes() {
                 </div>
 
                 <div
-                  className="text-center col-12 h-25"
-                  style={{ backgroundColor: "#C42709" }}
-                >
+                  className="text-center col-12 "  style={{ backgroundColor: "#C42709" }}  >
                   <div className="row row-cols-2 m-4 ">
+                  <div className="col">
                     <Link to="/restaurantes/agregar-restaurantes">
-                      <div className="col">
                         <button className="py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
-                      </div>
                     </Link>
+                   </div>
                     <div className="col">
                       <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                     </div>

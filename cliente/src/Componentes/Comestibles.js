@@ -140,7 +140,7 @@ function Comestibles() {
   
   return (
     <div class="container">
-      <div class="row " style={{ height: "800px", backgroundColor: "#FF723F"  }}>
+      <div class="row " style={{ height: "750px", backgroundColor: "#FF723F"  }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Comestibles</h3>
           <i class="fas fa-drumstick-bite fa-10x text-light" ></i>

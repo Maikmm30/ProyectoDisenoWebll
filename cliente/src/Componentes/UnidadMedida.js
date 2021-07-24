@@ -144,7 +144,7 @@ function UnidadMedida() {
 
   return (
     <div class="container">
-      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "760px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista Unidades de Medida</h3>
           <i class="fas fa-balance-scale-right fa-10x text-light"></i>

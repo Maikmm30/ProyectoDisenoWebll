@@ -197,7 +197,7 @@ function Paises() {
 
                 <div className="col">
                   <Link to="/agregarPaises">
-                    <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                    <button className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
                   </Link>
                 </div>
 

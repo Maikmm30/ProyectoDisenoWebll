@@ -153,7 +153,7 @@ function Mesas() {
 
   return (
     <div class="container">
-      <div class="row " style={{ height: "800px", backgroundColor: "#FF723F" }}>
+      <div class="row " style={{ height: "750px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Mesas</h3>
           <img
@@ -209,7 +209,7 @@ function Mesas() {
 
               <div class="form-group row mt-2">
 
-                <div class="py-5 px-5"
+                <div class="py-5 px-5 table-scroll"
                   onKeyUp={capturaInput} onBlur={actualizaPais}>
                   <BootstrapTable
                     keyField="id"

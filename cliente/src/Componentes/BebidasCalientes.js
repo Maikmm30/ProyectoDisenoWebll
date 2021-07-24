@@ -136,7 +136,7 @@ function BebidasCalientes() {
 
   return (
     <div class="container">
-      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "750px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Bebidas Calientes</h3>
           <i class="fas fa-mug-hot fa-10x text-light"></i>
@@ -205,7 +205,7 @@ function BebidasCalientes() {
 
               <div class="form-group row mt-2  text-center">
                 <div
-                  class="py-5 px-5"
+                  class="py-5 px-5 table-scroll"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
                   <BootstrapTable

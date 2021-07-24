@@ -186,7 +186,7 @@ function Empleados() {
 
   return (
     <div class="container">
-      <div class="row" style={{ height: "700px", backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "780px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Empleados</h3>
           <i class="fas fa-user-friends fa-10x text-light"></i>
@@ -238,7 +238,7 @@ function Empleados() {
 
               <div class="form-group row mt-2">
 
-                <div class="py-5 px-5 text-center"
+                <div class="py-5 px-5 text-center table-scroll"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
                   <BootstrapTable

@@ -153,7 +153,7 @@ function Especialidades() {
     <div className="container">
       <div
         className="row "
-        style={{ height: "800px", backgroundColor: "#FF723F" }}
+        style={{ height: "750px", backgroundColor: "#FF723F" }}
       >
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Especialidades</h3>
@@ -212,7 +212,7 @@ function Especialidades() {
 
               <div className="form-group row mt-2 text-center">
                 <div
-                  className="py-5 px-5"
+                  className="py-5 px-5 table-scroll"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
 

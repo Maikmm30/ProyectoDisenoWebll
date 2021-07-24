@@ -93,7 +93,7 @@ function Cajas() {
        <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Cajas</h3>
-          <i className="fas fa-cash-register fa-10x"></i>
+          <i className="fas fa-cash-register fa-10x  text-light"></i>
         </div>
         <div className="col-9">
           <div className="row h-75">

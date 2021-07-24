@@ -142,14 +142,14 @@ function Utensilio() {
 
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Utensilios</h3>
-          <i class="fas fa-utensils fa-10x"></i>
+          <i class="fas fa-utensils fa-10x  text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12  h-25"  style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4">
 
                 <div class="col"><button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button></div>
@@ -160,7 +160,7 @@ function Utensilio() {
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               Búsqueda de Utensilios
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">
@@ -192,7 +192,7 @@ function Utensilio() {
               </div>
               <div class="form-group row mt-2">
 
-                <div class="col-sm-12"
+                <div class="col-sm-12 table-scroll"
                   onKeyUp={capturaInput} onBlur={actualiza}>
                   <BootstrapTable
                     keyField="id"
@@ -203,7 +203,7 @@ function Utensilio() {
                   />
                 </div>
 
-                <div class="text-center col-12 bg-success h-25">
+                <div class="text-center col-12 h-25"  style={{ backgroundColor: "#C42709" }}>
                   <div class="row row-cols-2 m-4">
                     <Link to='/agregarUtensilio'>
                       <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>

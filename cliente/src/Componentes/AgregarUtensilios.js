@@ -32,6 +32,19 @@ function AgregarUtensilios() {
  
              }
             });  
+        Axios.get("http://localhost:3001/marcas/names").then((res) => {
+        console.log('data'+res.data)
+        console.log(res.data[1]);
+        var array = [];
+        for(var k in res.data) {
+          console.log(array.push(res.data[k].nombre));
+        }
+        for(var i in array)
+        { 
+            document.getElementById("marcas").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+
+        }
+      });
     });
   }, []);
 
@@ -125,17 +138,12 @@ function AgregarUtensilios() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="marcas"
                         onChange={(event)=>{
                           setMarcaEquipo(event.target.value);
                         }}
                       >
-                        <option>Marca 1</option>
-                        <option>Marca 2</option>
-                        <option>Marca 3</option>
-                        <option>Marca 4</option>
-                        <option>Marca 5</option>
-                        <option>Marca 6</option>
+                        
                       </select>
                 </div>
                 

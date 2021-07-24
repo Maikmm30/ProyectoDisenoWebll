@@ -11,6 +11,7 @@ function UnidadMedida() {
   const [unidadMedida, setUnidad] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [detalleBusca, setDetalle] = useState("");
+  var [nombreBusca, setNombre] = useState("");
 
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [unidadNuevo, setNuevoUnidad] = useState("");
@@ -110,6 +111,11 @@ function UnidadMedida() {
     },
   ];
 
+  const limpiaCajas = () => {
+    setCodigo("");
+    setDetalle("");
+  };
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
@@ -148,7 +154,7 @@ function UnidadMedida() {
             <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4 text-lighttext-light">
                 <div class="col">
-                  <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
+                  <button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas} ></button>
                 </div>
                 <div class="col ">
                   <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></i>
@@ -162,7 +168,6 @@ function UnidadMedida() {
               </div>
             </div>
             <div class="col-12 bg-danger h-80">
-              Solo búsqueda
               <div class="container">
                 <div class="row">
                   <div class="col">
@@ -202,7 +207,7 @@ function UnidadMedida() {
                 </div>
               </div>
               <div class="form-group text-center" class="table-scroll">
-                <div class="py-5 px-4" 
+                <div class="py-5 px-4"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
                   <BootstrapTable

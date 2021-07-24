@@ -75,7 +75,7 @@ function Cajas() {
       text: "Apertura de Caja",
       editable: false,
     },
-    ,
+    
     {
       dataField: "cierreCaja",
       text: "Cierre de caja",

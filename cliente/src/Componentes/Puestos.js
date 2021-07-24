@@ -149,7 +149,7 @@ function Puestos() {
       <div class="row " style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Puestos</h3>
-          <i class="fas fa-user-friends fa-10x"></i>
+          <i class="fas fa-user-friends fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">

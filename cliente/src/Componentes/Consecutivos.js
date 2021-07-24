@@ -150,14 +150,14 @@ function Consecutivos() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Consecutivos</h3>
           <i className="fas fa-window-restore fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row h-75">
-            <div className="text-center col-12 bg-success h-25">
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
 
                 <div className="col">
@@ -175,7 +175,7 @@ function Consecutivos() {
                 </div>
               </div>
             </div>
-            <div className="col-12 bg-danger h-80">
+            <div className="col-12 h-80">
               <div className="container">
                 <div className="row">
                   <div className="col">
@@ -222,8 +222,8 @@ function Consecutivos() {
                 </div>
               </div>
             </div>
-            <div className="bg-success text-center">
-              <div className="row row-cols-2 m-4 ">
+            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div className="row row-cols-2 m-4  ">
                 <Link to="/agregarConsecutivos">
                   <div className="col">
                     <i className=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>

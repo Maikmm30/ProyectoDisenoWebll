@@ -157,14 +157,14 @@ function Usuarios() {
 
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Usuarios</h3>
           <i class="fas fa-user-alt fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4">
 
                 <div class="col">
@@ -181,7 +181,7 @@ function Usuarios() {
                 </div>
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               Información de los artículos
               <div class="container">
                 <div class="row">
@@ -222,7 +222,7 @@ function Usuarios() {
 
                 </div>
               </div>
-              <div class="form-group text-center">
+              <div class="form-group text-center" class="table-scroll">
                 <div class="py-5 px-4"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
@@ -236,8 +236,8 @@ function Usuarios() {
                 </div>
               </div>
             </div>
-            <div class="bg-success text-center ">
-              <div class="row row-cols-2 m-4">
+            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div className="row row-cols-2 m-4">
                 <Link to="/agregarUsuarios">
                   <div class="col">
                     <button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button>
@@ -254,4 +254,5 @@ function Usuarios() {
     </div>
   );
 }
+
 export default Usuarios;

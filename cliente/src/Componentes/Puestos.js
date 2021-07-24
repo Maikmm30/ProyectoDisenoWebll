@@ -166,36 +166,40 @@ function Puestos() {
             </div>
             <div class="col-12 h-80">
               Búsqueda de Puestos
-              <div class="form-group row mt-2">
-                <label class="col-sm-2 col-form-label">
-                  Código del puesto
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    value={codigoBusca}
-                    onChange={(event) => {
-                      setCodigo(event.target.value);
-                    }}
-                  />
+              <div className="container">
+              <div className="row">
+                <div className="col">
+                  <div className="form-group row mt-2">
+                    <label className="col-sm-4 col-form-label">
+                      Código del Puesto
+                    </label>
+                    <div className="col-sm-8">
+                      <input type="text" className="form-control"
+                        value={codigoBusca}
+                        onChange={(event) => {
+                          setCodigo(event.target.value);
+                        }} />
+                    </div>
+                  </div>
                 </div>
-                <label class="col-sm-2 col-form-label">
-                  Nombre del puesto
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="text"
-                    class="form-control"
-                    value={nombreBusca}
-                    onChange={(event) => {
-                      setNombre(event.target.value);
-                    }}
-                  />
+                <div className="col">
+                  <div className="form-group row mt-2">
+                    <label className="col-sm-4 col-form-label">
+                    Nombre del Puesto
+                    </label>
+                    <div className="col-sm-8">
+                      <input type="text" className="form-control"
+                        value={nombreBusca}
+                        onChange={(event) => {
+                          setNombre(event.target.value);
+                        }} />
+                    </div>
+                  </div>
                 </div>
               </div>
+            </div>
 
-              <div class="form-group row mt-2">
+              <div class="form-group text-center  table-scroll">
 
                 <div class="py-5 px-5"
                   onKeyUp={capturaInput} onBlur={actualizaPais}>
@@ -207,8 +211,8 @@ function Puestos() {
                     cellEdit={cellEditFactory({ mode: 'dbclick' })}
                   />
                 </div>
-
-                <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+                </div>
+                <div class="text-center " style={{ backgroundColor: "#C42709" }}>
                   <div class="row row-cols-2 m-4">
                     <Link to='/agregarPuestos'>
                       <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
@@ -219,7 +223,6 @@ function Puestos() {
                     </div>
 
                   </div>
-                </div>
               </div>
             </div>
           </div>

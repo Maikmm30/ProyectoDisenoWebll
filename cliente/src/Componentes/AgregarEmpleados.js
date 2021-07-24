@@ -1,5 +1,3 @@
-import { Container, Row, Col } from "react-bootstrap";
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 

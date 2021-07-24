@@ -11,6 +11,7 @@ function UnidadMedida() {
   const [unidadMedida, setUnidad] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [detalleBusca, setDetalle] = useState("");
+  var [nombreBusca, setNombre] = useState("");
 
   var [codigoActualiza, setCodigoActualiza] = useState("")
   var [unidadNuevo, setNuevoUnidad] = useState("");
@@ -110,6 +111,11 @@ function UnidadMedida() {
     },
   ];
 
+  const limpiaCajas = () => {
+    setCodigo("");
+    setDetalle("");
+  };
+
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
@@ -138,20 +144,18 @@ function UnidadMedida() {
 
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista Unidades de Medida</h3>
-          <i class="fas fa-balance-scale-right fa-10x"></i>
+          <i class="fas fa-balance-scale-right fa-10x text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
-              <div class="row row-cols-4 m-4">
-                <Link to="/agregarUnidadMedida">
-                  <div class="col">
-                    <i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
-                  </div>
-                </Link>
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div class="row row-cols-4 m-4 text-lighttext-light">
+                <div class="col">
+                  <button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas} ></button>
+                </div>
                 <div class="col ">
                   <i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={capturaBusca}></i>
                 </div>
@@ -164,7 +168,6 @@ function UnidadMedida() {
               </div>
             </div>
             <div class="col-12 bg-danger h-80">
-              Solo búsqueda
               <div class="container">
                 <div class="row">
                   <div class="col">
@@ -203,7 +206,7 @@ function UnidadMedida() {
                   </div>
                 </div>
               </div>
-              <div class="form-group text-center">
+              <div class="form-group text-center" class="table-scroll">
                 <div class="py-5 px-4"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>
@@ -217,11 +220,13 @@ function UnidadMedida() {
                 </div>
               </div>
             </div>
-            <div class="bg-success text-center">
-              <div class="row h-100 ">
-                <div class="col">
-                  <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
-                </div>
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div class="row row-cols-2 m-4">
+                <Link to="/agregarUnidadMedida">
+                  <div class="col">
+                    <i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i>
+                  </div>
+                </Link>
                 <div className="col">
                   <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                 </div>

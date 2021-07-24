@@ -114,14 +114,14 @@ function Paises() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Lista de Países </h3>
           <i className="fas fa-globe-americas fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row h-75">
-            <div className="text-center col-12 bg-success h-30">
+            <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
                 <div className="col">
                   <button className="p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button>
@@ -137,7 +137,7 @@ function Paises() {
                 </div>
               </div>
             </div>
-            <div className="col-12 bg-danger h-80">
+            <div className="col-12 h-80">
               Solo búsqueda
               <div className="container">
                 <div className="row">
@@ -177,8 +177,10 @@ function Paises() {
                   </div>
                 </div>
               </div>
-              <div className="form-group text-center">
-                <div className="py-5 px-5" onKeyUp={capturaInput} onBlur={actualizaPais}>
+              <div class="form-group row mt-2  text-center" class="table-scroll">
+                <div className="py-5 px-5"
+                  onKeyUp={capturaInput}
+                  onBlur={actualizaPais}>
                   <BootstrapTable
                     keyField="id"
                     data={paises}
@@ -190,8 +192,8 @@ function Paises() {
               </div>
             </div>
 
-            <div className="bg-success text-center">
-              <div className="row">
+            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+              <div className="row row-cols-2 m-4  ">
 
                 <div className="col">
                   <Link to="/agregarPaises">

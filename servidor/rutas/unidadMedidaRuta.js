@@ -11,7 +11,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/names").get((req, res) => {
-  UnidadMedida.find({ estado: { $ne: 'false' } }).select('unidadMedida')
+  UnidadMedida.find({ estado: { $ne: 'false' } }).select('detalle')
     .then((restaurante) => res.json(restaurante))
     .catch((err) => res.status(400).json("Error: " + err));
 });

@@ -162,7 +162,6 @@ function AgregarUnidadMedida() {
                         <option>Unidades de fuerza</option>
                         <option>Unidades de longitud</option>
                         <option>Unidades de masa</option>
-                        <option>Unidades de peso específico</option>
                         <option>Unidades de potencia</option>
                         <option>Unidades de superficie</option>
                         <option>Unidades de temperatura</option>

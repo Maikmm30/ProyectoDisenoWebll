@@ -1,5 +1,6 @@
 const router = require("express").Router();
 let Buffet = require("../modelos/Buffet");
+let Consecutivo = require("../modelos/Consecutivos");
 const express = require("express");
 const app = express();
 
@@ -9,24 +10,31 @@ router.route("/").get((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/id").get((req, res) => {
+  
+    Consecutivo.find({nombre: 'buffet'}).select('valorConsecutivo')
+        .then((consecutivo) => res.json(consecutivo))
+        .catch((err) => res.status(400).json("Error: " + err));
+  });
+  
 
 router.post("/agregar", async (req, res) => {
     const codigoBuffet = req.body.codigoBuffet;
+    const numeroBuffet = req.body.numeroBuffet;
     const nombreBuffet = req.body.nombreBuffet;
     const precioBuffet = req.body.precioBuffet;
-    const tipoComidaBuffet = req.body.tipoComidaBuffet;
-    const unidadMedidaBuffet = req.body.unidadMedidaBuffet;
-    const restauranteBuffet = req.body.restauranteBuffet;
+    const tipoBuffet = req.body.tipoBuffet;
+    const unidadBuffet = req.body.unidadBuffet;
     const estadoBuffet = req.body.estadoBuffet;
 
     try {
         const buffet = new Buffet({
             codigo: codigoBuffet,
+            numero: numeroBuffet,
             nombre: nombreBuffet,
             precio: precioBuffet,
-            tipoComida: tipoComidaBuffet,
-            unidadMedida: unidadMedidaBuffet,
-            restaurante: restauranteBuffet,
+            tipoComida: tipoBuffet,
+            unidadMedida: unidadBuffet,
             estado: estadoBuffet
         });
         await buffet.save();

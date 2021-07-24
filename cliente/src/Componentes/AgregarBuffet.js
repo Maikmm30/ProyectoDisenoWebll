@@ -1,5 +1,61 @@
+import { Container, Row, Col } from "react-bootstrap";
+import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
 
 function AgregarBuffet() {
+
+  const [codigoBuffet, setCodigoBuffet] = useState("");
+  const [numeroBuffet, setNumeroBuffet] = useState("");
+  const [nombreBuffet, setNombreBuffet] = useState("");
+  const [precioBuffet, setPrecioBuffet] = useState("");
+  const [tipoBuffet, setTipoBuffet] = useState("");
+  const [unidadBuffet, setUnidadBuffet ] = useState("");
+
+  
+  useEffect(() => {
+    Axios.get("http://localhost:3001/buffet/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo) + 1;
+      setNumeroBuffet(num);
+
+      const str = "B";
+      setCodigoBuffet(str + num);
+     
+      Axios.get("http://localhost:3001/unidadMedida/names").then((res) => {
+        console.log('data' + res.data)
+        console.log(res.data[1]);
+        var array = [];
+        for (var k in res.data) {
+          console.log(array.push(res.data[k].detalle));
+        }
+        for (var i in array) {
+          document.getElementById("unidad").innerHTML += "<option value='" + array[i] + "'>" + array[i] + "</option>";
+
+        }
+      });
+    });
+
+  }, []);
+
+  const enviarDatos = () => {
+    Axios.post("http://localhost:3001/buffet/agregar",{
+      codigoBuffet: codigoBuffet,
+      numeroBuffet: numeroBuffet,
+      nombreBuffet: nombreBuffet,
+      precioBuffet: precioBuffet,
+      tipoBuffet: tipoBuffet,
+      unidadBuffet: unidadBuffet,
+      estadoBuffet: true,
+    });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '10',
+        consecutivoNuevo: numeroBuffet,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
+    window.location.href = 'http://localhost:3000/administracion/especiales/buffet/'
+  };
+
   return (
     <div className="container">
       <div className="row " style={{ height: "600px" , backgroundColor: "#FF723F"}}>
@@ -12,7 +68,7 @@ function AgregarBuffet() {
             <div className="text-center col-12  h-25"  style={{  backgroundColor: "#C42709"}}>
               <div className="row row-cols-4 m-4  text-light">
                 <div className="col"><i className="p-3 ght rounded-circle fas fa-broom fa-3x "></i></div>
-                <div className="col"><i className="p-3 ght rounded-circle  fas fa-check-circle fa-3x"></i></div>
+                <div className="col"><i className="p-3 ght rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
                 <div className="col"><i className="py-3 px-4 ght rounded-circle fas fa-times fa-3x"></i></div>
                 <div className="col"><i className="fas fa-search fa-4x"></i></div>
 
@@ -26,9 +82,10 @@ function AgregarBuffet() {
                 </label>
                 <div className="col-sm-4">
                   <input
-                    type="number"
+                    type="text"
                     className="form-control"
                     readonly="readonly"
+                    value={codigoBuffet}
                   />
                 </div>
               </div>
@@ -40,6 +97,9 @@ function AgregarBuffet() {
                   <input
                     type="text"
                     className="form-control"
+                    onChange={(event)=>{
+                      setNombreBuffet(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -51,6 +111,9 @@ function AgregarBuffet() {
                   <input
                     type="number"
                     className="form-control"
+                    onChange={(event)=>{
+                      setPrecioBuffet(event.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -62,6 +125,9 @@ function AgregarBuffet() {
                   <select
                     className="form-control"
                     id="exampleFormControlSelect1"
+                    onChange={(event)=>{
+                      setTipoBuffet(event.target.value);
+                    }}
                   >
                     <option selected="selected">Marina</option>
                     <option>Vegetal</option>
@@ -79,23 +145,15 @@ function AgregarBuffet() {
                 <div className="col-sm-4">
                   <select
                     className="form-control"
-                    id="exampleFormControlSelect2"
+                    id="unidad"
+                    onChange={(event)=>{
+                      setUnidadBuffet(event.target.value);
+                    }}
+                    onClick={(event)=>{
+                      setUnidadBuffet(event.target.value);
+                    }}
                   >
-                    <option>Unidades de capacidad</option>
-                    <option>Unidades de densidad</option>
-                    <option>Unidades de energia</option>
-                    <option>Unidades de fuerza</option>
-                    <option>Unidades de longitud</option>
-                    <option>Unidades de masa</option>
-                    <option>Unidades de peso específico</option>
-                    <option>Unidades de superficie</option>
-                    <option>Unidades de temperatura</option>
-                    <option>Unidades de tiempo</option>
-                    <option>Unidades de velocidad</option>
-                    <option>Unidades de viscosidad</option>
-                    <option>Unidades de volumen</option>
-                    <option>Unidades eléctricas</option>
-                    <option>Unidades de potencia</option>
+                    
                   </select>
                 </div>
               </div>

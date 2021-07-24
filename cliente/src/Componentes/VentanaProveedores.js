@@ -9,7 +9,7 @@ function VentanaProveedores(){
           <div>
 
           <div style={{ padding: "30px 350px", backgroundColor: "#FF723F" }}>
-              <h4 className='text-center' style={{ color: "#FFF" }}>Ventana Administración</h4>
+              <h4 className='text-center' style={{ color: "#FFF" }}>Ventana Proveedores</h4>
 
               <CardGroup>
 

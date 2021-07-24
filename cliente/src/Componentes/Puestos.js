@@ -199,9 +199,9 @@ function Puestos() {
               </div>
             </div>
 
-              <div class="form-group text-center  table-scroll">
+              <div class="form-group text-center  ">
 
-                <div class="py-5 px-5"
+                <div class="py-5 px-5 table-scroll"
                   onKeyUp={capturaInput} onBlur={actualizaPais}>
                   <BootstrapTable
                     keyField="id"

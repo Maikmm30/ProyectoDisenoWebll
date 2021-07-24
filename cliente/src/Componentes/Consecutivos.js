@@ -176,7 +176,6 @@ function Consecutivos() {
               </div>
             </div>
             <div className="col-12 bg-danger h-80">
-              Solo búsqueda
               <div className="container">
                 <div className="row">
                   <div className="col">
@@ -209,7 +208,7 @@ function Consecutivos() {
                   </div>
                 </div>
               </div>
-              <div className="form-group text-center">
+              <div className="form-group text-center" class="table-scroll">
                 <div className="py-5 px-4"
                   onKeyUp={capturaInput}
                   onBlur={actualiza}>

@@ -38,12 +38,12 @@ const columns = [
   {
     dataField: "tipoCliente",
     text: "Tipo Cliente",
-  },
+  }
 ];
 
 function ClientesMesas() {
 
-  const [ClientesMesas, setClientesMesas] = useState([]);
+  const [clientesMesas, setClientesMesas] = useState([]);
   var [codigoBusca, setCodigo] = useState("");
   var [nombreBusca, setNombre] = useState("");
 
@@ -74,7 +74,7 @@ function ClientesMesas() {
         nombreBusca: nombreBusca
       })
       .then((res) => {
-        ClientesMesas(res.data);
+        clientesMesas(res.data);
       });
   };
 
@@ -226,7 +226,7 @@ function ClientesMesas() {
                   onBlur={actualizaClienteMesa}>
                   <BootstrapTable
                     keyField="id"
-                    data={ClientesMesas}
+                    data={clientesMesas}
                     columns={columns}
                     rowEvents={rowEvents}
                     cellEdit={cellEditFactory({ mode: "dbclick" })}

@@ -77,7 +77,7 @@ function Paises() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(JSON.parse(row.codigo))
+      setCodigoActualiza(row.codigo)
     }
   };
   const capturaInput = (event) => {

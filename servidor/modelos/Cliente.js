@@ -28,7 +28,11 @@ let clienteSchema = new Schema({
     },
     estado : {
         type: Boolean
+    }, 
+    tipoCliente: { //Mesa o Barra
+        type: String
     }
+
 })
 
 const Cliente = mongoose.model('cliente', clienteSchema, 'cliente');

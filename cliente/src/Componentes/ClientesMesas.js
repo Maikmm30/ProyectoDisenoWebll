@@ -130,7 +130,7 @@ function ClientesMesas() {
 
   return (
     <div className="container">
-      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "857px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5 ">
           <h3>Lista de Clientes Mesa</h3>
           <i className="fas fa-utensils fa-10x"></i>
@@ -159,11 +159,18 @@ function ClientesMesas() {
                 <div className="row">
                   <div className="col me-4">
                     <div className="form-group row mt-2">
-                      <label className="col-sm-4 col-form-label">
+                      <label className="col-sm-3 col-form-label">
                         Código del Cliente
                       </label>
-                      <div className="col-sm-8 ">
-                        <input type="number" className="form-control" />
+                      <div className="col-sm-8">
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={codigoBusca}
+                          onChange={(event) => {
+                            setCodigo(event.target.value);
+                          }}
+                        />
                       </div>
                     </div>
                   </div>
@@ -228,7 +235,7 @@ function ClientesMesas() {
               </div>
             </div>
 
-            <div className="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
+            <div className="text-center col-12 h-20" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-2 m-4  ">
 
                 <div className="col">

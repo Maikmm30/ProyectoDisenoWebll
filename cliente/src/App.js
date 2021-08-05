@@ -86,8 +86,7 @@ function App() {
         <Fragment>
           <Navbar />
           <Route path="/home" component={Home} />
-          <Route
-            path="/agregarClientesMesas" component={AgregarClientesMesas}/>
+          <Route path="/agregarClientesMesas" component={AgregarClientesMesas} />
           <Route path="/clientesMesas" component={ClientesMesas} />
           <Route path="/seguridad" component={Seguridad} />
           <Route path="/agregarUsuarios" component={AgregarUsuarios} />
@@ -103,10 +102,7 @@ function App() {
           <Route path="/agregarUnidadMedida" component={AgregarUnidadMedida} />
           <Route path="/aperturaCajas" component={AperturaCajas} />
           <Route path="/clientesBarra" component={ClientesBarra} />
-          <Route
-            path="/agregarClientesBarra"
-            component={AgregarClientesBarra}
-          />
+          <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
           <Route path="/cierreCajas" component={CierreCajas} />
           <Route path="/restauranteTurin" component={RestauranteTurin} />
           <Route path="/restaurantePicolla" component={RestaurantePicolla} />
@@ -114,11 +110,7 @@ function App() {
           <Route path="/agregarProveedores" component={AgregarProveedores} />
 
           <Route path="/restaurantes" exact component={Restaurantes} />
-          <Route
-            path="/restaurantes/agregar-restaurantes"
-            exact
-            component={AgregarRestaurante}
-          />
+          <Route path="/restaurantes/agregar-restaurantes" exact component={AgregarRestaurante} />
 
           <Route path="/ayuda-sistema" component={AyudaSistema} />
           <Route path="/ayuda-seguridad" component={AyudaSeguridad} />
@@ -127,92 +119,28 @@ function App() {
           <Route path="/ayuda-vinos" component={AyudaVinos} />
 
           <Route path="/administracion" exact component={Administracion} />
-          <Route
-            path="/administracion/especiales"
-            exact
-            component={Especiales}
-          />
-          <Route
-            path="/administracion/especiales/buffet"
-            exact
-            component={Buffet}
-          />
-          <Route
-            path="/administracion/especiales/buffet/agregar-buffet"
-            exact
-            component={AgregarBuffet}
-          />
-          <Route
-            path="/administracion/especiales/bebidas"
-            exact
-            component={Bebidas}
-          />
+          <Route path="/administracion/especiales" exact component={Especiales} />
+          <Route path="/administracion/especiales/buffet" exact component={Buffet} />
+          <Route path="/administracion/especiales/buffet/agregar-buffet" exact component={AgregarBuffet} />
+          <Route path="/administracion/especiales/bebidas" exact component={Bebidas} />
 
-          <Route
-            path="/administracion/especiales/bebidas/calientes"
-            exact
-            component={BebidasCalientes}
-          />
-          <Route
-            path="/administracion/especiales/bebidas/calientes/agregar-bebida-caliente"
-            exact
-            component={AgregarBebidaCaliente}
-          />
+          <Route path="/administracion/especiales/bebidas/calientes" exact component={BebidasCalientes} />
+          <Route path="/administracion/especiales/bebidas/calientes/agregar-bebida-caliente" exact component={AgregarBebidaCaliente} />
 
-          <Route
-            path="/administracion/especiales/bebidas/heladas"
-            exact
-            component={BebidasHeladas}
-          />
-          <Route
-            path="/administracion/especiales/bebidas/helada/agregar-bebida-helada"
-            exact
-            component={AgregarBebidaHelada}
-          />
+          <Route path="/administracion/especiales/bebidas/heladas" exact component={BebidasHeladas} />
+          <Route path="/administracion/especiales/bebidas/helada/agregar-bebida-helada" exact component={AgregarBebidaHelada} />
 
-          <Route
-            path="/administracion/especiales/bebidas/gaseosas"
-            exact
-            component={BebidasGaseosas}
-          />
-          <Route
-            path="/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa"
-            exact
-            component={AgregarBebidaGaseosa}
-          />
+          <Route path="/administracion/especiales/bebidas/gaseosas" exact component={BebidasGaseosas} />
+          <Route path="/administracion/especiales/bebidas/gaseosas/agregar-bebida-gaseosa" exact component={AgregarBebidaGaseosa} />
 
-          <Route
-            path="/administracion/especiales/bebidas/licores"
-            exact
-            component={BebidasLicores}
-          />
-          <Route
-            path="/administracion/especiales/bebidas/licores/agregar-bebida-licor"
-            exact
-            component={AgregarBebidaLicor}
-          />
+          <Route path="/administracion/especiales/bebidas/licores" exact component={BebidasLicores} />
+          <Route path="/administracion/especiales/bebidas/licores/agregar-bebida-licor" exact component={AgregarBebidaLicor} />
 
-          <Route
-            path="/administracion/especiales/bebidas/vinos"
-            exact
-            component={BebidasVinos}
-          />
-          <Route
-            path="/administracion/especiales/bebidas/vinos/agregar-bebida-vino"
-            exact
-            component={AgregarBebidaVino}
-          />
+          <Route path="/administracion/especiales/bebidas/vinos" exact component={BebidasVinos} />
+          <Route path="/administracion/especiales/bebidas/vinos/agregar-bebida-vino" exact component={AgregarBebidaVino} />
 
-          <Route
-            path="/administracion/especiales/especialidades"
-            exact
-            component={Especialidades}
-          />
-          <Route
-            path="/administracion/especiales/especialidades/agregar-especialidad"
-            exact
-            component={AgregarEspecialidad}
-          />
+          <Route path="/administracion/especiales/especialidades" exact component={Especialidades} />
+          <Route path="/administracion/especiales/especialidades/agregar-especialidad" exact component={AgregarEspecialidad} />
           <Route path="/tecnologia" component={Tecnologia} />
           <Route path="/agregarTecnologia" component={AgregarTecnologia} />
           <Route path="/ventanaProveedores" component={VentanaProveedores} />

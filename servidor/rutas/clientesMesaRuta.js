@@ -5,7 +5,7 @@ const express = require("express");
 const app = express();
 
 router.route("/").get((req, res) => {
-    Cliente.find({ estado: { $ne: 'false' } })
+    Cliente.find({ estado: { $ne: 'false' }, tipoCliente: "Mesa" })
         .then((clientes) => res.json(clientes))
         .catch((err) => res.status(400).json("Error: " + err));
 });
@@ -27,7 +27,7 @@ router.post("/agregar", async (req, res) => {
     const barraClienteMesa = req.body.barra;
     const fechaClienteMesa = req.body.fecha;
     const estadoClienteMesa = req.body.estado;
-    const tipoClienteClienteMesa = req.body.tipoCliente;
+    const tipoCliente = "Mesa";
 
     try {
         const clienteMesa = new Cliente({
@@ -39,7 +39,7 @@ router.post("/agregar", async (req, res) => {
             barra: barraClienteMesa,
             fecha: fechaClienteMesa,
             estado: estadoClienteMesa,
-            tipoCliente: tipoClienteClienteMesa,
+            tipoCliente: tipoCliente,
             montoPagado: montoPagadoClienteMesa,
             montoPagado: montoPagadoClienteMesa
         });

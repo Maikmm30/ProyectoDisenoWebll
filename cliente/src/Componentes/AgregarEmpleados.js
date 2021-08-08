@@ -28,7 +28,12 @@ function AgregarEmpleados() {
         console.log('data' + res.data)
         console.log(res.data[1]);
         var array = [];
+        var primerValor = true;
         for (var k in res.data) {
+          if (primerValor === true){
+            setRestauranteEmpleado(res.data[k].nombre);
+            primerValor = false;
+          }
           console.log(array.push(res.data[k].nombre));
         }
         for (var i in array) {
@@ -43,11 +48,34 @@ function AgregarEmpleados() {
       console.log('data' + res.data)
       console.log(res.data[1]);
       var array1 = [];
+      var primerValor = true;
       for (var k in res.data) {
+        if (primerValor === true){
+          setNacionalidadEmpleado(res.data[k].nombre);
+          primerValor = false;
+        }
         console.log(array1.push(res.data[k].nombre));
       }
       for (var i in array1) {
         document.getElementById("nacionalidad").innerHTML += "<option value='" + array1[i] + "'>" + array1[i] + "</option>";
+
+      }
+    });
+
+    Axios.get("http://localhost:3001/puestos/names").then((res) => {
+      console.log('data' + res.data)
+      console.log(res.data[1]);
+      var array = [];
+      var primerValor = true;
+      for (var k in res.data) {
+        if (primerValor === true){
+          setPuestoEmpleado(res.data[k].nombre);
+          primerValor = false;
+        }
+        console.log(array.push(res.data[k].nombre));
+      }
+      for (var i in array) {
+        document.getElementById("puesto").innerHTML += "<option value='" + array[i] + "'>" + array[i] + "</option>";
 
       }
     });
@@ -183,17 +211,15 @@ function AgregarEmpleados() {
                 <div class="col-sm-8">
                 <select
                         class="form-control"
-                        id="exampleFormControlSelect1"
+                        id="puesto"
                         onChange={(event)=>{
                           setPuestoEmpleado(event.target.value);
                         }}
+                        onClick={(event)=>{
+                          setPuestoEmpleado(event.target.value);
+                        }}
                       >
-                        <option>Puesto 1</option>
-                        <option>Puesto 2</option>
-                        <option>Puesto 3</option>
-                        <option>Puesto 4</option>
-                        <option>Puesto 5</option>
-                        <option>Puesto 6</option>
+                      
                       </select>
                 </div>
               </div>

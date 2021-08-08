@@ -25,7 +25,13 @@ function AgregarBuffet() {
         console.log('data' + res.data)
         console.log(res.data[1]);
         var array = [];
+        var primerValor = true;
+        setTipoBuffet('Marina');
         for (var k in res.data) {
+          if (primerValor === true){
+            setUnidadBuffet(res.data[k].detalle);
+            primerValor = false;
+          }
           console.log(array.push(res.data[k].detalle));
         }
         for (var i in array) {

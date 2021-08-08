@@ -22,7 +22,12 @@ function AgregarTecnologia() {
               console.log('data'+res.data)
               console.log(res.data[1]);
               var array = [];
+              var primerValor = true;
               for(var k in res.data) {
+                if (primerValor === true){
+                  setRestauranteTecnologia(res.data[k].nombre);
+                  primerValor = false;
+                }
                 console.log(array.push(res.data[k].nombre));
              }
              for(var i in array)
@@ -35,7 +40,12 @@ function AgregarTecnologia() {
         console.log('data'+res.data)
         console.log(res.data[1]);
         var array = [];
+        var primerValor = true;
         for(var k in res.data) {
+          if (primerValor === true){
+            setMarcaTecnologia(res.data[k].nombre);
+            primerValor = false;
+          }
           console.log(array.push(res.data[k].nombre));
         }
         for(var i in array)

@@ -17,6 +17,13 @@ router.route("/id").get((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/names").get((req, res) => {
+  Puesto.find({ estado: { $ne: 'false' } }).select('nombre')
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
 router.post("/agregar", async (req, res) => {
   const codigoPuesto = req.body.codigoPuesto;
   const nombrePuesto = req.body.nombrePuesto;

@@ -26,7 +26,15 @@ function AgregarComestibles() {
               console.log('data'+res.data)
               console.log(res.data[1]);
               var array = [];
+              var primerValor = true;
+              setTipoDeComestible('Frutas');
+              setClaseDeComestible('Fibra');
+              setLineaDeComestible('Secos');
               for(var k in res.data) {
+                if (primerValor === true){
+                  setRestauranteComestible(res.data[k].nombre);
+                  primerValor = false;
+                }
                 console.log(array.push(res.data[k].nombre));
              }
              for(var i in array)
@@ -39,8 +47,13 @@ function AgregarComestibles() {
         console.log('data'+res.data)
         console.log(res.data[1]);
         var array = [];
+        var primerValor = true;
         for(var k in res.data) {
-          console.log(array.push(res.data[k].unidadMedida));
+          if (primerValor === true){
+            setUnidadDeMedidaComestible(res.data[k].detalle);
+            primerValor = false;
+          }
+          console.log(array.push(res.data[k].detalle));
         }
         for(var i in array)
         { 
@@ -52,7 +65,12 @@ function AgregarComestibles() {
         console.log('data'+res.data)
         console.log(res.data[1]);
         var array = [];
+        var primerValor = true;
         for(var k in res.data) {
+          if (primerValor === true){
+            setMarcaComestible(res.data[k].nombre);
+            primerValor = false;
+          }
           console.log(array.push(res.data[k].nombre));
         }
         for(var i in array)

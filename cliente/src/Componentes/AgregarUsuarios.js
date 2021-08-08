@@ -19,10 +19,29 @@ function AgregarUsuarios() {
   useEffect(() => {
     Axios.get("http://localhost:3001/usuario/id").then((res) => {
       const num = parseInt(res.data[0].valorConsecutivo) + 1;
+      console.log(num);
       setNumeroUsuario(num);
-
       const str = "U";
       setCodigoUsuario(str + num);
+
+      Axios.get("http://localhost:3001/roles/names").then((res) => {
+              console.log('data'+res.data)
+              console.log(res.data[1]);
+              var array = [];
+              var primerValor = true;
+              for(var k in res.data) {
+                if (primerValor === true){
+                  setRolUsuario(res.data[k].nombre);
+                  primerValor = false;
+                }
+                console.log(array.push(res.data[k].nombre));
+             }
+             for(var i in array)
+             { 
+                 document.getElementById("rol").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+ 
+             }
+            }); 
   
     });
   
@@ -45,7 +64,7 @@ function AgregarUsuarios() {
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
-        codigoActualiza: '10',
+        codigoActualiza: '21',
         consecutivoNuevo: numeroUsuario,
         columnaSeleccionada: 'valorConsecutivo'
       });
@@ -161,20 +180,20 @@ function AgregarUsuarios() {
                   </div>
                 </div>
              
-              <h4 className='mt-3'>Privilegios</h4>
+              <h4 className='mt-3'>Rol</h4>
               <div className="row mt-2">
               
                 <div className="col">
                 <select
                 class="form-control"
-                id="exampleFormControlSelect1"
+                id="rol"
                 onChange={(event)=>{
                   setRolUsuario(event.target.value);
+                }} 
+                onClick={(event)=>{
+                  setRolUsuario(event.target.value);
                 }} >
-                <option>Administrador del Sistema</option>
-                <option>Administrador de Seguridad</option>
-                <option>Administrador del Restaurante</option>
-                <option>Administrador de Cuentas</option>
+                
               </select>
                 </div>
                 </div>

@@ -18,10 +18,10 @@ let cajaSchema = new Schema({
         type: Number
     },
     aperturaCaja: {
-        type: Number
+        type: Boolean
     },
     cierreCaja : {
-        type: Number
+        type: Boolean
     },
     estado : {
         type: Boolean

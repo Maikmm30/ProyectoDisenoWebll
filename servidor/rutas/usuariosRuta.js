@@ -12,7 +12,6 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/id").get((req, res) => {
-  
   Consecutivo.find({nombre: 'usuario'}).select('valorConsecutivo')
       .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));
@@ -75,6 +74,15 @@ router.route("/buscar").post((req, res) => {
     .then(usuario => res.json(usuario))
     .catch(err => res.status(400).json('Error: ' + err));
 })
+
+router.route("/rol").post((req, res) => {
+  const usuarioBusca = req.body.usuarioBusca;
+
+  Usuario.find({usuario: usuarioBusca}).select('rol')
+      .then((usuario) => res.json(usuario))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 
 router.put("/eliminar", async (req, res) => {
 

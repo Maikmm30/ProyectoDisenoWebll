@@ -17,6 +17,8 @@ function AgregarUnidadMedida() {
       setNumeroUnidadMedida(num);
       const str = "UM";
       setCodigoUnidadMedida(str+num);
+      setEscalaUnidadMedida('Yotta');
+      setDetalleUnidadMedida('Unidades de capacidad');
     });
   }, []);
 

@@ -18,8 +18,26 @@ function Login() {
           displayAlert()
         }
         else{
-          window.location.href = 'http://localhost:3000/home'
+          Axios.post("http://localhost:3001/usuario/rol",
+            {
+              usuarioBusca: usuarioBusca
+            })
+            .then((res) => {
+              //console.log("COOKIE: "+ JSON.stringify(res.data))
+              JSON.stringify(res.data); 
+              console.log(res.data[0].rol)
+              var rol = res.data[0].rol;
+              document.cookie = "rol="+rol;
+              if (rol==="Administrador del Restaurante"){
+                window.location.href = 'http://localhost:3000/aperturaCajas'
+              } else {
+                window.location.href = 'http://localhost:3000/home'
+              }
+            });
+          
         }
+          
+          
     });
   };
   

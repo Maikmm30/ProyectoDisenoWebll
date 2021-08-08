@@ -8,10 +8,22 @@ let clienteSchema = new Schema({
     nombreCompleto: {
         type: String
     },
+    nombreMesa: {
+        type: String
+    },
     montoPagado: {
         type: Number
     },
     restaurante: {
+        type: String
+    },
+    horaEntrada: {
+        type: String
+    },
+    horaSalida: {
+        type: String
+    },
+    duracion: {
         type: String
     },
     detalle: {
@@ -23,13 +35,55 @@ let clienteSchema = new Schema({
     barra : {
         type: Boolean
     },
-    fecha : {
+    fechaLlegada : {
+        type: Date
+    },
+    fechaReservacion: {
         type: Date
     },
     estado : {
         type: Boolean
     }, 
     tipoCliente: { //Mesa o Barra
+        type: String
+    },
+    numeroMesa: {
+        type: Number
+    },
+    pedidoSilla1:{
+        type: String
+    },
+    pedidoSilla2:{
+        type: String
+    },
+    pedidoSilla3:{
+        type: String
+    },
+    pedidoSilla4:{
+        type: String
+    },
+    precioSilla1:{
+        type: Number
+    },
+    precioSilla2:{
+        type: Number
+    },
+    precioSilla3:{
+        type: Number
+    },
+    precioSilla4:{
+        type: Number
+    },
+    pedidoBarra:{
+        type: String
+    },
+    precioBarra: {
+        type: Number
+    },
+    numeroSillaBarra: {
+        type: Number
+    },
+    estadoCuenta:{
         type: String
     }
 

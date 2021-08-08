@@ -28,6 +28,7 @@ function Login() {
               console.log(res.data[0].rol)
               var rol = res.data[0].rol;
               document.cookie = "rol="+rol;
+              document.cookie="usuario="+usuarioBusca;
               if (rol==="Administrador del Restaurante"){
                 window.location.href = 'http://localhost:3000/aperturaCajas'
               } else {

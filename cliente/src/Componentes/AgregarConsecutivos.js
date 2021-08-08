@@ -22,6 +22,9 @@ function AgregarConsecutivos() {
       //setCodigoPais(str+num);
     });
   }, []);*/
+  useEffect(() => {
+    setTipoConsecutivo('Clientes');
+  }, []);
 
   const enviarDatos = () => {
     Axios.post("http://localhost:3001/consecutivos/agregar",{

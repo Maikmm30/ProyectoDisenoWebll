@@ -12,7 +12,6 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/id").get((req, res) => {
-  
   Consecutivo.find({nombre: 'usuario'}).select('valorConsecutivo')
       .then((consecutivo) => res.json(consecutivo))
       .catch((err) => res.status(400).json("Error: " + err));

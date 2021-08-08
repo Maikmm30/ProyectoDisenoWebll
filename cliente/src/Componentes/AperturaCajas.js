@@ -1,4 +1,52 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+
 function AperturaCajas() {
+
+  const [codigoCaja, setCodigoCaja] = useState("");
+  const [numeroCaja, setNumeroCaja] = useState("");
+  const [entradaDineroCaja, setEntradaDineroCaja] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/cajas/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo) + 1;
+      setNumeroCaja(num);
+      const str = "CA";
+      console.log(num);
+      setCodigoCaja(str + num);
+    });
+
+  }, []);
+
+  const enviarDatos = () => {
+    
+    var currentdate = new Date();
+    Axios.post("http://localhost:3001/cajas/agregar", {
+      //codigoCaja: codigoCaja,
+      //numeroCaja: numeroCaja,
+      codigoCaja: codigoCaja,
+      entradaDineroCaja: entradaDineroCaja,
+      fechaCaja: currentdate.getDate() + "/"
+      + (currentdate.getMonth()+1)  + "/" 
+      + currentdate.getFullYear() + " @ "  
+      + currentdate.getHours() + ":"  
+      + currentdate.getMinutes() + ":" 
+      + currentdate.getSeconds(),
+      restauranteCaja: 'Restaurante 1 - Cookie',
+      aperturaCaja: true,
+      descripcionCaja: "Apertura de Caja",
+      cierreCaja: false,
+      estadoCaja: true
+    });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '22',
+        consecutivoNuevo: numeroCaja,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
+    window.location.href = 'http://localhost:3000/cajas'
+  };
+
   return (
     <div className="container">
       <div className="row bg-warning" style={{ height: "800px" }}>
@@ -14,7 +62,7 @@ function AperturaCajas() {
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i>
                 </div>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
@@ -46,6 +94,9 @@ function AperturaCajas() {
                         <input
                           type="number"
                           className="form-control"
+                          onChange={(event)=>{
+                            setEntradaDineroCaja(event.target.value);
+                          }}
                         />
                       </div>
                     </div>

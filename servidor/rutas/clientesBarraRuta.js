@@ -12,38 +12,59 @@ router.route("/").get((req, res) => {
 
 router.route("/id").get((req, res) => {
 
-    Consecutivo.find({ nombre: 'clientesBarra' }).select('valorConsecutivo')
+    Consecutivo.find({ nombre: 'cliente' }).select('valorConsecutivo')
         .then((consecutivo) => res.json(consecutivo))
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.post("/agregar", async (req, res) => {
+    console.log("AGREGAR")
     const codigoClienteBarra = req.body.codigoClienteBarra;
-    const nombreCompletoClienteBarra = req.body.nombreCompleto;
-    const montoPagadoClienteBarra = req.body.montoPagado;
-    const restauranteClienteBarra = req.body.restaurante;
-    const detalleClienteBarra = req.body.detalle;
-    const reservacionClienteBarra = req.body.reservacion;
-    const barraClienteBarra = req.body.barra;
-    const fechaClienteBarra = req.body.fecha;
-    const estadoClienteBarra = req.body.estado;
-    const tipoCliente = "Barra";
+    const nombreCompletoClienteBarra = req.body.nombreCompletoClienteBarra;
+    //const nombreMesaClienteBarra = req.body.nombreMesaClienteBarra;
+    const nombreMesaClienteBarra = 'Barra Silla';
+    const montoPagadoClienteBarra = req.body.montoPagadoClienteBarra;
+    const restauranteClienteBarra = req.body.restauranteClienteBarra;
+    //const detalleClienteBarra = req.body.detalleClienteBarra;
+    const detalleClienteBarra = 'Pedido en la Barra';
+    //const reservacionClienteBarra = req.body.reservacionClienteBarra;
+    const reservacionClienteBarra = 'No';
+    //const barraClienteBarra = req.body.barraClienteBarra;
+    const barraClienteBarra = true;
+    //const fechaClienteBarra = req.body.fechaClienteBarra;
+    const fechaClienteBarra = '05/07/21';
+    const horaEntradaClienteBarra = req.body.horaEntradaClienteBarra;
+    const horaSalidaClienteBarra = req.body.horaSalidaClienteBarra;
+    const duracionClienteBarra = req.body.duracionClienteBarra;
+    //const estadoClienteBarra = req.body.estadoClienteBarra;
+    const estadoClienteBarra = true;
+    const pedidoClienteBarra = req.body.pedidoClienteBarra;
+    const numeroSillaClienteBarra = req.body.numeroSillaClienteBarra;
+    const precioClienteBarra = req.body.precioClienteBarra;
+    const tipoClienteBarra = "Barra";
 
     try {
-        const clienteBarra = new Cliente({
+        console.log("AGREGAR")
+        const cliente = new Cliente({
             codigo: codigoClienteBarra,
             nombreCompleto: nombreCompletoClienteBarra,
+            nombreMesa: nombreMesaClienteBarra,
+            montoPagado: montoPagadoClienteBarra,
             restaurante: restauranteClienteBarra,
             detalle: detalleClienteBarra,
             reservacion: reservacionClienteBarra,
             barra: barraClienteBarra,
-            fecha: fechaClienteBarra,
+            fechaLlegada: fechaClienteBarra,
+            horaEntrada: horaEntradaClienteBarra,
+            horaSalida: horaSalidaClienteBarra,
+            duracion: duracionClienteBarra,
             estado: estadoClienteBarra,
-            tipoCliente: tipoCliente,
-            montoPagado: montoPagadoClienteBarra,
-            montoPagado: montoPagadoClienteBarra
+            pedidoBarra: pedidoClienteBarra,
+            precioBarra: precioClienteBarra,
+            numeroSillaBarra: numeroSillaClienteBarra,
+            tipoCliente: tipoClienteBarra
         });
-        await clienteBarra.save();
+        await cliente.save();
         res.send("inserted data");
     } catch (err) {
         console.log(err);

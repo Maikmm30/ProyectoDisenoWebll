@@ -1,4 +1,57 @@
+import React, { useState, useEffect } from 'react';
+import Axios from 'axios';
+
 function AgregarClientesBarra() {
+
+  const [codigoClienteBarra, setCodigoClienteBarra] = useState("");
+  const [numeroClienteBarra, setNumeroClienteBarra] = useState("");
+  const [nombreCompletoClienteBarra, setNombreCompletoClienteBarra] = useState("");
+  const [montoPagadoClienteBarra, setMontoPagadoClienteBarra] = useState("");
+  const [restauranteClienteBarra, setRestauranteClienteBarra] = useState("");
+  const [fechaClienteBarra, setFechaClienteBarra] = useState("");
+  const [horaEntradaClienteBarra, setHoraEntradaClienteBarra] = useState("");
+  const [horaSalidaClienteBarra, setHoraSalidaClienteBarra] = useState("");
+  const [duracionClienteBarra, setDuracionClienteBarra] = useState("");
+  const [pedidoClienteBarra, setPedidoClienteBarra] = useState("");
+  const [precioClienteBarra, setPrecioClienteBarra] = useState("");
+  const [numeroSillaClienteBarra, setNumeroSillaClienteBarra] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/clientes-barra/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroClienteBarra(num);
+      const str = "CLI";
+      setCodigoClienteBarra(str+num);
+      setFechaClienteBarra('05/07/21')
+    });
+    
+  }, []);
+
+  const enviarDatos = () => {
+    console.log('Entró')
+    Axios.post("http://localhost:3001/clientes-barra/agregar",{
+      codigoClienteBarra: codigoClienteBarra,
+      nombreCompletoClienteBarra: nombreCompletoClienteBarra,
+      montoPagadoClienteBarra: montoPagadoClienteBarra,
+      restauranteClienteBarra: restauranteClienteBarra,
+      fechaClienteBarra: fechaClienteBarra,
+      horaEntradaClienteBarra: horaEntradaClienteBarra,
+      horaSalidaClienteBarra: horaSalidaClienteBarra,
+      duracionClienteBarra: duracionClienteBarra,
+      pedidoClienteBarra: pedidoClienteBarra,
+      precioClienteBarra: precioClienteBarra,
+      numeroSillaClienteBarra: numeroSillaClienteBarra,
+    });
+    console.log('Codigo'+codigoClienteBarra)
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '23',
+        consecutivoNuevo: numeroClienteBarra,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
+    window.location.href = 'http://localhost:3000/clientesBarra'
+  };
+
   return (
     <div className="container">
       <div className="estilocambia row bg-warning" style={{ height: "900px" }}>
@@ -14,7 +67,7 @@ function AgregarClientesBarra() {
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i>
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i>
                 </div>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
@@ -27,78 +80,62 @@ function AgregarClientesBarra() {
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Código Cliente</label>
                     <div className="col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="First name"
-                      />
+                    <input type="text" className="form-control" value={codigoClienteBarra} disabled/>
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Nombre del cliente</label>
                     <div className="col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Last name"
-                      />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                  setNombreCompletoClienteBarra(event.target.value);
+                }}/>
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Nombre de la mesa</label>
                     <div className="col-sm-9">
-                      <select
-                        className="form-control"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="...">Mesa1</option>
-                        <option value="...">Mesa2</option>
-                      </select>
+                    <input type="text" className="form-control" />
                     </div>
                   </div>
 
                   <div className="mt-2  mb-3 row">
                     <label className="col-sm-3">Monto de pago</label>
                     <div className="col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Last name"
-                      />
+                    <input type="number" className="form-control" onChange={(event)=>{
+                  setMontoPagadoClienteBarra(event.target.value);
+                }}/>
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Restaurante</label>
                     <div className="col-sm-9">
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="First name"
-                      />
+                    <input type="text" className="form-control" onChange={(event)=>{
+                  setRestauranteClienteBarra(event.target.value);
+                }}/>
                     </div>
                   </div>
 
                   <div className="my-4">
                     <label className="me-2">Hora de Entrada</label>
-                    <input type="time" name="" id="" />
+                    <input type="time" className="form-control" onChange={(event)=>{
+                  setHoraEntradaClienteBarra(event.target.value);
+                }}/>
 
                     <label className="mx-2">Hora de salida</label>
-                    <input type="time" name="" id="" />
+                    <input type="time" className="form-control" onChange={(event)=>{
+                  setHoraSalidaClienteBarra(event.target.value);
+                }}/>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Duracion en Barra</label>
                     <div className="col-sm-9">
-                      <select
-                        className="form-control"
-                        id="exampleFormControlSelect1"
-                      >
-                        <option value="1">1 hora</option>
-                        <option value="2">2 horas</option>
-                      </select>
+                    <input type="text" className="form-control" onChange={(event)=>{
+                  setDuracionClienteBarra(event.target.value);
+                }}/>
                     </div>
                   </div>
                 </form>
@@ -117,13 +154,17 @@ function AgregarClientesBarra() {
                 <div className="mt-2 form-group row">
                   <label className="col-sm-5 col-form-label">Pedido</label>
                   <div className="col-sm-6">
-                    <input type="text" className="form-control" />
+                  <input type="text" className="form-control" onChange={(event)=>{
+                  setPedidoClienteBarra(event.target.value);
+                }}/>
                   </div>
                 </div>
                 <div className="mt-2 form-group row">
                   <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-6">
-                    <input type="text" className="form-control" />
+                  <input type="number" className="form-control" onChange={(event)=>{
+                  setPrecioClienteBarra(event.target.value);
+                }}/>
                   </div>
                 </div>
                 <div className="mt-2 form-group row">
@@ -131,7 +172,9 @@ function AgregarClientesBarra() {
                     Número de silla
                   </label>
                   <div className="col-sm-6">
-                    <input type="text" className="form-control" />
+                  <input type="number" className="form-control" onChange={(event)=>{
+                  setNumeroSillaClienteBarra(event.target.value);
+                }}/>
                   </div>
                 </div>
               </div>
@@ -143,7 +186,7 @@ function AgregarClientesBarra() {
                       Estado de la Cuenta
                     </label>
                     <div className="col-sm-8">
-                      <input type="text" className="form-control" />
+                    <input type="text" className="form-control" />
                     </div>
                   </div>
                   <div className="mb-3 row">

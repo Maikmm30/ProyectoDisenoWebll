@@ -34,6 +34,10 @@ function VentanaReportes(){
             document.getElementById("clientes").style.display = "none";
             document.getElementById("facturacion").style.display = "none";
           }
+          if (rol === 'Administrador de Cuentas'){
+            document.getElementById("clientes").style.display = "none";
+            document.getElementById("bitacora").style.display = "none";
+          }
           
         });
         

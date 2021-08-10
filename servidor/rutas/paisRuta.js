@@ -1,6 +1,7 @@
 const router = require("express").Router();
 let Pais = require("../modelos/Pais");
 let Consecutivo = require("../modelos/Consecutivos");
+let Bitacora = require("../modelos/Bitacora");
 const express = require("express");
 const app = express();
 
@@ -16,11 +17,15 @@ router.route("/names").get((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-router.route("/id").get((req, res) => {
-  
-  Consecutivo.find({nombre: 'pais'}).select('valorConsecutivo')
-      .then((consecutivo) => res.json(consecutivo))
-      .catch((err) => res.status(400).json("Error: " + err));
+router.route("/id").get(async (req, res) => {
+
+  Consecutivo.find({ nombre: 'pais' }).select('valorConsecutivo')
+    .then((consecutivo) => {
+      res.json(consecutivo)
+    })
+    .catch((err) => res.status(400).json("Error: " + err));
+
+
 });
 
 router.post("/agregar", async (req, res) => {
@@ -39,6 +44,44 @@ router.post("/agregar", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
+
+  //Agregar a bitacora FALTA CONSECUTIVO
+  //Get current time and date
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
+
+  var valorConsecutivo;
+  //Se obtiene el consecutivo//
+  await Consecutivo.find({ nombre: 'bitacora' })
+    .then((consecutivo) => {
+      valorConsecutivo = parseInt(consecutivo[0].valorConsecutivo) + 1;
+    })
+
+  //Se actualiza el consecutivo en la tabla
+  await Consecutivo.findOneAndUpdate({ codigo: '24' }, { valorConsecutivo: valorConsecutivo }, (err, consecutivo) => {
+  });
+  //*********//
+
+  var usuario = req.body.bitacoraUsuario
+  var rol_usuario = req.body.bitacoraRol
+  var descripcion = "Se inserto el Pais con el codigo " + codigoPais;
+
+  try {
+    const bitacora = new Bitacora({
+      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      usuario: usuario,
+      rol_usuario: rol_usuario,
+      fecha: dateTime,
+      descripcion: descripcion
+    });
+    await bitacora.save();
+
+  } catch (err) {
+    console.log(err)
+  }
+
 });
 
 router.put("/update", async (req, res) => {
@@ -53,6 +96,44 @@ router.put("/update", async (req, res) => {
   }
   catch (err) {
     res.send('error' + err);
+  }
+
+
+  //Agregar a bitacora FALTA CONSECUTIVO
+  //Get current time and date
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
+
+  var valorConsecutivo;
+  //Se obtiene el consecutivo//
+  await Consecutivo.find({ nombre: 'bitacora' })
+    .then((consecutivo) => {
+      valorConsecutivo = parseInt(consecutivo[0].valorConsecutivo) + 1;
+    })
+
+  //Se actualiza el consecutivo en la tabla
+  await Consecutivo.findOneAndUpdate({ codigo: '24' }, { valorConsecutivo: valorConsecutivo }, (err, consecutivo) => {
+  });
+  //*********//
+
+  var usuario = req.body.bitacoraUsuario
+  var rol_usuario = req.body.bitacoraRol
+  var descripcion = "Se actualizo el Pais con el codigo " + codigoActualiza;
+
+  try {
+    const bitacora = new Bitacora({
+      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      usuario: usuario,
+      rol_usuario: rol_usuario,
+      fecha: dateTime,
+      descripcion: descripcion
+    });
+    await bitacora.save();
+
+  } catch (err) {
+    console.log(err)
   }
 })
 
@@ -75,6 +156,43 @@ router.put("/eliminar", async (req, res) => {
   }
   catch (err) {
     res.send('error' + err);
+  }
+
+  //Agregar a bitacora FALTA CONSECUTIVO
+  //Get current time and date
+  var today = new Date();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date + ' ' + time;
+
+  var valorConsecutivo;
+  //Se obtiene el consecutivo//
+  await Consecutivo.find({ nombre: 'bitacora' })
+    .then((consecutivo) => {
+      valorConsecutivo = parseInt(consecutivo[0].valorConsecutivo) + 1;
+    })
+
+  //Se actualiza el consecutivo en la tabla
+  await Consecutivo.findOneAndUpdate({ codigo: '24' }, { valorConsecutivo: valorConsecutivo }, (err, consecutivo) => {
+  });
+  //*********//
+
+  var usuario = req.body.bitacoraUsuario
+  var rol_usuario = req.body.bitacoraRol
+  var descripcion = "Se elimino el Pais con el codigo " + codigoBusca;
+
+  try {
+    const bitacora = new Bitacora({
+      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      usuario: usuario,
+      rol_usuario: rol_usuario,
+      fecha: dateTime,
+      descripcion: descripcion
+    });
+    await bitacora.save();
+
+  } catch (err) {
+    console.log(err)
   }
 })
 

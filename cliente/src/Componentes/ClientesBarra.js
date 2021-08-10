@@ -22,7 +22,7 @@ const columns = [
     text: "Detalle",
   },
   {
-    dataField: "fecha",
+    dataField: "fechaLlegada",
     text: "Fecha",
   },
   {

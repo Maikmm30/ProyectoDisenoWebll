@@ -23,10 +23,9 @@ const columns = [
     text: "Detalle",
   },
   {
-    dataField: "fecha",
+    dataField: "fechaLlegada",
     text: "Fecha",
   },
-  ,
   {
     dataField: "reservacion",
     text: "Reservación",

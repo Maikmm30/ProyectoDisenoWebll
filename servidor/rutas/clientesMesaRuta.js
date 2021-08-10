@@ -19,29 +19,58 @@ router.route("/id").get((req, res) => {
 
 router.post("/agregar", async (req, res) => {
     const codigoClienteMesa = req.body.codigoClienteMesa;
-    const nombreCompletoClienteMesa = req.body.nombreCompleto;
-    const montoPagadoClienteMesa = req.body.montoPagado;
-    const restauranteClienteMesa = req.body.restaurante;
-    const detalleClienteMesa = req.body.detalle;
-    const reservacionClienteMesa = req.body.reservacion;
-    const barraClienteMesa = req.body.barra;
-    const fechaClienteMesa = req.body.fecha;
-    const estadoClienteMesa = req.body.estado;
-    const tipoCliente = "Mesa";
+    const nombreCompletoClienteMesa = req.body.nombreCompletoClienteMesa;
+    const nombreMesaClienteMesa = req.body.nombreMesaClienteMesa;
+    const montoPagadoClienteMesa = req.body.montoPagadoClienteMesa;
+    const restauranteClienteMesa = req.body.restauranteClienteMesa;
+    const detalleClienteMesa = 'Pedido en Mesa';
+    const reservacionClienteMesa = req.body.reservacionClienteMesa;
+    const barraClienteMesa = false;
+    const fechaLlegadaClienteMesa = req.body.fechaLlegadaClienteMesa;
+    const fechaReservacionClienteMesa = req.body.fechaReservacionClienteMesa;
+    const horaEntradaClienteMesa = req.body.horaEntradaClienteMesa;
+    const horaSalidaClienteMesa = req.body.horaSalidaClienteMesa;
+    const duracionClienteMesa = req.body.duracionClienteMesa;
+    const estadoClienteMesa = true;
+    const numeroMesaClienteMesa = req.body.numeroMesaClienteMesa;
+    const pedidoSilla1ClienteMesa = req.body.pedidoSilla1ClienteMesa;
+    const pedidoSilla2ClienteMesa = req.body.pedidoSilla2ClienteMesa;
+    const pedidoSilla3ClienteMesa = req.body.pedidoSilla3ClienteMesa;
+    const pedidoSilla4ClienteMesa = req.body.pedidoSilla4ClienteMesa;
+    const precioSilla1ClienteMesa = req.body.precioSilla1ClienteMesa;
+    const precioSilla2ClienteMesa = req.body.precioSilla2ClienteMesa;
+    const precioSilla3ClienteMesa = req.body.precioSilla3ClienteMesa;
+    const precioSilla4ClienteMesa = req.body.precioSilla4ClienteMesa;
+    const estadoCuentaClienteMesa = req.body.estadoCuentaClienteMesa;
+    const tipoClienteClienteMesa = 'Mesa';
 
     try {
         const clienteMesa = new Cliente({
             codigo: codigoClienteMesa,
             nombreCompleto: nombreCompletoClienteMesa,
+            nombreMesa: nombreMesaClienteMesa,
+            montoPagado: montoPagadoClienteMesa,
             restaurante: restauranteClienteMesa,
             detalle: detalleClienteMesa,
             reservacion: reservacionClienteMesa,
             barra: barraClienteMesa,
-            fecha: fechaClienteMesa,
+            fechaLlegada: fechaLlegadaClienteMesa,
+            fechaReservacion: fechaReservacionClienteMesa,
+            horaEntrada: horaEntradaClienteMesa,
+            horaSalida: horaSalidaClienteMesa,
+            duracion: duracionClienteMesa,
             estado: estadoClienteMesa,
-            tipoCliente: tipoCliente,
-            montoPagado: montoPagadoClienteMesa,
-            montoPagado: montoPagadoClienteMesa
+            numeroMesa: numeroMesaClienteMesa,
+            pedidoSilla1: pedidoSilla1ClienteMesa,
+            pedidoSilla2: pedidoSilla2ClienteMesa,
+            pedidoSilla3: pedidoSilla3ClienteMesa,
+            pedidoSilla4: pedidoSilla4ClienteMesa,
+            precioSilla1: precioSilla1ClienteMesa,
+            precioSilla2: precioSilla2ClienteMesa,
+            precioSilla3: precioSilla3ClienteMesa,
+            precioSilla4: precioSilla4ClienteMesa,
+            estadoCuenta: estadoCuentaClienteMesa,
+            tipoCliente: tipoClienteClienteMesa
         });
         await clienteMesa.save();
         res.send("inserted data");

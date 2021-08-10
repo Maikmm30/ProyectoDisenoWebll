@@ -45,7 +45,7 @@ router.post("/agregar", async (req, res) => {
     console.log(err);
   }
 
-  //Agregar a bitacora FALTA CONSECUTIVO
+  //Agregar a bitacora
   //Get current time and date
   var today = new Date();
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -70,7 +70,7 @@ router.post("/agregar", async (req, res) => {
 
   try {
     const bitacora = new Bitacora({
-      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      codigo: "BIT" + valorConsecutivo,
       usuario: usuario,
       rol_usuario: rol_usuario,
       fecha: dateTime,
@@ -99,7 +99,7 @@ router.put("/update", async (req, res) => {
   }
 
 
-  //Agregar a bitacora FALTA CONSECUTIVO
+  //Agregar a bitacora
   //Get current time and date
   var today = new Date();
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -124,7 +124,7 @@ router.put("/update", async (req, res) => {
 
   try {
     const bitacora = new Bitacora({
-      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      codigo: "BIT" + valorConsecutivo,
       usuario: usuario,
       rol_usuario: rol_usuario,
       fecha: dateTime,
@@ -158,7 +158,7 @@ router.put("/eliminar", async (req, res) => {
     res.send('error' + err);
   }
 
-  //Agregar a bitacora FALTA CONSECUTIVO
+  //Agregar a bitacora
   //Get current time and date
   var today = new Date();
   var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -183,7 +183,7 @@ router.put("/eliminar", async (req, res) => {
 
   try {
     const bitacora = new Bitacora({
-      codigo: "BIT" + valorConsecutivo, //Se necesita consecutivo
+      codigo: "BIT" + valorConsecutivo,
       usuario: usuario,
       rol_usuario: rol_usuario,
       fecha: dateTime,
@@ -201,6 +201,5 @@ router.route("/obtenerCodigos").get((req, res) => {
     .then(pais => res.json(pais))
     .catch(err => res.status(400).json('Error: ' + err));
 })
-
 
 module.exports = router;

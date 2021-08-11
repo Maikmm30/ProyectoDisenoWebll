@@ -55,7 +55,7 @@ router.put("/update", async (req, res) => {
     const clienteMesaNuevo = req.body.clienteMesaNuevo;
     const columnaSeleccionada = req.body.columnaSeleccionada;
     try {
-        await Pais.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: clienteMesaNuevo }, (err, clienteMesa) => {
+        await Cliente.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: clienteMesaNuevo }, (err, clienteMesa) => {
             res.json(clienteMesa);
 
         });

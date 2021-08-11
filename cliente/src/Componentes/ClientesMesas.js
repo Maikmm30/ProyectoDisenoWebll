@@ -4,43 +4,6 @@ import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 
-
-const columns = [
-  {
-    dataField: "codigo",
-    text: "Código",
-  },
-  {
-    dataField: "nombreCompleto",
-    text: "Nombre",
-  },
-  {
-    dataField: "montoPagado",
-    text: "Monto Pagado",
-  },
-  {
-    dataField: "detalle",
-    text: "Detalle",
-  },
-  {
-    dataField: "fecha",
-    text: "Fecha",
-  },
-  ,
-  {
-    dataField: "reservacion",
-    text: "Reservación",
-  },
-  {
-    dataField: "restaurante",
-    text: "Restaurante",
-  },
-  {
-    dataField: "tipoCliente",
-    text: "Tipo Cliente",
-  }
-];
-
 function ClientesMesas() {
 
   const [clientesMesas, setClientesMesas] = useState([]);
@@ -74,7 +37,7 @@ function ClientesMesas() {
         nombreBusca: nombreBusca
       })
       .then((res) => {
-        clientesMesas(res.data);
+        setClientesMesas(res.data);
       });
   };
 
@@ -88,14 +51,10 @@ function ClientesMesas() {
       });
   };
 
-  const rowEvents = {
-    onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(row.codigo)
-    }
-  };
+
   const capturaInput = (event) => {
     if (!event.target.value == '') {
-      clienteMesaNuevo(event.target.value)
+      setclienteMesaNuevo(event.target.value)
       console.log(event.target)
     }
   };
@@ -127,6 +86,103 @@ function ClientesMesas() {
     setNombre("")
   }
 
+
+
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+      editable: false,
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "nombreCompleto",
+      text: "Nombre",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "montoPagado",
+      text: "Monto Pagado",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "detalle",
+      text: "Detalle",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "nombreMesa",
+      text: "Nombre Mesa",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "fecha",
+      text: "Fecha",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    
+    {
+      dataField: "reservacion",
+      text: "Reservación",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante", 
+        events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+    {
+      dataField: "tipoCliente",
+      text: "Tipo Cliente",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
+  
+  ];  
+  
+  let rowEvents = {
+    onClick: (e, row, rowIndex) => {
+      setCodigoActualiza(row.codigo)
+      let nombreMesa =JSON.stringify(row)
+      window.location.href = `http://localhost:3000/agregarClientesMesas/${nombreMesa}`
+      console.log(nombreMesa)
+    } 
+  };
 
   return (
     <div className="container">
@@ -178,46 +234,19 @@ function ClientesMesas() {
                     <div className="row">
                       <div className="form-group row ">
                         <label className="col-sm-4 col-form-label">
-                          Fecha de Reservación
+                        Nombre del Cliente
                         </label>
                         <div className="col-sm-8">
-                          <input type="date" className="form-control" />
+                          <input type="text" className="form-control"
+                          value={nombreBusca}
+                          onChange={(event) => {
+                            setNombre(event.target.value);
+                          }} />
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="form-group  mt-2">
-                    <div className="row ">
-                      <div className="col ">
-                        <div className="form-group row ">
-                          <label className="col-sm-4  col-form-label">
-                            Nombre del Cliente
-                          </label>
-                          <div className="col-sm-8">
-                            <input type="text" className="form-control ms-2" />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col ms-5">
-                        <div className="row">
-                          <div className="form-group row">
-                            <div >
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id=""
-                              />
-                              <label className="ms-2 ">
-                                Reservación
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="form-group row mt-2  text-center" class="table-scroll">
@@ -225,7 +254,7 @@ function ClientesMesas() {
                   onKeyUp={capturaInput}
                   onBlur={actualizaClienteMesa}>
                   <BootstrapTable
-                    keyField="id"
+                    keyField="codigo"
                     data={clientesMesas}
                     columns={columns}
                     rowEvents={rowEvents}

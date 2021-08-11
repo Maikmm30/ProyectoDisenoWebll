@@ -86,7 +86,11 @@ function App() {
         <Fragment>
           <Navbar />
           <Route path="/home" component={Home} />
-          <Route path="/agregarClientesMesas" component={AgregarClientesMesas} />
+          <Route path="/agregarClientesMesas" component={AgregarClientesMesas} exact />
+        
+          <Route path="/agregarClientesMesas/:obj" component={AgregarClientesMesas}  />
+
+          
           <Route path="/clientesMesas" component={ClientesMesas} />
           <Route path="/seguridad" component={Seguridad} />
           <Route path="/agregarUsuarios" component={AgregarUsuarios} />

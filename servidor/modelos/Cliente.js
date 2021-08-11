@@ -86,7 +86,7 @@ let clienteSchema = new Schema({
     estadoCuenta:{
         type: String
     },
-    estadoMesa:{
+    ocupado:{
         type:Boolean
     }
 

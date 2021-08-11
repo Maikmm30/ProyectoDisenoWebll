@@ -18,6 +18,7 @@ function ClientesMesas() {
     Axios.get("http://localhost:3001/clientes-mesa/").then((res) => {
       setClientesMesas(res.data);
     });
+    console.log(clientesMesas)
   }, []);
 
   const actualizaClienteMesa = () => {

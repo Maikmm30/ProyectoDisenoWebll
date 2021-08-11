@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useParams } from "react-router-dom";
 import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 function AgregarClientesMesas() {
@@ -11,21 +12,33 @@ const [showMesa, setShowMesa] = useState(true);
 
 const generarPdf =() =>{
   
-    const doc = new jsPDF();
-    doc.text(JSON.stringify(JSON.parse(params.obj)), 20, 20);
+  const doc = new jsPDF();
+  let tabla =  JSON.parse(params.obj) 
+    doc.autoTable({
+      head: [['Codigo', 'Nombre', 'Monto Pagado', 'Detalle', 'Nombre de Mesa', 'Fecha', 'Reservación', 'Restaurante', 'Tipo de Cliente' ]],
+      body: [
+        [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.nombreMesa, tabla.fecha, tabla.reservacion, tabla.restaurante, tabla.tipoCliente]
+      ],
+     
+      startY: 40,
+      styles: {
+      
+        halign: 'center',
+        cellWidth: 21 
+      },
+      
+    })
+   
     window.open(URL.createObjectURL(doc.output("blob")))
     doc.save()
-  
+  console.log(tabla.nombreMesa)
 }
 const deshabilitar=()=>{
   toast.warning('El cliente no ha realizado el pago',
   {position: toast.POSITION.TOP_CENTER,
- autoClose: 2500})
+   autoClose: 2500})
 }
 useEffect(() => {
-
-  //let ob=(JSON.parse(params.obj) );
-  //console.log( JSON.parse(params.obj).nombreMesa )
   if(JSON.stringify(params.obj).length > 8){
     setShowMesa(false)
   

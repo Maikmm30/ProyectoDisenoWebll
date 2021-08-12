@@ -10,6 +10,19 @@ router.route("/").get((req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/names").get((req, res) => {
+    Buffet.find({ estado: { $ne: 'false' } }).select('nombre')
+      .then((restaurante) => res.json(restaurante))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/precios").get((req, res) => {
+Buffet.find({ estado: { $ne: 'false' } }).select('precio')
+    .then((restaurante) => res.json(restaurante))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+  
+
 router.route("/id").get((req, res) => {
   
     Consecutivo.find({nombre: 'buffet'}).select('valorConsecutivo')
@@ -66,6 +79,14 @@ router.route("/buscar").post((req, res) => {
     const nombreBusca = req.body.nombreBusca
 
     Buffet.find({ codigo: codigoBusca, nombre: nombreBusca })
+        .then(buffet => res.json(buffet))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
+router.route("/buscarNombre").post((req, res) => {
+    const nombreBusca = req.body.nombreBusca
+
+    Buffet.find({nombre: nombreBusca }).select('precio')
         .then(buffet => res.json(buffet))
         .catch(err => res.status(400).json('Error: ' + err));
 })

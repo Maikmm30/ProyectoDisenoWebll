@@ -7,6 +7,12 @@ import React, { useState, useEffect } from "react";
 
 function RestauranteTurin() {
   var [ocupadoImage, setOcupado] = useState([]); 
+  var [cuadroTextoClientes, setCuadroTextoClientes] = useState(true); 
+  var [cuadroTextoMesas, setCuadroTextoMesas] = useState(true); 
+  var [cuadroTextoReservaciones, setCuadroReservaciones] = useState(true); 
+  var [cuadroTextoProductos, setCuadroProductos] = useState(true); 
+  var [reservacionMesa, setReservacionMesa] = useState([]); 
+  var [especialRestaurante, setEspecial] = useState([]); 
   let ocupadoMesa = (Mesa)=>{
     return ocupadoImage.filter((o) => o.nombreMesa == Mesa && o.ocupado == true ).length
    
@@ -18,35 +24,56 @@ function RestauranteTurin() {
       setOcupado(res.data)
     });
 
+    Axios.post("http://localhost:3001/clientes-mesa/obtenerReservaciones",{
+      restauranteClienteMesa : 'Turin'
+    }).then((res) => {
+      setReservacionMesa(res.data)
+    
+    });
+
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/obtenerEspecialidades",{
+      restauranteClienteMesa : 'Turin'
+    }).then((res) => {
+      setEspecial(res.data)
+    });
+
+
   }, []);
   return (
     <div className="container">
       <div className="row " style={{ height: "1000px",  backgroundColor:  "#C42709"  }}>
         <div className="col-3 m-auto text-center pb-5">
-          <button className="rounded-circle border-0 mt-2 p-2">
+        <button className={!cuadroTextoMesas ? "border-0 mt-2 p-2" : "border-0 mt-2 p-2 rounded-circle "}
+        onClick={()=> setCuadroTextoMesas(!cuadroTextoMesas)}>
             <img
               src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNTEyLjAwMSA1MTIuMDAxIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIuMDAxIDUxMi4wMDE7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4NCjxnPg0KCTxnPg0KCQk8Zz4NCgkJCTxwYXRoIGQ9Ik01MDUuOTQ3LDEyMy41OTdjLTQuMzUzLTQuNzUyLTEwLjU0Ni03LjQ3Ny0xNi45OS03LjQ3N2gtNi44MzdjLTE3LjkyOSwwLTMyLjYzMSwxMy40NjgtMzQuMTk4LDMxLjMyOGwtNy4zOTcsODQuMjc5DQoJCQkJYy0wLjY1NSw3LjQ2OS02LjgwNCwxMy4xMDItMTQuMzAzLDEzLjEwMmgtNjQuMDI2Yy0yMC41MTYsMC0zNy4yMDcsMTYuNjkxLTM3LjIwNywzNy4yMDd2My42OTcNCgkJCQljMCwxMi4zOTUsMTAuMDgzLDIyLjQ3OCwyMi40NzgsMjIuNDc4aDEzLjcyM2wtMTMuNTE0LDQ0LjEzNWMtMC4wMSwwLjAzMy0wLjAyLDAuMDY2LTAuMDMsMC4wOTlsLTEwLjMzLDMzLjczNg0KCQkJCWMtMS4yMTMsMy45NjEsMS4wMTUsOC4xNTQsNC45NzUsOS4zNjdjMC43MzIsMC4yMjQsMS40NzIsMC4zMzEsMi4xOTksMC4zMzFjMy4yMDksMCw2LjE4LTIuMDc3LDcuMTY4LTUuMzA2bDguNzEyLTI4LjQ1MUg0NjMuMjQNCgkJCQlsOC43MTIsMjguNDUxYzAuOTg4LDMuMjI5LDMuOTU4LDUuMzA2LDcuMTY4LDUuMzA2YzAuNzI4LDAsMS40NjgtMC4xMDcsMi4xOTktMC4zMzFjMy45Ni0xLjIxMyw2LjE4OC01LjQwNyw0Ljk3NS05LjM2Nw0KCQkJCWwtMjQuNTE3LTgwLjA2NmM0LjMwNS0xLjIxOSw4LjQ2Mi0yLjk1MywxMi4zNjItNS4xODhjMy41OTMtMi4wNiw0LjgzNi02LjY0MywyLjc3Ni0xMC4yMzYNCgkJCQljLTIuMDYtMy41OTMtNi42NDQtNC44MzYtMTAuMjM3LTIuNzc2Yy02LjA0NCwzLjQ2NS0xMi45MzksNS4yOTctMTkuOTQsNS4yOTdoLTc1LjQwMmMtMC4wMjUsMC0wLjA1LDAtMC4wNzQsMGgtMjMuNzkzDQoJCQkJYy00LjEyMywwLTcuNDc4LTMuMzU0LTcuNDc4LTcuNDc4di0zLjY5N2MwLTEyLjI0NSw5Ljk2Mi0yMi4yMDcsMjIuMjA3LTIyLjIwN2g2NC4wMjZjMTUuMzMzLDAsMjcuOTA2LTExLjUxOCwyOS4yNDYtMjYuNzkxDQoJCQkJbDcuMzk2LTg0LjI4YzAuODgyLTEwLjA1Niw5LjE2LTE3LjY0LDE5LjI1NS0xNy42NGg2LjgzN2MyLjI4MiwwLDQuMzg5LDAuOTI3LDUuOTMsMi42MWMxLjU0MiwxLjY4MywyLjI4MiwzLjg2MiwyLjA4Miw2LjEzNg0KCQkJCWwtMTAuMjQyLDExNi43MTFjLTAuMjUyLDIuODc4LTAuODEzLDUuNzI2LTEuNjY2LDguNDY0Yy0xLjIzMiwzLjk1NSwwLjk3Niw4LjE2LDQuOTMxLDkuMzkxYzMuOTYsMS4yMzIsOC4xNTktMC45NzcsOS4zOTItNC45Mw0KCQkJCWMxLjE3MS0zLjc2MiwxLjk0LTcuNjY5LDIuMjg3LTExLjYxNGwxMC4yNDItMTE2LjcxMUM1MTIuNDc0LDEzNC43NTcsNTEwLjMsMTI4LjM0OSw1MDUuOTQ3LDEyMy41OTd6IE0zNzYuODc1LDMwOC4yMTJoNjkuODU1DQoJCQkJbDExLjkxNCwzOC45MWgtOTMuNjg0TDM3Ni44NzUsMzA4LjIxMnoiLz4NCgkJCTxwYXRoIGQ9Ik0xNDkuODAzLDI0NC44M0g4NS43NzdjLTcuNDk5LDAtMTMuNjQ3LTUuNjMyLTE0LjMwMy0xMy4xMDJsLTcuMzk2LTg0LjI3OWMtMS41NjctMTcuODYtMTYuMjY5LTMxLjMyOC0zNC4xOTgtMzEuMzI4DQoJCQkJaC02LjgzN2MtNi40NDQsMC0xMi42MzcsMi43MjUtMTYuOTksNy40NzdjLTQuMzUzLDQuNzUyLTYuNTI3LDExLjE2LTUuOTY1LDE3LjU4MWwxMC4yNDIsMTE2LjcxMQ0KCQkJCWMxLjIwOSwxMy43NzMsNy40ODksMjYuNTAxLDE3LjY4NCwzNS44NDFjNi40MDUsNS44NjgsMTQuMDEsMTAuMDc3LDIyLjIwNiwxMi4zOTdsLTI0LjUxNCw4MC4wNTUNCgkJCQljLTEuMjEzLDMuOTYxLDEuMDE1LDguMTU0LDQuOTc1LDkuMzY3YzAuNzMyLDAuMjI0LDEuNDcyLDAuMzMxLDIuMTk5LDAuMzMxYzMuMjA5LDAsNi4xOC0yLjA3Nyw3LjE2OC01LjMwNmw4LjcxMi0yOC40NTFIMTUxLjYzDQoJCQkJbDguNzEyLDI4LjQ1MWMwLjk4OCwzLjIyOSwzLjk1OCw1LjMwNiw3LjE2OCw1LjMwNmMwLjcyOCwwLDEuNDY4LTAuMTA3LDIuMTk5LTAuMzMxYzMuOTYtMS4yMTMsNi4xODgtNS40MDcsNC45NzUtOS4zNjcNCgkJCQlsLTEwLjMzLTMzLjczNmMtMC4wMS0wLjAzMy0wLjAyLTAuMDY2LTAuMDMtMC4wOTlsLTEzLjUxNC00NC4xMzVoMTMuNzIzYzEyLjM5NSwwLDIyLjQ3Ny0xMC4wODMsMjIuNDc3LTIyLjQ3OHYtMy42OTcNCgkJCQlDMTg3LjAxLDI2MS41MjEsMTcwLjMxOSwyNDQuODMsMTQ5LjgwMywyNDQuODN6IE01My4zNTMsMzQ3LjEyMmwxMS45MTQtMzguOTFoNjkuODU1bDExLjkxNCwzOC45MUg1My4zNTN6IE0xNzIuMDEsMjg1LjczNA0KCQkJCWMwLDQuMTI0LTMuMzU0LDcuNDc4LTcuNDc3LDcuNDc4aC0yMy43ODhjLTAuMDMsMC0wLjA1OSwwLTAuMDg5LDBINjUuMjYzYy0xLjYwNCwwLTMuMTgyLTAuMTAzLTQuNzM2LTAuMjgzDQoJCQkJYy0wLjAwMSwwLTAuMDAzLDAtMC4wMDUsMGMtMTguNzY0LTIuMTY5LTMzLjU1OC0xNy4wNjUtMzUuMjUtMzYuMzUyTDE1LjAzLDEzOS44NjdjLTAuMi0yLjI3NSwwLjU0LTQuNDU0LDIuMDgyLTYuMTM3DQoJCQkJYzEuNTQxLTEuNjgzLDMuNjQ3LTIuNjEsNS45My0yLjYxaDYuODM3YzEwLjA5NSwwLDE4LjM3Myw3LjU4MywxOS4yNTUsMTcuNjRsNy4zOTYsODQuMjc5di0wLjAwMQ0KCQkJCWMxLjM0LDE1LjI3MywxMy45MTMsMjYuNzkxLDI5LjI0NiwyNi43OTFoNjQuMDI2YzEyLjI0NSwwLDIyLjIwNyw5Ljk2MiwyMi4yMDcsMjIuMjA3VjI4NS43MzR6Ii8+DQoJCQk8cGF0aCBkPSJNMzEyLjk0OCwzNzEuMTQxYy0zLjA5NS0xMS44OTctMTMuODQxLTIwLjIwNi0yNi4xMzQtMjAuMjA2aC00LjY0MlYyMTQuNDAxaDkyLjM1NGM1LjMyLDAsMTAuMjk5LTIuMzY1LDEzLjY2MS02LjQ4OA0KCQkJCWMzLjM2Mi00LjEyNCw0LjY3Ny05LjQ3OCwzLjYwNS0xNC42OWMtMy4yMjYtMTUuNjg0LTE3LjE4OC0yNy4wNjctMzMuMTk5LTI3LjA2N0gyMDIuNjY1Yy00LjE0MywwLTcuNSwzLjM1OC03LjUsNy41DQoJCQkJczMuMzU3LDcuNSw3LjUsNy41aDE1NS45MjhjOC45MjYsMCwxNi43MDgsNi4zNDYsMTguNTA2LDE1LjA4OGMwLjIxOSwxLjA2NC0wLjI0MywxLjgyOS0wLjUzNywyLjE5MQ0KCQkJCWMtMC4yOTUsMC4zNjEtMC45NTEsMC45NjctMi4wMzYsMC45NjdIMTM3LjQ3MmMtMS4wODUsMC0xLjc0MS0wLjYwNi0yLjAzNi0wLjk2N2MtMC4yOTQtMC4zNjEtMC43NTYtMS4xMjctMC41MzctMi4xOQ0KCQkJCWMxLjc5OC04Ljc0Myw5LjU4LTE1LjA4OSwxOC41MDYtMTUuMDg5aDE0LjA4NGM0LjE0MywwLDcuNS0zLjM1OCw3LjUtNy41cy0zLjM1Ny03LjUtNy41LTcuNWgtMTQuMDg0DQoJCQkJYy0xNi4wMTIsMC0yOS45NzQsMTEuMzgzLTMzLjE5OSwyNy4wNjhjLTEuMDcxLDUuMjEyLDAuMjQzLDEwLjU2NiwzLjYwNSwxNC42ODljMy4zNjIsNC4xMjMsOC4zNDEsNi40ODgsMTMuNjYxLDYuNDg4aDkyLjM1NQ0KCQkJCXYxMzYuNTM1aC00LjY0MmMtMTIuMjkzLDAtMjMuMDM5LDguMzA5LTI2LjEzNCwyMC4yMDVsLTEuNzYxLDYuNzY3Yy0xLjEyNyw0LjMzNS0wLjIwMyw4Ljg1MiwyLjUzNiwxMi4zOTYNCgkJCQljMi43NCwzLjU0Myw2Ljg4LDUuNTc2LDExLjM1OCw1LjU3Nmg4OS42M2M0LjQ3OSwwLDguNjE4LTIuMDMyLDExLjM1OC01LjU3NmMyLjczOS0zLjU0MywzLjY2My04LjA2MSwyLjUzNi0xMi4zOTYNCgkJCQlMMzEyLjk0OCwzNzEuMTQxeiBNMjQ0LjgyNywyMTQuNDAxTDI0NC44MjcsMjE0LjQwMWgyMi4zNDZ2MTM2LjUzNWgtMjIuMzQ2VjIxNC40MDF6IE0yMTIuMDE2LDM4MC44NzlsMS41NTItNS45NjINCgkJCQljMS4zNzUtNS4yODgsNi4xNTItOC45ODEsMTEuNjE2LTguOTgxaDYxLjYyOWM1LjQ2NCwwLDEwLjI0MSwzLjY5MywxMS42MTYsOC45ODFsMS41NTIsNS45NjJIMjEyLjAxNnoiLz4NCgkJPC9nPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K"
               style={{ height: "90px" }}
             />
-          </button>
+            <textarea  style={{ display : cuadroTextoMesas ? 'none' : 'block'}} rows="4" cols="30" value={`Mesas libres: ${23 - ocupadoImage.filter((o) =>  o.ocupado == true).length} Mesas Ocupadas: ${ocupadoImage.filter((o) =>  o.ocupado == true).length}  Total de mesas: 23`}></textarea>
+            </button>
 
-          <button className="rounded-circle mt-4 border-0 m-auto p-3 d-flex flex-column">
+         <button className={!cuadroTextoReservaciones? "mt-4 border-0 m-auto p-3 d-flex flex-column align-items-center" : "rounded-circle mt-4 border-0 m-auto p-3 d-flex flex-column"}  onClick={()=> setCuadroReservaciones(!cuadroTextoReservaciones)}>
             <img
               src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pg0KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjAuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJDYXBhXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4Ig0KCSB2aWV3Qm94PSIwIDAgNDgwIDQ4MCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDgwIDQ4MDsiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik00MDgsMEg3MkMzMi4yNTQsMC4wNDQsMC4wNDQsMzIuMjU0LDAsNzJ2MTc2YzAuMDQ0LDM5Ljc0NiwzMi4yNTQsNzEuOTU2LDcyLDcyaDEyMHYzMmgyNHYxMTJoLTcydjE2aDE5MnYtMTZoLTcyVjM1MmgyNA0KCQkJdi0zMmgxMjBjMzkuNzQ2LTAuMDQ0LDcxLjk1Ni0zMi4yNTQsNzItNzJWNzJDNDc5Ljk1NiwzMi4yNTQsNDQ3Ljc0NiwwLjA0NCw0MDgsMHogTTI0OCw0NjRoLTE2VjM1MmgxNlY0NjR6IE0yNzIsMzM2aC02NHYtNDhoNjQNCgkJCVYzMzZ6IE00NjQsMjQ4Yy0wLjA0LDMwLjkxMS0yNS4wODksNTUuOTYtNTYsNTZIMjg4di0zMmgtOTZ2MzJINzJjLTMwLjkxMS0wLjA0LTU1Ljk2LTI1LjA4OS01Ni01NlY3Mg0KCQkJYzAuMDQtMzAuOTExLDI1LjA4OS01NS45Niw1Ni01NmgzMzZjMzAuOTExLDAuMDQsNTUuOTYsMjUuMDg5LDU2LDU2VjI0OHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTc5LjE2LDE4MC40MjRMNjguOTQ0LDE2MEg3MmM0LjQxOCwwLDgtMy41ODIsOC04di0zMmMwLTQuNDE4LTMuNTgyLTgtOC04SDQwYy00LjQxOCwwLTgsMy41ODItOCw4djY0DQoJCQljMCw0LjQxOCwzLjU4Miw4LDgsOHM4LTMuNTgyLDgtOHYtMjRoMy4wNTZsMTMuNzg0LDI3LjU3NmMxLjk3NSwzLjk1NCw2Ljc4Miw1LjU1OSwxMC43MzYsMy41ODQNCgkJCUM3OS41MywxODkuMTg1LDgxLjEzNSwxODQuMzc4LDc5LjE2LDE4MC40MjR6IE02NCwxNDRINDh2LTE2aDE2VjE0NHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTQyNCwxMTJoLTE2Yy00LjQxOCwwLTgsMy41ODItOCw4djY0YzAsNC40MTgsMy41ODIsOCw4LDhoMTZjMTMuMjU1LDAsMjQtMTAuNzQ1LDI0LTI0di0zMg0KCQkJQzQ0OCwxMjIuNzQ1LDQzNy4yNTUsMTEyLDQyNCwxMTJ6IE00MzIsMTY4YzAsNC40MTgtMy41ODIsOC04LDhoLTh2LTQ4aDhjNC40MTgsMCw4LDMuNTgyLDgsOFYxNjh6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0yODgsMTUydi0zMmMwLTQuNDE4LTMuNTgyLTgtOC04aC0zMmMtNC40MTgsMC04LDMuNTgyLTgsOHY2NGMwLDQuNDE4LDMuNTgyLDgsOCw4czgtMy41ODIsOC04di0yNGgzLjA1NmwxMy43NDQsMjcuNTc2DQoJCQljMS45NzUsMy45NTQsNi43ODIsNS41NTksMTAuNzM2LDMuNTg0YzMuOTU0LTEuOTc1LDUuNTU5LTYuNzgyLDMuNTg0LTEwLjczNkwyNzYuOTQ0LDE2MEgyODBDMjg0LjQxOCwxNjAsMjg4LDE1Ni40MTgsMjg4LDE1MnoNCgkJCSBNMjcyLDE0NGgtMTZ2LTE2aDE2VjE0NHoiLz4NCgk8L2c+DQo8L2c+DQo8Zz4NCgk8Zz4NCgkJPHBhdGggZD0iTTEyMCwxNzZoLTE2di0xNmg4YzQuNDE4LDAsOC0zLjU4Miw4LThzLTMuNTgyLTgtOC04aC04di0xNmgxNmM0LjQxOCwwLDgtMy41ODIsOC04cy0zLjU4Mi04LTgtOEg5Ng0KCQkJYy00LjQxOCwwLTgsMy41ODItOCw4djY0YzAsNC40MTgsMy41ODIsOCw4LDhoMjRjNC40MTgsMCw4LTMuNTgyLDgtOFMxMjQuNDE4LDE3NiwxMjAsMTc2eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMjI0LDE3NmgtMTZ2LTE2aDhjNC40MTgsMCw4LTMuNTgyLDgtOHMtMy41ODItOC04LThoLTh2LTE2aDE2YzQuNDE4LDAsOC0zLjU4Miw4LThzLTMuNTgyLTgtOC04aC0yNA0KCQkJYy00LjQxOCwwLTgsMy41ODItOCw4djY0YzAsNC40MTgsMy41ODIsOCw4LDhoMjRjNC40MTgsMCw4LTMuNTgyLDgtOFMyMjguNDE4LDE3NiwyMjQsMTc2eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMzg0LDE3NmgtMTZ2LTE2aDhjNC40MTgsMCw4LTMuNTgyLDgtOHMtMy41ODItOC04LThoLTh2LTE2aDE2YzQuNDE4LDAsOC0zLjU4Miw4LThzLTMuNTgyLTgtOC04aC0yNA0KCQkJYy00LjQxOCwwLTgsMy41ODItOCw4djY0YzAsNC40MTgsMy41ODIsOCw4LDhoMjRjNC40MTgsMCw4LTMuNTgyLDgtOFMzODguNDE4LDE3NiwzODQsMTc2eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KCTxnPg0KCQk8cGF0aCBkPSJNMTc2LDE0NGgtMjR2LTE2aDI0YzQuNDE4LDAsOC0zLjU4Miw4LThzLTMuNTgyLTgtOC04aC0zMmMtNC40MTgsMC04LDMuNTgyLTgsOHYzMmMwLDQuNDE4LDMuNTgyLDgsOCw4aDI0djE2aC0yNA0KCQkJYy00LjQxOCwwLTgsMy41ODItOCw4czMuNTgyLDgsOCw4aDMyYzQuNDE4LDAsOC0zLjU4Miw4LTh2LTMyQzE4NCwxNDcuNTgyLDE4MC40MTgsMTQ0LDE3NiwxNDR6Ii8+DQoJPC9nPg0KPC9nPg0KPGc+DQoJPGc+DQoJCTxwYXRoIGQ9Ik0zMzcuOTM2LDExMi4yNGMtNC4yODYtMS4wNjgtOC42MjYsMS41MzktOS42OTYsNS44MjRMMzIwLDE1MS4wMTZsLTguMjQtMzIuOTUyYy0wLjk3LTQuMzExLTUuMjUtNy4wMTktOS41NjEtNi4wNDkNCgkJCWMtNC4zMTEsMC45Ny03LjAxOSw1LjI1LTYuMDQ5LDkuNTYxYzAuMDI3LDAuMTIxLDAuMDU3LDAuMjQxLDAuMDksMC4zNmwxNiw2NGMxLjA3NCw0LjI4Niw1LjQxOSw2Ljg4OSw5LjcwNSw1LjgxNQ0KCQkJYzIuODYzLTAuNzE3LDUuMDk4LTIuOTUzLDUuODE1LTUuODE1bDE2LTY0QzM0NC44MjgsMTE3LjY1LDM0Mi4yMjEsMTEzLjMxLDMzNy45MzYsMTEyLjI0eiIvPg0KCTwvZz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjxnPg0KPC9nPg0KPGc+DQo8L2c+DQo8Zz4NCjwvZz4NCjwvc3ZnPg0K"
               style={{ height: "100px" }}
             />
+            <textarea  style={{ display : cuadroTextoReservaciones ? 'none' : 'block'}} rows="4" cols="30" value={`Mesas reservadas: ${reservacionMesa.filter((r) => r.reservacion == true ).length} Mesas no reservadas: ${23 - reservacionMesa.filter((r) => r.reservacion == true ).length} Total de Mesas: 23`  }></textarea>
           </button>
 
-          <button className="rounded-circle mt-4 border-0 ">
-            <i className="fas fa-users fa-5x p-2"></i>
-          </button>
+          <button className={ !cuadroTextoClientes ? " mt-4 border-0":" rounded-circle mt-4 border-0" } onClick={()=> setCuadroTextoClientes(!cuadroTextoClientes)}>
+          
+          <i className="fas fa-users fa-5x p-2" ></i>
+        
+          <textarea  style={{ display : cuadroTextoClientes ? 'none' : 'block'}} rows="4" cols="30" value={`Mesas con clientes: ${ocupadoImage.filter((o) =>  o.ocupado == true).length} Mesas en barra: `} ></textarea>
+        </button>
 
-          <button className="rounded-circle mt-4 border-0 d-flex flex-column m-auto">
-            <i className="fas fa-hamburger fa-4x p-3 "></i>
-          </button>
-          <button className="rounded-circle p-3 mt-4 border-0">
-            <h3>Salir</h3>
-          </button>
+        <button className={ !cuadroTextoProductos ? "mt-4 border-0 d-flex flex-column m-auto align-items-center":"rounded-circle mt-4 border-0 d-flex flex-column m-auto"} onClick={()=> setCuadroProductos(!cuadroTextoProductos)}>
+      
+        <i className="fas fa-hamburger fa-4x p-3 "></i>
+    
+        <textarea  style={{ display : cuadroTextoProductos ? 'none' : 'block'}} rows="4" cols="30" value={`Especialidades del restaurante ${especialRestaurante.map((e) => 'Especial: '+e.nombre+', Precio: '+e.precio +'')}`}></textarea>
+      </button>
+    
         </div>
         <div className="col-9">
           <div className="row">

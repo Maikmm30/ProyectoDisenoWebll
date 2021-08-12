@@ -32,13 +32,12 @@ function AgregarClientesMesas() {
   const [precioSilla3ClienteMesa, setPrecioSilla3ClienteMesa] = useState("");
   const [precioSilla4ClienteMesa, setPrecioSilla4ClienteMesa] = useState("");
   const [estadoCuentaClienteMesa, setEstadoCuentaClienteMesa] = useState("");
-
   let  params = useParams();
   // let obj = JSON.parse(JSON.stringify(params));
  const [showMesa, setShowMesa] = useState(true);
  
  const generarPdf =() =>{
-   
+  desocupaMesa()
    const doc = new jsPDF();
    let tabla =  JSON.parse(params.obj) 
      doc.autoTable({
@@ -58,12 +57,19 @@ function AgregarClientesMesas() {
     
      window.open(URL.createObjectURL(doc.output("blob")))
      doc.save()
+  
+    
  }
  const deshabilitar=()=>{
    toast.warning('El cliente no ha realizado el pago',
    {position: toast.POSITION.TOP_CENTER,
     autoClose: 2500})
  }
+ const deshabilitarAgregar=()=>{
+  toast.warning('El cliente ya ha sido agregado',
+  {position: toast.POSITION.TOP_CENTER,
+   autoClose: 2500})
+}
   useEffect(() => {
     Axios.get("http://localhost:3001/clientes-barra/id").then((res) => {
       const num = parseInt(res.data[0].valorConsecutivo)+1;
@@ -72,16 +78,29 @@ function AgregarClientesMesas() {
       setCodigoClienteMesa(str+num);
       setReservacionClienteMesa(false)
     });
+    
     if(JSON.stringify(params.obj).length > 8){
       setShowMesa(false)
       setNombreMesaClienteMesa(JSON.parse(params.obj).nombreMesa )
+      setRestauranteClienteMesa(JSON.parse(params.obj).restaurante)
+
     }
     else{
       setShowMesa(true)
       setNombreMesaClienteMesa(params.obj)
+      setRestauranteClienteMesa(params.restaurante)
     }
+    console.log(nombreMesaClienteMesa)
   }, []);
-
+  
+  const desocupaMesa =() =>{
+    Axios.put("http://localhost:3001/clientes-mesa/updateMesaDisponible",
+    {
+      nombreMesaClienteMesa: nombreMesaClienteMesa,
+      estadoMesaClienteMesa : false,
+      restauranteClienteMesa : restauranteClienteMesa
+    });
+  }
   const enviarDatos = () => {
 
     Axios.post("http://localhost:3001/clientes-mesa/agregar",{
@@ -107,6 +126,7 @@ function AgregarClientesMesas() {
       precioSilla4ClienteMesa: precioSilla4ClienteMesa,
       estadoCuentaClienteMesa: estadoCuentaClienteMesa,
     });
+ 
 
     Axios.put("http://localhost:3001/consecutivos/update",
       {
@@ -114,6 +134,14 @@ function AgregarClientesMesas() {
         consecutivoNuevo: numeroClienteMesa,
         columnaSeleccionada: 'valorConsecutivo'
       });
+      Axios.put("http://localhost:3001/clientes-mesa/updateMesaDisponible",
+      {
+        nombreMesaClienteMesa: nombreMesaClienteMesa,
+        estadoMesaClienteMesa : true,
+        restauranteClienteMesa : restauranteClienteMesa
+      });
+      console.log(nombreMesaClienteMesa)
+      console.log(nombreMesaClienteMesa)
     window.location.href = 'http://localhost:3000/clientesMesas'
   };
 
@@ -146,7 +174,7 @@ function AgregarClientesMesas() {
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x " onClick={enviarDatos}></i>
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x " onClick={!showMesa  ? deshabilitarAgregar : enviarDatos}></i>
                 </div>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
@@ -212,8 +240,9 @@ function AgregarClientesMesas() {
                     <label className="col-sm-3">Restaurante</label>
                     <div className="col-sm-9">
                     <input type="text" className="form-control" onChange={(event)=>{
-                  setRestauranteClienteMesa(event.target.value);
-                }}/>
+                  setRestauranteClienteMesa(event.target.value)}}
+                  value={showMesa ?  params.restaurante : JSON.parse(params.obj).restaurante }
+                  disabled/>
                     </div>
                   </div>
 

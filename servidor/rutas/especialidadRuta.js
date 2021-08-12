@@ -33,7 +33,7 @@ router.post("/agregar", async (req, res) => {
       ingredientes: ingredientesEspecialidad,
       precio: precioEspecialidad,
       detalle: detalleEspecialidad,
-      restaruante: restauranteEspecialidad,
+      restaurante: restauranteEspecialidad,
       estado: estadoEspecialidad,
     });
     await especialidad.save();
@@ -81,5 +81,14 @@ router.put("/eliminar", async (req, res) => {
       res.send('error' + err);
   }
 })
+
+router.route("/obtenerEspecialidades").post((req, res) => {
+  const restauranteClienteMesa = req.body.restauranteClienteMesa;
+
+  Especialidad.find({ estado: { $ne: 'false' }, restaurante: restauranteClienteMesa}).select('nombre').select('precio')
+      .then((oc) => res.json(oc))
+      .catch((err) => res.status(400).json("Error: " + err));
+});
+
 
 module.exports = router;

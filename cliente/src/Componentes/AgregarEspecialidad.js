@@ -9,7 +9,7 @@ function AgregarEspecialidad() {
   const [ingredientesEspecialidad, setIngredientesEspecialidad] = useState("");
   const [precioEspecialidad, setPrecioEspecialidad] = useState("");
   const [detalleEspecialidad, setDetalleEspecialidad] = useState("");
-  const [restauranteEspecialidad, setRestauranteEspecialidad] = useState("");
+  const [restauranteEspecialidad, setRestauranteEspecialidad] = useState("Piccola");
 
   useEffect(() => {
     Axios.get("http://localhost:3001/administracion/especiales/especialidades/id").then((res) => {
@@ -21,6 +21,7 @@ function AgregarEspecialidad() {
   }, []);
 
   const enviarDatos = () => {
+    console.log(restauranteEspecialidad)
     Axios.post("http://localhost:3001/administracion/especiales/especialidades/agregar",{
       codigoEspecialidad: codigoEspecialidad,
       nombreEspecialidad: nombreEspecialidad,
@@ -75,6 +76,24 @@ function AgregarEspecialidad() {
                         }}/>
                   </div>
                 </div>
+                <div class="row mt-2 mb-3">
+                  <label class="col-sm-3 ">Restaurante</label>
+                    <div class="col-sm-8">
+                      <select
+                        class="form-control"
+                        id="restaurante"
+                        defaultValue={'Piccola'}
+                        onChange={(event)=>{
+                          setRestauranteEspecialidad(event.target.value);
+                        }}
+                      >
+                      <option value="Piccola">Piccola</option>
+                      <option value="Turin">Turin</option>
+                      <option value="Notte">Notte</option>
+
+                    </select>
+                    </div>
+                  </div>
                 <div class="form-group row mt-2">
                   <label class="col-sm-3">Ingredientes</label>
                   <div class="col-sm-8" >

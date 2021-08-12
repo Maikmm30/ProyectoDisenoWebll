@@ -88,9 +88,9 @@ function App() {
           <Route path="/home" component={Home} />
           <Route path="/agregarClientesMesas" component={AgregarClientesMesas} exact />
         
-          <Route path="/agregarClientesMesas/:obj" component={AgregarClientesMesas}  />
+          <Route path="/agregarClientesMesas/:obj" component={AgregarClientesMesas} exact />
+          <Route path="/agregarClientesMesas/:obj/:restaurante" component={AgregarClientesMesas}  />
 
-          
           <Route path="/clientesMesas" component={ClientesMesas} />
           <Route path="/seguridad" component={Seguridad} />
           <Route path="/agregarUsuarios" component={AgregarUsuarios} />

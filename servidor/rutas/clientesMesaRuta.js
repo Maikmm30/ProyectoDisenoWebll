@@ -43,7 +43,7 @@ router.post("/agregar", async (req, res) => {
     const precioSilla4ClienteMesa = req.body.precioSilla4ClienteMesa;
     const estadoCuentaClienteMesa = req.body.estadoCuentaClienteMesa;
     const tipoClienteClienteMesa = 'Mesa';
-    const ocupadoClienteMesa = true;
+    const ocupadoClienteMesa = false;
 
     try {
         const clienteMesa = new Cliente({
@@ -124,10 +124,38 @@ router.route("/obtenerCodigos").get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
-router.route("/obtenerOcupado").get((req, res) => {
-    Cliente.find({ estado: { $ne: 'false' }, tipoCliente: "Mesa" }).select('ocupado').select('nombreMesa')
+router.route("/obtenerOcupado").post((req, res) => {
+    const restauranteClienteMesa = req.body.restauranteClienteMesa;
+
+    Cliente.find({ estado: { $ne: 'false' }, tipoCliente: "Mesa", restaurante: restauranteClienteMesa }).select('ocupado').select('nombreMesa')
         .then((oc) => res.json(oc))
         .catch((err) => res.status(400).json("Error: " + err));
 });
+
+
+router.route("/obtenerReservaciones").post((req, res) => {
+    const restauranteClienteMesa = req.body.restauranteClienteMesa;
+
+    Cliente.find({ estado: { $ne: 'false' }, tipoCliente: "Mesa", restaurante: restauranteClienteMesa }).select('reservacion')
+        .then((oc) => res.json(oc))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
+
+router.put("/updateMesaDisponible", async (req, res) => {
+    const nombreMesaClienteMesa = req.body.nombreMesaClienteMesa;
+    const estadoMesaClienteMesa = req.body.estadoMesaClienteMesa;
+    const restauranteClienteMesa = req.body.restauranteClienteMesa;
+    
+    try {
+        await Cliente.findOneAndUpdate({ nombreMesa: nombreMesaClienteMesa, restaurante: restauranteClienteMesa }, { ocupado: estadoMesaClienteMesa }).then((nombreMesa) => {
+            res.json('update realizado'+nombreMesa);
+
+        }) ;
+    }
+    catch (err) {
+        res.send('error' + err);
+    }
+})
 
 module.exports = router;

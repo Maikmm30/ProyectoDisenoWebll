@@ -71,7 +71,7 @@ router.post("/agregar", async (req, res) => {
             precioSilla3: precioSilla3ClienteMesa,
             precioSilla4: precioSilla4ClienteMesa,
             estadoCuenta: estadoCuentaClienteMesa,
-            tipoCliente: tipoClienteClienteMesa,
+            tipoCliente: 'Mesa',
             ocupado: ocupadoClienteMesa
         });
         await clienteMesa.save();

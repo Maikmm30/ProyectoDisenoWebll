@@ -179,10 +179,15 @@ function ClientesMesas() {
   let rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
+    
+    },
+    onDoubleClick: (e, row, rowIndex) => {
       let nombreMesa =JSON.stringify(row)
       window.location.href = `http://localhost:3000/agregarClientesMesas/${nombreMesa}`
       console.log(nombreMesa)
+    
     } 
+
   };
 
   return (
@@ -259,7 +264,7 @@ function ClientesMesas() {
                     data={clientesMesas}
                     columns={columns}
                     rowEvents={rowEvents}
-                    cellEdit={cellEditFactory({ mode: "dbclick" })}
+                    cellEdit={cellEditFactory({ mode: "click" })}
                   />
                 </div>
               </div>

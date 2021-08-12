@@ -62,7 +62,7 @@ router.post("/agregar", async (req, res) => {
             pedidoBarra: pedidoClienteBarra,
             precioBarra: precioClienteBarra,
             numeroSillaBarra: numeroSillaClienteBarra,
-            tipoCliente: tipoClienteBarra
+            tipoCliente: 'Barra'
         });
         await cliente.save();
         res.send("inserted data");
@@ -76,7 +76,7 @@ router.put("/update", async (req, res) => {
     const clienteBarraNuevo = req.body.clienteBarraNuevo;
     const columnaSeleccionada = req.body.columnaSeleccionada;
     try {
-        await Pais.findOneAndUpdate({ codigo: codigoActualiza }, { [columnaSeleccionada]: clienteBarraNuevo }, (err, clienteBarra) => {
+        await Cliente.findOneAndUpdate({ codigo: codigoActualiza,  }, { [columnaSeleccionada]: clienteBarraNuevo }, (err, clienteBarra) => {
             res.json(clienteBarra);
 
         });

@@ -39,6 +39,7 @@ const ayudaLicoresRuta = require('./rutas/ayudaLicoresRuta');
 const ayudaVinosRuta = require('./rutas/ayudaVinosRuta');
 const clientesMesaRuta = require('./rutas/clientesMesaRuta');
 const clientesBarraRuta = require('./rutas/clientesBarraRuta');
+const bitacoraRuta = require('./rutas/bitacoraRuta');
 
 app.use('/paises', paisRutas);
 app.use('/administracion/especiales/bebidas/calientes/', bebidaCalienteRutas);
@@ -73,6 +74,7 @@ app.use('/ayuda-licores', ayudaLicoresRuta);
 app.use('/ayuda-vinos', ayudaVinosRuta);
 app.use('/clientes-mesa', clientesMesaRuta);
 app.use('/clientes-barra', clientesBarraRuta);
+app.use('/bitacora', bitacoraRuta);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb+srv://dbAdmin:Admin$db1@cluster0.oznix.mongodb.net/ProyectoDiseno?retryWrites=true&w=majority', {

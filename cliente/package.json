@@ -9,6 +9,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
+    "bootstrap-select": "^1.13.18",
+    "multiselect-react-dropdown": "^2.0.5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-bootstrap-table-next": "^4.0.3",

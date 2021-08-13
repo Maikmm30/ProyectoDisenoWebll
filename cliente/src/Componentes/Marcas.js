@@ -11,11 +11,15 @@ function Marcas() {
   const [nombreMarca, setNombreMarca] = useState("");
   const [nacionalidadMarca, setNacionalidadMarca] = useState("");
   const [descripcionMarca, setDescripcionMarca] = useState("");
-  const [cedulaJuridicaMarca, setCedulaJuridicaMarca ] = useState("");
+  const [cedulaJuridicaMarca, setCedulaJuridicaMarca] = useState("");
   const [empresaMarca, setEmpresaMarca] = useState("");
   const [detalleEmpresaMarca, setDetalleEmpresaMarca] = useState("");
   const [telefonoEmpresaMarca, setTelefonoEmpresaMarca] = useState("");
 
+  //Manejar imagen
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
 
 
   useEffect(() => {
@@ -44,23 +48,23 @@ function Marcas() {
   }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/marcas/agregar",{
+    Axios.post("http://localhost:3001/marcas/agregar", {
       codigoMarca: codigoMarca,
       numeroMarca: numeroMarca,
       nombreMarca: nombreMarca,
       nacionalidadMarca: nacionalidadMarca,
       descripcionMarca: descripcionMarca,
       cedulaJuridicaMarca: cedulaJuridicaMarca,
-      empresaMarca : empresaMarca,
-      detalleEmpresaMarca : detalleEmpresaMarca,
-      telefonoEmpresaMarca : telefonoEmpresaMarca,
+      empresaMarca: empresaMarca,
+      detalleEmpresaMarca: detalleEmpresaMarca,
+      telefonoEmpresaMarca: telefonoEmpresaMarca,
       estadoEmpaque: true,
     });
-    Axios.post("http://localhost:3001/bitacora/agregar",{
-      
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoMarca+': '+getCookie('usuario')+' agregó una marca',
+      descripcionBitacora: codigoMarca + ': ' + getCookie('usuario') + ' agregó una marca',
 
     });
     Axios.put("http://localhost:3001/consecutivos/update",
@@ -71,6 +75,22 @@ function Marcas() {
       });
     window.location.href = 'http://localhost:3000/marcas/'
   };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewSource(reader.result);
+    }
+  }
+
   return (
     <div class="container">
       <div class="row bg-warning" style={{ height: "800px" }}>
@@ -81,168 +101,181 @@ function Marcas() {
         <div class="col-9">
           <div class="row h-75">
             <div class="text-center col-12 bg-success h-25">
-                <div class="row row-cols-3 m-4">
-                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                  <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"  onClick={enviarDatos}></i></div>
-                  <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
+              <div class="row row-cols-3 m-4">
+                <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
+                <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
+                <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
 
               </div>
             </div>
             <div class="col-6 bg-danger h-100">
-            Información de la Marca
+              Información de la Marca
               <div class="form-group row mt-4">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Código
                 </label>
                 <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        readonly="readonly"
-                        value={codigoMarca}
-                      />
-                    </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    readonly="readonly"
+                    value={codigoMarca}
+                  />
+                </div>
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Nombre
                 </label>
                 <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        onChange={(event)=>{
-                          setNombreMarca(event.target.value);
-                        }}
-                      />
-                    </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(event) => {
+                      setNombreMarca(event.target.value);
+                    }}
+                  />
+                </div>
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Nacionalidad
                 </label>
                 <div class="col-sm-8">
-                <select
-                       class="form-control"
-                        id="nacionalidad"
-                        onChange={(event)=>{
-                          setNacionalidadMarca(event.target.value);
-                        }}
-                        onClick={(event)=>{
-                          setNacionalidadMarca(event.target.value);
-                        }}
-                        >
-                      </select>
+                  <select
+                    class="form-control"
+                    id="nacionalidad"
+                    onChange={(event) => {
+                      setNacionalidadMarca(event.target.value);
+                    }}
+                    onClick={(event) => {
+                      setNacionalidadMarca(event.target.value);
+                    }}
+                  >
+                  </select>
                 </div>
-                
+
               </div>
-              
+
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
-                Descripción
+                  Descripción
                 </label>
                 <div class="col-sm-8">
-                      <textarea
-                        type="text"
-                        class="form-control"
-                        onChange={(event)=>{
-                          setDescripcionMarca(event.target.value);
-                        }}
-                        rows="3"
-                      />
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    onChange={(event) => {
+                      setDescripcionMarca(event.target.value);
+                    }}
+                    rows="3"
+                  />
                 </div>
                 <div class="form-group row mt-2">
-                <div class="col-sm-6">
-                    <Form class="">
-                        <Form.Group>
-                            <Form.File id="exampleFormControlFile1" label="Foto de la Marca" />
-                        </Form.Group>
-                    </Form>
-                    
+                  <div className=" row mt-2 mb-3">
+                    <label for="staticEmail" className="col-sm-3 me-3">
+                      Imagen:
+                    </label>
+
+                    {previewSource && (
+                      <img
+                        src={previewSource}
+                        alt="chosen"
+                        style={{ height: '200px', width: '350px' }}
+                      />
+
+                    )}
+
+                    <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                      className="form-input" />
+                  </div>
+
+
                 </div>
-            
-                
-              </div>
               </div>
             </div>
             <div class="col-6 bg-primary p-0 border border-danger">
-              
-            Información del Contacto
+
+              Información del Contacto
               <div class="form-group row mt-4">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Cédula Jurídica
                 </label>
                 <div class="col-sm-8">
-                      <input
-                        type="number"
-                        class="form-control"
-                        onChange={(event)=>{
-                          setCedulaJuridicaMarca(event.target.value);
-                        }}
-                      />
-                    </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    onChange={(event) => {
+                      setCedulaJuridicaMarca(event.target.value);
+                    }}
+                  />
+                </div>
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Nombre Empresa
                 </label>
                 <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        onChange={(event)=>{
-                          setEmpresaMarca(event.target.value);
-                        }}
-                      />
-                    </div>
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(event) => {
+                      setEmpresaMarca(event.target.value);
+                    }}
+                  />
+                </div>
               </div>
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
                   Detalle Empresa
                 </label>
                 <div class="col-sm-8">
-                      <textarea
-                        type="text"
-                        class="form-control"
-                        rows="3"
-                        onChange={(event)=>{
-                          setDetalleEmpresaMarca(event.target.value);
-                        }}
-                      />
+                  <textarea
+                    type="text"
+                    class="form-control"
+                    rows="3"
+                    onChange={(event) => {
+                      setDetalleEmpresaMarca(event.target.value);
+                    }}
+                  />
                 </div>
-                
+
               </div>
-              
+
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
-                Teléfono
+                  Teléfono
                 </label>
                 <div class="col-sm-8">
-                      <input
-                        type="text"
-                        class="form-control"
-                        onChange={(event)=>{
-                          setTelefonoEmpresaMarca(event.target.value);
-                        }}
-                      />
-              </div>
-                <div class="form-group row mt-2">
-                <div class="col-sm-6">
-                    <Form class="">
-                        <Form.Group>
-                            <Form.File id="exampleFormControlFile1" label="Foto de la Marca" />
-                        </Form.Group>
-                    </Form>
+                  <input
+                    type="text"
+                    class="form-control"
+                    onChange={(event) => {
+                      setTelefonoEmpresaMarca(event.target.value);
+                    }}
+                  />
                 </div>
-            
-                
-              </div>
-              </div>
+                <div class="form-group row mt-2">
+                  <div className=" row mt-2 mb-3">
+                    <label for="staticEmail" className="col-sm-3 me-3">
+                      Imagen:
+                    </label>
 
+                    {previewSource && (
+                      <img
+                        src={previewSource}
+                        alt="chosen"
+                        style={{ height: '200px', width: '350px' }}
+                      />
 
+                    )}
+
+                    <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                      className="form-input" />
+                  </div>
+                </div>
+              </div>
             </div>
-
-            
           </div>
         </div>
       </div>

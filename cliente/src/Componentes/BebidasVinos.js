@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
-
+import getCookie from './utils/Cookies';
 
 
 function BebidasVinos() {
@@ -31,6 +31,15 @@ function BebidasVinos() {
       vinoNuevo: vinoNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' se actualizo una bebida Vino',
+
+    });
+
     window.location.reload();
   };
 
@@ -152,6 +161,14 @@ function BebidasVinos() {
 
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino una bebida Vino',
+
+    });
 
   };
 

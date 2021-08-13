@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function BebidasCalientes() {
 
@@ -25,11 +26,21 @@ function BebidasCalientes() {
   }, []);
 
   const actualiza = () => {
+
     Axios.put("http://localhost:3001/administracion/especiales/bebidas/calientes/update", {
       codigoActualiza: codigoActualiza,
       bebidaNuevo: bebidaNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una bebida caliente',
+
+    });
+
     window.location.reload();
   };
 
@@ -131,6 +142,14 @@ function BebidasCalientes() {
       .then(() => {
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino una bebida caliente',
+
+    });
 
   };
 

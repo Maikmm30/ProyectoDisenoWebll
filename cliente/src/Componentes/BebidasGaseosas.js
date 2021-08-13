@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function BebidasGaseosas() {
 
@@ -31,6 +32,15 @@ function BebidasGaseosas() {
       bebidaNuevo: bebidaNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una bebida gaseosa',
+
+    });
+
     window.location.reload();
   };
 
@@ -126,6 +136,14 @@ function BebidasGaseosas() {
       .then(() => {
         window.location.reload()
       });
+
+      Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino una bebida gaseosa',
+
+    });
 
   };
 

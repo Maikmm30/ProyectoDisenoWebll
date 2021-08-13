@@ -3,10 +3,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-  Link
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function ListaMarcas() {
 
@@ -32,6 +30,15 @@ function ListaMarcas() {
         marcaNuevo: marcaNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una marca',
+
+    });
+
     window.location.reload()
   }
 
@@ -160,12 +167,20 @@ function ListaMarcas() {
         window.location.reload()
       });
 
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino una marca',
+
+    });
+
   };
 
 
   return (
     <div class="container">
-      <div class="row " style={{ height: "750px" , backgroundColor: "#FF723F" }}>
+      <div class="row " style={{ height: "750px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Marcas</h3>
           <i class="fas fa-copyright fa-10x text-light"></i>
@@ -227,7 +242,7 @@ function ListaMarcas() {
                   />
                 </div>
 
-                <div class="text-center col-12 h-25"  style={{ backgroundColor: "#C42709" }}>
+                <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
                   <div class="row row-cols-2 m-4">
                     <Link to='/marcas'>
                       <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>

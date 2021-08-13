@@ -3,7 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-
+import getCookie from './utils/Cookies';
 
 
 function ClientesBarra() {
@@ -29,6 +29,14 @@ function ClientesBarra() {
         clienteBarraNuevo: clienteBarraNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Cliente Barra',
+
+    });
     window.location.reload()
   }
 
@@ -51,6 +59,14 @@ function ClientesBarra() {
       .then(() => {
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Cliente Barra',
+
+    });
   };
 
 
@@ -126,7 +142,7 @@ function ClientesBarra() {
         }
       }
     },
-    
+
     {
       dataField: "numeroSillaBarra",
       text: "Numero de Silla",
@@ -154,20 +170,20 @@ function ClientesBarra() {
         }
       }
     }
-  
+
   ];
-  
+
 
   let rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
-    
+
     },
     onDoubleClick: (e, row, rowIndex) => {
-      let numeroSillaBarra =JSON.stringify(row)
+      let numeroSillaBarra = JSON.stringify(row)
       window.location.href = `http://localhost:3000/agregarClientesBarra/${numeroSillaBarra}`
-      
-    } 
+
+    }
   };
 
   return (
@@ -220,14 +236,14 @@ function ClientesBarra() {
                     <div className="row">
                       <div className="form-group row ">
                         <label className="col-sm-4 col-form-label">
-                        Nombre del Cliente:
+                          Nombre del Cliente:
                         </label>
                         <div className="col-sm-8">
                           <input type="text" className="form-control"
-                          value={nombreBusca}
-                          onChange={(event) => {
-                            setNombre(event.target.value);
-                          }} />
+                            value={nombreBusca}
+                            onChange={(event) => {
+                              setNombre(event.target.value);
+                            }} />
                         </div>
                       </div>
                     </div>
@@ -249,7 +265,7 @@ function ClientesBarra() {
                 </div>
               </div>
             </div>
-            <div className="text-center col-12 h-20" style={{height: "850", backgroundColor: "#C42709" }}>
+            <div className="text-center col-12 h-20" style={{ height: "850", backgroundColor: "#C42709" }}>
               <div className="row row-cols-2 m-4  ">
 
                 <div className="col">

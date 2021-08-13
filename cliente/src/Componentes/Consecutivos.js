@@ -3,7 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import getCookie from './utils/Cookies';
 
 function Consecutivos() {
 
@@ -30,6 +30,15 @@ function Consecutivos() {
       consecutivoNuevo: consecutivoNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Consecutivo',
+
+    });
+
     window.location.reload();
   };
 
@@ -146,6 +155,14 @@ function Consecutivos() {
 
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Consecutivo',
+
+    });
   };
 
   return (

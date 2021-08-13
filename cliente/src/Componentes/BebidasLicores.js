@@ -33,7 +33,7 @@ function BebidasLicores() {
 
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' se actualizo una bebida Licor',
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una bebida Licor',
 
     });
 

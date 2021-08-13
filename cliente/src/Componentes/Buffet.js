@@ -34,7 +34,7 @@ function Buffet() {
 
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' se actualizo un Buffet',
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Buffet',
 
     });
 
@@ -155,7 +155,7 @@ function Buffet() {
 
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' se elimino un Buffet',
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Buffet',
 
     });
 

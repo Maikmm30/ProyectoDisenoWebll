@@ -3,6 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import getCookie from './utils/Cookies';
 
 function ClientesMesas() {
 
@@ -28,6 +29,14 @@ function ClientesMesas() {
         clienteMesaNuevo: clienteMesaNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Cliente Mesa',
+
+    });
     window.location.reload()
   }
 
@@ -50,6 +59,14 @@ function ClientesMesas() {
       .then(() => {
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Cliente Mesa',
+
+    });
   };
 
 
@@ -145,7 +162,7 @@ function ClientesMesas() {
         }
       }
     },
-    
+
     {
       dataField: "reservacion",
       text: "Reservación",
@@ -157,8 +174,8 @@ function ClientesMesas() {
     },
     {
       dataField: "restaurante",
-      text: "Restaurante", 
-        events: {
+      text: "Restaurante",
+      events: {
         onClick: (column, columnIndex) => {
           setColumna(columnIndex.dataField);
         }
@@ -173,19 +190,19 @@ function ClientesMesas() {
         }
       }
     },
-  
-  ];  
-  
+
+  ];
+
   let rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
-    
+
     },
     onDoubleClick: (e, row, rowIndex) => {
-      let nombreMesa =JSON.stringify(row)
+      let nombreMesa = JSON.stringify(row)
       window.location.href = `http://localhost:3000/agregarClientesMesas/${nombreMesa}`
-      
-    } 
+
+    }
   };
 
   return (
@@ -238,14 +255,14 @@ function ClientesMesas() {
                     <div className="row">
                       <div className="form-group row ">
                         <label className="col-sm-4 col-form-label">
-                        Nombre del Cliente
+                          Nombre del Cliente
                         </label>
                         <div className="col-sm-8">
                           <input type="text" className="form-control"
-                          value={nombreBusca}
-                          onChange={(event) => {
-                            setNombre(event.target.value);
-                          }} />
+                            value={nombreBusca}
+                            onChange={(event) => {
+                              setNombre(event.target.value);
+                            }} />
                         </div>
                       </div>
                     </div>

@@ -98,8 +98,10 @@ router.put("/update", async (req, res) => {
 
 router.route("/buscar").post((req, res) => {
     const codigoBusca = req.body.codigoBusca
+    const nombreBusca = req.body.nombreBusca
 
-    Cliente.find({ codigo: codigoBusca })
+
+    Cliente.find({ codigo: codigoBusca, nombreCompleto: nombreBusca, tipoCliente: "Mesa" })
         .then(cliente => res.json(cliente))
         .catch(err => res.status(400).json('Error: ' + err));
 })
@@ -145,12 +147,12 @@ router.put("/updateMesaDisponible", async (req, res) => {
     const nombreMesaClienteMesa = req.body.nombreMesaClienteMesa;
     const estadoMesaClienteMesa = req.body.estadoMesaClienteMesa;
     const restauranteClienteMesa = req.body.restauranteClienteMesa;
-    
+
     try {
         await Cliente.findOneAndUpdate({ nombreMesa: nombreMesaClienteMesa, restaurante: restauranteClienteMesa }, { ocupado: estadoMesaClienteMesa }).then((nombreMesa) => {
-            res.json('update realizado'+nombreMesa);
+            res.json('update realizado' + nombreMesa);
 
-        }) ;
+        });
     }
     catch (err) {
         res.send('error' + err);

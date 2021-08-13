@@ -52,39 +52,32 @@ function Cajas() {
     {
       dataField: "codigo",
       text: "Código",
-      editable: false,
       
     },
     {
       dataField: "fecha",
       text: "Fecha de Registro",
-      editable: false,
     },
     {
       dataField: "descripcion",
       text: "Descripción",
-      editable: false,
     },
     {
       dataField: "entradaDinero",
       text: "Entrada de Dinero",
-      editable: false,
     },
     {
       dataField: "aperturaCaja",
       text: "Apertura de Caja",
-      editable: false,
     },
     
     {
       dataField: "cierreCaja",
       text: "Cierre de caja",
-      editable: false,
     },
     {
       dataField: "restaurante",
       text: "Restaurante",
-      editable: false,
     }
   ];
 
@@ -140,7 +133,6 @@ function Cajas() {
                     keyField="id"
                     data={cajas}
                     columns={columns}
-                    cellEdit={cellEditFactory({ mode: "dbclick" })}
                   />
                 </div>
               </div>

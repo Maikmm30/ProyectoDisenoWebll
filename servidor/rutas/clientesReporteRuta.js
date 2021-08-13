@@ -20,4 +20,11 @@ router.route("/").get((req, res) => {
   });
 
   
+  router.route("/buscar").post((req, res) => {
+    const restauranteBusca = req.body.restauranteBusca;
+    Cliente.find({ estado: { $ne: 'false' }, restaurante: restauranteBusca})
+      .then((cliente) => res.json(cliente))
+      .catch((err) => res.status(400).json("Error: " + err));
+  });
+  
 module.exports = router;

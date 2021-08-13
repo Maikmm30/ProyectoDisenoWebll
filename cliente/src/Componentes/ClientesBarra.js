@@ -172,7 +172,7 @@ function ClientesBarra() {
 
   return (
     <div className="container">
-      <div class="row" style={{ height: "874px", backgroundColor: "#FF723F" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5 ">
           <h3>Lista de Clientes Barra</h3>
           <i className="fas fa-glass-martini-alt fa-10x"></i>

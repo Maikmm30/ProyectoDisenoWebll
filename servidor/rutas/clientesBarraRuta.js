@@ -114,4 +114,12 @@ router.route("/obtenerCodigos").get((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
+
+router.route("/obtenerOcupado").post((req, res) => {
+    const restauranteClienteBarra = req.body.restauranteClienteBarra;
+
+    Cliente.find({ estado: { $ne: 'false' }, tipoCliente: "Barra", restaurante: restauranteClienteBarra }).select('ocupado').select('numeroSillaBarra')
+        .then((oc) => res.json(oc))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
 module.exports = router;

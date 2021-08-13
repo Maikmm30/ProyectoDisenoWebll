@@ -148,10 +148,16 @@ function ClientesBarra() {
   ];
   
 
-  const rowEvents = {
+  let rowEvents = {
     onClick: (e, row, rowIndex) => {
       setCodigoActualiza(row.codigo)
-    }
+    
+    },
+    onDoubleClick: (e, row, rowIndex) => {
+      let numeroSillaBarra =JSON.stringify(row)
+      window.location.href = `http://localhost:3000/agregarClientesBarra/${numeroSillaBarra}`
+      
+    } 
   };
 
   return (

@@ -184,10 +184,8 @@ function ClientesMesas() {
     onDoubleClick: (e, row, rowIndex) => {
       let nombreMesa =JSON.stringify(row)
       window.location.href = `http://localhost:3000/agregarClientesMesas/${nombreMesa}`
-      console.log(nombreMesa)
-    
+      
     } 
-
   };
 
   return (

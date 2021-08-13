@@ -53,15 +53,15 @@ function AgregarClientesBarra() {
   };
 
   return (
-    <div className="container">
-      <div className="estilocambia row bg-warning" style={{ height: "900px" }}>
+    <div className="container" style={{backgroundColor:  "#FF723F"}}>
+      <div className="estilocambia row " style={{ height: "1000px" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Barra</h3>
           <i className="fas fa-glass-martini-alt fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row ">
-            <div className="text-center col-12 bg-success h-25">
+            <div className="text-center col-12 h-25"  style={{  backgroundColor: "#C42709"}}>
               <div className="row row-cols-3 m-4">
                 <div className="col">
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
@@ -74,7 +74,7 @@ function AgregarClientesBarra() {
                 </div>
               </div>
             </div>
-            <div className="col-6 bg-danger">
+            <div className="col-6 ">
               <h4 className="py-4">Datos del cliente</h4>
                 <form action="">
                   <div className="mt-2 mb-3 row">
@@ -140,7 +140,7 @@ function AgregarClientesBarra() {
                   </div>
                 </form>
             </div>
-            <div className="col-6 bg-primary p-0 border border-danger">
+            <div className="col-6  p-0">
               <div className="px-3">
                 <h4 className= 'py-4'>Pedidos previos</h4>
                 <textarea className="ms-5" name="" id="" cols="40" rows="15" readOnly></textarea>
@@ -149,7 +149,7 @@ function AgregarClientesBarra() {
 
             <div class="col">
               <div className="row">
-              <div class="col bg-info">
+              <div class="col ">
                 <h4 className="py-4">Información del pedido</h4>
                 <div className="mt-2 form-group row">
                   <label className="col-sm-5 col-form-label">Pedido</label>
@@ -178,7 +178,7 @@ function AgregarClientesBarra() {
                   </div>
                 </div>
               </div>
-              <div class="col bg-light">
+              <div class="col">
             
                 <h4 className="py-4">  Estado de facturación </h4>
                   <div className="form-group row">
@@ -190,11 +190,13 @@ function AgregarClientesBarra() {
                     </div>
                   </div>
                   <div className="mb-3 row">
-                    <label className="col-sm-5 col-form-label">
-                      Imprimir factura
+                  <label className="col-sm-4 col-form-label">
+                      <button>
+                        Imprimir factura
+                      </button>
                     </label>
                     <div className="col">
-                      <i className="fas fa-print fa-4x"></i>
+                      <i className="fas fa-print fa-5x"></i>
                     </div>
                   </div>
               </div>

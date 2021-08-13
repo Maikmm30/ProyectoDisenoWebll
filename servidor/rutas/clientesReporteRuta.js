@@ -18,5 +18,6 @@ router.route("/").get((req, res) => {
       .then((cliente) => res.json(cliente))
       .catch((err) => res.status(400).json("Error: " + err));
   });
+
   
 module.exports = router;

@@ -107,6 +107,11 @@ function App() {
           <Route path="/aperturaCajas" component={AperturaCajas} />
           <Route path="/clientesBarra" component={ClientesBarra} />
           <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
+
+           
+          <Route path="/agregarClientesBarra/:obj" component={AgregarClientesBarra} exact />
+          <Route path="/agregarClientesBarra/:obj/:restaurante" component={AgregarClientesBarra}  />
+
           <Route path="/cierreCajas" component={CierreCajas} />
           <Route path="/restauranteTurin" component={RestauranteTurin} />
           <Route path="/restaurantePicolla" component={RestaurantePicolla} />

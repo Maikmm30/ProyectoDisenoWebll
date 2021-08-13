@@ -90,5 +90,13 @@ router.route("/obtenerEspecialidades").post((req, res) => {
       .catch((err) => res.status(400).json("Error: " + err));
 });
 
+router.route("/buscarNombre").post((req, res) => {
+  const nombreBusca = req.body.nombreBusca
+  const restauranteClienteMesa = req.body.restauranteClienteMesa;
+
+  Especialidad.find({estado: { $ne: 'false' }, restaurante: restauranteClienteMesa, nombre: nombreBusca }).select('precio')
+      .then(buffet => res.json(buffet))
+      .catch(err => res.status(400).json('Error: ' + err));
+})
 
 module.exports = router;

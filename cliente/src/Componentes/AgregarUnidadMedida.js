@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarUnidadMedida() {
 
@@ -31,6 +32,13 @@ function AgregarUnidadMedida() {
       simbologiaUnidadMedida: simbologiaUnidadMedida,
       simboloUnidadMedida: simboloUnidadMedida,
       estadoUnidadMedida: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoUnidadMedida+': '+getCookie('usuario')+' agregó una Unidad de Medida',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

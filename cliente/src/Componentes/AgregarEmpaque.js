@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarEmpaques() {
 
@@ -67,6 +68,13 @@ function AgregarEmpaques() {
       marcaEmpaque: marcaEmpaque,
       descripcionEmpaque: descripcionEmpaque,
       estadoEmpaque: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoEmpaque+': '+getCookie('usuario')+' agregó un empaque',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

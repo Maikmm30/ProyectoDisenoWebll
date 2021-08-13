@@ -1,7 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-
+import getCookie from './utils/Cookies';
 
 function AgregarRestaurante() {
   
@@ -19,6 +19,13 @@ function AgregarRestaurante() {
       direccionRestaurante: direccionRestaurante,
       telefonoRestaurante: telefonoRestaurante,
       estadoRestaurante: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoRestaurante+': '+getCookie('usuario')+' agregó un restaurante',
+
     });
     window.location.href = 'http://localhost:3000/restaurantes'
   };

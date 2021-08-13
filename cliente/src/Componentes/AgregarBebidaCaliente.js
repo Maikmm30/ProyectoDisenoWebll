@@ -54,7 +54,7 @@ function AgregarBebidaCaliente() {
       
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: getCookie('usuario')+' agregó una bebida caliente',
+      descripcionBitacora: codigoBebidaCaliente+': '+getCookie('usuario')+' agregó una bebida caliente',
 
     });
     

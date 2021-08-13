@@ -26,6 +26,9 @@ function AgregarPaises() {
       codigoPais: codigoPais,
       nombrePais: nombrePais,
       estadoPais: true,
+      bitacoraUsuario: getCookie("usuario"),
+      bitacoraRol: getCookie("rol"),
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
@@ -54,6 +57,22 @@ function AgregarPaises() {
       setPreviewSource(reader.result);
     }
   }
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
 
   return (
     <div className="container">

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+var bcrypt = require('bcryptjs');
 
 let usuarioSchema = new Schema({
     codigo: {
@@ -34,6 +35,16 @@ let usuarioSchema = new Schema({
     }
 })
 
-const Usuario = mongoose.model('usuario', usuarioSchema, 'usuario');
+//Encriptacion
+usuarioSchema.pre('save', function (next) {
+    if (!this.isModified('password'))
+        return next();
+    bcrypt.hash(this.password, 10, (err, passwordHash) => {
+        if (err)
+            return next(err);
+        this.password = passwordHash;
+        next();
+    })
+});
 
-module.exports = Usuario;
+module.exports = mongoose.model('usuario', usuarioSchema, 'usuario');

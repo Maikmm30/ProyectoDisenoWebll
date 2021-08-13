@@ -24,7 +24,9 @@ function Paises() {
       {
         codigoActualiza: codigoActualiza,
         paisNuevo: paisNuevo,
-        columnaSeleccionada: columnaSeleccionada
+        columnaSeleccionada: columnaSeleccionada,
+        bitacoraUsuario: getCookie("usuario"),
+        bitacoraRol: getCookie("rol"),
       });
     window.location.reload()
 
@@ -45,7 +47,9 @@ function Paises() {
   const eliminaPais = () => {
     Axios.put("http://localhost:3001/paises/eliminar",
       {
-        codigoBusca: codigoBusca
+        codigoBusca: codigoBusca,
+        bitacoraUsuario: getCookie("usuario"),
+        bitacoraRol: getCookie("rol"),
       })
       .then(() => {
         window.location.reload()
@@ -110,6 +114,21 @@ function Paises() {
   const limpiaCajas = () => {
     setCodigo("")
     setNombre("")
+  }
+
+  function getCookie(cname) {
+    let name = cname + "=";
+    let ca = document.cookie.split(';');
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) === 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
   return (

@@ -6,6 +6,7 @@ import 'jspdf-autotable'
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios';
+import Multiselect from 'multiselect-react-dropdown';
 
 function AgregarClientesMesas() {
   const [showBuffet, setShowBuffet] = useState(true);
@@ -32,6 +33,21 @@ function AgregarClientesMesas() {
   const [precioSilla3ClienteMesa, setPrecioSilla3ClienteMesa] = useState("");
   const [precioSilla4ClienteMesa, setPrecioSilla4ClienteMesa] = useState("");
   const [estadoCuentaClienteMesa, setEstadoCuentaClienteMesa] = useState("");
+  let arrayNombres = [];
+  let arrayPrecios = [];
+  let precioTotal1 = 0;
+  let precioTotal2 = 0;
+  let precioTotal3 = 0;
+  let precioTotal4 = 0;
+  let pedidoTotal1 = '';
+  let pedidoTotal2 = '';
+  let pedidoTotal3 = '';
+  let pedidoTotal4 = '';
+  let errorHandler1 = 0;
+  let errorHandler2 = 0;
+  let errorHandler3 = 0;
+  let errorHandler4 = 0;
+
   let  params = useParams();
   // let obj = JSON.parse(JSON.stringify(params));
  const [showMesa, setShowMesa] = useState(true);
@@ -79,6 +95,18 @@ function AgregarClientesMesas() {
       setReservacionClienteMesa(false)
     });
     
+    Axios.get("http://localhost:3001/buffet/names").then((res) => {
+              for(var k in res.data) {
+                arrayNombres.push(res.data[k].nombre);
+             }
+            console.log(res.data)
+            }); 
+    Axios.get("http://localhost:3001/buffet/precios").then((res) => {
+      for(var k in res.data) {
+        arrayPrecios.push(res.data[k].precio);
+      }
+    }); 
+    
     if(JSON.stringify(params.obj).length > 8){
       setShowMesa(false)
       setNombreMesaClienteMesa(JSON.parse(params.obj).nombreMesa )
@@ -101,7 +129,73 @@ function AgregarClientesMesas() {
       restauranteClienteMesa : restauranteClienteMesa
     });
   }
+
+  
+
+  const manejoSilla1 = (valor) => {
+    precioTotal1=0;
+    var valorSplit = valor.toString().split(',');
+    valorSplit.forEach(element => 
+      Axios.post("http://localhost:3001/buffet/buscarNombre",
+    {
+      nombreBusca: element
+    })
+    .then((res) => {
+      precioTotal1=precioTotal1+Number(res.data[0].precio);
+      document.getElementById("precio1").value= precioTotal1;
+    }));
+  };
+
+  const manejoSilla2 = (valor) => {
+    precioTotal2=0;
+    var valorSplit = valor.toString().split(',');
+    valorSplit.forEach(element => 
+      Axios.post("http://localhost:3001/buffet/buscarNombre",
+    {
+      nombreBusca: element
+    })
+    .then((res) => {
+      precioTotal2=precioTotal2+Number(res.data[0].precio);
+      document.getElementById("precio2").value= precioTotal2;
+    }));
+  };
+
+  const manejoSilla3 = (valor) => {
+    precioTotal3=0;
+    var valorSplit = valor.toString().split(',');
+    valorSplit.forEach(element => 
+      Axios.post("http://localhost:3001/buffet/buscarNombre",
+    {
+      nombreBusca: element
+    })
+    .then((res) => {
+      precioTotal3=precioTotal3+Number(res.data[0].precio);
+      document.getElementById("precio3").value= precioTotal3;
+    }));
+  };
+
+  const manejoSilla4 = (valor) => {
+    precioTotal4=0;
+    var valorSplit = valor.toString().split(',');
+    valorSplit.forEach(element => 
+      Axios.post("http://localhost:3001/buffet/buscarNombre",
+    {
+      nombreBusca: element
+    })
+    .then((res) => {
+      precioTotal4=precioTotal4+Number(res.data[0].precio);
+      document.getElementById("precio4").value= precioTotal4;
+    }));
+  };
+
   const enviarDatos = () => {
+
+    setPedidoSilla1ClienteMesa(pedidoTotal1);
+    setPrecioSilla1ClienteMesa(precioTotal1);
+
+    alert(codigoClienteMesa)
+    alert(pedidoTotal1)
+    alert(precioTotal1)
 
     Axios.post("http://localhost:3001/clientes-mesa/agregar",{
       codigoClienteMesa: codigoClienteMesa,
@@ -116,17 +210,16 @@ function AgregarClientesMesas() {
       horaSalidaClienteMesa: horaSalidaClienteMesa,
       duracionClienteMesa: duracionClienteMesa,
       numeroMesaClienteMesa: numeroMesaClienteMesa,
-      pedidoSilla1ClienteMesa: pedidoSilla1ClienteMesa,
-      pedidoSilla2ClienteMesa: pedidoSilla2ClienteMesa,
-      pedidoSilla3ClienteMesa: pedidoSilla3ClienteMesa,
-      pedidoSilla4ClienteMesa: pedidoSilla4ClienteMesa,
-      precioSilla1ClienteMesa: precioSilla1ClienteMesa,
-      precioSilla2ClienteMesa: precioSilla2ClienteMesa,
-      precioSilla3ClienteMesa: precioSilla3ClienteMesa,
-      precioSilla4ClienteMesa: precioSilla4ClienteMesa,
+      pedidoSilla1ClienteMesa: pedidoTotal1.toString(),
+      pedidoSilla2ClienteMesa: pedidoTotal2.toString(),
+      pedidoSilla3ClienteMesa: pedidoTotal3.toString(),
+      pedidoSilla4ClienteMesa: pedidoTotal4.toString(),
+      precioSilla1ClienteMesa: Number(precioTotal1),
+      precioSilla2ClienteMesa: Number(precioTotal2),
+      precioSilla3ClienteMesa: Number(precioTotal3),
+      precioSilla4ClienteMesa: Number(precioTotal4),
       estadoCuentaClienteMesa: estadoCuentaClienteMesa,
     });
- 
 
     Axios.put("http://localhost:3001/consecutivos/update",
       {
@@ -140,8 +233,6 @@ function AgregarClientesMesas() {
         estadoMesaClienteMesa : true,
         restauranteClienteMesa : restauranteClienteMesa
       });
-      console.log(nombreMesaClienteMesa)
-      console.log(nombreMesaClienteMesa)
     window.location.href = 'http://localhost:3000/clientesMesas'
   };
 
@@ -453,20 +544,60 @@ function AgregarClientesMesas() {
                   <label className="col-sm-7 col-form-label">
                     Pedido silla N° 1
                   </label>
-                  <textarea name="" id="" cols="30" rows="5"></textarea>
-                  <label className="col-sm-7 col-form-label">Precio</label>
+                  <Multiselect
+                    isObject={false}
+                    closeOnSelect={true}
+                    onRemove={(value) => {
+                      errorHandler1 = errorHandler1-1
+                      if(errorHandler1!==0){
+                        manejoSilla1(value);
+                        pedidoTotal1=value;
+                      }else{
+                        document.getElementById("precio1").value=0;
+                      }
+                      }
+                    }
+                    onSelect={(value) => {
+                      manejoSilla1(value);
+                      pedidoTotal1=value;
+                      errorHandler1 = errorHandler1+1
+                      }
+                    }
+                    options={arrayNombres}
+                  />
+                  <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-8">
-                    <input type="number" className="form-control" />
+                  <input type="number" className="form-control" id="precio1" value="0" disabled/>
                   </div>
                 </div>
                 <div className="col">
                   <label className="col-sm-7 col-form-label">
                     Pedido silla N° 2
                   </label>
-                  <textarea name="" id="" cols="30" rows="5"></textarea>
-                  <label className="col-sm-7 col-form-label">Precio</label>
+                  <Multiselect
+                    isObject={false}
+                    closeOnSelect={true}
+                    onRemove={(value) => {
+                      errorHandler2 = errorHandler2-1
+                      if(errorHandler2!==0){
+                        manejoSilla2(value);
+                        pedidoTotal2=value;
+                      }else{
+                        document.getElementById("precio2").value=0;
+                      }
+                      }
+                    }
+                    onSelect={(value) => {
+                      manejoSilla2(value);
+                      pedidoTotal2=value;
+                      errorHandler2 = errorHandler2+1
+                      }
+                    }
+                    options={arrayNombres}
+                  />
+                  <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-8">
-                    <input type="number" className="form-control" />
+                  <input type="number" className="form-control" id="precio2" value="0" disabled/>
                   </div>
                 </div>
                 <div className="w-100"></div>
@@ -474,20 +605,60 @@ function AgregarClientesMesas() {
                   <label className="col-sm-7 col-form-label">
                     Pedido silla N° 3
                   </label>
-                  <textarea name="" id="" cols="30" rows="5"></textarea>
-                  <label className="col-sm-7 col-form-label">Precio</label>
+                  <Multiselect
+                    isObject={false}
+                    closeOnSelect={true}
+                    onRemove={(value) => {
+                      errorHandler3 = errorHandler3-1
+                      if(errorHandler3!==0){
+                        manejoSilla3(value);
+                        pedidoTotal3=value;
+                      }else{
+                        document.getElementById("precio3").value=0;
+                      }
+                      }
+                    }
+                    onSelect={(value) => {
+                      manejoSilla3(value);
+                      pedidoTotal3=value;
+                      errorHandler3 = errorHandler3+1
+                      }
+                    }
+                    options={arrayNombres}
+                  />
+                  <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-8">
-                    <input type="number" className="form-control" />
+                  <input type="number" className="form-control" id="precio3" value="0" disabled/>
                   </div>
                 </div>
                 <div className="col">
                   <label className="col-sm-7 col-form-label">
                     Pedido silla N° 4
                   </label>
-                  <textarea name="" id="" cols="30" rows="5"></textarea>
-                  <label className="col-sm-7 col-form-label">Precio</label>
+                  <Multiselect
+                    isObject={false}
+                    closeOnSelect={true}
+                    onRemove={(value) => {
+                      errorHandler4 = errorHandler4-1
+                      if(errorHandler4!==0){
+                        manejoSilla4(value);
+                        pedidoTotal4=value;
+                      }else{
+                        document.getElementById("precio4").value=0;
+                      }
+                      }
+                    }
+                    onSelect={(value) => {
+                      manejoSilla4(value);
+                      pedidoTotal4=value;
+                      errorHandler4 = errorHandler4+1
+                      }
+                    }
+                    options={arrayNombres}
+                  />
+                  <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-8">
-                    <input type="number" className="form-control" />
+                  <input type="number" className="form-control" id="precio4" value="0" disabled/>
                   </div>
                 </div>
               </div>

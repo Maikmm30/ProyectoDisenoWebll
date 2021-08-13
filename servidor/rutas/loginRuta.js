@@ -1,24 +1,23 @@
 const router = require("express").Router();
 let Usuario = require("../modelos/Usuario");
 const express = require("express");
+var bcrypt = require('bcryptjs');
 const app = express();
 
-router.post("/", async(req, res) => {
+router.post("/", async (req, res) => {
+
   const usuarioBusca = req.body.usuarioBusca;
   const passBusca = req.body.passBusca;
- await Usuario.findOne(
-    {
-      usuario: usuarioBusca,
-      password: passBusca,
-    }, function (err, user){
-        if(!user){
-           return res.send(false)
-        }
-        if(user){
-            return res.json(user)
-        }
-        
-    })
+
+  const usuario = await Usuario.findOne({ usuario: usuarioBusca })
+
+  if (!usuario) {
+    return res.send(false)
+  } else if (usuario) {
+
+    return res.json(await bcrypt.compare(passBusca, usuario.password))
+
+  }
 });
 
 module.exports = router;

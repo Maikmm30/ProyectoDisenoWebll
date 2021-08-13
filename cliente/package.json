@@ -11,6 +11,8 @@
     "bootstrap": "^4.6.0",
     "jspdf": "^2.3.1",
     "jspdf-autotable": "^3.5.15",
+    "bootstrap-select": "^1.13.18",
+    "multiselect-react-dropdown": "^2.0.5",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-bootstrap-table-next": "^4.0.3",

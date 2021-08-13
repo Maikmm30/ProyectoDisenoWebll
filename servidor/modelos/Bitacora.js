@@ -5,35 +5,20 @@ let bitacoraSchema = new Schema({
     codigo: {
         type: String
     },
-    nombre: {
+    usuario: { //La persona que realiza la actividad
         type: String
     },
-    cantidad: {
-        type: Number
-    },
-    restaurante: {
+    rol_usuario: {
         type: String
     },
-    marca: {
+    fecha: {
         type: String
     },
-    tipoDeComestible: {
+    descripcion: {
         type: String
-    },
-    claseDeComestible : {
-        type: String
-    },
-    lineaDeComestible : {
-        type: String
-    },
-    unidadDeMedida : {
-        type: String
-    },
-    estado : {
-        type: Boolean
     }
 })
 
-const Bitacora = mongoose.model('bitacora', bitacoraSchema);
+const Bitacora = mongoose.model('bitacora', bitacoraSchema, 'bitacora');
 
 module.exports = Bitacora;

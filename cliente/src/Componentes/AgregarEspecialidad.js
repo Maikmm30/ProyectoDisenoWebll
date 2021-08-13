@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarEspecialidad() {
 
@@ -30,6 +31,13 @@ function AgregarEspecialidad() {
       detalleEspecialidad: detalleEspecialidad,
       restauranteEspecialidad: restauranteEspecialidad,
       estadoEspecialidad: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoEspecialidad+': '+getCookie('usuario')+' agregó una especialidad',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

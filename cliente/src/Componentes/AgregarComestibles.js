@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarComestibles() {
 
@@ -94,6 +95,13 @@ function AgregarComestibles() {
       lineaDeComestible: lineaDeComestible,
       unidadDeMedidaComestible: unidadDeMedidaComestible,
       estadoComestible: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoComestible+': '+getCookie('usuario')+' agregó un comestible',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

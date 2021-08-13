@@ -36,12 +36,12 @@ router.post("/agregar", async (req, res) => {
     const horaEntradaClienteBarra = req.body.horaEntradaClienteBarra;
     const horaSalidaClienteBarra = req.body.horaSalidaClienteBarra;
     const duracionClienteBarra = req.body.duracionClienteBarra;
-    //const estadoClienteBarra = req.body.estadoClienteBarra;
     const estadoClienteBarra = true;
     const pedidoClienteBarra = req.body.pedidoClienteBarra;
     const numeroSillaClienteBarra = req.body.numeroSillaClienteBarra;
     const precioClienteBarra = req.body.precioClienteBarra;
-    const tipoClienteBarra = "Barra";
+    const ocupadoClienteMesa = false;
+
 
     try {
         console.log("AGREGAR")
@@ -62,7 +62,8 @@ router.post("/agregar", async (req, res) => {
             pedidoBarra: pedidoClienteBarra,
             precioBarra: precioClienteBarra,
             numeroSillaBarra: numeroSillaClienteBarra,
-            tipoCliente: 'Barra'
+            tipoCliente: 'Barra',
+            ocupado: ocupadoClienteMesa
         });
         await cliente.save();
         res.send("inserted data");
@@ -80,6 +81,22 @@ router.put("/update", async (req, res) => {
             res.json(clienteBarra);
 
         });
+    }
+    catch (err) {
+        res.send('error' + err);
+    }
+})
+
+router.put("/updateSillaDisponible", async (req, res) => {
+    const numeroSillaClienteBarra = req.body.numeroSillaClienteBarra;
+    const estadoSillaCliente = req.body.estadoSillaCliente;
+    const restauranteClienteBarra = req.body.restauranteClienteBarra;
+    
+    try {
+        await Cliente.findOneAndUpdate({ numeroSillaBarra: numeroSillaClienteBarra, restaurante: restauranteClienteBarra }, { ocupado: estadoSillaCliente }).then((numeroSilla) => {
+            res.json('update realizado '+numeroSilla);
+
+        }) ;
     }
     catch (err) {
         res.send('error' + err);
@@ -122,4 +139,5 @@ router.route("/obtenerOcupado").post((req, res) => {
         .then((oc) => res.json(oc))
         .catch((err) => res.status(400).json("Error: " + err));
 });
+
 module.exports = router;

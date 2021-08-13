@@ -126,6 +126,16 @@ function ClientesBarra() {
         }
       }
     },
+    
+    {
+      dataField: "numeroSillaBarra",
+      text: "Numero de Silla",
+      events: {
+        onClick: (column, columnIndex) => {
+          setColumna(columnIndex.dataField);
+        }
+      }
+    },
     {
       dataField: "fecha",
       text: "Fecha",

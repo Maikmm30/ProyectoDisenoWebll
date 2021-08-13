@@ -42,7 +42,6 @@ router.post("/agregar", async (req, res) => {
     const precioSilla3ClienteMesa = req.body.precioSilla3ClienteMesa;
     const precioSilla4ClienteMesa = req.body.precioSilla4ClienteMesa;
     const estadoCuentaClienteMesa = req.body.estadoCuentaClienteMesa;
-    const tipoClienteClienteMesa = 'Mesa';
     const ocupadoClienteMesa = false;
 
     try {

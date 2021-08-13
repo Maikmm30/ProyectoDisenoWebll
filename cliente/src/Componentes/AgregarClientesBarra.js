@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
+import { useParams } from "react-router-dom";
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 function AgregarClientesBarra() {
 
@@ -15,6 +20,42 @@ function AgregarClientesBarra() {
   const [pedidoClienteBarra, setPedidoClienteBarra] = useState("");
   const [precioClienteBarra, setPrecioClienteBarra] = useState("");
   const [numeroSillaClienteBarra, setNumeroSillaClienteBarra] = useState("");
+  let  params = useParams();
+  const [showSilla, setShowSilla] = useState(true);
+
+  const generarPdf =() =>{
+    desocupaSilla()
+     const doc = new jsPDF();
+     let tabla =  JSON.parse(params.obj) 
+       doc.autoTable({
+         head: [['Codigo', 'Nombre', 'Monto Pagado', 'Detalle', 'Numero de silla', 'Fecha', 'Restaurante', 'Tipo de Cliente' ]],
+         body: [
+           [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.numeroSillaBarra, tabla.fecha, tabla.restaurante, tabla.tipoCliente]
+         ],
+        
+         startY: 40,
+         styles: {
+         
+           halign: 'center',
+           cellWidth: 21 
+         },
+         
+       })
+      
+       window.open(URL.createObjectURL(doc.output("blob")))
+       doc.save()
+   }
+
+  const deshabilitar=()=>{
+    toast.warning('El cliente no ha realizado el pago',
+    {position: toast.POSITION.TOP_CENTER,
+     autoClose: 2500})
+  }
+  const deshabilitarAgregar=()=>{
+   toast.warning('El cliente ya ha sido agregado',
+   {position: toast.POSITION.TOP_CENTER,
+    autoClose: 2500})
+ }
 
   useEffect(() => {
     Axios.get("http://localhost:3001/clientes-barra/id").then((res) => {
@@ -24,8 +65,33 @@ function AgregarClientesBarra() {
       setCodigoClienteBarra(str+num);
       setFechaClienteBarra('05/07/21')
     });
-    
+
+    if(JSON.stringify(params.obj).length > 3){
+      setShowSilla(false)
+      setNumeroSillaClienteBarra(JSON.parse(params.obj).numeroSillaBarra )
+      setRestauranteClienteBarra(JSON.parse(params.obj).restaurante)
+      console.log('entra')
+      console.log(numeroSillaClienteBarra)
+      console.log(restauranteClienteBarra)
+    }
+    else{
+      setShowSilla(true)
+      setNumeroSillaClienteBarra(params.obj)
+      setRestauranteClienteBarra(params.restaurante)
+    }
+    console.log(JSON.stringify(params.obj).length)
+  
+
   }, []);
+  const desocupaSilla =() =>{
+    Axios.put("http://localhost:3001/clientes-barra/updateSillaDisponible",
+    {
+      numeroSillaClienteBarra: numeroSillaClienteBarra,
+      estadoMesaClienteMesa : false,
+      restauranteClienteBarra : restauranteClienteBarra
+    });
+  }
+
 
   const enviarDatos = () => {
     console.log('Entró')
@@ -49,6 +115,12 @@ function AgregarClientesBarra() {
         consecutivoNuevo: numeroClienteBarra,
         columnaSeleccionada: 'valorConsecutivo'
       });
+      Axios.put("http://localhost:3001/clientes-barra/updateSillaDisponible",
+      {
+        numeroSillaClienteBarra: numeroSillaClienteBarra,
+        estadoSillaCliente : true,
+        restauranteClienteBarra : restauranteClienteBarra
+      });
     window.location.href = 'http://localhost:3000/clientesBarra'
   };
 
@@ -67,7 +139,7 @@ function AgregarClientesBarra() {
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
                 </div>
                 <div className="col ">
-                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i>
+                  <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={!showSilla  ? deshabilitarAgregar : enviarDatos}></i>
                 </div>
                 <div className="col">
                   <i className=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i>
@@ -114,7 +186,8 @@ function AgregarClientesBarra() {
                     <div className="col-sm-9">
                     <input type="text" className="form-control" onChange={(event)=>{
                   setRestauranteClienteBarra(event.target.value);
-                }}/>
+                }}  value={showSilla ?  params.restaurante : JSON.parse(params.obj).restaurante }
+                disabled/>
                     </div>
                   </div>
 
@@ -174,7 +247,9 @@ function AgregarClientesBarra() {
                   <div className="col-sm-6">
                   <input type="number" className="form-control" onChange={(event)=>{
                   setNumeroSillaClienteBarra(event.target.value);
-                }}/>
+                }}
+                value={showSilla ?  params.obj : JSON.parse(params.obj).numeroSillaBarra }
+                disabled/>
                   </div>
                 </div>
               </div>
@@ -191,9 +266,8 @@ function AgregarClientesBarra() {
                   </div>
                   <div className="mb-3 row">
                   <label className="col-sm-4 col-form-label">
-                      <button>
-                        Imprimir factura
-                      </button>
+                  <button onClick={showSilla ?  deshabilitar : generarPdf}> Imprimir factura</button>
+
                     </label>
                     <div className="col">
                       <i className="fas fa-print fa-5x"></i>

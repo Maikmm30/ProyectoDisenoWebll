@@ -106,7 +106,7 @@ function App() {
           <Route path="/agregarUnidadMedida" component={AgregarUnidadMedida} />
           <Route path="/aperturaCajas" component={AperturaCajas} />
           <Route path="/clientesBarra" component={ClientesBarra} />
-          <Route path="/agregarClientesBarra" component={AgregarClientesBarra} />
+          <Route path="/agregarClientesBarra" component={AgregarClientesBarra} exact/>
 
            
           <Route path="/agregarClientesBarra/:obj" component={AgregarClientesBarra} exact />

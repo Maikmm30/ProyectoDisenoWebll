@@ -7,6 +7,7 @@ import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Axios from 'axios';
 import Multiselect from 'multiselect-react-dropdown';
+import getCookie from './utils/Cookies';
 
 function AgregarClientesMesas() {
   const [showBuffet, setShowBuffet] = useState(true);
@@ -301,7 +302,13 @@ function AgregarClientesMesas() {
       precioSilla4ClienteMesa: Number(precioTotal4)+Number(precioTotal4Pedido),
       estadoCuentaClienteMesa: estadoCuentaClienteMesa,
     });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoClienteMesa+': '+getCookie('usuario')+' agregó un cliente',
 
+    });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
         codigoActualiza: '23',

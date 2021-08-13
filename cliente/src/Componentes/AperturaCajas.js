@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AperturaCajas() {
 
@@ -37,6 +38,13 @@ function AperturaCajas() {
       descripcionCaja: "Apertura de Caja",
       cierreCaja: false,
       estadoCaja: true
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoCaja+': '+getCookie('usuario')+' agregó una apertura de Caja',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

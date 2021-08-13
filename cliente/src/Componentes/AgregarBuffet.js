@@ -2,6 +2,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarBuffet() {
 
@@ -52,6 +53,13 @@ function AgregarBuffet() {
       tipoBuffet: tipoBuffet,
       unidadBuffet: unidadBuffet,
       estadoBuffet: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBuffet+': '+getCookie('usuario')+' agregó un buffet',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

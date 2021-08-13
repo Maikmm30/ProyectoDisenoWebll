@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarClientesBarra() {
 
@@ -41,6 +42,14 @@ function AgregarClientesBarra() {
       pedidoClienteBarra: pedidoClienteBarra,
       precioClienteBarra: precioClienteBarra,
       numeroSillaClienteBarra: numeroSillaClienteBarra,
+    });
+
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoClienteBarra+': '+getCookie('usuario')+' agregó un cliente',
+
     });
     console.log('Codigo'+codigoClienteBarra)
     Axios.put("http://localhost:3001/consecutivos/update",

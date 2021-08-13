@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
+import getCookie from './utils/Cookies';
 
 function AgregarPuesto() {
 
@@ -51,6 +52,13 @@ function AgregarPuesto() {
       rolPuesto: rolPuesto,
       relacionPuesto: relacionPuesto,
       estadoPuesto: true,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoPuesto+': '+getCookie('usuario')+' agregó un puesto',
+
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {

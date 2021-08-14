@@ -5,10 +5,16 @@ const express = require("express");
 const app = express();
 
 router.route("/id").get((req, res) => {
-  
-  Consecutivo.find({nombre: 'bitacora'}).select('valorConsecutivo')
-      .then((consecutivo) => res.json(consecutivo))
-      .catch((err) => res.status(400).json("Error: " + err));
+
+    Consecutivo.find({ nombre: 'bitacora' }).select('valorConsecutivo')
+        .then((consecutivo) => res.json(consecutivo))
+        .catch((err) => res.status(400).json("Error: " + err));
+});
+
+router.route("/").get((req, res) => {
+    Bitacora.find({})
+        .then((paises) => res.json(paises))
+        .catch((err) => res.status(400).json("Error: " + err));
 });
 
 router.post("/agregar", async (req, res) => {
@@ -17,8 +23,8 @@ router.post("/agregar", async (req, res) => {
     //Se obtiene el consecutivo//
     await Consecutivo.find({ nombre: 'bitacora' })
         .then((consecutivo) => {
-        valorConsecutivo = parseInt(consecutivo[0].valorConsecutivo) + 1;
-    })
+            valorConsecutivo = parseInt(consecutivo[0].valorConsecutivo) + 1;
+        })
 
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -26,7 +32,7 @@ router.post("/agregar", async (req, res) => {
     var dateTime = date + ' ' + time;
 
 
-    const codigoBitacora = 'BIT'+valorConsecutivo;
+    const codigoBitacora = 'BIT' + valorConsecutivo;
     const usuarioBitacora = req.body.usuarioBitacora;
     const rolBitacora = req.body.rolBitacora;
     const fechaBitacora = dateTime;
@@ -34,11 +40,11 @@ router.post("/agregar", async (req, res) => {
 
     try {
         const bitacora = new Bitacora({
-        codigo: codigoBitacora,
-        usuario: usuarioBitacora,
-        rol_usuario: rolBitacora,
-        fecha: fechaBitacora,
-        descripcion: descripcionBitacora,
+            codigo: codigoBitacora,
+            usuario: usuarioBitacora,
+            rol_usuario: rolBitacora,
+            fecha: fechaBitacora,
+            descripcion: descripcionBitacora,
         });
         await bitacora.save();
         await Consecutivo.findOneAndUpdate({ codigo: '24' }, { valorConsecutivo: valorConsecutivo }, (err, consecutivo) => {

@@ -111,40 +111,7 @@ function Bitacora() {
 
               Información de Bitácora
               <div class="form-group row mt-2">
-
-                <div class="form-check form-check-inline col-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked" />
-                  <label class="form-check-label" for="inlineRadio1" >General</label>
-                </div>
-                <div class="form-check form-check-inline col-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                  <label class="form-check-label" for="inlineRadio1">Por Fecha</label>
-                </div>
-                <div class="form-check form-check-inline col-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                  <label class="form-check-label" for="inlineRadio1">Por Usuario</label>
-                </div>
-
-                <div class="form-group row mt-2">
-                  <label class="col-sm-2 col-form-label">
-                    Fecha Inicial
-                  </label>
-                  <div class="col-sm-4">
-                    <input
-                      type="date"
-                      class="form-control"
-                    />
-                  </div>
-                  <label class="col-sm-2 col-form-label">
-                    Fecha Final
-                  </label>
-                  <div class="col-sm-4">
-                    <input
-                      type="date"
-                      class="form-control"
-                    />
-                  </div>
-                </div>
+               
                 <div class="form-group row mt-2">
                   <label class="col-sm-2 col-form-label">
                     Usuario

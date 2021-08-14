@@ -261,7 +261,7 @@ function AgregarClientesMesas() {
     var valorSplit = valor.toString().split(',');
     valorSplit.forEach(element => 
       Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscarNombre",{
-      restauranteClienteMesa : 'Piccola',
+      restauranteClienteMesa : params.restaurante,
       nombreBusca: element
     }).then((res) => {
       precioTotal1Pedido=precioTotal1Pedido+Number(res.data[0].precio);
@@ -275,7 +275,7 @@ function AgregarClientesMesas() {
     var valorSplit = valor.toString().split(',');
     valorSplit.forEach(element => 
       Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscarNombre",{
-      restauranteClienteMesa : 'Piccola',
+      restauranteClienteMesa : params.restaurante,
       nombreBusca: element
     }).then((res) => {
       precioTotal2Pedido=precioTotal2Pedido+Number(res.data[0].precio);
@@ -289,7 +289,7 @@ function AgregarClientesMesas() {
     var valorSplit = valor.toString().split(',');
     valorSplit.forEach(element => 
       Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscarNombre",{
-      restauranteClienteMesa : 'Piccola',
+      restauranteClienteMesa : params.restaurante,
       nombreBusca: element
     }).then((res) => {
       precioTotal3Pedido=precioTotal3Pedido+Number(res.data[0].precio);
@@ -303,7 +303,7 @@ function AgregarClientesMesas() {
     var valorSplit = valor.toString().split(',');
     valorSplit.forEach(element => 
       Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscarNombre",{
-      restauranteClienteMesa : 'Piccola',
+      restauranteClienteMesa : params.restaurante,
       nombreBusca: element
     }).then((res) => {
       precioTotal4Pedido=precioTotal4Pedido+Number(res.data[0].precio);

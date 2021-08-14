@@ -108,7 +108,7 @@ function AgregarEmpleados() {
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
-        codigoActualiza: '10',
+        codigoActualiza: '20',
         consecutivoNuevo: numeroEmpleado,
         columnaSeleccionada: 'valorConsecutivo'
       });

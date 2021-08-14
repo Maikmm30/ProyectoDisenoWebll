@@ -63,7 +63,7 @@ function AgregarBuffet() {
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
-        codigoActualiza: '10',
+        codigoActualiza: '19',
         consecutivoNuevo: numeroBuffet,
         columnaSeleccionada: 'valorConsecutivo'
       });

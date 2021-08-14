@@ -86,14 +86,14 @@ function AgregarTecnologia() {
 
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "600px" }}>
+      <div class="row" style={{ height: "600px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Tecnología</h3>
           <i class="fas fa-laptop fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12 h-25">
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " ></i></div>
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
@@ -101,7 +101,7 @@ function AgregarTecnologia() {
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
+            <div class="col-12 h-80">
               Información de los artículos
               <div class="form-group row mt-2">
                 <label for="staticEmail" class="col-sm-2 col-form-label">

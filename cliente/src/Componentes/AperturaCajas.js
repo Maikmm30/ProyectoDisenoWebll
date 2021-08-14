@@ -74,7 +74,18 @@ function AperturaCajas() {
         consecutivoNuevo: numeroCaja,
         columnaSeleccionada: 'valorConsecutivo'
       });
-    window.location.href = 'http://localhost:3000/cajas'
+    if (restauranteCaja=== 'Piccola') {
+      window.location.href = 'http://localhost:3000/restaurantePicolla'
+
+    }
+    if (restauranteCaja=== 'Notte') {
+      window.location.href = 'http://localhost:3000/restauranteNotte'
+
+    }
+    if (restauranteCaja=== 'Turin') {
+      window.location.href = 'http://localhost:3000/restauranteTurin'
+
+    }
   };
 
   return (

@@ -93,7 +93,7 @@ function AgregarTecnologia() {
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 h-25">
+            <div class="text-center col-12 h-25"style={{backgroundColor: "#C42709" }}>
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " ></i></div>
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>

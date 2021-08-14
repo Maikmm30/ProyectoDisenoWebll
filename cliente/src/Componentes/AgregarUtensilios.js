@@ -88,14 +88,14 @@ function AgregarUtensilios() {
 
   return (
 <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "800px" , backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Utensilios y Equipos</h3>
           <i class="fas fa-utensil-spoon fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12 h-25" style={{backgroundColor: "#C42709" }}>
                 <div class="row row-cols-3 m-4">
                   <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
                   <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
@@ -103,7 +103,7 @@ function AgregarUtensilios() {
 
               </div>
             </div>
-            <div class="col-6 bg-danger h-100">
+            <div class="col-6 h-100">
             Información del Utensilio
               <div class="form-group row mt-4">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
@@ -201,13 +201,6 @@ function AgregarUtensilios() {
               
               
             </div>
-            <div class="col-6 bg-danger p-0 border border-danger">
-              
-            
-
-
-            </div>
-
             
           </div>
         </div>

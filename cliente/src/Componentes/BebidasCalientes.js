@@ -159,10 +159,7 @@ function BebidasCalientes() {
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div
-              class="text-center col-12 h-25"
-              style={{ backgroundColor: "#C42709" }}
-            >
+            <div class="text-center col-12 h-25"style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4 text-light">
                 <div class="col">
                   <button
@@ -219,7 +216,7 @@ function BebidasCalientes() {
                 </div>
               </div>
 
-              <div class="form-group row mt-2  text-center">
+              <div class="form-group row mt-2 text-center">
                 <div
                   class="py-5 px-5 table-scroll"
                   onKeyUp={capturaInput}

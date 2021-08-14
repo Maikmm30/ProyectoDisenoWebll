@@ -6,6 +6,7 @@ import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function BebidasCalientes() {
 
@@ -29,6 +30,12 @@ function BebidasCalientes() {
       codigoActualiza: codigoActualiza,
       bebidaNuevo: bebidaNuevo,
       columnaSeleccionada: columnaSeleccionada,
+    });
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza+': '+getCookie('usuario')+' modificó una bebida caliente',
     });
     window.location.reload();
   };

@@ -91,8 +91,6 @@ router.route("/buscarNombre").post((req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 })
 
-
-
 router.put("/eliminar", async (req, res) => {
 
     const codigoBusca = req.body.codigoBusca

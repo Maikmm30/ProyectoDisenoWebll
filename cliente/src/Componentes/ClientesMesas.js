@@ -137,7 +137,7 @@ function ClientesMesas() {
       }
     },
     {
-      dataField: "fecha",
+      dataField: "fechaLlegada",
       text: "Fecha",
       events: {
         onClick: (column, columnIndex) => {

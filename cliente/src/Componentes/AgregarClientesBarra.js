@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import {toast} from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import getCookie from './utils/Cookies';
+import Multiselect from 'multiselect-react-dropdown';
 
 function AgregarClientesBarra() {
 
@@ -21,8 +22,27 @@ function AgregarClientesBarra() {
   const [pedidoClienteBarra, setPedidoClienteBarra] = useState("");
   const [precioClienteBarra, setPrecioClienteBarra] = useState("");
   const [numeroSillaClienteBarra, setNumeroSillaClienteBarra] = useState("");
+  const [estadoCuentaClienteBarra, setEstadoCuentaClienteBarra] = useState("");
   let  params = useParams();
   const [showSilla, setShowSilla] = useState(true);
+  let arrayNombresPedido = [];
+  let arrayPreciosPedido = [];
+  let precioTotal1Pedido = 0;
+  let pedidoTotal1Pedido = '';
+  let errorHandler1Pedido = 0;
+
+ function duracion(entrada, salida){
+    var hora2 = entrada.split(":"),
+    hora1 = salida.split(":"),
+    t1 = new Date(),
+    t2 = new Date();
+ 
+    t1.setHours(hora1[0], hora1[1], hora1[2]);
+    t2.setHours(hora2[0], hora2[1], hora2[2]);
+    t1.setHours(t1.getHours() - t2.getHours(), t1.getMinutes() - t2.getMinutes(), t1.getSeconds() - t2.getSeconds());
+
+    setDuracionClienteBarra(t1.getHours()+':'+t1.getMinutes()+':'+t1.getSeconds())
+}
 
   const generarPdf =() =>{
     desocupaSilla()
@@ -31,7 +51,7 @@ function AgregarClientesBarra() {
        doc.autoTable({
          head: [['Codigo', 'Nombre', 'Monto Pagado', 'Detalle', 'Numero de silla', 'Fecha', 'Restaurante', 'Tipo de Cliente' ]],
          body: [
-           [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.numeroSillaBarra, tabla.fecha, tabla.restaurante, tabla.tipoCliente]
+           [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.numeroSillaBarra, tabla.fechaLlegada, tabla.restaurante, tabla.tipoCliente]
          ],
         
          startY: 40,
@@ -58,27 +78,64 @@ function AgregarClientesBarra() {
     autoClose: 2500})
  }
 
+ const manejoSilla1Pedido = (valor) => {
+  precioTotal1Pedido=0;
+  var valorSplit = valor.toString().split(',');
+  valorSplit.forEach(element => 
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/buscarNombre",{
+    restauranteClienteMesa : 'Piccola',
+    nombreBusca: element
+  }).then((res) => {
+    precioTotal1Pedido=precioTotal1Pedido+Number(res.data[0].precio);
+    document.getElementById("precio1Pedido").value= precioTotal1Pedido;
+    document.getElementById("montoPago").value=precioTotal1Pedido;
+  }));
+};
+
   useEffect(() => {
     Axios.get("http://localhost:3001/clientes-barra/id").then((res) => {
       const num = parseInt(res.data[0].valorConsecutivo)+1;
       setNumeroClienteBarra(num);
       const str = "CLI";
       setCodigoClienteBarra(str+num);
-      setFechaClienteBarra('05/07/21')
     });
-
+    Axios.post("http://localhost:3001/administracion/especiales/especialidades/obtenerEspecialidades",{
+      restauranteClienteMesa : params.restaurante
+    }).then((res) => {
+      for(var k in res.data) {
+        arrayNombresPedido.push(res.data[k].nombre);
+        arrayPreciosPedido.push(res.data[k].precio);
+     }
+    }); 
+    var hoy = new Date();
+    var currentdate = new Date();
+    
+    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds()
     if(JSON.stringify(params.obj).length > 3){
       setShowSilla(false)
       setNumeroSillaClienteBarra(JSON.parse(params.obj).numeroSillaBarra )
       setRestauranteClienteBarra(JSON.parse(params.obj).restaurante)
-      console.log('entra')
-      console.log(numeroSillaClienteBarra)
-      console.log(restauranteClienteBarra)
+      setHoraEntradaClienteBarra(JSON.parse(params.obj).horaEntrada);
+      setHoraSalidaClienteBarra(hora);
+      setEstadoCuentaClienteBarra('Pago');
+      duracion(JSON.parse(params.obj).horaEntrada,hora);
+      document.getElementById('ocultarMesa').style.display="none";
+      document.getElementById('ocultarMesa1').style.display="none";
+      document.getElementById('ocultarMesa2').style.display="none";
+      document.getElementById('ocultarMesa3').style.display="none";
+      setPrecioClienteBarra(JSON.parse(params.obj).precioBarra)
+      setNombreCompletoClienteBarra(JSON.parse(params.obj).nombreCompleto)
+      document.getElementById('nombreCompleto').disabled=true;
+      document.getElementById('nombreCompleto').value=(JSON.parse(params.obj).nombreCompleto)
+      //document.getElementById('precio1Pedido').value=JSON.parse(params.obj).precioBarra;
     }
     else{
       setShowSilla(true)
       setNumeroSillaClienteBarra(params.obj)
       setRestauranteClienteBarra(params.restaurante)
+      setHoraEntradaClienteBarra(hora);
+      setFechaClienteBarra(currentdate);
+      setEstadoCuentaClienteBarra('Sin Pagar')
     }
     console.log(JSON.stringify(params.obj).length)
   
@@ -99,15 +156,16 @@ function AgregarClientesBarra() {
     Axios.post("http://localhost:3001/clientes-barra/agregar",{
       codigoClienteBarra: codigoClienteBarra,
       nombreCompletoClienteBarra: nombreCompletoClienteBarra,
-      montoPagadoClienteBarra: montoPagadoClienteBarra,
+      montoPagadoClienteBarra: Number(precioTotal1Pedido),
       restauranteClienteBarra: restauranteClienteBarra,
       fechaClienteBarra: fechaClienteBarra,
       horaEntradaClienteBarra: horaEntradaClienteBarra,
       horaSalidaClienteBarra: horaSalidaClienteBarra,
       duracionClienteBarra: duracionClienteBarra,
-      pedidoClienteBarra: pedidoClienteBarra,
-      precioClienteBarra: precioClienteBarra,
+      pedidoClienteBarra: pedidoTotal1Pedido.toString(),
+      precioClienteBarra: Number(precioTotal1Pedido),
       numeroSillaClienteBarra: numeroSillaClienteBarra,
+      estadoCuentaClienteBarra: estadoCuentaClienteBarra
     });
 
     Axios.post("http://localhost:3001/bitacora/agregar",{
@@ -168,25 +226,16 @@ function AgregarClientesBarra() {
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Nombre del cliente</label>
                     <div className="col-sm-9">
-                    <input type="text" className="form-control" onChange={(event)=>{
+                    <input type="text" className="form-control" id="nombreCompleto" onChange={(event)=>{
                   setNombreCompletoClienteBarra(event.target.value);
                 }}/>
-                    </div>
-                  </div>
-
-                  <div className="mt-2 mb-3 row">
-                    <label className="col-sm-3">Nombre de la mesa</label>
-                    <div className="col-sm-9">
-                    <input type="text" className="form-control" />
                     </div>
                   </div>
 
                   <div className="mt-2  mb-3 row">
                     <label className="col-sm-3">Monto de pago</label>
                     <div className="col-sm-9">
-                    <input type="number" className="form-control" onChange={(event)=>{
-                  setMontoPagadoClienteBarra(event.target.value);
-                }}/>
+                    <input type="number" className="form-control" id="montoPago" value={precioClienteBarra} disabled />
                     </div>
                   </div>
 
@@ -202,54 +251,65 @@ function AgregarClientesBarra() {
 
                   <div className="my-4">
                     <label className="me-2">Hora de Entrada</label>
-                    <input type="time" className="form-control" onChange={(event)=>{
-                  setHoraEntradaClienteBarra(event.target.value);
-                }}/>
+                    <input type="text" className="form-control" value={horaEntradaClienteBarra} disabled/>
 
                     <label className="mx-2">Hora de salida</label>
-                    <input type="time" className="form-control" onChange={(event)=>{
-                  setHoraSalidaClienteBarra(event.target.value);
-                }}/>
+                    <input type="text" className="form-control" value={horaSalidaClienteBarra} disabled/>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Duracion en Barra</label>
                     <div className="col-sm-9">
-                    <input type="text" className="form-control" onChange={(event)=>{
-                  setDuracionClienteBarra(event.target.value);
-                }}/>
+                    <input type="text" className="form-control" value={duracionClienteBarra} disabled/>
                     </div>
                   </div>
                 </form>
             </div>
             <div className="col-6  p-0">
               <div className="px-3">
-                <h4 className= 'py-4'>Pedidos previos</h4>
-                <textarea className="ms-5" name="" id="" cols="40" rows="15" readOnly></textarea>
+                
               </div>
             </div>
 
             <div class="col">
               <div className="row">
               <div class="col ">
-                <h4 className="py-4">Información del pedido</h4>
-                <div className="mt-2 form-group row">
+                <h4 className="py-4" id="ocultarMesa3" >Información del pedido</h4>
+                <div className="mt-2 form-group row" id="ocultarMesa">
                   <label className="col-sm-5 col-form-label">Pedido</label>
                   <div className="col-sm-6">
-                  <input type="text" className="form-control" onChange={(event)=>{
-                  setPedidoClienteBarra(event.target.value);
-                }}/>
+                  <Multiselect
+                      isObject={false}
+                      closeOnSelect={true}
+                      onRemove={(value) => {
+                        errorHandler1Pedido = errorHandler1Pedido-1
+                        if(errorHandler1Pedido!==0){
+                          manejoSilla1Pedido(value);
+                          pedidoTotal1Pedido=value;
+                        }else{
+                          precioTotal1Pedido=0;
+                          document.getElementById("precio1Pedido").value=0;
+                          document.getElementById("montoPago").value=precioTotal1Pedido;
+                        }
+                        }
+                      }
+                      onSelect={(value) => {
+                        manejoSilla1Pedido(value);
+                        pedidoTotal1Pedido=value;
+                        errorHandler1Pedido = errorHandler1Pedido+1
+                        }
+                      }
+                      options={arrayNombresPedido}
+                    />
                   </div>
                 </div>
-                <div className="mt-2 form-group row">
+                <div className="mt-2 form-group row" id="ocultarMesa1">
                   <label className="col-sm-5 col-form-label">Precio</label>
                   <div className="col-sm-6">
-                  <input type="number" className="form-control" onChange={(event)=>{
-                  setPrecioClienteBarra(event.target.value);
-                }}/>
+                  <input type="number" className="form-control" id="precio1Pedido" value="0" disabled/>
                   </div>
                 </div>
-                <div className="mt-2 form-group row">
+                <div className="mt-2 form-group row" id="ocultarMesa2">
                   <label className="col-sm-5 col-form-label">
                     Número de silla
                   </label>
@@ -270,7 +330,7 @@ function AgregarClientesBarra() {
                       Estado de la Cuenta
                     </label>
                     <div className="col-sm-8">
-                    <input type="text" className="form-control" />
+                    <input type="text" className="form-control" value={estadoCuentaClienteBarra} disabled/>
                     </div>
                   </div>
                   <div className="mb-3 row">

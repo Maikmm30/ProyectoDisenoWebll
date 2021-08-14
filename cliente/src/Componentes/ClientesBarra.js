@@ -153,7 +153,7 @@ function ClientesBarra() {
       }
     },
     {
-      dataField: "fecha",
+      dataField: "fechaLlegada",
       text: "Fecha",
       events: {
         onClick: (column, columnIndex) => {
@@ -260,7 +260,7 @@ function ClientesBarra() {
                     data={clientesBarra}
                     columns={columns}
                     rowEvents={rowEvents}
-                    cellEdit={cellEditFactory({ mode: "dbclick" })}
+                    cellEdit={cellEditFactory({ mode: "click" })}
                   />
                 </div>
               </div>

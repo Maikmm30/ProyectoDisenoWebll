@@ -67,6 +67,19 @@ function AgregarClientesMesas() {
   // let obj = JSON.parse(JSON.stringify(params));
  const [showMesa, setShowMesa] = useState(true);
  
+  function duracion(entrada, salida){
+    var hora2 = entrada.split(":"),
+    hora1 = salida.split(":"),
+    t1 = new Date(),
+    t2 = new Date();
+ 
+    t1.setHours(hora1[0], hora1[1], hora1[2]);
+    t2.setHours(hora2[0], hora2[1], hora2[2]);
+    t1.setHours(t1.getHours() - t2.getHours(), t1.getMinutes() - t2.getMinutes(), t1.getSeconds() - t2.getSeconds());
+
+    setDuracionClienteMesa(t1.getHours()+':'+t1.getMinutes()+':'+t1.getSeconds())
+}
+
  const generarPdf =() =>{
   desocupaMesa()
    const doc = new jsPDF();
@@ -74,7 +87,7 @@ function AgregarClientesMesas() {
      doc.autoTable({
        head: [['Codigo', 'Nombre', 'Monto Pagado', 'Detalle', 'Nombre de Mesa', 'Fecha', 'Reservación', 'Restaurante', 'Tipo de Cliente' ]],
        body: [
-         [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.nombreMesa, tabla.fecha, tabla.reservacion, tabla.restaurante, tabla.tipoCliente]
+         [tabla.codigo, tabla.nombreCompleto, tabla.montoPagado, tabla.detalle, tabla.nombreMesa, tabla.fechaLlegada, tabla.reservacion, tabla.restaurante, tabla.tipoCliente]
        ],
       
        startY: 40,
@@ -102,10 +115,7 @@ function AgregarClientesMesas() {
    autoClose: 2500})
 }
   useEffect(() => {
-    var hoy = new Date();
-    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds()
-    setHoraEntradaClienteMesa(hora);
-    setEstadoCuentaClienteMesa('Sin Pagar');
+    
     Axios.get("http://localhost:3001/clientes-barra/id").then((res) => {
       const num = parseInt(res.data[0].valorConsecutivo)+1;
       setNumeroClienteMesa(num);
@@ -126,28 +136,53 @@ function AgregarClientesMesas() {
       }
     });
     Axios.post("http://localhost:3001/administracion/especiales/especialidades/obtenerEspecialidades",{
-      restauranteClienteMesa : 'Piccola'
+      restauranteClienteMesa : params.restaurante
     }).then((res) => {
       for(var k in res.data) {
         arrayNombresPedido.push(res.data[k].nombre);
         arrayPreciosPedido.push(res.data[k].precio);
      }
     }); 
-    
+    var hoy = new Date();
+    var currentdate = new Date();
+    /*currentdate = currentdate.getDate() + "/"
+      + (currentdate.getMonth()+1)  + "/" 
+      + currentdate.getFullYear() + " @ "  
+      + currentdate.getHours() + ":"  
+      + currentdate.getMinutes() + ":" 
+      + currentdate.getSeconds();*/
+    var hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds()
+    var dia =  (hoy.getMonth() + 1) + '/' + hoy.getDate() + '/' +  hoy.getFullYear();
+    //var dia = hoy.getMonth() + '/' + hoy.getDay() + '/'+ hoy.getFullYear()
+
     if(JSON.stringify(params.obj).length > 8){
       setShowMesa(false)
       setNombreMesaClienteMesa(JSON.parse(params.obj).nombreMesa)
       setRestauranteClienteMesa(JSON.parse(params.obj).restaurante)
       setNumeroMesaClienteMesa(JSON.parse(params.obj).nombreMesa.replace('Mesa',''))
-
+      setHoraEntradaClienteMesa(JSON.parse(params.obj).horaEntrada);
+      setHoraSalidaClienteMesa(hora);
+      setEstadoCuentaClienteMesa('Pago');
+      setDuracionClienteMesa(horaSalidaClienteMesa-horaEntradaClienteMesa)
+      duracion(JSON.parse(params.obj).horaEntrada,hora);
+      setFechaLlegadaClienteMesa(JSON.parse(params.obj).fechaLlegada)
+      setNombreCompletoClienteMesa(JSON.parse(params.obj).nombreCompleto)
+      document.getElementById('nombreCompleto').disabled=true;
+      document.getElementById('ocultarMesa').style.display="none";
+      document.getElementById('nombreCompleto').value=(JSON.parse(params.obj).nombreCompleto)
+      document.getElementById('reservacion').disabled=true;
+      document.getElementById('reservacion').type='text';
+      document.getElementById('reservacion').value=JSON.parse(params.obj).fechaReservacion   
     }
     else{
       setShowMesa(true)
       setNombreMesaClienteMesa(params.obj)
       setRestauranteClienteMesa(params.restaurante)
       setNumeroMesaClienteMesa((params.obj).replace('Mesa',''))
+      setHoraEntradaClienteMesa(hora);
+      setEstadoCuentaClienteMesa('Sin Pagar')
+      setFechaLlegadaClienteMesa(currentdate);
     }
-    
   }, []);
   
   const desocupaMesa =() =>{
@@ -278,12 +313,11 @@ function AgregarClientesMesas() {
   };
 
   const enviarDatos = () => {
-    
     Axios.post("http://localhost:3001/clientes-mesa/agregar",{
       codigoClienteMesa: codigoClienteMesa,
       nombreCompletoClienteMesa: nombreCompletoClienteMesa,
       nombreMesaClienteMesa: nombreMesaClienteMesa,
-      montoPagadoClienteMesa: montoPagadoClienteMesa,
+      montoPagadoClienteMesa: Number(precioTotal1)+Number(precioTotal1Pedido)+Number(precioTotal2)+Number(precioTotal2Pedido)+Number(precioTotal3)+Number(precioTotal3Pedido)+Number(precioTotal4)+Number(precioTotal4Pedido),
       restauranteClienteMesa: restauranteClienteMesa,
       reservacionClienteMesa: reservacionClienteMesa,
       fechaLlegadaClienteMesa: fechaLlegadaClienteMesa,
@@ -380,8 +414,9 @@ function AgregarClientesMesas() {
                     <div className="col-sm-9">
                       <input
                         type="text"
+                        id="nombreCompleto"
                         className="form-control"
-                        placeholder="Last name"
+                        value={nombreCompletoClienteMesa}
                         onChange={(event)=>{
                           setNombreCompletoClienteMesa(event.target.value);
                         }}
@@ -409,7 +444,7 @@ function AgregarClientesMesas() {
                   <div className="mt-2  mb-3 row">
                     <label className="col-sm-3">Monto de pago</label>
                     <div className="col-sm-9">
-                    <input type="number" className="form-control" id="montoPago" disabled/>
+                    <input type="number" className="form-control" id="montoPago" value="0" disabled/>
                     </div>
                   </div>
 
@@ -428,17 +463,13 @@ function AgregarClientesMesas() {
                     <input type="text" className="form-control" value={horaEntradaClienteMesa} disabled/>
 
                     <label className="mx-2">Hora de salida</label>
-                    <input type="time" className="form-control" onChange={(event)=>{
-                  setHoraSalidaClienteMesa(event.target.value);
-                }}/>
+                    <input type="text" className="form-control" value={horaSalidaClienteMesa} disabled/>
                   </div>
 
                   <div className="mt-2 mb-3 row">
-                    <label className="col-sm-3">Duracion en Mesa</label>
+                    <label className="col-sm-3">Duracion en Barra</label>
                     <div className="col-sm-9">
-                    <input type="text" className="form-control" onChange={(event)=>{
-                  setDuracionClienteMesa(event.target.value);
-                }}/>
+                    <input type="text" className="form-control" value={duracionClienteMesa} disabled/>
                     </div>
                   </div>
                 </form>
@@ -458,13 +489,14 @@ function AgregarClientesMesas() {
                 </div>
                 <div className="mt-4">
                   <label className="me-2">Fecha de llegada</label>
-                  <input type="date" className="form-control" onChange={(event)=>{
-                  setFechaLlegadaClienteMesa(event.target.value);
-                }}/>
+                  <input type="text" className="form-control" value={fechaLlegadaClienteMesa} disabled/>
                 </div>
                 <div className="mt-4">
                   <label className="me-2">Fecha de reservacion</label>
-                  <input type="date" className="form-control" onChange={(event)=>{
+                  <input type="date" className="form-control" id="reservacion" onChange={(event)=>{
+                  setFechaReservacionClienteMesa(event.target.value);
+                }}
+                onClick={(event)=>{
                   setFechaReservacionClienteMesa(event.target.value);
                 }}/>
                 </div>
@@ -491,7 +523,7 @@ function AgregarClientesMesas() {
               </div>
             </div>
 
-            <div className=" pb-3"  style={{  backgroundColor: "#C42709"}} >
+            <div className=" pb-3"  id="ocultarMesa" style={{  backgroundColor: "#C42709"}} >
               <div className="mt-2 form-group row">
                 <label className="col-sm-2 col-form-label">
                   Número de mesa
@@ -505,6 +537,7 @@ function AgregarClientesMesas() {
                 <label className="col-sm-2 col-form-label">
                   Pedido silla N° 1
                 </label>
+                <div className="col-sm-3">
                 <Multiselect
                       isObject={false}
                       closeOnSelect={true}
@@ -528,6 +561,7 @@ function AgregarClientesMesas() {
                       }
                       options={arrayNombresPedido}
                     />
+                    </div>
                 <label className="col-sm-1 col-form-label">Precio</label>
                 <div className="col-sm-3">
                 <input type="number" className="form-control" id="precio1Pedido" value="0" disabled/>

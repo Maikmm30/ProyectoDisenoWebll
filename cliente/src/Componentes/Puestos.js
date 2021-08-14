@@ -1,11 +1,10 @@
 import { Container, Row, Col } from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import getCookie from './utils/Cookies';
 
 function Puestos() {
 
@@ -31,6 +30,15 @@ function Puestos() {
         puestoNuevo: puestoNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un puesto',
+
+    });
+
     window.location.reload()
   }
 
@@ -136,9 +144,16 @@ function Puestos() {
         codigoBusca: codigoBusca
       })
       .then(() => {
-
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un puesto',
+
+    });
 
   };
 
@@ -167,37 +182,37 @@ function Puestos() {
             <div class="col-12 h-80">
               Búsqueda de Puestos
               <div className="container">
-              <div className="row">
-                <div className="col">
-                  <div className="form-group row mt-2">
-                    <label className="col-sm-4 col-form-label">
-                      Código del Puesto
-                    </label>
-                    <div className="col-sm-8">
-                      <input type="text" className="form-control"
-                        value={codigoBusca}
-                        onChange={(event) => {
-                          setCodigo(event.target.value);
-                        }} />
+                <div className="row">
+                  <div className="col">
+                    <div className="form-group row mt-2">
+                      <label className="col-sm-4 col-form-label">
+                        Código del Puesto
+                      </label>
+                      <div className="col-sm-8">
+                        <input type="text" className="form-control"
+                          value={codigoBusca}
+                          onChange={(event) => {
+                            setCodigo(event.target.value);
+                          }} />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="col">
-                  <div className="form-group row mt-2">
-                    <label className="col-sm-4 col-form-label">
-                    Nombre del Puesto
-                    </label>
-                    <div className="col-sm-8">
-                      <input type="text" className="form-control"
-                        value={nombreBusca}
-                        onChange={(event) => {
-                          setNombre(event.target.value);
-                        }} />
+                  <div className="col">
+                    <div className="form-group row mt-2">
+                      <label className="col-sm-4 col-form-label">
+                        Nombre del Puesto
+                      </label>
+                      <div className="col-sm-8">
+                        <input type="text" className="form-control"
+                          value={nombreBusca}
+                          onChange={(event) => {
+                            setNombre(event.target.value);
+                          }} />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
               <div class="form-group text-center  ">
 
@@ -211,18 +226,18 @@ function Puestos() {
                     cellEdit={cellEditFactory({ mode: 'dbclick' })}
                   />
                 </div>
-                </div>
-                <div class="text-center " style={{ backgroundColor: "#C42709" }}>
-                  <div class="row row-cols-2 m-4">
-                    <Link to='/agregarPuestos'>
-                      <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
-                    </Link>
-                    
-                    <div className="col">
-                      <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
-                    </div>
+              </div>
+              <div class="text-center " style={{ backgroundColor: "#C42709" }}>
+                <div class="row row-cols-2 m-4">
+                  <Link to='/agregarPuestos'>
+                    <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>
+                  </Link>
 
+                  <div className="col">
+                    <button className=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x" onClick={capturaEliminar}></button>
                   </div>
+
+                </div>
               </div>
             </div>
           </div>

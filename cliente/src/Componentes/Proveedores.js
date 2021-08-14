@@ -3,6 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import getCookie from './utils/Cookies';
 
 
 function Proveedores() {
@@ -28,6 +29,15 @@ function Proveedores() {
         proveedorNuevo: proveedorNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un proveedor',
+
+    });
+
     window.location.reload()
   }
 
@@ -158,19 +168,27 @@ function Proveedores() {
 
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un proveedor',
+
+    });
   };
 
 
   return (
     <div class="container">
-      <div class="row " style={{ height: "780px", backgroundColor: "#FF723F"  }}>
+      <div class="row " style={{ height: "780px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Proveedores</h3>
           <i class="fas fa-people-carry fa-10x  text-light"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12  h-25"  style={{ backgroundColor: "#C42709" }}>
+            <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4">
 
                 <div class="col"><button class=" p-3 bg-light rounded-circle fas fa-broom fa-3x " onClick={limpiaCajas}></button></div>
@@ -225,7 +243,7 @@ function Proveedores() {
                   />
                 </div>
 
-                <div class="text-center col-12 h-25"  style={{ backgroundColor: "#C42709" }}>
+                <div class="text-center col-12 h-25" style={{ backgroundColor: "#C42709" }}>
                   <div class="row row-cols-2 m-4">
                     <Link to='/agregarProveedores'>
                       <div class="col"><button class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></button></div>

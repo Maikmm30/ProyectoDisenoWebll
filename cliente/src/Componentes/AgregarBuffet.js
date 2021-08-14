@@ -11,9 +11,14 @@ function AgregarBuffet() {
   const [nombreBuffet, setNombreBuffet] = useState("");
   const [precioBuffet, setPrecioBuffet] = useState("");
   const [tipoBuffet, setTipoBuffet] = useState("");
-  const [unidadBuffet, setUnidadBuffet ] = useState("");
+  const [unidadBuffet, setUnidadBuffet] = useState("");
 
-  
+  //Manejar imagen
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+
+
   useEffect(() => {
     Axios.get("http://localhost:3001/buffet/id").then((res) => {
       const num = parseInt(res.data[0].valorConsecutivo) + 1;
@@ -21,7 +26,7 @@ function AgregarBuffet() {
 
       const str = "B";
       setCodigoBuffet(str + num);
-     
+
       Axios.get("http://localhost:3001/unidadMedida/names").then((res) => {
         console.log('data' + res.data)
         console.log(res.data[1]);
@@ -29,7 +34,7 @@ function AgregarBuffet() {
         var primerValor = true;
         setTipoBuffet('Marina');
         for (var k in res.data) {
-          if (primerValor === true){
+          if (primerValor === true) {
             setUnidadBuffet(res.data[k].detalle);
             primerValor = false;
           }
@@ -45,7 +50,7 @@ function AgregarBuffet() {
   }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/buffet/agregar",{
+    Axios.post("http://localhost:3001/buffet/agregar", {
       codigoBuffet: codigoBuffet,
       numeroBuffet: numeroBuffet,
       nombreBuffet: nombreBuffet,
@@ -54,11 +59,11 @@ function AgregarBuffet() {
       unidadBuffet: unidadBuffet,
       estadoBuffet: true,
     });
-    Axios.post("http://localhost:3001/bitacora/agregar",{
-      
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoBuffet+': '+getCookie('usuario')+' agregó un buffet',
+      descripcionBitacora: codigoBuffet + ': ' + getCookie('usuario') + ' agregó un buffet',
 
     });
     Axios.put("http://localhost:3001/consecutivos/update",
@@ -70,16 +75,31 @@ function AgregarBuffet() {
     window.location.href = 'http://localhost:3000/administracion/especiales/buffet/'
   };
 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewSource(reader.result);
+    }
+  }
+
   return (
     <div className="container">
-      <div className="row " style={{ height: "600px" , backgroundColor: "#FF723F"}}>
+      <div className="row " style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Agregar Buffet</h3>
           <i className="fas fa-utensils fa-10x text-light"></i>
         </div>
         <div className="col-9">
           <div className="row h-75">
-            <div className="text-center col-12  h-25"  style={{  backgroundColor: "#C42709"}}>
+            <div className="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4  text-light">
                 <div className="col"><i className="p-3 ght rounded-circle fas fa-broom fa-3x "></i></div>
                 <div className="col"><i className="p-3 ght rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
@@ -111,7 +131,7 @@ function AgregarBuffet() {
                   <input
                     type="text"
                     className="form-control"
-                    onChange={(event)=>{
+                    onChange={(event) => {
                       setNombreBuffet(event.target.value);
                     }}
                   />
@@ -125,7 +145,7 @@ function AgregarBuffet() {
                   <input
                     type="number"
                     className="form-control"
-                    onChange={(event)=>{
+                    onChange={(event) => {
                       setPrecioBuffet(event.target.value);
                     }}
                   />
@@ -139,7 +159,7 @@ function AgregarBuffet() {
                   <select
                     className="form-control"
                     id="exampleFormControlSelect1"
-                    onChange={(event)=>{
+                    onChange={(event) => {
                       setTipoBuffet(event.target.value);
                     }}
                   >
@@ -160,16 +180,34 @@ function AgregarBuffet() {
                   <select
                     className="form-control"
                     id="unidad"
-                    onChange={(event)=>{
+                    onChange={(event) => {
                       setUnidadBuffet(event.target.value);
                     }}
-                    onClick={(event)=>{
+                    onClick={(event) => {
                       setUnidadBuffet(event.target.value);
                     }}
                   >
-                    
+
                   </select>
                 </div>
+              </div>
+
+              <div className=" row mt-2 mb-3">
+                <label for="staticEmail" className="col-sm-3 me-3">
+                  Imagen:
+                </label>
+
+                {previewSource && (
+                  <img
+                    src={previewSource}
+                    alt="chosen"
+                    style={{ height: '200px', width: '350px' }}
+                  />
+
+                )}
+
+                <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                  className="form-input" />
               </div>
             </div>
           </div>

@@ -3,9 +3,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-  Link
-} from "react-router-dom";
+import { Link } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function Mesas() {
 
@@ -31,6 +30,15 @@ function Mesas() {
         mesaNuevo: mesaNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una mesa',
+
+    });
+
     window.location.reload()
   }
   const buscar = () => {
@@ -148,6 +156,14 @@ function Mesas() {
 
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino una mesa',
+
+    });
 
   };
 

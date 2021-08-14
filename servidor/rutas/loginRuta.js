@@ -14,9 +14,7 @@ router.post("/", async (req, res) => {
   if (!usuario) {
     return res.send(false)
   } else if (usuario) {
-
     return res.json(await bcrypt.compare(passBusca, usuario.password))
-
   }
 });
 

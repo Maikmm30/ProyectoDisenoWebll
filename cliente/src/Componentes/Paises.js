@@ -3,6 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
+import getCookie from './utils/Cookies';
 
 function Paises() {
   const [paises, setPais] = useState([]);
@@ -25,10 +26,16 @@ function Paises() {
         codigoActualiza: codigoActualiza,
         paisNuevo: paisNuevo,
         columnaSeleccionada: columnaSeleccionada,
-        bitacoraUsuario: getCookie("usuario"),
-        bitacoraRol: getCookie("rol"),
       });
     window.location.reload()
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Pais',
+
+    });
 
   }
 
@@ -54,6 +61,14 @@ function Paises() {
       .then(() => {
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Pais',
+
+    });
 
   };
   const columns = [

@@ -3,10 +3,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
-import {
-  Link
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import getCookie from './utils/Cookies';
 
 function Empaques() {
   const [empaques, setEmpaque] = useState([]);
@@ -30,6 +28,15 @@ function Empaques() {
         empaqueNuevo: empaqueNuevo,
         columnaSeleccionada: columnaSeleccionada
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un empaque',
+
+    });
+
     window.location.reload()
   }
 
@@ -138,12 +145,20 @@ function Empaques() {
         window.location.reload()
       });
 
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un empaque',
+
+    });
+
   };
 
 
   return (
     <div class="container">
-      <div class="row " style={{ height: "780px" , backgroundColor: "#FF723F" }}>
+      <div class="row " style={{ height: "780px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Empaques</h3>
           <i class="fas fa-box fa-10x text-light"></i>

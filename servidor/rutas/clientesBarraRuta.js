@@ -77,7 +77,7 @@ router.put("/update", async (req, res) => {
     const clienteBarraNuevo = req.body.clienteBarraNuevo;
     const columnaSeleccionada = req.body.columnaSeleccionada;
     try {
-        await Cliente.findOneAndUpdate({ codigo: codigoActualiza,  }, { [columnaSeleccionada]: clienteBarraNuevo }, (err, clienteBarra) => {
+        await Cliente.findOneAndUpdate({ codigo: codigoActualiza, }, { [columnaSeleccionada]: clienteBarraNuevo }, (err, clienteBarra) => {
             res.json(clienteBarra);
 
         });
@@ -91,12 +91,12 @@ router.put("/updateSillaDisponible", async (req, res) => {
     const numeroSillaClienteBarra = req.body.numeroSillaClienteBarra;
     const estadoSillaCliente = req.body.estadoSillaCliente;
     const restauranteClienteBarra = req.body.restauranteClienteBarra;
-    
+
     try {
         await Cliente.findOneAndUpdate({ numeroSillaBarra: numeroSillaClienteBarra, restaurante: restauranteClienteBarra }, { ocupado: estadoSillaCliente }).then((numeroSilla) => {
-            res.json('update realizado '+numeroSilla);
+            res.json('update realizado ' + numeroSilla);
 
-        }) ;
+        });
     }
     catch (err) {
         res.send('error' + err);
@@ -106,8 +106,10 @@ router.put("/updateSillaDisponible", async (req, res) => {
 
 router.route("/buscar").post((req, res) => {
     const codigoBusca = req.body.codigoBusca
+    const nombreBusca = req.body.nombreBusca
 
-    Cliente.find({ codigo: codigoBusca })
+
+    Cliente.find({ codigo: codigoBusca, nombreCompleto: nombreBusca, tipoCliente: "Barra" })
         .then(cliente => res.json(cliente))
         .catch(err => res.status(400).json('Error: ' + err));
 })

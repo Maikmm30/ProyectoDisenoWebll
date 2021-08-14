@@ -16,71 +16,73 @@ function AgregarBebidaVino() {
   const [cantidadBebidaVino, setCantidadBebidaVino] = useState("");
   const [descripcionBebidaVino, setDescripcionBebidaVino] = useState("");
 
+  //Manejar imagen
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+
   useEffect(() => {
     Axios.get("http://localhost:3001/administracion/especiales/bebidas/vinos/id").then((res) => {
-      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      const num = parseInt(res.data[0].valorConsecutivo) + 1;
       setNumeroBebidaVino(num);
       const str = "BV";
-      setCodigoBebidaVino(str+num);
+      setCodigoBebidaVino(str + num);
       Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
-              console.log('data'+res.data)
-              console.log(res.data[1]);
-              var array = [];
-              var primerValor = true;
-              for(var k in res.data) {
-                if (primerValor === true){
-                  setRestauranteBebidaVino(res.data[k].nombre);
-                  primerValor = false;
-                }
-                console.log(array.push(res.data[k].nombre));
-             }
-             for(var i in array)
-             { 
-                 document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
- 
-             }
-            }); 
-        Axios.get("http://localhost:3001/paises/names").then((res) => {
-        console.log('data'+res.data)
+        console.log('data' + res.data)
         console.log(res.data[1]);
         var array = [];
         var primerValor = true;
-        for(var k in res.data) {
-          if (primerValor === true){
+        for (var k in res.data) {
+          if (primerValor === true) {
+            setRestauranteBebidaVino(res.data[k].nombre);
+            primerValor = false;
+          }
+          console.log(array.push(res.data[k].nombre));
+        }
+        for (var i in array) {
+          document.getElementById("restaurante").innerHTML += "<option value='" + array[i] + "'>" + array[i] + "</option>";
+
+        }
+      });
+      Axios.get("http://localhost:3001/paises/names").then((res) => {
+        console.log('data' + res.data)
+        console.log(res.data[1]);
+        var array = [];
+        var primerValor = true;
+        for (var k in res.data) {
+          if (primerValor === true) {
             setNacionalidadBebidaVino(res.data[k].nombre);
             primerValor = false;
           }
           console.log(array.push(res.data[k].nombre));
         }
-        for(var i in array)
-        { 
-            document.getElementById("nacionalidad").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+        for (var i in array) {
+          document.getElementById("nacionalidad").innerHTML += "<option value='" + array[i] + "'>" + array[i] + "</option>";
 
         }
-      }); 
+      });
       Axios.get("http://localhost:3001/marcas/names").then((res) => {
-        console.log('data'+res.data)
+        console.log('data' + res.data)
         console.log(res.data[1]);
         var array = [];
         var primerValor = true;
-        for(var k in res.data) {
-          if (primerValor === true){
+        for (var k in res.data) {
+          if (primerValor === true) {
             setMarcaBebidaVino(res.data[k].nombre);
             primerValor = false;
           }
           console.log(array.push(res.data[k].nombre));
         }
-        for(var i in array)
-        { 
-            document.getElementById("marcas").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+        for (var i in array) {
+          document.getElementById("marcas").innerHTML += "<option value='" + array[i] + "'>" + array[i] + "</option>";
 
         }
-      });  
+      });
     });
   }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/agregar",{
+    Axios.post("http://localhost:3001/administracion/especiales/bebidas/vinos/agregar", {
       codigoBebidaVino: codigoBebidaVino,
       nombreBebidaVino: nombreBebidaVino,
       marcaBebidaVino: marcaBebidaVino,
@@ -93,11 +95,11 @@ function AgregarBebidaVino() {
       descripcionBebidaVino: descripcionBebidaVino,
       estadoBebidaVino: true,
     });
-    Axios.post("http://localhost:3001/bitacora/agregar",{
-      
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoBebidaVino+': '+getCookie('usuario')+' agregó una bebida vino',
+      descripcionBitacora: codigoBebidaVino + ': ' + getCookie('usuario') + ' agregó una bebida vino',
 
     });
     Axios.put("http://localhost:3001/consecutivos/update",
@@ -109,9 +111,24 @@ function AgregarBebidaVino() {
     window.location.href = 'http://localhost:3000/administracion/especiales/bebidas/vinos/'
   };
 
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewSource(reader.result);
+    }
+  }
+
   return (
     <div class="container">
-      <div class="row " style={{ height: "700px" , backgroundColor: "#FF723F"}}>
+      <div class="row " style={{ height: "800px", backgroundColor: "#FF723F" }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Agregar Bebida Vino</h3>
           <i class="fas fa-wine-glass-alt fa-10x text-light"></i>
@@ -133,15 +150,15 @@ function AgregarBebidaVino() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" value={codigoBebidaVino} disabled/>
+                    <input type="text" class="form-control" value={codigoBebidaVino} disabled />
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
                   <label class="col-sm-3">Nombre</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" onChange={(event)=>{
-                        setNombreBebidaVino(event.target.value);
-                      }}/>
+                    <input type="text" class="form-control" onChange={(event) => {
+                      setNombreBebidaVino(event.target.value);
+                    }} />
                   </div>
                 </div>
                 <div class=" row mt-2 mb-2">
@@ -150,14 +167,14 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="marcas"
-                      onChange={(event)=>{
+                      onChange={(event) => {
                         setMarcaBebidaVino(event.target.value);
                       }}
-                      onClick={(event)=>{
+                      onClick={(event) => {
                         setMarcaBebidaVino(event.target.value);
                       }}
                     >
-                      
+
                     </select>
                   </div>
                 </div>
@@ -168,14 +185,14 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="nacionalidad"
-                      onChange={(event)=>{
+                      onChange={(event) => {
                         setNacionalidadBebidaVino(event.target.value);
                       }}
-                      onClick={(event)=>{
+                      onClick={(event) => {
                         setNacionalidadBebidaVino(event.target.value);
                       }}
                     >
-              
+
                     </select>
                   </div>
 
@@ -185,9 +202,9 @@ function AgregarBebidaVino() {
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="col-sm-2">Precio Unitario</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                        setPrecioUnitarioBebidaVino(event.target.value);
-                      }}/>
+                    <input type="number" class="form-control" onChange={(event) => {
+                      setPrecioUnitarioBebidaVino(event.target.value);
+                    }} />
                   </div>
                 </div>
 
@@ -195,18 +212,18 @@ function AgregarBebidaVino() {
                   <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                   <label class="col-sm-2">Precio Botella</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                        setPrecioBotellaBebidaVino(event.target.value);
-                      }}/>
+                    <input type="number" class="form-control" onChange={(event) => {
+                      setPrecioBotellaBebidaVino(event.target.value);
+                    }} />
                   </div>
                 </div>
 
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Año de la Cosecha</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                        setAnioBebidaVino(event.target.value);
-                      }}/>
+                    <input type="number" class="form-control" onChange={(event) => {
+                      setAnioBebidaVino(event.target.value);
+                    }} />
                   </div>
                 </div>
 
@@ -219,14 +236,14 @@ function AgregarBebidaVino() {
                     <select
                       class="form-control"
                       id="restaurante"
-                      onChange={(event)=>{
+                      onChange={(event) => {
                         setRestauranteBebidaVino(event.target.value);
                       }}
-                      onClick={(event)=>{
+                      onClick={(event) => {
                         setRestauranteBebidaVino(event.target.value);
                       }}
                     >
-                    
+
                     </select>
                   </div>
 
@@ -234,9 +251,9 @@ function AgregarBebidaVino() {
                 <div class="row mt-3 mb-2">
                   <label class="col-sm-3 ">Cantidad</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                        setCantidadBebidaVino(event.target.value);
-                      }}/>
+                    <input type="number" class="form-control" onChange={(event) => {
+                      setCantidadBebidaVino(event.target.value);
+                    }} />
                   </div>
                 </div>
                 <div class="row mt-3 ">
@@ -245,15 +262,30 @@ function AgregarBebidaVino() {
                     <textarea
                       class="form-control"
                       rows="4"
-                      onChange={(event)=>{
+                      onChange={(event) => {
                         setDescripcionBebidaVino(event.target.value);
                       }}
                     />
                   </div>
                 </div>
 
-                <label class="form-label" for="customFile">Seleccione una imagen</label>
-                <input type="file" class="form-control" id="customFile" />
+                <div className=" row mt-2 mb-3">
+                  <label for="staticEmail" className="col-sm-3 me-3">
+                    Imagen:
+                  </label>
+
+                  {previewSource && (
+                    <img
+                      src={previewSource}
+                      alt="chosen"
+                      style={{ height: '200px', width: '350px' }}
+                    />
+
+                  )}
+
+                  <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                    className="form-input" />
+                </div>
 
               </div>
 

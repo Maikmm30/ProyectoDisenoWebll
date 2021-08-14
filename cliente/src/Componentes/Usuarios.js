@@ -3,7 +3,7 @@ import cellEditFactory from "react-bootstrap-table2-editor";
 import Axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import getCookie from './utils/Cookies';
 
 function Usuarios() {
 
@@ -28,6 +28,15 @@ function Usuarios() {
       usuarioNuevo: usuarioNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo un Usuario',
+
+    });
+
     window.location.reload();
   };
 
@@ -149,9 +158,16 @@ function Usuarios() {
         codigoBusca: codigoBusca
       })
       .then(() => {
-
         window.location.reload()
       });
+
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
+      usuarioBitacora: getCookie('usuario'),
+      rolBitacora: getCookie('rol'),
+      descripcionBitacora: codigoBusca + ': ' + getCookie('usuario') + ' elimino un Usuario',
+
+    });
   };
 
 

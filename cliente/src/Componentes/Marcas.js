@@ -72,11 +72,11 @@ function Marcas() {
     });
     Axios.put("http://localhost:3001/consecutivos/update",
       {
-        codigoActualiza: '10',
+        codigoActualiza: '18',
         consecutivoNuevo: numeroMarca,
         columnaSeleccionada: 'valorConsecutivo'
       });
-    window.location.href = 'http://localhost:3000/marcas/'
+    window.location.href = 'http://localhost:3000/listaMarcas/'
   };
 
   const handleFileInputChange01 = (e) => {

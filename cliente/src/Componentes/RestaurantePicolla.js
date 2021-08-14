@@ -88,7 +88,7 @@ function RestaurantePicolla() {
             <i className="fas fa-hamburger fa-4x p-3 "></i>
             <textarea  style={{ display : cuadroTextoProductos ? 'none' : 'block'}} rows="4" cols="30" value={`Especialidades del restaurante ${especialRestaurante.map((e) => 'Especial: '+e.nombre+', Precio: '+e.precio +'')}`}></textarea>
           </button>
-        
+        <button className='rounded-circle mt-4 border-0'> <Link to ='/cierreCajas'> <i className="fas fa-wallet fa-4x p-3 text-dark "></i></Link></button>
         </div>
         <div className="col-9">
           <div className="row">

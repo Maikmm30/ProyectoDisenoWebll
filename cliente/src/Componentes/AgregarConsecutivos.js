@@ -13,16 +13,6 @@ function AgregarConsecutivos() {
   const [contienePrefijoConsecutivo, setContienePrefijoConsecutivo] = useState("");
   const [prefijoConsecutivo, setPrefijoConsecutivo] = useState("");
 
-  /*useEffect(() => {
-    Axios.get("http://localhost:3001/consecutivos/id").then((res) => {
-      console.log(res.data);
-      const num = parseInt(res.data[0])+1;
-      console.log(num);
-      setNumeroConsecutivo(num);
-      //const str = "P";
-      //setCodigoPais(str+num);
-    });
-  }, []);*/
   useEffect(() => {
     setTipoConsecutivo('Clientes');
     setContienePrefijoConsecutivo(false)
@@ -51,14 +41,14 @@ function AgregarConsecutivos() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "650px" }}>
+      <div className="row " style={{ height: "650px" , backgroundColor: "#FF723F"}}>
         <div className="col-3 m-auto text-center pb-5">
           <h3 className="mb-4 text-center">Consecutivos</h3>
           <i className="far fa-window-restore fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row">
-            <div className="text-center mb-3 col-12 bg-success h-35">
+            <div className="text-center mb-3 col-12 h-35" style={{ backgroundColor: "#C42709" }}>
               <div className="row row-cols-3 m-4">
                 <div className="col">
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x " ></i>

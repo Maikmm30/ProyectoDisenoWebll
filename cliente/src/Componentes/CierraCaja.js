@@ -73,18 +73,15 @@ function CierreCajas() {
 
     return (
       <div className="container">
-        <div className="row bg-warning" style={{ height: "800px" }}>
+        <div className="row " style={{ height: "650px", backgroundColor: "#FF723F" }}>
           <div className="col-3 m-auto text-center pb-5">
             <h3>Cierre de cajas</h3>
             <i className="fas fa-wallet fa-10x"></i>
           </div>
           <div className="col-9">
             <div className="row h-50">
-              <div className="text-center col-12 bg-success h-40">
-                <div className="row row-cols-3 m-4">
-                  <div className="col">
-                    <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
-                  </div>
+              <div className="text-center col-12 h-40" style={{ backgroundColor: "#C42709" }}>
+                <div className="row row-cols-2 m-4">
                   <div className="col ">
                     <i className="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i>
                   </div>
@@ -93,7 +90,7 @@ function CierreCajas() {
                   </div>
                 </div>
               </div>
-              <div className="col-12 bg-danger pt-5 h-100">
+              <div className="col-12 pt-5 h-100">
                 <div className="container">
                   <div className="row">
                     <div className="col">

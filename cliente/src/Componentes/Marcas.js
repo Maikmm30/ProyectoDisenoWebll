@@ -93,14 +93,14 @@ function Marcas() {
 
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "800px" }}>
+      <div class="row" style={{ height: "610px" , backgroundColor: "#FF723F" }} >
         <div class="col-3 m-auto text-center pb-5">
           <h3>Marcas</h3>
           <i class="far fa-copyright fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12  h-25" style={{backgroundColor: "#C42709" }}>
               <div class="row row-cols-3 m-4">
                 <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
                 <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
@@ -108,7 +108,7 @@ function Marcas() {
 
               </div>
             </div>
-            <div class="col-6 bg-danger h-100">
+            <div class="col-6 h-100">
               Información de la Marca
               <div class="form-group row mt-4">
                 <label for="staticEmail" class="col-sm-3 col-form-label">
@@ -194,7 +194,7 @@ function Marcas() {
                 </div>
               </div>
             </div>
-            <div class="col-6 bg-primary p-0 border border-danger">
+            <div class="col-6  p-0 ">
 
               Información del Contacto
               <div class="form-group row mt-4">

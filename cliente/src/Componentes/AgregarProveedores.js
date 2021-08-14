@@ -77,14 +77,14 @@ function AgregarProveedores() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "1100px" }}>
+      <div className="row" style={{ height: "800px" , backgroundColor: "#FF723F"  }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3>Proveedores</h3>
           <i className="fas fa-user-friends fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row ">
-            <div className="text-center col-12 bg-success h-25">
+            <div className="text-center col-12 h-25" style={{backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
                 <div className="col">
                   <i className=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i>
@@ -100,7 +100,7 @@ function AgregarProveedores() {
                 </div>
               </div>
             </div>
-            <div className="col-8 bg-danger">
+            <div className="col-8">
               <div>
                 <form>
                   <div className="mt-2 mb-3 row">
@@ -191,7 +191,7 @@ function AgregarProveedores() {
                 </form>
               </div>
             </div>
-            <div className="col-4 bg-info p-0 ">
+            <div className="col-4 p-0 ">
               <h4 className="m-4">Foto del Proveedor</h4>
               <div className="col-sm-4 border border-danger m-auto " style={{ height: "350px", width: "260px" }}>
                 {previewSource && (
@@ -207,27 +207,7 @@ function AgregarProveedores() {
                 className="form-input" /> 
             </div>
 
-            <div className="bg-success pb-3 text-center">
-              <h4 className="m-4">Pase de productos</h4>
-              <div class="container">
-                <div class="row">
-                  <div class="col">
-                    <label>Productos del restaurante</label>
-
-                    <textarea name="" id="" cols="43" rows="10"></textarea>
-                  </div>
-                  <div className="col">
-                    <i class="fas fa-arrow-circle-left fa-3x m-3"></i>
-                    <i class="fas fa-arrow-circle-right fa-3x"></i>
-                  </div>
-                  <div class="col">
-                    <label>Productos manejados por el Proveedor</label>
-
-                    <textarea name="" id="" cols="43" rows="10"></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
+         
           </div>
         </div>
       </div>

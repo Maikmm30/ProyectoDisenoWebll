@@ -16,17 +16,22 @@ function AgregarProveedores() {
   const [faxProveedor, setFaxProveedor] = useState("");
   const [celularProveedor, setCelularProveedor] = useState("");
 
+  //Manejar imagen
+  const [fileInputState, setFileInputState] = useState('');
+  const [selectedFile, setSelectedFile] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+
   useEffect(() => {
     Axios.get("http://localhost:3001/Proveedores/id").then((res) => {
-      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      const num = parseInt(res.data[0].valorConsecutivo) + 1;
       setNumeroProveedor(num);
       const str = "PRO";
-      setCodigoProveedor(str+num);
+      setCodigoProveedor(str + num);
     });
   }, []);
 
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/Proveedores/agregar",{
+    Axios.post("http://localhost:3001/Proveedores/agregar", {
       codigoProveedor: codigoProveedor,
       cedulaProveedor: cedulaProveedor,
       fechaProveedor: fechaProveedor,
@@ -39,11 +44,11 @@ function AgregarProveedores() {
       celularProveedor: celularProveedor,
       estadoLimpieza: true,
     });
-    Axios.post("http://localhost:3001/bitacora/agregar",{
-      
+    Axios.post("http://localhost:3001/bitacora/agregar", {
+
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoProveedor+': '+getCookie('usuario')+' agregó un proveedor',
+      descripcionBitacora: codigoProveedor + ': ' + getCookie('usuario') + ' agregó un proveedor',
 
     });
     Axios.put("http://localhost:3001/consecutivos/update",
@@ -54,6 +59,21 @@ function AgregarProveedores() {
       });
     window.location.href = 'http://localhost:3000/Proveedores/'
   };
+
+  const handleFileInputChange = (e) => {
+    const file = e.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(e.target.value);
+  }
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewSource(reader.result);
+    }
+  }
 
   return (
     <div className="container">
@@ -87,61 +107,61 @@ function AgregarProveedores() {
                     <h4 className="my-4">Información del Proveedor</h4>
                     <label className="col-sm-3">Código </label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" value={codigoProveedor} disabled/>
+                      <input type="text" className="form-control" value={codigoProveedor} disabled />
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Cédula de identidad</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setCedulaProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setCedulaProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
-                  
+
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Fecha de Ingreso</label>
                     <div className="col-sm-9">
-                      <input type="date" name="" id="" onChange={(event)=>{
-                  setFechaProveedor(event.target.value);
-                }}/>
+                      <input type="date" name="" id="" onChange={(event) => {
+                        setFechaProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
 
                   <div className="mt-2  mb-3 row">
                     <label className="col-sm-3">Nombre del Proveedor</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setNombreProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setNombreProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Primer apellido</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setPrimerApellidoProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setPrimerApellidoProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Segundo apellido</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setSegundoApellidoProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setSegundoApellidoProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
 
                   <div className="mt-2 mb-3 row">
                     <label className="col-sm-3">Dirección</label>
                     <div className="col-sm-9">
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setDireccionProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setDireccionProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
 
@@ -149,23 +169,23 @@ function AgregarProveedores() {
                     <h5>Teléfonos</h5>
                     <div className="col-sm-4">
                       <label>Oficina</label>
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setTelefonoOficinaProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setTelefonoOficinaProveedor(event.target.value);
+                      }} />
                     </div>
 
                     <div className="col-sm-4">
                       <label>Fax</label>
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setFaxProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setFaxProveedor(event.target.value);
+                      }} />
                     </div>
 
                     <div className="col-sm-4">
                       <label>Celular</label>
-                      <input type="text" className="form-control" onChange={(event)=>{
-                  setCelularProveedor(event.target.value);
-                }}/>
+                      <input type="text" className="form-control" onChange={(event) => {
+                        setCelularProveedor(event.target.value);
+                      }} />
                     </div>
                   </div>
                 </form>
@@ -173,10 +193,18 @@ function AgregarProveedores() {
             </div>
             <div className="col-4 bg-info p-0 ">
               <h4 className="m-4">Foto del Proveedor</h4>
-              <div
-                className="col-sm-4 border border-danger m-auto "
-                style={{ height: "350px", width: "260px" }}
-              ></div>
+              <div className="col-sm-4 border border-danger m-auto " style={{ height: "350px", width: "260px" }}>
+                {previewSource && (
+                  <img
+                    src={previewSource}
+                    alt="chosen"
+                    style={{ height: '348px', width: '258px' }}
+                  />)}
+
+
+              </div>
+              <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                className="form-input" /> 
             </div>
 
             <div className="bg-success pb-3 text-center">

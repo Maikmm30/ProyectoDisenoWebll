@@ -13,8 +13,6 @@ export default () => {
         <Nav className="mr-auto">
         <Nav.Link href="/home"><i className="fas fa-home fa-2x"></i></Nav.Link>
           <NavDropdown title="Sistema" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Información</NavDropdown.Item>
-              <NavDropdown.Divider />
               <NavDropdown.Item><PopUp/></NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/">Salir</NavDropdown.Item>

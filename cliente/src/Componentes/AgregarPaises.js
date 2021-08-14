@@ -76,14 +76,14 @@ function AgregarPaises() {
 
   return (
     <div className="container">
-      <div className="row bg-warning" style={{ height: "650px" }}>
+      <div className="row" style={{ height: "650px", backgroundColor: "#FF723F"  }}>
         <div className="col-3 m-auto text-center pb-5">
           <h3 className="mb-4 text-center">Países</h3>
           <i className="fas fa-globe-americas fa-10x"></i>
         </div>
         <div className="col-9">
           <div className="row">
-            <div className="text-center mb-3 col-12 bg-success h-35">
+            <div className="text-center mb-3 col-12 h-35" style={{backgroundColor: "#C42709" }}>
               <div className="row row-cols-4 m-4">
                 <div className="col">
                   <button className=" p-3 bg-light rounded-circle fas fa-broom fa-3x" onClick={limpiaCajas}></button>

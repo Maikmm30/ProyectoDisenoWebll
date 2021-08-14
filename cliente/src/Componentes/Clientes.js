@@ -1,217 +1,148 @@
-import { Container, Row, Col } from "react-bootstrap";
-import BootstrapTable from 'react-bootstrap-table-next';
-import cellEditFactory from 'react-bootstrap-table2-editor';
 
+import BootstrapTable from 'react-bootstrap-table-next';
+
+import Axios from "axios";
+import React, { useState, useEffect } from "react";
 import {
   Link
 } from "react-router-dom";
 
-const columns = [{
-  dataField: 'codigo',
-  text: 'Código'
-}, {
-  dataField: 'nombre',
-  text: 'Nombre'
-},
-{
-  dataField: 'montoPagado',
-  text: 'Monto Pagado'
-},
-{
-  dataField: 'detalle',
-  text: 'Detalle'
-},
-{
-  dataField: 'fecha',
-  text: 'Fecha'
-}, {
-  dataField: 'reservacion',
-  text: 'Reservación'
-},
-{
-  dataField: 'barra',
-  text: 'Barra'
-},
-{
-  dataField: 'restaurante',
-  text: 'Restaurante'
-}];
-
-const products = [{
-  codigo: 1,
-  nombre: 'A',
-  montoPagado: 1,
-  detalle: 'A',
-  fecha: '09/05/21',
-  reservacion: 'Sí',
-  barra: 'No',
-  restaurante: 'A',
-
-}, {
-  codigo: 2,
-  nombre: 'B',
-  montoPagado: 2,
-  detalle: 'B',
-  fecha: '09/09/21',
-  reservacion: 'Sí',
-  barra: 'No',
-  restaurante: 'A',
-},
-{
-  codigo: 3,
-  nombre: 'C',
-  montoPagado: 1,
-  detalle: 'C',
-  fecha: '08/05/21',
-  reservacion: 'Sí',
-  barra: 'No',
-  restaurante: 'B',
-},
-{
-  codigo: 4,
-  nombre: 'D',
-  montoPagado: 1,
-  detalle: 'D',
-  fecha: '09/18/21',
-  reservacion: 'Sí',
-  barra: 'No',
-  restaurante: 'C',
-}];
 
 
 function Clientes() {
+  
+  const [clientes, setClientes] = useState([]);
+  var [restauranteBusca, setRestaurante] = useState("");
+
+  useEffect(() => {
+    Axios.get("http://localhost:3001/cajas/").then((res) => {
+      setClientes(res.data);
+    });
+
+    console.log(clientes)
+  
+    
+  }, []);
+  const buscarCliente= () => {
+    Axios.post("http://localhost:3001/clienteReporte/buscar",
+      {
+        restauranteBusca: restauranteBusca
+      })
+      .then((res) => {
+        setClientes(res.data);
+      });
+  };
+  const capturaBuscaCliente= () => {
+    if (restauranteBusca !== '') {
+      buscarCliente()
+    }
+    else {
+      alert('Por favor ingrese el dato a buscar')
+    }
+  }
+
+  const recarga = () => {
+    window.location.reload();
+  }
+  const limpiaCajas = () => {
+    setRestaurante("")
+  }
+
+  const columns = [{
+    
+    dataField: "codigo",
+    text: "Código",
+    
+  },
+  {
+    dataField: "fecha",
+    text: "Fecha de Registro",
+  },
+  {
+    dataField: "descripcion",
+    text: "Descripción",
+  },
+  {
+    dataField: "entradaDinero",
+    text: "Entrada de Dinero",
+  },
+  {
+    dataField: "aperturaCaja",
+    text: "Apertura de Caja",
+  },
+  
+  {
+    dataField: "cierreCaja",
+    text: "Cierre de caja",
+  },
+  {
+    dataField: "restaurante",
+    text: "Restaurante",
+  }
+];
   return (
     <div class="container">
-      <div class="row bg-warning" style={{ height: "900px" }}>
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F"  }}>
         <div class="col-3 m-auto text-center pb-5">
           <h3>Lista de Clientes</h3>
           <i class="fas fa-users fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12 bg-success h-25">
+            <div class="text-center col-12"  style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-4 m-4">
-                <Link to='/marcas'>
-                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
-                </Link>
-                <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"></i></div>
+               
+                  <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "  onClick={limpiaCajas}></i></div>
+            
+                <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x"  onClick={capturaBuscaCliente}></i></div>
                 <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-times fa-3x"></i></div>
-                <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x"></i></div>
+                <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-sync fa-3x" onClick={recarga}></i></div>
 
               </div>
             </div>
-            <div class="col-12 bg-danger h-80">
-              Búsqueda de Clientes
-              <div class="form-group row mt-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Código del Cliente
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="number"
-                    class="form-control"
-                  />
+            <div class="col-12 h-100">
+            Solo búsqueda
+            <div className="container">
+              <div className="row">
+                <div className="col me-4">
+                  <div className="form-group row mt-2">
+                    <label className="col-sm-3 col-form-label">
+                      Nombre del restaurante
+                    </label>
+                    <div className="col-sm-8">
+                      <input
+                        type="text"
+                        className="form-control"
+                        value={restauranteBusca}
+                        onChange={(event) => {
+                          setRestaurante(event.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Cliente
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="number"
-                    class="form-control"
-                  />
+                <div className="col">
+                  <div className="row">
+                 
+                  </div>
                 </div>
-              </div>
-              <div class="form-group row mt-2">
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Nombre del Restaurante
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="number"
-                    class="form-control"
-                  />
-                </div>
-                <div class="form-check col-3">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Barra
-                  </label>
-                </div>
-                <div class="form-check col-3">
-                  <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                  <label class="form-check-label" for="flexRadioDefault1">
-                    Reservación
-                  </label>
-                </div>
-              </div>
-              <div class="form-group row mt-2">
-                <div class="form-group row mt-2">
-                  Rango de Fecha
-                </div>
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Inicial
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="date"
-                    class="form-control"
-                  />
-                </div>
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Final
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="date"
-                    class="form-control"
-                  />
-                </div>
-              </div>
-              <div class="form-group row mt-2">
-                <div class="form-group row mt-2">
-                  Rango de Fecha en Reservaciones
-                </div>
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Inicial
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="date"
-                    class="form-control"
-                  />
-                </div>
-                <label for="staticEmail" class="col-sm-2 col-form-label">
-                  Final
-                </label>
-                <div class="col-sm-4">
-                  <input
-                    type="date"
-                    class="form-control"
-                  />
-                </div>
-              </div>
 
-              <div class="form-group row mt-2">
+              </div>
+            </div>
+         
+              <div class="form-group row mt-5 table-scroll">
 
                 <div class="col-sm-12">
                   <BootstrapTable
                     keyField="id"
-                    data={products}
+                    data={clientes}
                     columns={columns}
-                    cellEdit={cellEditFactory({ mode: 'dbclick' })}
                   />
                 </div>
 
-                <div class="text-center col-12 bg-success h-15">
-                  <div class="row row-cols-2 m-3">
-
-                    <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-plus-circle fa-3x"></i></div>
-                    <div class="col"><i class=" py-3 px-4 bg-light rounded-circle fas fa-minus-circle fa-3x"></i></div>
-
-                  </div>
-                </div>
+               
               </div>
+          
             </div>
           </div>
         </div>

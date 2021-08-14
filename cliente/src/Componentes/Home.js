@@ -73,7 +73,7 @@ function Home(){
           </Card>
 
           <Card className="m-5 text-center" id="clientes">
-            <Link to='clientesMesas'>
+            <Link to='clientes'>
             <Card.Body>
             <i className="fas fa-user-alt fa-5x" style={{color: "#C42709"}}></i>
               <Card.Title>Clientes</Card.Title>

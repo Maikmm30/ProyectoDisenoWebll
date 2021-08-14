@@ -18,7 +18,7 @@ let restauranteSchema = new Schema({
         type: Number
     },
     telefono: {
-        type: String
+        type: Number
     },
     barraEstado:{
         type: Boolean

@@ -243,13 +243,12 @@ function AgregarLimpieza() {
                         onChange={(event)=>{
                           setTipoDeArticuloLimpieza(event.target.value);
                         }}
+                        onClick={(event)=>{
+                          setTipoDeArticuloLimpieza(event.target.value);
+                        }}
                       >
-                        <option>Tipo de Artículo 1</option>
-                        <option>Tipo de Artículo 2</option>
-                        <option>Tipo de Artículo 3</option>
-                        <option>Tipo de Artículo 4</option>
-                        <option>Tipo de Artículo 5</option>
-                        <option>Tipo de Artículo 6</option>
+                        <option>Liquido</option>
+                        <option>No Liquido</option>
                       </select>
                 </div>
                 

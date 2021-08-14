@@ -7,12 +7,22 @@ function AgregarRestaurante() {
   
   const [codigoRestaurante, setCodigoRestaurante] = useState("");
   const [nombreRestaurante, setNombreRestaurante] = useState("");
+  const [numeroRestaurante, setNumeroRestaurante] = useState("");
   const [especialidadRestaurante, setEspecialidadRestaurante] = useState("");
   const [direccionRestaurante, setDireccionRestaurante] = useState("");
   const [telefonoRestaurante, setTelefonoRestaurante] = useState("");
   
+  useEffect(() => {
+    Axios.get("http://localhost:3001/restaurantes/id").then((res) => {
+      const num = parseInt(res.data[0].valorConsecutivo)+1;
+      setNumeroRestaurante(num);
+      const str = "RES";
+      setCodigoRestaurante(str+num);
+    });
+  }, []);
+
   const enviarDatos = () => {
-    Axios.post("http://localhost:3001/restaurantes/agregar-restaurantes",{
+    Axios.post("http://localhost:3001/restaurantes/agregar",{
       codigoRestaurante: codigoRestaurante,
       nombreRestaurante: nombreRestaurante,
       especialidadRestaurante: especialidadRestaurante,
@@ -27,6 +37,12 @@ function AgregarRestaurante() {
       descripcionBitacora: codigoRestaurante+': '+getCookie('usuario')+' agregó un restaurante',
 
     });
+    Axios.put("http://localhost:3001/consecutivos/update",
+      {
+        codigoActualiza: '25',
+        consecutivoNuevo: numeroRestaurante,
+        columnaSeleccionada: 'valorConsecutivo'
+      });
     window.location.href = 'http://localhost:3000/restaurantes'
   };
   
@@ -54,9 +70,11 @@ function AgregarRestaurante() {
                 <div class="row mt-4 mb-3">
                   <label class="col-sm-3 ">Código</label>
                   <div class="col-sm-8">
-                    <input type="number" class="form-control" onChange={(event)=>{
-                  setCodigoRestaurante(event.target.value);
-                }}/>
+                  <input
+                        type="text"
+                        class="form-control"
+                        value={codigoRestaurante} disabled
+                      />
                   </div>
                 </div>
                 <div class="row mt-2 mb-3">
@@ -94,17 +112,7 @@ function AgregarRestaurante() {
                   </div>
                 </div>
 
-                <div class="row mt-4 mb-3">
-
-                  <div class="col-sm-1">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-                  </div>
-                  
-                    <label class="col-sm-5">Activo</label>
-
-                </div>
-
-
+                
               </div>
 
             </div>

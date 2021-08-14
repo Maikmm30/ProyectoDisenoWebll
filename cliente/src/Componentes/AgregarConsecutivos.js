@@ -25,6 +25,7 @@ function AgregarConsecutivos() {
   }, []);*/
   useEffect(() => {
     setTipoConsecutivo('Clientes');
+    setContienePrefijoConsecutivo(false)
   }, []);
 
   const enviarDatos = () => {
@@ -34,7 +35,7 @@ function AgregarConsecutivos() {
       descripcionConsecutivo: descripcionConsecutivo,
       nombreConsecutivo: nombreConsecutivo,
       valorConsecutivo: valorConsecutivo,
-      contienePrefijoConsecutivo: contienePrefijoConsecutivo,
+      contienePrefijoConsecutivo: true,
       prefijoConsecutivo: prefijoConsecutivo,
       estadoConsecutivo: true,
     });
@@ -141,22 +142,7 @@ function AgregarConsecutivos() {
                 }}/>
               </div>
             </div>
-            <div className="row mt-2 mb-3">
-              <label for="staticEmail" className="col-sm-3">
-                Consecutivo posee Prefijo
-              </label>
-              <div className="col-sm-2">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  value=""
-                  id=""
-                  on={(event)=>{
-                    setContienePrefijoConsecutivo(true);
-                  }}
-                />
-              </div>
-            </div>
+            
             <div className="row mt-1 mb-3">
               <label for="staticEmail" className="col-sm-3">
                 Prefijo

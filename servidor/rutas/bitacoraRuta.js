@@ -56,4 +56,11 @@ router.post("/agregar", async (req, res) => {
     }
 });
 
+router.route("/buscar").post((req, res) => {
+    const nombreBusca = req.body.nombreBusca
+    Bitacora.find({ usuario: nombreBusca })
+        .then(bitacora => res.json(bitacora))
+        .catch(err => res.status(400).json('Error: ' + err));
+})
+
 module.exports = router;

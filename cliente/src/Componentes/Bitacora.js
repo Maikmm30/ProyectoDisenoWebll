@@ -43,7 +43,6 @@ function Bitacora() {
   const buscarBitacora = () => {
     Axios.post("http://localhost:3001/bitacora/buscar",
       {
-        codigoBusca: codigoBusca,
         nombreBusca: nombreBusca
       })
       .then((res) => {
@@ -54,20 +53,19 @@ function Bitacora() {
 
   const rowEvents = {
     onClick: (e, row, rowIndex) => {
-      setCodigoActualiza(row.codigo)
+      setCodigoActualiza(row.codigo)///
     }
   };
 
   const capturaInput = (event) => {
     if (!event.target.value == '') {
       setNuevoBitacora(event.target.value)
-      console.log(event.target)
     }
   };
 
 
   const capturaBuscaBitacora = () => {
-    if (codigoBusca && nombreBusca !== '') {
+    if (nombreBusca !== '') {
       buscarBitacora()
     }
     else {
@@ -115,8 +113,8 @@ function Bitacora() {
               <div class="form-group row mt-2">
 
                 <div class="form-check form-check-inline col-3">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                  <label class="form-check-label" for="inlineRadio1">General</label>
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked" />
+                  <label class="form-check-label" for="inlineRadio1" >General</label>
                 </div>
                 <div class="form-check form-check-inline col-3">
                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
@@ -152,14 +150,14 @@ function Bitacora() {
                     Usuario
                   </label>
                   <div class="col-sm-10">
-                    <select
-                      class="form-control"
-                      id="exampleFormControlSelect1"
-                    >
-                      <option>Usuario 1</option>
-                      <option>Usuario 2</option>
-                      <option>Usuario 3</option>
-                    </select>
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={nombreBusca}
+                      onChange={(event) => {
+                        setNombre(event.target.value);
+                      }}
+                    />
                   </div>
 
                 </div>

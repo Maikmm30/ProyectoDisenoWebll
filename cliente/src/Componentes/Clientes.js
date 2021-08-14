@@ -15,7 +15,7 @@ function Clientes() {
   var [restauranteBusca, setRestaurante] = useState("");
 
   useEffect(() => {
-    Axios.get("http://localhost:3001/cajas/").then((res) => {
+    Axios.get("http://localhost:3001/clienteReporte").then((res) => {
       setClientes(res.data);
     });
 
@@ -47,39 +47,40 @@ function Clientes() {
   const limpiaCajas = () => {
     setRestaurante("")
   }
-
-  const columns = [{
-    
-    dataField: "codigo",
-    text: "Código",
-    
-  },
-  {
-    dataField: "fecha",
-    text: "Fecha de Registro",
-  },
-  {
-    dataField: "descripcion",
-    text: "Descripción",
-  },
-  {
-    dataField: "entradaDinero",
-    text: "Entrada de Dinero",
-  },
-  {
-    dataField: "aperturaCaja",
-    text: "Apertura de Caja",
-  },
-  
-  {
-    dataField: "cierreCaja",
-    text: "Cierre de caja",
-  },
-  {
-    dataField: "restaurante",
-    text: "Restaurante",
-  }
-];
+  const columns = [
+    {
+      dataField: "codigo",
+      text: "Código",
+    },
+    {
+      dataField: "nombreCompleto",
+      text: "Nombre Completo",
+    },
+    {
+      dataField: "montoPagado",
+      text: "Monto Pagado",
+    },
+    {
+      dataField: "detalle",
+      text: "Detalle",
+    },
+    {
+      dataField: "fecha",
+      text: "Fecha",
+    },
+    {
+      dataField: "reservacion",
+      text: "Reservación",
+    },
+    {
+      dataField: "barra",
+      text: "Barra",
+    },
+    {
+      dataField: "restaurante",
+      text: "Restaurante",
+    },
+  ];
   return (
     <div class="container">
       <div class="row" style={{ height: "800px", backgroundColor: "#FF723F"  }}>

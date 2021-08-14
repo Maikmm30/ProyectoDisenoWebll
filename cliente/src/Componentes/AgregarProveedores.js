@@ -193,7 +193,7 @@ function AgregarProveedores() {
             </div>
             <div className="col-4 p-0 ">
               <h4 className="m-4">Foto del Proveedor</h4>
-              <div className="col-sm-4 border border-danger m-auto " style={{ height: "350px", width: "260px" }}>
+              <div className=" m-auto " style={{ height: "350px", width: "260px" }}>
                 {previewSource && (
                   <img
                     src={previewSource}

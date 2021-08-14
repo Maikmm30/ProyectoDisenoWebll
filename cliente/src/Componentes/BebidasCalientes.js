@@ -32,15 +32,12 @@ function BebidasCalientes() {
       bebidaNuevo: bebidaNuevo,
       columnaSeleccionada: columnaSeleccionada,
     });
-
-    Axios.post("http://localhost:3001/bitacora/agregar", {
-
+    Axios.post("http://localhost:3001/bitacora/agregar",{
+      
       usuarioBitacora: getCookie('usuario'),
       rolBitacora: getCookie('rol'),
-      descripcionBitacora: codigoActualiza + ': ' + getCookie('usuario') + ' actualizo una bebida caliente',
-
+      descripcionBitacora: codigoActualiza+': '+getCookie('usuario')+' modificó una bebida caliente',
     });
-
     window.location.reload();
   };
 

@@ -36,10 +36,10 @@ let clienteSchema = new Schema({
         type: Boolean
     },
     fechaLlegada : {
-        type: Date
+        type: String
     },
     fechaReservacion: {
-        type: Date
+        type: String
     },
     estado : {
         type: Boolean

@@ -32,7 +32,7 @@ router.post("/agregar", async (req, res) => {
     //const barraClienteBarra = req.body.barraClienteBarra;
     const barraClienteBarra = true;
     //const fechaClienteBarra = req.body.fechaClienteBarra;
-    const fechaClienteBarra = '05/07/21';
+    const fechaClienteBarra = req.body.fechaClienteBarra;
     const horaEntradaClienteBarra = req.body.horaEntradaClienteBarra;
     const horaSalidaClienteBarra = req.body.horaSalidaClienteBarra;
     const duracionClienteBarra = req.body.duracionClienteBarra;
@@ -41,6 +41,7 @@ router.post("/agregar", async (req, res) => {
     const numeroSillaClienteBarra = req.body.numeroSillaClienteBarra;
     const precioClienteBarra = req.body.precioClienteBarra;
     const ocupadoClienteMesa = false;
+    const estadoCuentaClienteBarra = req.body.estadoCuentaClienteBarra;
 
 
     try {
@@ -63,7 +64,8 @@ router.post("/agregar", async (req, res) => {
             precioBarra: precioClienteBarra,
             numeroSillaBarra: numeroSillaClienteBarra,
             tipoCliente: 'Barra',
-            ocupado: ocupadoClienteMesa
+            ocupado: ocupadoClienteMesa,
+            estadocuenta: estadoCuentaClienteBarra
         });
         await cliente.save();
         res.send("inserted data");

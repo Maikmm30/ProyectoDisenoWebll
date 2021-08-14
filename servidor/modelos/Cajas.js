@@ -6,7 +6,7 @@ let cajaSchema = new Schema({
         type: String
     },
     fecha: {
-        type: Date
+        type: String
     },
     descripcion: {
         type: String

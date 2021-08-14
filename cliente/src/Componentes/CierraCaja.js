@@ -5,6 +5,7 @@ import getCookie from './utils/Cookies';
 function CierreCajas() {
   const [codigoCaja, setCodigoCaja] = useState("");
   const [numeroCaja, setNumeroCaja] = useState("");
+  const [restauranteCaja, setRestauranteCaja] = useState("");
   const [entradaDineroCaja, setEntradaDineroCaja] = useState("");
 
   useEffect(() => {
@@ -15,6 +16,25 @@ function CierreCajas() {
       console.log(num);
       setCodigoCaja(str + num);
     });
+
+    Axios.get("http://localhost:3001/restaurantes/names").then((res) => {
+      console.log('data'+res.data)
+      console.log(res.data[1]);
+      var array = [];
+      var primerValor = true;
+      for(var k in res.data) {
+        if (primerValor === true){
+          setRestauranteCaja(res.data[k].nombre);
+          primerValor = false;
+        }
+        console.log(array.push(res.data[k].nombre));
+     }
+     for(var i in array)
+     { 
+         document.getElementById("restaurante").innerHTML += "<option value='"+array[i]+"'>"+array[i]+"</option>"; 
+
+     }
+    }); 
 
   }, []);
 
@@ -28,11 +48,8 @@ function CierreCajas() {
       entradaDineroCaja: entradaDineroCaja,
       fechaCaja: currentdate.getDate() + "/"
       + (currentdate.getMonth()+1)  + "/" 
-      + currentdate.getFullYear() + " @ "  
-      + currentdate.getHours() + ":"  
-      + currentdate.getMinutes() + ":" 
-      + currentdate.getSeconds(),
-      restauranteCaja: 'Restaurante 1 - Cookie',
+      + currentdate.getFullYear(),
+      restauranteCaja: restauranteCaja,
       aperturaCaja: false,
       descripcionCaja: "Cierre de Caja",
       cierreCaja: true,
@@ -85,10 +102,17 @@ function CierreCajas() {
                           Restaurante
                         </label>
                         <div className="col-sm-8">
-                          <input
-                            type="text"
-                            className="form-control"
-                          />
+                        <select
+                      class="form-control"
+                      id="restaurante"
+                      onChange={(event)=>{
+                        setRestauranteCaja(event.target.value);
+                      }}
+                      onClick={(event)=>{
+                        setRestauranteCaja(event.target.value);
+                      }}
+                    >
+                      </select>
                         </div>
                       </div>
                     </div>

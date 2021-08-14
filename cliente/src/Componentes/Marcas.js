@@ -17,9 +17,12 @@ function Marcas() {
   const [telefonoEmpresaMarca, setTelefonoEmpresaMarca] = useState("");
 
   //Manejar imagen
-  const [fileInputState, setFileInputState] = useState('');
-  const [selectedFile, setSelectedFile] = useState('');
-  const [previewSource, setPreviewSource] = useState('');
+  const [fileInputState01, setFileInputState01] = useState('');
+  const [fileInputState02, setFileInputState02] = useState('');
+  const [selectedFile01, setSelectedFile01] = useState('');
+  const [selectedFile02, setSelectedFile02] = useState('');
+  const [previewSource01, setPreviewSource01] = useState('');
+  const [previewSource02, setPreviewSource02] = useState('');
 
 
   useEffect(() => {
@@ -76,31 +79,46 @@ function Marcas() {
     window.location.href = 'http://localhost:3000/marcas/'
   };
 
-  const handleFileInputChange = (e) => {
+  const handleFileInputChange01 = (e) => {
     const file = e.target.files[0];
-    previewFile(file);
-    setSelectedFile(file);
-    setFileInputState(e.target.value);
+    previewFile01(file);
+    setSelectedFile01(file);
+    setFileInputState01(e.target.value);
   }
 
-  const previewFile = (file) => {
+  const handleFileInputChange02 = (e) => {
+    const file = e.target.files[0];
+    previewFile02(file);
+    setSelectedFile02(file);
+    setFileInputState02(e.target.value);
+  }
+
+  const previewFile01 = (file) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setPreviewSource(reader.result);
+      setPreviewSource01(reader.result);
+    }
+  }
+
+  const previewFile02 = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setPreviewSource02(reader.result);
     }
   }
 
   return (
     <div class="container">
-      <div class="row" style={{ height: "610px" , backgroundColor: "#FF723F" }} >
+      <div class="row" style={{ height: "800px", backgroundColor: "#FF723F" }} >
         <div class="col-3 m-auto text-center pb-5">
           <h3>Marcas</h3>
           <i class="far fa-copyright fa-10x"></i>
         </div>
         <div class="col-9">
           <div class="row h-75">
-            <div class="text-center col-12  h-25" style={{backgroundColor: "#C42709" }}>
+            <div class="text-center col-12  h-25" style={{ backgroundColor: "#C42709" }}>
               <div class="row row-cols-3 m-4">
                 <div class="col"><i class=" p-3 bg-light rounded-circle fas fa-broom fa-3x "></i></div>
                 <div class="col "><i class="p-3 bg-light rounded-circle  fas fa-check-circle fa-3x" onClick={enviarDatos}></i></div>
@@ -174,19 +192,19 @@ function Marcas() {
                 <div class="form-group row mt-2">
                   <div className=" row mt-2 mb-3">
                     <label for="staticEmail" className="col-sm-3 me-3">
-                      Imagen:
+                      Imagen
                     </label>
 
-                    {previewSource && (
+                    {previewSource01 && (
                       <img
-                        src={previewSource}
+                        src={previewSource01}
                         alt="chosen"
                         style={{ height: '200px', width: '350px' }}
                       />
 
                     )}
 
-                    <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                    <input type="file" name="image" onChange={handleFileInputChange01}
                       className="form-input" />
                   </div>
 
@@ -261,16 +279,17 @@ function Marcas() {
                       Imagen:
                     </label>
 
-                    {previewSource && (
+
+                    {previewSource02 && (
                       <img
-                        src={previewSource}
+                        src={previewSource02}
                         alt="chosen"
                         style={{ height: '200px', width: '350px' }}
                       />
 
                     )}
 
-                    <input type="file" name="image" onChange={handleFileInputChange} value={fileInputState}
+                    <input type="file" name="image" onChange={handleFileInputChange02}
                       className="form-input" />
                   </div>
                 </div>
